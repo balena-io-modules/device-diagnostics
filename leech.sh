@@ -7,7 +7,7 @@ function fatal()
 }
 
 if [ -z "$1" ] || [ -z "$2" ]; then
-    fatal usage: $(basename $0) [vpn ip address] [device uuid] >&2
+    fatal usage: $(basename $0) [vpn ip address] [device uuid]
 fi
 
 if [ ! -f diagnose_template.sh ]; then
