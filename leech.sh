@@ -27,7 +27,7 @@ mkdir -p ${out_dir}
 rm -rf /tmp/leech
 mkdir /tmp/leech
 
-sed "s/@@replaceme@@/$uuid/" diagnose_template.sh > /tmp/leech/diagnose.sh
+sed "s/@@replaceme@@/$uuid/" ${script_dir}/diagnose_template.sh > /tmp/leech/diagnose.sh
 
 # This message is apparently unavoidable when ssh is relayed :(
 ignore_line="Killed by signal 1."
