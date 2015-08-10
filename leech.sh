@@ -35,6 +35,7 @@ ignore_line="Killed by signal 1."
 echo Copying script to device...
 scp -q -p -o Hostname=$ip /tmp/leech/diagnose.sh resin:/home/root/ 2>&1 | grep -v "$ignore_line"
 echo Executing script...
-ssh -o Hostname=$ip resin "bash /home/root/diagnose.sh" 2>&1 | \
+ssh -o Hostname=$ip -o UserKnownHostsFile=/dev/null \
+    -o StrictHostKeyChecking=no resin "bash /home/root/diagnose.sh" 2>&1 | \
     grep -v "$ignore_line" >$output
 echo Done! Output stored in $out_file
