@@ -24,7 +24,7 @@ addresses get reused.)
 
 ## Hacking
 
-To add more checks, simply add commands below the 'DIAGNOSTIC COMMANDS BELOW'
-line in `diagnose_template.sh`, prepending each line with `d `.
+To add more checks, simply add commands to the `commands` array in
+`diagnose_template.sh`.
 
 [scratch]:https://resinio.atlassian.net/wiki/display/RES/Lolo%27s+Scratch+Pad
