@@ -29,13 +29,10 @@ mkdir /tmp/leech
 
 sed "s/@@replaceme@@/$uuid/" ${script_dir}/diagnose_template.sh > /tmp/leech/diagnose.sh
 
-# This message is apparently unavoidable when ssh is relayed :(
-ignore_line="Killed by signal 1."
+ssh_opts="-o Hostname=$ip -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
 echo Copying script to device...
-scp -q -p -o Hostname=$ip /tmp/leech/diagnose.sh resin:/home/root/ 2>&1 | grep -v "$ignore_line"
+scp -q -p $ssh_opts /tmp/leech/diagnose.sh resin:/home/root/ 2>/dev/null
 echo Executing script...
-ssh -o Hostname=$ip -o UserKnownHostsFile=/dev/null \
-    -o StrictHostKeyChecking=no resin "bash /home/root/diagnose.sh" 2>&1 | \
-    grep -v "$ignore_line" >$output
+ssh $ssh_opts resin "bash /home/root/diagnose.sh" >$output 2>/dev/null
 echo Done! Output stored in $out_file
