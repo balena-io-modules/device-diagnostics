@@ -21,6 +21,7 @@ commands=(
 	"ping -c 1 -W 3 google.co.uk"
 	"journalctl -n500"
 	"dmesg"
+	"cat /var/log/messages"
 	"rce --version"
 	"rce images"
 	"rce ps -a"
