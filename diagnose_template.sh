@@ -11,8 +11,10 @@ commands=(
 	"tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log"
 	"cat /var/log/provisioning-progress.log"
 	"df -h"
-	"btrfs fi df /mnt/data-disk"
-	"cat /mnt/data-disk/config.json"
+	"btrfs fi df /mnt/data-disk" # legacy
+	"btrfs fi df /mnt/data"
+	"cat /mnt/data-disk/config.json" # legacy
+	"cat /mnt/conf/config.json"
 	"mount"
 	"ls -l /dev"
 	"date"
@@ -21,7 +23,7 @@ commands=(
 	"ping -c 1 -W 3 google.co.uk"
 	"journalctl -n500"
 	"dmesg"
-	"cat /var/log/messages"
+	"cat /var/log/messages" # legacy
 	"rce --version"
 	"rce images"
 	"rce ps -a"
