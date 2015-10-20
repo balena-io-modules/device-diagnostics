@@ -24,6 +24,7 @@ commands=(
 	"journalctl -n500"
 	"dmesg"
 	"cat /var/log/messages" # legacy
+	"cat /etc/resolv.conf"
 	"rce --version"
 	"rce images"
 	"rce ps -a"
