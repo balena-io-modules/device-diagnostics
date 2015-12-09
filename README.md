@@ -1,12 +1,15 @@
 # Leech
 
-## Using
-
-Retrieves diagnostic information from a user device.
+### Prerequisites
 
 This script is pretty basic for now - it assumes you have an ssh alias `resin`
 hooked up to the resin management servers and all appropriate ssh keys in
-place - see the [scratch pad][scratch] for details on how to do this.
+place - see the entry in the [scratch pad][scratch] for details on how to do
+this.
+
+## Using
+
+Retrieves diagnostic information from a user device.
 
 Currently the script simply copies a diagnostic script over to
 the device then runs it there, redirecting output to `out/$UUID.txt`. It uses
@@ -15,7 +18,7 @@ the device then runs it there, redirecting output to `out/$UUID.txt`. It uses
 Usage is:
 
 ```bash
-./leech.sh [vpn ip address] [device uuid]
+./leech.sh [device uuid]
 ```
 
 The script first checks that the device with the specified vpn address matches
@@ -27,4 +30,4 @@ addresses get reused.)
 To add more checks, simply add commands to the `commands` array in
 `diagnose_template.sh`.
 
-[scratch]:https://resinio.atlassian.net/wiki/display/RES/Lolo%27s+Scratch+Pad
+[scratch]:https://resinio.atlassian.net/wiki/pages/viewpage.action?spaceKey=RES&title=Scratch+Pad#ScratchPad-AccessingUserDevices
