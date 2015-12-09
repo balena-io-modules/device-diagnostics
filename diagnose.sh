@@ -48,16 +48,6 @@ function announce_run()
 	eval $@ 2>&1
 }
 
-EXPECTED_UUID=@@replaceme@@
-UUID=$(head -1 /var/volatile/vpnfile)
-
-if [ "$UUID" != "$EXPECTED_UUID" ]; then
-   echo "ERROR: This is not the device you are looking for."
-   echo "ERROR: Expected: $EXPECTED_UUID"
-   echo "ERROR:   Actual: $UUID"
-   exit 1
-fi
-
 echo "--- COMMANDS ---"
 echo
 each_command echo
