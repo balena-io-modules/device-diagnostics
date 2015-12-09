@@ -15,7 +15,7 @@ the device then runs it there, redirecting output to `out/$UUID.txt`. It uses
 Usage is:
 
 ```bash
-./leech.sh [vpn ip address] [device uuid]
+./leech.sh [device uuid]
 ```
 
 The script first checks that the device with the specified vpn address matches
