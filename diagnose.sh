@@ -32,6 +32,9 @@ commands=(
 	"dmesg"
 	"cat /var/log/messages" # legacy
 	"cat /etc/resolv.conf"
+	"cat /proc/net/dev"
+	"cat /proc/net/udp"
+	"cat /proc/net/snmp"
 	"rce --version"
 	"rce images"
 	"rce ps -a"
