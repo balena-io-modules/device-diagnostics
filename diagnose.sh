@@ -27,7 +27,6 @@ commands=(
 	"date"
 	"/sbin/ip addr"
 	"curl https://google.co.uk"
-	"ping -c 1 -W 3 google.co.uk"
 	"journalctl -n500"
 	"dmesg"
 	"cat /var/log/messages" # legacy
@@ -36,6 +35,7 @@ commands=(
 	"cat /proc/net/udp"
 	"cat /proc/net/snmp"
 	"rce --version"
+	"ping -c 1 -W 3 google.co.uk"
 	"rce images"
 	"rce ps -a"
 )
