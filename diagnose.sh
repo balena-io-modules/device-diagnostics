@@ -77,6 +77,12 @@ function btrfs_get_data()
 		| paste - -
 }
 
+function is_mounted()
+{
+	# busybox grep doesn't like long options.
+	mount | grep -q "on $1"
+}
+
 function check_memory()
 {
 	total_kb=$(get_meminfo_field MemTotal)
@@ -97,6 +103,11 @@ function check_memory()
 
 function check_diskspace()
 {
+	if ! is_mounted $mountpoint; then
+		echo "DISK: DANGER: BTRFS filesystem not mounted at $mountpoint!"
+		return
+	fi
+
 	# Last +0 forces the field to a number, stripping the '%' on the end.
 	# Tested working on busybox.
 	used_percent=$(df $mountpoint | tail -n 1 | awk '{print $5+0}')
@@ -124,6 +135,11 @@ function check_diskspace()
 
 function check_metadata()
 {
+	if ! is_mounted $mountpoint; then
+		echo "METADATA: SKIP: BTRFS filesystem not mounted."
+		return
+	fi
+
 	read total used <<<$(btrfs_get_data $mountpoint "Metadata, DUP")
 
 	used_percent=$((used*100/total))
