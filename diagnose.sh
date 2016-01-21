@@ -72,9 +72,9 @@ function get_meminfo_field()
 function btrfs_get_data()
 {
 	btrfs fi df --raw $1 \
-	    | grep "^$2" \
-	    | grep -o '[0-9]*' \
-	    | paste - -
+		| grep "^$2" \
+		| grep -o '[0-9]*' \
+		| paste - -
 }
 
 function check_memory()
@@ -89,9 +89,9 @@ function check_memory()
 	percent=$((100*avail_kb/total_kb))
 
 	if [ "$percent" -lt "${low_mem_threshold}" ]; then
-	    echo "MEM: DANGER: LOW MEMORY: ${percent}% (${avail_mb}MB) available. ${used_mb}MB/${total_mb}MB used."
+		echo "MEM: DANGER: LOW MEMORY: ${percent}% (${avail_mb}MB) available. ${used_mb}MB/${total_mb}MB used."
 	else
-	    echo "MEM: OK (${percent}% available.)"
+		echo "MEM: OK (${percent}% available.)"
 	fi
 }
 
@@ -106,8 +106,8 @@ function check_diskspace()
 	# btrfs df. This is because btrfs allocates more space than is needed,
 	# so df saying we're out of space doesn't mean we actually are.
 	if [ "$free_percent" -gt "$low_disk_threshold" ]; then
-	    echo "DISK: OK (df reports ${free_percent}% free.)"
-	    return
+		echo "DISK: OK (df reports ${free_percent}% free.)"
+		return
 	fi
 
 	read total used <<<$(btrfs_get_data $mountpoint "Data, single")
@@ -116,9 +116,9 @@ function check_diskspace()
 	free_percent_btrfs=$((100 - $used_percent_btrfs))
 
 	if [ "$free_percent_btrfs" -lt "$low_disk_threshold" ]; then
-	    echo "DISK: DANGER: LOW SPACE: df reports ${free_percent}%, btrfs reports ${free_percent_btrfs}%."
+		echo "DISK: DANGER: LOW SPACE: df reports ${free_percent}%, btrfs reports ${free_percent_btrfs}%."
 	else
-	    echo "DISK: OK (df reports ${free_percent}% free, but btrfs reports ${free_percent_btrfs}% free.)"
+		echo "DISK: OK (df reports ${free_percent}% free, but btrfs reports ${free_percent_btrfs}% free.)"
 	fi
 }
 
@@ -130,26 +130,26 @@ function check_metadata()
 	free_percent=$((100 - $used_percent))
 
 	if [ "$free_percent" -lt "$low_metadata_threshold" ]; then
-	    echo "METADATA: DANGER: LOW SPACE: ${free_percent}% btrfs metadata free."
+		echo "METADATA: DANGER: LOW SPACE: ${free_percent}% btrfs metadata free."
 	else
-	    echo "METADATA: OK (${free_percent}% btrfs metadata free.)"
+		echo "METADATA: OK (${free_percent}% btrfs metadata free.)"
 	fi
 }
 
 function check_rce()
 {
 	if (pidof rce >/dev/null); then
-	    echo "RCE: OK (rce is running.)"
+		echo "RCE: OK (rce is running.)"
 	else
-	    echo "RCE: DANGER: rce is NOT running!"
+		echo "RCE: DANGER: rce is NOT running!"
 	fi
 }
 
 function check_dns()
 {
 	if [ ! -f /etc/resolv.conf ]; then
-	    echo "DNS: DANGER: /etc/resolv.conf missing!!"
-	    return
+		echo "DNS: DANGER: /etc/resolv.conf missing!!"
+		return
 	fi
 
 	first_server=$(cat /etc/resolv.conf | \
@@ -158,9 +158,9 @@ function check_dns()
 				  awk '{print $2}')
 
 	if [ "$first_server" = "8.8.8.8" ] || [ "$first_server" = "8.8.4.4" ]; then
-	    echo "DNS: OK (first DNS server is ${first_server}.)"
+		echo "DNS: OK (first DNS server is ${first_server}.)"
 	else
-	    echo "DNS: DANGER: First DNS server not google, is '${first_server}'."
+		echo "DNS: DANGER: First DNS server not google, is '${first_server}'."
 	fi
 }
 
