@@ -7,11 +7,11 @@ function fatal()
 }
 
 if [ -z "$1" ]; then
-    fatal usage: $(basename $0) [device uuid]
+	fatal usage: $(basename $0) [device uuid]
 fi
 
 if [ ! -f diagnose.sh ]; then
-    fatal Missing diagnose.sh file.
+	fatal Missing diagnose.sh file.
 fi
 
 uuid=$1
