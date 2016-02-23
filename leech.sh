@@ -19,7 +19,7 @@ uuid=$1
 # Gets current script dir, see http://stackoverflow.com/a/246128.
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 out_dir=${script_dir}/out
-out_file=${uuid}.txt
+out_file=${uuid}_$(date +%Y%m%d%H%M).txt
 output=${out_dir}/${out_file}
 
 mkdir -p ${out_dir}
