@@ -88,6 +88,15 @@ function check_memory()
 	total_kb=$(get_meminfo_field MemTotal)
 	avail_kb=$(get_meminfo_field MemAvailable)
 
+	if [ -z "$avail_kb" ]; then
+		# For kernels that don't support MemAvailable.
+		# Not as accurate, but a good approximation.
+
+		avail_kb=$(get_meminfo_field MemFree)
+		avail_kb=$((avail_kb + $(get_meminfo_field Cached)))
+		avail_kb=$((avail_kb + $(get_meminfo_field Buffers)))
+	fi
+
 	total_mb=$((total_kb/1024))
 	avail_mb=$((avail_kb/1024))
 
