@@ -26,7 +26,7 @@ commands=(
 	"ls -l /dev"
 	"date"
 	"/sbin/ip addr"
-	"curl https://google.co.uk"
+	"curl https://www.google.co.uk"
 	"journalctl -n500"
 	"dmesg"
 	"cat /var/log/messages" # legacy
