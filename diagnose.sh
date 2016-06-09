@@ -182,11 +182,7 @@ function check_dns()
 				  head -n 1 | \
 				  awk '{print $2}')
 
-	if [ "$first_server" = "8.8.8.8" ] || [ "$first_server" = "8.8.4.4" ]; then
-		echo "DNS: OK (first DNS server is ${first_server}.)"
-	else
-		echo "DNS: DANGER: First DNS server not google, is '${first_server}'."
-	fi
+	echo "DNS: OK (first DNS server is ${first_server}.)"
 }
 
 function run_checks()
