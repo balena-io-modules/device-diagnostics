@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# rce's mount is also the core btrfs filesystem.
-mountpoint="/var/lib/rce"
+# Determine whether we're using the older 'rce'-aliased docker or not.
+docker_name=$(which docker >/dev/null && echo "docker" || echo "rce")
+
+# docker's mount is also the core btrfs filesystem.
+mountpoint="/var/lib/$docker_name"
 
 low_mem_threshold=10 #%
 low_disk_threshold=10 #%
@@ -34,10 +37,10 @@ commands=(
 	"cat /proc/net/dev"
 	"cat /proc/net/udp"
 	"cat /proc/net/snmp"
-	"rce --version"
+	"$docker_name --version"
 	"ping -c 1 -W 3 google.co.uk"
-	"rce images"
-	"rce ps -a"
+	"$docker_name images"
+	"$docker_name ps -a"
 )
 
 function each_command()
@@ -161,12 +164,12 @@ function check_metadata()
 	fi
 }
 
-function check_rce()
+function check_docker()
 {
-	if (pidof rce >/dev/null); then
-		echo "RCE: OK (rce is running.)"
+	if (pidof $docker_name >/dev/null); then
+		echo "DOCKER: OK (docker is running.)"
 	else
-		echo "RCE: DANGER: rce is NOT running!"
+		echo "DOCKER: DANGER: docker is NOT running!"
 	fi
 }
 
@@ -190,7 +193,7 @@ function run_checks()
 	announce CHECKS
 
 	check_memory
-	check_rce
+	check_docker
 	check_dns
 	check_diskspace
 	check_metadata
