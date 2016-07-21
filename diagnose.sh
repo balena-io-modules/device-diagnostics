@@ -23,6 +23,8 @@ commands=(
 	"df -h"
 	"btrfs fi df /mnt/data-disk" # legacy
 	"btrfs fi df /mnt/data"
+	"btrfs fi usage /mnt/data-disk" # legacy
+	"btrfs fi usage /mnt/data"
 	"cat /mnt/data-disk/config.json" # legacy
 	"cat /mnt/conf/config.json"
 	"mount"
