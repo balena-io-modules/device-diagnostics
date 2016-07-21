@@ -210,3 +210,6 @@ function run_commands()
 
 run_checks
 run_commands
+
+# Don't return a spurious error code.
+true
