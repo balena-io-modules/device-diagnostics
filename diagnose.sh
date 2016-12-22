@@ -32,6 +32,7 @@ commands=(
 	"date"
 	"/sbin/ip addr"
 	"curl https://www.google.co.uk"
+	"curl https://pubnub.com"
 	"journalctl -n500"
 	"dmesg"
 	"cat /var/log/messages" # legacy
