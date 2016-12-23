@@ -13,7 +13,7 @@ Retrieves diagnostic information from a user device.
 
 Currently the script simply copies a diagnostic script over to
 the device then runs it there, redirecting output to `out/$UUID.txt`. It uses
-`diagnose_template.sh` to generate this script.
+`diagnose.sh` to generate this script.
 
 Usage is:
 
@@ -28,6 +28,6 @@ addresses get reused.)
 ## Hacking
 
 To add more checks, simply add commands to the `commands` array in
-`diagnose_template.sh`.
+`diagnose.sh`.
 
 [scratch]:https://resinio.atlassian.net/wiki/pages/viewpage.action?spaceKey=RES&title=Scratch+Pad#ScratchPad-AccessingUserDevices
