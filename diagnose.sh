@@ -12,13 +12,14 @@ low_metadata_threshold=30 #%
 
 # DIAGNOSTIC COMMANDS BELOW.
 commands=(
+	"cat /etc/os-release"
 	"uname -a"
 	"free -h"
 	"cat /proc/cpuinfo"
 	"cat /proc/meminfo"
 	"ps"
 	"top -b -n 1"
-	"tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log"
+	"tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log" # legacy
 	"cat /var/log/provisioning-progress.log"
 	"df -h"
 	"btrfs fi df /mnt/data-disk" # legacy
@@ -26,13 +27,19 @@ commands=(
 	"btrfs fi usage /mnt/data-disk" # legacy
 	"btrfs fi usage /mnt/data"
 	"cat /mnt/data-disk/config.json" # legacy
-	"cat /mnt/conf/config.json"
+	"cat /mnt/conf/config.json" # legacy
+	"cat /mnt/boot/config.json"
+	"ls -l /mnt/boot/system-connections"
+	"cat /mnt/boot/config.txt" # only for rpi...
+	"cat /mnt/boot/uEnv.txt" # only for uboot devices
+	"cat /mnt/boot/resinOS_uEnv.txt" # ibidem
 	"mount"
 	"ls -l /dev"
 	"date"
 	"/sbin/ip addr"
 	"curl https://www.google.co.uk"
 	"curl https://pubnub.com"
+	"curl https://api.resin.io/ping"
 	"journalctl -n500"
 	"dmesg"
 	"cat /var/log/messages" # legacy
@@ -44,6 +51,12 @@ commands=(
 	"ping -c 1 -W 3 google.co.uk"
 	"$docker_name images"
 	"$docker_name ps -a"
+	"systemctl status resin-supervisor"
+	"journalctl -n 200 --no-pager -u resin-supervisor"
+	"systemctl status $docker_name"
+	"journalctl -n 200 --no-pager -u $docker_name"
+	"systemctl status openvpn-resin"
+	"journalctl -n 200 --no-pager -u openvpn-resin"
 )
 
 function each_command()
@@ -176,6 +189,16 @@ function check_docker()
 	fi
 }
 
+function check_supervisor()
+{
+	container_running=$($docker_name ps | grep resin_supervisor)
+	if [ -z "$container_running" ]; then
+		echo "SUPERVISOR: DANGER (supervisor is NOT running!)"
+	else
+		echo "SUPERVISOR: OK (supervisor is running)."
+	fi
+}
+
 function check_dns()
 {
 	if [ ! -f /etc/resolv.conf ]; then
@@ -197,6 +220,7 @@ function run_checks()
 
 	check_memory
 	check_docker
+	check_supervisor
 	check_dns
 	check_diskspace
 	check_metadata
