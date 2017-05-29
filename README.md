@@ -12,8 +12,9 @@ this.
 Retrieves diagnostic information from a user device.
 
 Currently the script simply copies a diagnostic script over to
-the device then runs it there, redirecting output to `out/$UUID.txt`. It uses
-`diagnose.sh` to generate this script.
+the device then runs it there, redirecting output to `out/$UUID_<TIME>.txt`,
+where `<TIME>` is the localtime when leech has started.
+It uses `diagnose.sh` to generate this script.
 
 Usage is:
 
@@ -30,4 +31,4 @@ addresses get reused.)
 To add more checks, simply add commands to the `commands` array in
 `diagnose.sh`.
 
-[scratch]:https://resinio.atlassian.net/wiki/pages/viewpage.action?spaceKey=RES&title=Scratch+Pad#ScratchPad-AccessingUserDevices
+[scratch]:https://github.com/resin-io/hq/wiki/Scratch-Pad#accessing-user-devices
