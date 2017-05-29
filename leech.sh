@@ -1,18 +1,21 @@
 #!/bin/bash
 
+# Where to save the leech error log
+ERROR_LOG_FILE=${ERROR_LOG_FILE=/tmp/leech_err}
+
 function fatal()
 {
 	echo $@ >&2
 
-	if [ -f /tmp/leech_err ]; then
-		echo -e "\nOUTPUT:\n"
-		cat /tmp/leech_err
+	if [ -f "$ERROR_LOG_FILE" ]; then
+		echo -e "\nOUTPUT ($ERROR_LOG_FILE):\n"
+		cat $ERROR_LOG_FILE
 	fi
 
 	exit 1
 }
 
-rm -f /tmp/leech_err
+rm -f $ERROR_LOG_FILE
 
 if [ -z "$1" ]; then
 	fatal usage: $(basename $0) [device uuid]
@@ -35,7 +38,7 @@ mkdir -p ${out_dir}
 ssh_opts="-o Hostname=$uuid.vpn -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
 echo Executing script...
-ssh $ssh_opts resin 'bash -s' <${script_dir}/diagnose.sh >$output 2>/tmp/leech_err
+ssh $ssh_opts resin 'bash -s' <${script_dir}/diagnose.sh >$output 2>$ERROR_LOG_FILE
 [ "$?" != 0 ] && fatal "ERROR: Script execution failed."
 
 echo Done! Output stored in $out_file
