@@ -47,6 +47,8 @@ commands=(
 	"cat /proc/net/dev"
 	"cat /proc/net/udp"
 	"cat /proc/net/snmp"
+	"netstat -ntl"
+	"curl --max-time 5 localhost:48484/ping"
 	"$docker_name --version"
 	"ping -c 1 -W 3 google.co.uk"
 	"$docker_name images"
