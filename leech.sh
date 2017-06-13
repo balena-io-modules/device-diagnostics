@@ -1,4 +1,6 @@
 #!/bin/bash
+# Script version information
+VERSION=v1.0.0
 
 # Where to save the leech error log
 ERROR_LOG_FILE=${ERROR_LOG_FILE=/tmp/leech_err}
@@ -38,7 +40,7 @@ mkdir -p ${out_dir}
 ssh_opts="-o Hostname=$uuid.vpn -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
 echo Executing script...
-ssh $ssh_opts resin 'bash -s' <${script_dir}/diagnose.sh >$output 2>$ERROR_LOG_FILE
+ssh $ssh_opts resin "export LEECH_VERSION=${VERSION}; bash -s" <${script_dir}/diagnose.sh >$output 2>$ERROR_LOG_FILE
 [ "$?" != 0 ] && fatal "ERROR: Script execution failed."
 
 echo Done! Output stored in $out_file

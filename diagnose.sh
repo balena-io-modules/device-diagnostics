@@ -84,6 +84,11 @@ function announce_run()
 	eval $@ 2>&1
 }
 
+function announce_version()
+{
+	announce "leech / diagnose ${LEECH_VERSION}"
+}
+
 function get_meminfo_field()
 {
 	# Thankfully this works even with busybox :)
@@ -237,6 +242,7 @@ function run_commands()
 	each_command announce_run
 }
 
+announce_version
 run_checks
 run_commands
 
