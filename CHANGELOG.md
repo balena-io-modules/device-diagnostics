@@ -1,0 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## v1.0.1 - 2017-06-13
+
+ - Versionist support: add config and changelog file [Gergely Imreh]
+ - Add version info to the output [Gergely Imreh]
+ - Add netstat to diagnose.sh [Kostas Lekkas]
+
+## v1.0.0 - 2017-06-09
+
+ - error log: single place to set the error log location [Gergely Imreh]
+
+Previously unversioned, check the commit log for changes!

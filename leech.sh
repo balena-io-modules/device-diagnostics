@@ -1,6 +1,6 @@
 #!/bin/bash
 # Script version information
-VERSION=v1.0.0
+VERSION=v1.0.1
 
 # Where to save the leech error log
 ERROR_LOG_FILE=${ERROR_LOG_FILE=/tmp/leech_err}
