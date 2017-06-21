@@ -26,9 +26,9 @@ commands=(
 	"btrfs fi df /mnt/data"
 	"btrfs fi usage /mnt/data-disk" # legacy
 	"btrfs fi usage /mnt/data"
-	"cat /mnt/data-disk/config.json" # legacy
-	"cat /mnt/conf/config.json" # legacy
-	"cat /mnt/boot/config.json"
+	"cat /mnt/data-disk/config.json | jq '.apiKey = \"foo\" | .deviceApiKey = \"bar\" | .pubnubSubscribeKey = \"psk\" | .pubnubPublishKey = \"ppk\" | .mixpanelToken = \"mpt\" | .wifiKey = \"dunno\" | .files = {}'"  # legacy
+	"cat /mnt/conf/config.json | jq '.apiKey = \"foo\" | .deviceApiKey = \"bar\" | .pubnubSubscribeKey = \"psk\" | .pubnubPublishKey = \"ppk\" | .mixpanelToken = \"mpt\" | .wifiKey = \"dunno\" | .files = {}'" # legacy
+	"cat /mnt/boot/config.json | jq '.apiKey = \"foo\" | .deviceApiKey = \"bar\" | .pubnubSubscribeKey = \"psk\" | .pubnubPublishKey = \"ppk\" | .mixpanelToken = \"mpt\" | .wifiKey = \"dunno\" | .files = {}'"
 	"ls -l /mnt/boot/system-connections"
 	"cat /mnt/boot/config.txt" # only for rpi...
 	"cat /mnt/boot/uEnv.txt" # only for uboot devices
