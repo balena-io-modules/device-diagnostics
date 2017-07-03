@@ -59,6 +59,9 @@ commands=(
 	"journalctl -n 200 --no-pager -u $docker_name"
 	"systemctl status openvpn-resin"
 	"journalctl -n 200 --no-pager -u openvpn-resin"
+	"iptables -n -L"
+	"iptables -n -t nat -L"
+	"$docker exec resin_supervisor cat /etc/resolv.conf"
 )
 
 function each_command()
