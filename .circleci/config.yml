@@ -1,10 +1,17 @@
 version: 2.0
+jobs:
+    test:
+        steps:
+            - checkout
+            - run:
+                name: check
+                command: |
+                    apt-get update
+                    apt-get install -qy shellcheck
+                    shellcheck *.sh
 
-dependencies:
-    pre:
-        - sudo apt-get update
-        - sudo apt-get install shellcheck
-
-test:
-    override:
-        - shellcheck *.sh 
+workflows:
+  version: 2
+  est:
+    jobs:
+        - test
