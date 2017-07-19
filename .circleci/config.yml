@@ -11,9 +11,3 @@ jobs:
                     apt-get update
                     apt-get install -qy shellcheck
                     shellcheck *.sh
-
-workflows:
-  version: 2
-  est:
-    jobs:
-        - test
