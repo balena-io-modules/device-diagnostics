@@ -6,11 +6,11 @@ jobs:
         steps:
             - checkout
             - run:
-                name: check
+                name: shellcheck
                 command: |
                     apt-get update
                     apt-get install -qy shellcheck
-                    shellcheck *.sh
+                    shellcheck leech.sh
 workflows:
   version: 2
   test:
