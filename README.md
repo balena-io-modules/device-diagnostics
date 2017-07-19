@@ -1,5 +1,8 @@
 # Leech
 
+![https://circleci.com/gh/imrehg/leech.svg?style=shield](https://circleci.com/gh/imrehg/leech/)
+
+
 ### Prerequisites
 
 This script is pretty basic for now - it assumes you have an ssh alias `resin`
