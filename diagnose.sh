@@ -152,7 +152,7 @@ function check_diskspace()
 	# Last +0 forces the field to a number, stripping the '%' on the end.
 	# Tested working on busybox.
 	used_percent=$(df $mountpoint | tail -n 1 | awk '{print $5+0}')
-	free_percent=$((100 - $used_percent))
+	free_percent=$((100 - used_percent))
 
 	# First, check that df indicates low space. If not, no need to check
 	# btrfs df. This is because btrfs allocates more space than is needed,
@@ -162,29 +162,49 @@ function check_diskspace()
 		return
 	fi
 
-	read total used <<<$(btrfs_get_data $mountpoint "Data, single")
-
-	used_percent_btrfs=$((used*100/total))
-	free_percent_btrfs=$((100 - $used_percent_btrfs))
-
-	if [ "$free_percent_btrfs" -lt "$low_disk_threshold" ]; then
-		echo "DISK: DANGER: LOW SPACE: df reports ${free_percent}%, btrfs reports ${free_percent_btrfs}%."
+	if ! [ -x "$(command -v btrfs)" ]; then
+		# if btrfs command does not exists, that's all we can check
+		echo "DISK: DANGER: LOW SPACE: df reports ${free_percent}%"
 	else
-		echo "DISK: OK (df reports ${free_percent}% free, but btrfs reports ${free_percent_btrfs}% free.)"
+		# resinOS 1.x device needs check of btrfs
+		read total used <<<$(btrfs_get_data $mountpoint "Data, single")
+		if [ -z "$total" ]; then
+			read total used <<<$(btrfs_get_data $mountpoint "Data+Metadata")
+		fi
+
+		used_percent_btrfs=$((used*100/total))
+		free_percent_btrfs=$((100 - used_percent_btrfs))
+
+		if [ "$free_percent_btrfs" -lt "$low_disk_threshold" ]; then
+			echo "DISK: DANGER: LOW SPACE: df reports ${free_percent}%, btrfs reports ${free_percent_btrfs}%."
+		else
+			echo "DISK: OK (df reports ${free_percent}% free, but btrfs reports ${free_percent_btrfs}% free.)"
+		fi
 	fi
 }
 
 function check_metadata()
 {
+	if ! [ -x "$(command -v btrfs)" ]; then
+		# Not a resinOS 1.x device, as btrfs does not exists, so no metadata
+		echo "METADATA: SKIP: not resinOS 1.x device"
+		return
+	fi
 	if ! is_mounted $mountpoint; then
 		echo "METADATA: SKIP: BTRFS filesystem not mounted."
 		return
 	fi
 
-	read total used <<<$(btrfs_get_data $mountpoint "Metadata, DUP")
+	read total used <<<$(btrfs_get_data $mountpoint "Data+Metadata")
+	if [ -n "$total" ]; then
+		echo "BTRFS MODE: MIXED"
+	else
+		read total used <<<$(btrfs_get_data $mountpoint "Metadata, DUP")
+		echo "BTRFS MODE: DUP"
+	fi
 
 	used_percent=$((used*100/total))
-	free_percent=$((100 - $used_percent))
+	free_percent=$((100 - used_percent))
 
 	if [ "$free_percent" -lt "$low_metadata_threshold" ]; then
 		echo "METADATA: DANGER: LOW SPACE: ${free_percent}% btrfs metadata free."
