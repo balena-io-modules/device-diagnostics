@@ -10,7 +10,11 @@ low_mem_threshold=10 #%
 low_disk_threshold=10 #%
 low_metadata_threshold=30 #%
 
-# DIAGNOSTIC COMMANDS BELOW.
+## DIAGNOSTIC COMMANDS BELOW.
+# Helper variables
+filter_config_keys="jq '. | with_entries(if .key | (contains(\"apiKey\") or contains(\"deviceApiKey\") or contains(\"pubnubSubscribeKey\") or contains(\"pubnubPublishKey\") or contains(\"mixpanelToken\") or contains(\"wifiKey\") or contains(\"files\")) then .value = \"<hidden>\" else . end)'"
+
+# Commands
 commands=(
 	"cat /etc/os-release"
 	"uname -a"
@@ -26,9 +30,9 @@ commands=(
 	"btrfs fi df /mnt/data"
 	"btrfs fi usage /mnt/data-disk" # legacy
 	"btrfs fi usage /mnt/data"
-	"cat /mnt/data-disk/config.json | jq '.apiKey = \"foo\" | .deviceApiKey = \"bar\" | .pubnubSubscribeKey = \"psk\" | .pubnubPublishKey = \"ppk\" | .mixpanelToken = \"mpt\" | .wifiKey = \"dunno\" | .files = {}'"  # legacy
-	"cat /mnt/conf/config.json | jq '.apiKey = \"foo\" | .deviceApiKey = \"bar\" | .pubnubSubscribeKey = \"psk\" | .pubnubPublishKey = \"ppk\" | .mixpanelToken = \"mpt\" | .wifiKey = \"dunno\" | .files = {}'" # legacy
-	"cat /mnt/boot/config.json | jq '.apiKey = \"foo\" | .deviceApiKey = \"bar\" | .pubnubSubscribeKey = \"psk\" | .pubnubPublishKey = \"ppk\" | .mixpanelToken = \"mpt\" | .wifiKey = \"dunno\" | .files = {}'"
+	"cat /mnt/data-disk/config.json | $filter_config_keys"  # legacy
+	"cat /mnt/conf/config.json | $filter_config_keys" # legacy
+	"cat /mnt/boot/config.json | $filter_config_keys"
 	"ls -l /mnt/boot/system-connections"
 	"cat /mnt/boot/config.txt" # only for rpi...
 	"cat /mnt/boot/uEnv.txt" # only for uboot devices
