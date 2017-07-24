@@ -68,9 +68,10 @@ commands=(
 
 function each_command()
 {
+	local meta_command=$1
 	for command in "${commands[@]}"
 	do
-		eval "$1 $command"
+		eval "$1 \"$command\""
 	done
 }
 
