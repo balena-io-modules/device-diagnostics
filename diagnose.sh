@@ -63,7 +63,7 @@ commands=(
 	"journalctl -n 200 --no-pager -u openvpn-resin"
 	"iptables -n -L"
 	"iptables -n -t nat -L"
-	"$docker exec resin_supervisor cat /etc/resolv.conf"
+	"$docker_name exec resin_supervisor cat /etc/resolv.conf"
 	"ls -l /proc/*/fd/ | grep data | grep -w deleted"
 )
 
