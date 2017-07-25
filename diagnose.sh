@@ -16,58 +16,58 @@ filter_config_keys="jq '. | with_entries(if .key | (contains(\"apiKey\") or cont
 
 # Commands
 commands=(
-	"cat /etc/os-release"
-	"uname -a"
-	"free -h"
-	"cat /proc/cpuinfo"
-	"cat /proc/meminfo"
-	"ps"
-	"top -b -n 1"
-	"tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log" # legacy
-	"cat /var/log/provisioning-progress.log"
-	"df -h"
-	"btrfs fi df /mnt/data-disk" # legacy
-	"btrfs fi df /mnt/data"
-	"btrfs fi usage /mnt/data-disk" # legacy
-	"btrfs fi usage /mnt/data"
-	"cat /mnt/data-disk/config.json | $filter_config_keys"  # legacy
-	"cat /mnt/conf/config.json | $filter_config_keys" # legacy
-	"cat /mnt/boot/config.json | $filter_config_keys"
-	"ls -l /mnt/boot/system-connections"
-	"cat /mnt/boot/config.txt" # only for rpi...
-	"cat /mnt/boot/uEnv.txt" # only for uboot devices
-	"cat /mnt/boot/resinOS_uEnv.txt" # ibidem
-	"mount"
-	"ls -l /dev"
-	"date"
-	"timedatectl status"
-	"/sbin/ip addr"
-	"curl https://www.google.co.uk"
-	"curl https://pubnub.com"
-	"curl https://api.resin.io/ping"
-	"journalctl -n500"
-	"dmesg"
-	"cat /var/log/messages" # legacy
-	"cat /etc/resolv.conf"
-	"cat /proc/net/dev"
-	"cat /proc/net/udp"
-	"cat /proc/net/snmp"
-	"netstat -ntl"
-	"curl --max-time 5 localhost:48484/ping"
-	"$docker_name --version"
-	"ping -c 1 -W 3 google.co.uk"
-	"$docker_name images"
-	"$docker_name ps -a"
-	"$docker_name stats --all --no-stream"
-	"systemctl status resin-supervisor"
-	"journalctl -n 200 --no-pager -u resin-supervisor"
-	"systemctl status $docker_name"
-	"journalctl -n 200 --no-pager -u $docker_name"
-	"systemctl status openvpn-resin"
-	"journalctl -n 200 --no-pager -u openvpn-resin"
-	"iptables -n -L"
-	"iptables -n -t nat -L"
-	"$docker_name exec resin_supervisor cat /etc/resolv.conf"
+	'cat /etc/os-release'
+	'uname -a'
+	'free -h'
+	'cat /proc/cpuinfo'
+	'cat /proc/meminfo'
+	'ps'
+	'top -b -n 1'
+	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
+	'cat /var/log/provisioning-progress.log'
+	'df -h'
+	'btrfs fi df /mnt/data-disk' # legacy
+	'btrfs fi df /mnt/data'
+	'btrfs fi usage /mnt/data-disk' # legacy
+	'btrfs fi usage /mnt/data'
+	'cat /mnt/data-disk/config.json | $filter_config_keys'  # legacy
+	'cat /mnt/conf/config.json | $filter_config_keys' # legacy
+	'cat /mnt/boot/config.json | $filter_config_keys'
+	'ls -l /mnt/boot/system-connections'
+	'cat /mnt/boot/config.txt' # only for rpi...
+	'cat /mnt/boot/uEnv.txt' # only for uboot devices
+	'cat /mnt/boot/resinOS_uEnv.txt' # ibidem
+	'mount'
+	'ls -l /dev'
+	'date'
+	'timedatectl status'
+	'/sbin/ip addr'
+	'curl https://www.google.co.uk'
+	'curl https://pubnub.com'
+	'curl https://api.resin.io/ping'
+	'journalctl -n500'
+	'dmesg'
+	'cat /var/log/messages' # legacy
+	'cat /etc/resolv.conf'
+	'cat /proc/net/dev'
+	'cat /proc/net/udp'
+	'cat /proc/net/snmp'
+	'netstat -ntl'
+	'curl --max-time 5 localhost:48484/ping'
+	'$docker_name --version'
+	'ping -c 1 -W 3 google.co.uk'
+	'$docker_name images'
+	'$docker_name ps -a'
+	'$docker_name stats --all --no-stream'
+	'systemctl status resin-supervisor'
+	'journalctl -n 200 --no-pager -u resin-supervisor'
+	'systemctl status $docker_name'
+	'journalctl -n 200 --no-pager -u $docker_name'
+	'systemctl status openvpn-resin'
+	'journalctl -n 200 --no-pager -u openvpn-resin'
+	'iptables -n -L'
+	'iptables -n -t nat -L'
+	'$docker_name exec resin_supervisor cat /etc/resolv.conf'
 )
 
 function each_command()
@@ -75,7 +75,7 @@ function each_command()
 	local meta_command=$1
 	for command in "${commands[@]}"
 	do
-		eval "$1 \"$command\""
+		eval "$meta_command \"$command\""
 	done
 }
 
