@@ -17,22 +17,48 @@ the device is open for support or the account is an admin account.
 
 ## Using
 
-Retrieves diagnostic information from a user device.
-
-Currently the script simply copies a diagnostic script over to
-the device then runs it there, redirecting output to `out/$UUID_<TIME>.txt`,
-where `<TIME>` is the localtime when leech has started.
-It uses `diagnose.sh` to generate this script.
-
-Usage is:
-
-```bash
-./leech.sh [optional: resin|resinstaging] [resin username] [device uuid]
+```
+npm i github:resin-io/leech#cli && npm link
 ```
 
-The script first checks that the device with the specified vpn address matches
-the provided uuid to avoid receiving data from an incorrect device (VPN
-addresses get reused.)
+```
+leech diagnose <localDeviceIP|deviceUUID>
+```
+
+![demo](output.gif)
+
+## Configuration
+
+| Environment variable | Default     | Required |
+|-----------------------|-------------|----------|
+| LEECH_DIR             | $HOME/leech |          |
+
+## Mapping issues
+
+The cli, will parse the out put from commands in `diagnose.sh` line by line matching against regexes defined in `/lib/contants.ts`, Each issue must have an `id` which correlates to github issue number, a `regex` for matching logs and a `link` to some form of documentation on the bug.
+
+## Analytics
+
+Every leech on a remote device is reported to mixpanel.
+
+`leech` event example:
+```
+{
+  distint_id: `<device_uuid>`
+  issues: [
+    <id>,
+    <id>
+  ],
+  stats: [
+    'MEM: OK (79% available.)',
+    'DOCKER: OK (docker is running.)',
+    'SUPERVISOR: OK (supervisor is running)'
+    ...
+  ],
+  leecher: <os.userInfo().username>,
+  leech_version: '1.1.6'
+}
+```
 
 If the first argument is not used it defaults to `resin`.
 
