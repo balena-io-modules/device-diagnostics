@@ -68,6 +68,7 @@ commands=(
 	"iptables -n -L"
 	"iptables -n -t nat -L"
 	"$docker_name exec resin_supervisor cat /etc/resolv.conf"
+	"ls -l /proc/*/fd/ | grep data | grep -w deleted"
 )
 
 function each_command()
