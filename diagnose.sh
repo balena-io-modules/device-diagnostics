@@ -13,6 +13,7 @@ low_metadata_threshold=30 #%
 ## DIAGNOSTIC COMMANDS BELOW.
 # Helper variables
 filter_config_keys="jq '. | with_entries(if .key | (contains(\"apiKey\") or contains(\"deviceApiKey\") or contains(\"pubnubSubscribeKey\") or contains(\"pubnubPublishKey\") or contains(\"mixpanelToken\") or contains(\"wifiKey\") or contains(\"files\")) then .value = \"<hidden>\" else . end)'"
+filter_container_envs="jq 'del(.[].Config.Env)'"
 
 # Commands
 commands=(
@@ -68,6 +69,7 @@ commands=(
 	"iptables -n -L"
 	"iptables -n -t nat -L"
 	"$docker_name exec resin_supervisor cat /etc/resolv.conf"
+	"$docker_name inspect \$($docker_name ps --all --quiet | tr '\n' ' ') | $filter_container_envs"
 )
 
 function each_command()
