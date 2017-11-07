@@ -35,7 +35,11 @@ rm -f $ERROR_LOG_FILE
 versionCheck
 
 if [ -z "$1" ]; then
-	fatal usage: $(basename $0) [device uuid]
+	fatal usage: $(basename $0) [device uuid] [resin username] [sshhost defaults to ssh.resindevice.io] [sshport defaults to 22]
+fi
+
+if [ -z "$2" ]; then
+	fatal usage: $(basename $0) [device uuid] [resin username] [sshhost defaults to ssh.resindevice.io] [sshport defaults to 22]
 fi
 
 if [ ! -f diagnose.sh ]; then
@@ -43,6 +47,12 @@ if [ ! -f diagnose.sh ]; then
 fi
 
 uuid=$1
+
+username=$2
+
+sshhost=${3:-ssh.resindevice.io}
+
+sshport=${4:-22}
 
 # Gets current script dir, see http://stackoverflow.com/a/246128.
 script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -52,10 +62,10 @@ output=${out_dir}/${out_file}
 
 mkdir -p ${out_dir}
 
-ssh_opts="-o Hostname=$uuid.vpn -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+ssh_opts="-t -o LogLevel=ERROR -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ControlMaster=no -p $sshport $username@$sshhost host $uuid"
 
 echo Executing script...
-ssh $ssh_opts resin "export LEECH_VERSION=${VERSION}; bash -s" <${script_dir}/diagnose.sh >$output 2>$ERROR_LOG_FILE
+ssh $ssh_opts "export LEECH_VERSION=${VERSION}; bash -s" <${script_dir}/diagnose.sh >$output 2>$ERROR_LOG_FILE
 [ "$?" != 0 ] && fatal "ERROR: Script execution failed."
 
 echo Done! Output stored in $out_file
