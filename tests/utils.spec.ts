@@ -6,7 +6,9 @@ import { isLocal, getSSHOpts, parser } from '../lib/utils';
 import * as byline from 'byline';
 
 const LOCAL_DEVICE = '192.168.1.1';
+const HOST = 'ssh.devices.resinstaging.io';
 const REMOTE_DEVICE = '0d30096f589da97eb9236abeaee3625a';
+const USERNAME = 'unicorn'
 
 describe('utils', function() {
   describe('isLocal', () => {
@@ -21,21 +23,25 @@ describe('utils', function() {
 
   describe('getSSHOpts', () => {
     it('should return valid correct ssh options for local device', () => {
-  		expect(getSSHOpts(LOCAL_DEVICE)).to.deep.equal([
-        `root@${LOCAL_DEVICE}`,
-        '-p 22222',
+  		expect(getSSHOpts(LOCAL_DEVICE, HOST, USERNAME)).to.deep.equal([
+        '-t',
+        '-o LogLevel=ERROR',
         '-o StrictHostKeyChecking=no',
         '-o UserKnownHostsFile=/dev/null',
+        '-p 22222',
+        `root@${LOCAL_DEVICE}`
       ]);
   	});
 
     it('should return valid correct ssh options for remote device', () => {
-  		expect(getSSHOpts(REMOTE_DEVICE)).to.deep.equal([
-        'resin',
-        `-o Hostname=${REMOTE_DEVICE}.vpn`,
-        '-p 22222',
+  		expect(getSSHOpts(REMOTE_DEVICE, HOST, USERNAME)).to.deep.equal([
+        '-t',
+        '-o LogLevel=ERROR',
         '-o StrictHostKeyChecking=no',
         '-o UserKnownHostsFile=/dev/null',
+        '-p 22',
+        `${USERNAME}@${HOST}`,
+        `host ${REMOTE_DEVICE}`
       ]);
   	});
   });

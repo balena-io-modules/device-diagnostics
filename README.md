@@ -27,6 +27,22 @@ leech diagnose <localDeviceIP|deviceUUID>
 
 ![demo](output.gif)
 
+## usage
+
+```
+Use this command to diagnose a local or remote devices
+
+Options:
+  -h: hostname, default=ssh.resindevice.io (use ssh.devices.resinstaging.io for staging)
+  -u: username used to authenticate ssh keys, default=username retrieved from local resin-token
+  -t: track with mixpanel, default=true
+Examples:
+  $ leech diagnose 0d30096f589da97eb9236abeaee3625a
+  $ leech diagnose 192.168.1.125
+  $ leech diagnose -h=ssh.devices.resinstaging.io 0d30096f589da97eb9236abeaee3625a
+  $ leech diagnose -u=unicorn 0d30096f589da97eb9236abeaee3625a
+```
+
 ## Configuration
 
 | Environment variable | Default     | Required |

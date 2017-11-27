@@ -22,7 +22,7 @@
     "watch": "gulp watch",
     "prepublish": "require-npm4-to-publish",
     "prepublishOnly": "npm run build",
-    "prettier": "prettier --single-quote --write ./lib/**/*.ts",
+    "prettier": "prettier --single-quote --write ./lib/*.ts",
     "test": "mocha -r ts-node/register --reporter spec tests/**/*.spec.ts"
   },
   "devDependencies": {
@@ -51,6 +51,8 @@
     "mixpanel": "0.7.0",
     "mkdirp-promise": "5.0.1",
     "mocha": "3.5.0",
-    "resin-cli-visuals": "1.4.0"
+    "resin-cli-visuals": "1.4.0",
+    "resin-settings-client": "3.8.1",
+    "resin-token": "4.2.1"
   }
 }

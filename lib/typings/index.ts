@@ -9,7 +9,9 @@ export interface Params {
 }
 
 export interface Opts {
-  trackingOff: boolean;
+  tracking: boolean;
+  username: string;
+  host: string;
 }
 
 export interface Cmd {

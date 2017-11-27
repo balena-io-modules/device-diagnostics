@@ -1,23 +1,18 @@
 import * as byline from 'byline';
 import { spawn } from 'child_process';
 import * as fs from 'fs';
-import * as _ from 'lodash'
+import * as _ from 'lodash';
 import store from './store';
-import {
-  parser,
-  getSSHOpts,
-} from './utils';
-import {
-  LEECH_DIR,
-} from './constants'
+import { parser, getSSHOpts } from './utils';
+import { LEECH_DIR, SSH_HOST } from './constants';
 
-export default (deviceId: string) => {
+export default (deviceId: string, host = SSH_HOST, username: string) => {
   return new Promise(resolve => {
     const today = new Date();
     const outputFilePath = `${LEECH_DIR}/${deviceId}/${today.toISOString()}.txt`;
 
     const diagnose = fs.createReadStream(`${__dirname}/../scripts/diagnose.sh`);
-    const ssh = spawn(`ssh`, getSSHOpts(deviceId));
+    const ssh = spawn(`ssh`, getSSHOpts(deviceId, host, username));
     const lineStream = byline.createStream();
     const writeStream = fs.createWriteStream(outputFilePath);
 
@@ -35,13 +30,9 @@ export default (deviceId: string) => {
 
     ssh.stderr.on('data', (err: Buffer) => {
       const e = err.toString();
-      // ignore common warnings outputted from script
-      const warningFilter = [
-        'Pseudo-terminal',
-        'to the list of known hosts',
-        'No such file or directory'
-      ]
-      if (!_.some(warningFilter, (w) => _.includes(e, w))) {
+      // ignore common warnings outputted from diagnose.sh
+      const warningFilter = ['No such file or directory'];
+      if (!_.some(warningFilter, w => _.includes(e, w))) {
         store.actions.error(Error(e));
       }
     });

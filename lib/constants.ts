@@ -3,6 +3,7 @@ const IP_REGEX =
   '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$';
 const STATS_REGEX = '^(MEM|DOCKER|SUPERVISOR|DNS|DISK|METADATA): .*';
 const LEECH_DIR = process.env.LEECH_DIR || `${process.env.HOME}/leech`;
+const SSH_HOST = 'ssh.resindevice.io';
 
 const ISSUES_MAP = [
   {
@@ -31,4 +32,11 @@ const ISSUES_MAP = [
   }
 ];
 
-export { IP_REGEX, STATS_REGEX, MIXPANEL_TOKEN, LEECH_DIR, ISSUES_MAP };
+export {
+  IP_REGEX,
+  STATS_REGEX,
+  MIXPANEL_TOKEN,
+  LEECH_DIR,
+  ISSUES_MAP,
+  SSH_HOST
+};

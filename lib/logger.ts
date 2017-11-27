@@ -2,15 +2,11 @@ import * as chalk from 'chalk';
 import * as _ from 'lodash';
 import store from './store';
 const visuals = require('resin-cli-visuals');
-import {
-  isLocal
-} from './utils';
-import {
-  Issue
-} from './typings';
+import { isLocal } from './utils';
+import { Issue } from './typings';
 
 export default (deviceId: string) => {
-  let intro:string;
+  let intro: string;
   if (isLocal(deviceId)) {
     intro = `Leeching device in local network at ${deviceId}`;
   } else {
