@@ -70,6 +70,7 @@ commands=(
 	"iptables -n -t nat -L"
 	"$docker_name exec resin_supervisor cat /etc/resolv.conf"
 	"$docker_name inspect \$($docker_name ps --all --quiet | tr '\n' ' ') | $filter_container_envs"
+	"exit"
 )
 
 function each_command()

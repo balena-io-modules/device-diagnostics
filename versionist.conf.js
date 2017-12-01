@@ -13,12 +13,6 @@ const isIncrementalCommit = (changeType) => {
   return Boolean(changeType) && changeType.trim().toLowerCase() !== 'none';
 };
 
-const updateScriptVersion = (cwd, version, callback) => {
-  return exec(`sed -i 's/^VERSION=v.*/VERSION=v${version}/g' leech.sh`, {
-    encoding: 'utf8',
-  }, callback);
-};
-
 module.exports = {
   // This setup allows the editing and parsing of footer tags to get version and type information,
   // as well as ensuring tags of the type 'v<major>.<minor>.<patch>' are used.
@@ -27,7 +21,6 @@ module.exports = {
   parseFooterTags: true,
   getGitReferenceFromVersion: 'v-prefix',
   incrementVersion: 'semver',
-  updateVersion: updateScriptVersion,
 
   // Always add the entry to the top of the Changelog, below the header.
   addEntryToChangelog: {
