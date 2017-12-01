@@ -18,7 +18,7 @@ the device is open for support or the account is an admin account.
 ## Using
 
 ```
-npm i github:resin-io/leech#cli && npm link
+npm link
 ```
 
 ```

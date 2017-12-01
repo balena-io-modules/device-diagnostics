@@ -22,6 +22,7 @@
     "watch": "gulp watch",
     "prepublish": "require-npm4-to-publish",
     "prepublishOnly": "npm run build",
+    "prettier-check": "prettier-check --single-quote --write ./lib/*.ts",
     "prettier": "prettier --single-quote --write ./lib/*.ts",
     "test": "mocha -r ts-node/register --reporter spec tests/**/*.spec.ts"
   },
