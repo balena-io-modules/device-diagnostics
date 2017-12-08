@@ -1,6 +1,6 @@
 {
   "name": "leech",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "leech cli",
   "homepage": "https://github.com/resin-io/leech#readme",
   "main": "./build/index.js",
@@ -39,7 +39,8 @@
     "gulp-typescript": "^3.1.4",
     "gulp-util": "^3.0.7",
     "gulp-watch": "4.3.11",
-    "prettier": "1.5.3",
+    "prettier": "^1.5.3",
+    "prettier-check": "^2.0.0",
     "require-npm4-to-publish": "^1.0.0",
     "ts-node": "^3.3.0",
     "typescript": "^2.1.5"
