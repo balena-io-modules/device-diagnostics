@@ -1,0 +1,18 @@
+version: 2.0
+jobs:
+    test:
+        docker:
+            - image: buildpack-deps:wily
+        steps:
+            - checkout
+            - run:
+                name: shellcheck
+                command: |
+                    apt-get update
+                    apt-get install -qy shellcheck
+                    shellcheck leech.sh
+workflows:
+  version: 2
+  testflow:
+    jobs:
+        - test
