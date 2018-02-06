@@ -38,20 +38,20 @@ capitano.command({
   options: [
     {
       signature: 'host',
-      require: false,
+      required: false,
       parameter: 'host',
       alias: ['h']
     },
     {
       signature: 'username',
-      require: false,
+      required: false,
       parameter: 'username',
       alias: ['u']
     },
     {
       signature: 'tracking',
       boolean: true,
-      require: false,
+      required: false,
       alias: ['t']
     }
   ],
