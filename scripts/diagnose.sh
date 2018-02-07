@@ -1,7 +1,13 @@
 #!/bin/bash
 
 # Determine whether we're using the older 'rce'-aliased docker or not.
-docker_name=$(which docker >/dev/null && echo "docker" || echo "rce")
+if command -v balena >/dev/null ; then
+	docker_name="balena"
+elif command -v docker >/dev/null ; then
+	docker_name="docker"
+else
+	docker_name="rce"
+fi
 
 # docker's mount is also the core btrfs filesystem.
 mountpoint="/var/lib/$docker_name"
@@ -12,65 +18,70 @@ low_metadata_threshold=30 #%
 
 ## DIAGNOSTIC COMMANDS BELOW.
 # Helper variables
+# shellcheck disable=SC2034
 filter_config_keys="jq '. | with_entries(if .key | (contains(\"apiKey\") or contains(\"deviceApiKey\") or contains(\"pubnubSubscribeKey\") or contains(\"pubnubPublishKey\") or contains(\"mixpanelToken\") or contains(\"wifiKey\") or contains(\"files\")) then .value = \"<hidden>\" else . end)'"
+# shellcheck disable=SC2034
 filter_container_envs="jq 'del(.[].Config.Env)'"
 
 # Commands
+# shellcheck disable=SC2016
 commands=(
-	"cat /etc/os-release"
-	"uname -a"
-	"free -h"
-	"cat /proc/cpuinfo"
-	"cat /proc/meminfo"
-	"ps"
-	"top -b -n 1"
-	"tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log" # legacy
-	"cat /var/log/provisioning-progress.log"
-	"df -h"
-	"btrfs fi df /mnt/data-disk" # legacy
-	"btrfs fi df /mnt/data"
-	"btrfs fi usage /mnt/data-disk" # legacy
-	"btrfs fi usage /mnt/data"
-	"cat /mnt/data-disk/config.json | $filter_config_keys"  # legacy
-	"cat /mnt/conf/config.json | $filter_config_keys" # legacy
-	"cat /mnt/boot/config.json | $filter_config_keys"
-	"ls -l /mnt/boot/system-connections"
-	"cat /mnt/boot/config.txt" # only for rpi...
-	"cat /mnt/boot/uEnv.txt" # only for uboot devices
-	"cat /mnt/boot/resinOS_uEnv.txt" # ibidem
-	"mount"
-	"ls -l /dev"
-	"date"
-	"timedatectl status"
-	"/sbin/ip addr"
-	"curl https://www.google.co.uk"
-	"curl https://pubnub.com"
-	"curl https://api.resin.io/ping"
-	"journalctl -n500 -a"
-	"dmesg"
-	"cat /var/log/messages" # legacy
-	"cat /etc/resolv.conf"
-	"cat /proc/net/dev"
-	"cat /proc/net/udp"
-	"cat /proc/net/snmp"
-	"netstat -ntl"
-	"curl --max-time 5 localhost:48484/ping"
-	"$docker_name --version"
-	"ping -c 1 -W 3 google.co.uk"
-	"$docker_name images"
-	"$docker_name ps -a"
-	"$docker_name stats --all --no-stream"
-	"systemctl status resin-supervisor"
-	"journalctl -n 200 --no-pager -a -u resin-supervisor"
-	"systemctl status $docker_name"
-	"journalctl -n 200 --no-pager -a -u $docker_name"
-	"systemctl status openvpn-resin"
-	"journalctl -n 200 --no-pager -a -u openvpn-resin"
-	"iptables -n -L"
-	"iptables -n -t nat -L"
-	"$docker_name exec resin_supervisor cat /etc/resolv.conf"
-	"$docker_name inspect \$($docker_name ps --all --quiet | tr '\n' ' ') | $filter_container_envs"
-	"exit"
+	'cat /etc/os-release'
+	'uname -a'
+	'free -h'
+	'cat /proc/cpuinfo'
+	'cat /proc/meminfo'
+	'ps'
+	'top -b -n 1'
+	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
+	'cat /var/log/provisioning-progress.log'
+	'df -h'
+	'btrfs filesystem df /mnt/data-disk' # legacy
+	'btrfs filesystem df /mnt/data'
+	'btrfs filesystem usage /mnt/data-disk' # legacy
+	'btrfs filesystem usage /mnt/data'
+	'cat /mnt/data-disk/config.json | $filter_config_keys'  # legacy
+	'cat /mnt/conf/config.json | $filter_config_keys' # legacy
+	'cat /mnt/boot/config.json | $filter_config_keys'
+	'ls -l /mnt/boot/system-connections'
+	'cat /mnt/boot/config.txt' # only for rpi...
+	'cat /mnt/boot/uEnv.txt' # only for uboot devices
+	'cat /mnt/boot/resinOS_uEnv.txt' # ibidem
+	'mount'
+	'ls -l /dev'
+	'date'
+	'timedatectl status'
+	'/sbin/ip addr'
+	'curl https://www.google.co.uk'
+	'curl https://pubnub.com'
+	'curl https://api.resin.io/ping'
+	'journalctl -n500 -a'
+	'dmesg'
+	'cat /var/log/messages' # legacy
+	'cat /etc/resolv.conf'
+	'cat /proc/net/dev'
+	'cat /proc/net/udp'
+	'cat /proc/net/snmp'
+	'netstat -ntl'
+	'curl --max-time 5 localhost:48484/ping'
+	'$docker_name --version'
+	'ping -c 1 -W 3 google.co.uk'
+	'$docker_name images'
+	'$docker_name ps -a'
+	'$docker_name stats --all --no-stream'
+	'systemctl status resin-supervisor'
+	'journalctl -n 200 --no-pager -a -u resin-supervisor'
+	'$docker_name logs resin_supervisor'
+	'systemctl status $docker_name'
+	'journalctl -n 200 --no-pager -a -u $docker_name'
+	'systemctl status openvpn-resin'
+	'journalctl -n 200 --no-pager -a -u openvpn-resin'
+	'iptables -n -L'
+	'iptables -n -t nat -L'
+	'$docker_name exec resin_supervisor cat /etc/resolv.conf'
+	'$docker_name inspect \$($docker_name ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
+	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
+	'exit'
 )
 
 function each_command()
@@ -78,14 +89,14 @@ function each_command()
 	local meta_command=$1
 	for command in "${commands[@]}"
 	do
-		eval "$1 \"$command\""
+		eval "$meta_command \"$command\""
 	done
 }
 
 function announce()
 {
 	echo
-	echo "--- $@ ---"
+	echo "--- $* ---"
 	echo
 }
 
@@ -93,8 +104,8 @@ function announce()
 # screwed up :( let's do manually for now.
 function announce_run()
 {
-	announce $@
-	eval $@ 2>&1
+	announce "$@"
+	eval "$@" 2>&1
 }
 
 function announce_version()
@@ -105,12 +116,12 @@ function announce_version()
 function get_meminfo_field()
 {
 	# Thankfully this works even with busybox :)
-	cat /proc/meminfo | grep "^$1:" | awk '{print $2}'
+	grep "^$1:" /proc/meminfo | awk '{print $2}'
 }
 
 function btrfs_get_data()
 {
-	btrfs fi df --raw $1 \
+	btrfs filesystem df --raw "$1" \
 		| grep "^$2" \
 		| grep -o '[0-9]*' \
 		| paste - -
@@ -174,9 +185,9 @@ function check_diskspace()
 		echo "DISK: DANGER: LOW SPACE: df reports ${free_percent}%"
 	else
 		# resinOS 1.x device needs check of btrfs
-		read total used <<<$(btrfs_get_data $mountpoint "Data, single")
+		read -r total used <<<"$(btrfs_get_data $mountpoint "Data, single")"
 		if [ -z "$total" ]; then
-			read total used <<<$(btrfs_get_data $mountpoint "Data+Metadata")
+			read -r total used <<<"$(btrfs_get_data $mountpoint "Data+Metadata")"
 		fi
 
 		used_percent_btrfs=$((used*100/total))
@@ -202,11 +213,11 @@ function check_metadata()
 		return
 	fi
 
-	read total used <<<$(btrfs_get_data $mountpoint "Data+Metadata")
+	read -r total used <<<"$(btrfs_get_data $mountpoint "Data+Metadata")"
 	if [ -n "$total" ]; then
 		echo "BTRFS MODE: MIXED"
 	else
-		read total used <<<$(btrfs_get_data $mountpoint "Metadata, DUP")
+		read -r total used <<<"$(btrfs_get_data $mountpoint "Metadata, DUP")"
 		echo "BTRFS MODE: DUP"
 	fi
 
@@ -246,8 +257,7 @@ function check_dns()
 		return
 	fi
 
-	first_server=$(cat /etc/resolv.conf | \
-				  grep "^nameserver" | \
+	first_server=$(grep "^nameserver" /etc/resolv.conf | \
 				  head -n 1 | \
 				  awk '{print $2}')
 
