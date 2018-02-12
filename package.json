@@ -26,6 +26,12 @@
     "prettier": "prettier --single-quote --write ./lib/*.ts",
     "test": "mocha -r ts-node/register --reporter spec tests/**/*.spec.ts"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run prettier",
+      "pre-push": "npm run prettier-check && npm test"
+    }
+  },
   "devDependencies": {
     "@types/byline": "4.2.31",
     "@types/chai": "^4.0.1",
@@ -39,6 +45,7 @@
     "gulp-typescript": "^3.2.4",
     "gulp-util": "^3.0.7",
     "gulp-watch": "4.3.11",
+    "husky": "^0.15.0-rc.8",
     "prettier": "^1.5.3",
     "prettier-check": "^2.0.0",
     "require-npm4-to-publish": "^1.0.0",
