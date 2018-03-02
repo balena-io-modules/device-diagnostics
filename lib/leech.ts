@@ -1,15 +1,21 @@
 import * as byline from 'byline';
 import { spawn } from 'child_process';
+import * as dateFormat from 'dateformat';
 import * as fs from 'fs';
 import * as _ from 'lodash';
+import * as path from 'path';
 import store from './store';
 import { parser, getSSHOpts } from './utils';
 import { LEECH_DIR, SSH_HOST } from './constants';
 
 export default (deviceId: string, host = SSH_HOST, username: string) => {
     return new Promise(resolve => {
-        const today = new Date();
-        const outputFilePath = `${LEECH_DIR}/${deviceId}/${today.toISOString()}.txt`;
+        const now = new Date();
+        const outputFilePath = path.join(
+            LEECH_DIR,
+            deviceId,
+            `${dateFormat(now, 'yyyymmdd_HHMMss')}.txt`
+        );
 
         const diagnose = fs.createReadStream(
             `${__dirname}/../scripts/diagnose.sh`

@@ -1,6 +1,6 @@
 {
   "name": "leech",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "leech cli",
   "homepage": "https://github.com/resin-io/leech#readme",
   "main": "./build/index.js",
@@ -53,9 +53,11 @@
     "typescript": "^2.1.5"
   },
   "dependencies": {
+    "@types/dateformat": "^1.0.1",
     "byline": "5.0.0",
     "capitano": "1.7.4",
     "chalk": "2.0.1",
+    "dateformat": "^3.0.3",
     "lodash": "4.17.4",
     "mixpanel": "0.7.0",
     "mkdirp-promise": "5.0.1",
