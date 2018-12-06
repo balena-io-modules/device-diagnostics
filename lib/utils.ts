@@ -10,7 +10,7 @@ const getUserName = (username: string) => {
     return username
         ? Promise.resolve(username)
         : require('resin-token')({
-              dataDirectory: require('resin-settings-client').get(
+              dataDirectory: require('balena-settings-client').get(
                   'dataDirectory'
               )
           }).getUsername();
