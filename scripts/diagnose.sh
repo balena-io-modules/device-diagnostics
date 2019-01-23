@@ -21,13 +21,38 @@ low_disk_threshold=10 #%
 low_metadata_threshold=30 #%
 
 slow_disk_write=1000 #ms
+GLOBAL_TIMEOUT=60
+GLOBAL_TIMEOUT_CMD="timeout --preserve-status --kill-after=$(( GLOBAL_TIMEOUT * 2 ))"
+TIMEOUT_VERBOSE="timeout -v 1"
+# timeout (GNU coreutils) 8.26 does not support -v
+if ${TIMEOUT_VERBOSE} echo ; then
+        GLOBAL_TIMEOUT_CMD="${GLOBAL_TIMEOUT_CMD} -v"
+fi
+GLOBAL_TIMEOUT_CMD="${GLOBAL_TIMEOUT_CMD} ${GLOBAL_TIMEOUT}"
+# resinOS v1 busybox does not support `time -o`
+if [ -e "/usr/bin/time" ] ; then
+	TIME_CMD="/usr/bin/time -o /dev/stdout"
+	# resinOS v1 busybox does not support `time -o`
+	if ! ${TIME_CMD} echo ; then
+		TIME_CMD="/usr/bin/time"
+	fi
+else
+	# if for some reason the binary does not exist, use the shell builtin
+	TIME_CMD="time"
+fi
+
+# force UTC & RFC-3339 formatting
+# using nanos to help with event ordering, even if not provided by NTP
+DATE_CMD="date --utc --rfc-3339=ns"
+
+GLOBAL_CMD_PREFIX="${DATE_CMD} ; ${TIME_CMD} ${GLOBAL_TIMEOUT_CMD} bash -c"
 
 ## DIAGNOSTIC COMMANDS BELOW.
 # Helper variables
 # shellcheck disable=SC2034
-filter_config_keys="jq '. | with_entries(if .key | (contains(\"apiKey\") or contains(\"deviceApiKey\") or contains(\"pubnubSubscribeKey\") or contains(\"pubnubPublishKey\") or contains(\"mixpanelToken\") or contains(\"wifiKey\") or contains(\"files\")) then .value = \"<hidden>\" else . end)'"
+filter_config_keys='jq ". | with_entries(if .key | (contains(\"apiKey\") or contains(\"deviceApiKey\") or contains(\"pubnubSubscribeKey\") or contains(\"pubnubPublishKey\") or contains(\"mixpanelToken\") or contains(\"wifiKey\") or contains(\"files\")) then .value = \"<hidden>\" else . end)"'
 # shellcheck disable=SC2034
-filter_container_envs="jq 'del(.[].Config.Env)'"
+filter_container_envs='jq "del(.[].Config.Env)"'
 
 # Commands
 # shellcheck disable=SC2016
@@ -94,7 +119,6 @@ commands=(
 	'$ENG exec resin_supervisor cat /etc/resolv.conf'
 	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
 	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
-	'exit'
 )
 
 function each_command()
@@ -108,9 +132,9 @@ function each_command()
 
 function announce()
 {
-	echo
-	echo "--- $* ---"
-	echo
+	echo | tee /dev/stderr
+	echo "--- $* ---" | tee /dev/stderr
+	echo | tee /dev/stderr
 }
 
 # Sadly set -x outputs to stderr and with redirection the interleaving gets
@@ -118,7 +142,7 @@ function announce()
 function announce_run()
 {
 	announce "$@"
-	eval "$@" 2>&1
+	eval "${GLOBAL_CMD_PREFIX} '$*'"
 }
 
 function announce_version()
@@ -313,6 +337,7 @@ function run_checks()
 function run_commands()
 {
 	announce COMMANDS
+	announce "prefixing commands with '${GLOBAL_CMD_PREFIX}'"
 	# List commands.
 	each_command echo
 	# announce each command, then run it.
