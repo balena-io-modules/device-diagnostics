@@ -2,17 +2,12 @@
 
 ### Prerequisites
 
-This script is pretty basic for now - ~~it assumes you have an ssh alias `resin`
-hooked up to the resin management servers and all appropriate ssh keys in
-place~~ - see the entry in the [scratch pad][scratch] for details on how to do
-this.
-
-This script requires an existing account on the resin environment that the
-device is on. It also requires that the local ssh keys are stored in the resin
+This script requires an existing account on the balenaCloud environment that the
+device is on. It also requires that the local ssh keys are stored in your balena
 account (**This does not mean the master ssh key, the master ssh key is not
 needed anymore at all**). Just use the same ssh keys you would to push to the
-resin account. The resin account needs access to the device to be leeched,
-either the device is owned by the account, or the accout is a support agent and
+balena account. The balena account needs access to the device to be leeched,
+either the device is owned by the account, or the account is a support agent and
 the device is open for support or the account is an admin account.
 
 ## Using
@@ -34,12 +29,12 @@ Use this command to diagnose a local or remote devices
 
 Options:
   -h: hostname, default=ssh.resindevice.io (use ssh.devices.resinstaging.io for staging)
-  -u: username used to authenticate ssh keys, default=username retrieved from local resin-token
+  -u: username used to authenticate ssh keys, default=username retrieved from local balena-token
   -t: track with mixpanel, default=true
 Examples:
   $ leech diagnose 0d30096f589da97eb9236abeaee3625a
   $ leech diagnose 192.168.1.125
-  $ leech diagnose -h=ssh.devices.resinstaging.io 0d30096f589da97eb9236abeaee3625a
+  $ leech diagnose -h=ssh.devices.balena-staging.com 0d30096f589da97eb9236abeaee3625a
   $ leech diagnose -u=unicorn 0d30096f589da97eb9236abeaee3625a
 ```
 
@@ -60,7 +55,7 @@ Every leech on a remote device is reported to mixpanel.
 `leech` event example:
 ```
 {
-  distint_id: `<device_uuid>`
+  distinct_id: `<device_uuid>`
   issues: [
     <id>,
     <id>

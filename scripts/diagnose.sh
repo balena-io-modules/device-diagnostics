@@ -16,6 +16,11 @@ low_mem_threshold=10 #%
 low_disk_threshold=10 #%
 low_metadata_threshold=30 #%
 
+GLOBAL_TIMEOUT=10
+GLOBAL_TIMEOUT_CMD="timeout --kill-after=$(( ${GLOBAL_TIMEOUT} * 2 )) -v ${GLOBAL_TIMEOUT}"
+
+GLOBAL_CMD_PREFIX="date ; ${GLOBAL_TIMEOUT_CMD} time"
+
 ## DIAGNOSTIC COMMANDS BELOW.
 # Helper variables
 # shellcheck disable=SC2034
@@ -49,7 +54,6 @@ commands=(
 	'cat /mnt/boot/resinOS_uEnv.txt' # ibidem
 	'mount'
 	'ls -l /dev'
-	'date'
 	'timedatectl status'
 	'/sbin/ip addr'
 	'curl https://www.google.co.uk'
@@ -81,7 +85,6 @@ commands=(
 	'$docker_name exec resin_supervisor cat /etc/resolv.conf'
 	'$docker_name inspect \$($docker_name ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
 	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
-	'exit'
 )
 
 function each_command()
@@ -95,9 +98,9 @@ function each_command()
 
 function announce()
 {
-	echo
-	echo "--- $* ---"
-	echo
+	echo | tee /dev/stderr
+	echo "--- $* ---" | tee /dev/stderr
+	echo | tee /dev/stderr
 }
 
 # Sadly set -x outputs to stderr and with redirection the interleaving gets
@@ -105,7 +108,7 @@ function announce()
 function announce_run()
 {
 	announce "$@"
-	eval "$@" 2>&1
+	eval "${GLOBAL_CMD_PREFIX} $@"
 }
 
 function announce_version()
@@ -279,6 +282,7 @@ function run_checks()
 function run_commands()
 {
 	announce COMMANDS
+	announce "prefixing commands with '${GLOBAL_CMD_PREFIX}'"
 	# List commands.
 	each_command echo
 	# announce each command, then run it.
