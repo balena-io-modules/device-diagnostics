@@ -26,6 +26,7 @@ filter_container_envs="jq 'del(.[].Config.Env)'"
 # Commands
 # shellcheck disable=SC2016
 commands=(
+	'uptime'
 	'cat /etc/os-release'
 	'uname -a'
 	'free -h'
