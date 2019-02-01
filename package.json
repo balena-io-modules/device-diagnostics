@@ -15,6 +15,7 @@
   "bugs": {
     "url": "https://github.com/resin-io/leech/issues"
   },
+  "private": true,
   "scripts": {
     "start": "node build/index.js",
     "postinstall": "gulp build",
