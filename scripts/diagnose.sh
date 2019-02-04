@@ -56,6 +56,7 @@ commands=(
 	'curl https://pubnub.com'
 	'curl https://api.resin.io/ping'
 	'journalctl -n500 -a'
+	'for i in /sys/class/thermal/thermal* ; do if [ -e \$i/temp ]; then echo \$i && cat \$i/temp; fi ; done'
 	'dmesg'
 	'cat /var/log/messages' # legacy
 	'cat /etc/resolv.conf'
