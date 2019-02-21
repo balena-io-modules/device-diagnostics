@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Determine whether we're using the older 'rce'-aliased docker or not.
-if command -v balena >/dev/null ; then
-	docker_name="balena"
-elif command -v docker >/dev/null ; then
-	docker_name="docker"
-else
-	docker_name="rce"
-fi
+# stolen directly from the proxy:
+# (https://github.com/balena-io/resin-proxy/blob/master/src/common/host-scripts.ts#L28)
+X=/usr/bin/
+ENG=rce
+[ -x $X$ENG ] || ENG=docker
+[ -x $X$ENG ] || ENG=balena
+[ -x $X$ENG ] || ENG=balena-engine
 
 # docker's mount is also the core btrfs filesystem.
-mountpoint="/var/lib/$docker_name"
+mountpoint="/var/lib/$ENG"
 
 low_mem_threshold=10 #%
 low_disk_threshold=10 #%
@@ -67,22 +67,22 @@ commands=(
 	'netstat -ntl'
 	'sysctl -a'
 	'curl --max-time 5 localhost:48484/ping'
-	'$docker_name --version'
+	'$ENG --version'
 	'ping -c 1 -W 3 google.co.uk'
-	'$docker_name images'
-	'$docker_name ps -a'
-	'$docker_name stats --all --no-stream'
+	'$ENG images'
+	'$ENG ps -a'
+	'$ENG stats --all --no-stream'
 	'systemctl status resin-supervisor'
 	'journalctl -n 200 --no-pager -a -u resin-supervisor'
-	'$docker_name logs resin_supervisor'
-	'systemctl status $docker_name'
-	'journalctl -n 200 --no-pager -a -u $docker_name'
+	'$ENG logs resin_supervisor'
+	'systemctl status $ENG'
+	'journalctl -n 200 --no-pager -a -u $ENG'
 	'systemctl status openvpn-resin'
 	'journalctl -n 200 --no-pager -a -u openvpn-resin'
 	'iptables -n -L'
 	'iptables -n -t nat -L'
-	'$docker_name exec resin_supervisor cat /etc/resolv.conf'
-	'$docker_name inspect \$($docker_name ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
+	'$ENG exec resin_supervisor cat /etc/resolv.conf'
+	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
 	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
 	'exit'
 )
@@ -236,7 +236,7 @@ function check_metadata()
 
 function check_docker()
 {
-	if (pidof $docker_name >/dev/null); then
+	if (pidof $ENG >/dev/null); then
 		echo "DOCKER: OK (docker is running.)"
 	else
 		echo "DOCKER: DANGER: docker is NOT running!"
@@ -245,7 +245,7 @@ function check_docker()
 
 function check_supervisor()
 {
-	container_running=$($docker_name ps | grep resin_supervisor)
+	container_running=$($ENG ps | grep resin_supervisor)
 	if [ -z "$container_running" ]; then
 		echo "SUPERVISOR: DANGER (supervisor is NOT running!)"
 	else
