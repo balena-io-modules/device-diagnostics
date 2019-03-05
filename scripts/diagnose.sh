@@ -32,6 +32,7 @@ commands=(
 	'free -h'
 	'cat /proc/cpuinfo'
 	'cat /proc/meminfo'
+	'cat /proc/device-tree/model'
 	'ps'
 	'top -b -n 1'
 	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
