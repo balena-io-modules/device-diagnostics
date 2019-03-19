@@ -37,6 +37,7 @@ commands=(
 	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
 	'cat /var/log/provisioning-progress.log'
 	'df -h'
+	'df -ih'
 	'btrfs filesystem df /mnt/data-disk' # legacy
 	'btrfs filesystem df /mnt/data'
 	'btrfs filesystem usage /mnt/data-disk' # legacy
