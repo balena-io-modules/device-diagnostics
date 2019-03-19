@@ -52,6 +52,7 @@ commands=(
 	'mount'
 	'ls -l /dev'
 	'date'
+	'lsusb -vvv'
 	'timedatectl status'
 	'/sbin/ip addr'
 	'curl https://www.google.co.uk'
