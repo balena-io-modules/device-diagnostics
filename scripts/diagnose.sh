@@ -67,6 +67,7 @@ commands=(
 	'cat /proc/net/dev'
 	'cat /proc/net/udp'
 	'cat /proc/net/snmp'
+	'find /mnt/data/resinhup/*log -mtime -30 | xargs tail -n 10 -v'
 	'netstat -ntl'
 	'sysctl -a'
 	'curl --max-time 5 localhost:48484/ping'
