@@ -1,5 +1,5 @@
 #!/bin/bash
-
+DIAGNOSE_VERSION=2.6.0
 # Determine whether we're using the older 'rce'-aliased docker or not.
 # stolen directly from the proxy:
 # (https://github.com/balena-io/resin-proxy/blob/master/src/common/host-scripts.ts#L28)
@@ -116,7 +116,8 @@ function announce_run()
 
 function announce_version()
 {
-	announce "leech / diagnose ${LEECH_VERSION}"
+	announce "diagnose ${DIAGNOSE_VERSION}"
+	announce "NOTE: not all commands are expected to succeed on all device types"
 }
 
 function get_meminfo_field()
