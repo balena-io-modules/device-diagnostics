@@ -168,9 +168,15 @@ function check_memory()
 
 function check_diskspace()
 {
-	if ! is_mounted $mountpoint; then
-		echo "DISK: DANGER: BTRFS filesystem not mounted at $mountpoint!"
-		return
+
+	if ! [ -x "$(command -v btrfs)" ]; then
+		# Not a resinOS 1.x device, as btrfs does not exist
+		echo "DISK: BTRFS SKIP: not resinOS 1.x device"
+	else
+		if ! is_mounted $mountpoint; then
+			echo "DISK: DANGER: BTRFS filesystem not mounted at $mountpoint!"
+			return
+		fi
 	fi
 
 	# Last +0 forces the field to a number, stripping the '%' on the end.
