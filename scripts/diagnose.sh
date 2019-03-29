@@ -16,6 +16,8 @@ low_mem_threshold=10 #%
 low_disk_threshold=10 #%
 low_metadata_threshold=30 #%
 
+slow_disk_write=1000 #ms
+
 ## DIAGNOSTIC COMMANDS BELOW.
 # Helper variables
 # shellcheck disable=SC2034
@@ -168,6 +170,19 @@ function check_memory()
 	fi
 }
 
+function check_write_latency()
+{
+    # from https://www.kernel.org/doc/Documentation/iostats.txt:
+    #
+    # Field  5 -- # of writes completed
+    #     This is the total number of writes completed successfully.
+    # Field  8 -- # of milliseconds spent writing
+    #     This is the total number of milliseconds spent by all writes (as
+    #     measured from __make_request() to end_that_request_last()).
+
+    awk -v limit=${slow_disk_write} '!/(loop|ram)/{if ($11/(($8>0)?$8:1)>limit){print "DISK PARTITION WRITES SLOW: " $3": " $11/(($8>0)?$8:1) "ms / write, sample size " $8}}' /proc/diskstats
+}
+
 function check_diskspace()
 {
 
@@ -287,6 +302,7 @@ function run_checks()
 	check_supervisor
 	check_dns
 	check_diskspace
+	check_write_latency
 	check_metadata
 }
 
