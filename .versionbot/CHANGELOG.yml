@@ -1,0 +1,437 @@
+- commits:
+  - author: Matthew McGinn
+    body: ""
+    footers:
+      change-type: minor
+      connects-to: '#60'
+      signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+    hash: dfc768e0ef0b4daf801ac374260bbe47cd5693a1
+    subject: Get any recent (<30d old) resinhup log tails
+  - author: Matthew McGinn
+    body: ""
+    footers:
+      change-type: minor
+      signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+    hash: 3c71eea62645b5ef98ee2ffe6ff5edad1919f7b8
+    subject: Warn if any disk takes more than 1s on average to write to
+  date: "2019-03-28T17:21:38Z"
+  version: 2.9.0
+- commits:
+  - author: Matthew McGinn
+    body: ""
+    footers:
+      change-type: patch
+      hq: balena-io/balena#1663
+      signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+    hash: dd89118490c9daf3219c95153d208b1853882719
+    subject: 'diagnostics: fix versioning information, add note about failing commands'
+  date: "2019-03-28T16:57:47Z"
+  version: 2.8.2
+- commits:
+  - author: Matthew McGinn
+    body: ""
+    footers:
+      change-type: patch
+      connects-to: '#74'
+      hq: balena-io/balena#1663
+      signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+    hash: 43ce8cd1a00f767bd23528fbe441afe94fb81754
+    subject: 'diagnose: limit btrfs checks to resinOS 1.x devices'
+  date: "2019-03-26T18:36:03Z"
+  version: 2.8.1
+- commits:
+  - author: Matthew McGinn
+    body: ""
+    footers:
+      change-type: minor
+      connects-to: '#70'
+      signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+    hash: b3e5fda8e62ed2a12be6a74e5b61a913a90b2642
+    subject: Add device hardware type to diagnostics
+  date: "2019-03-21T13:33:13Z"
+  version: 2.8.0
+- commits:
+  - author: Matthew McGinn
+    body: ""
+    footers:
+      change-type: minor
+      signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+    hash: 04f26f5d856b8d56bc205ca5d09a47b0bcf6b5f2
+    subject: Add lsusb output to leech
+  - author: xginn8
+    body: ""
+    hash: ef7756937f6f9385bbaa28bf17ac4bfd14ce0425
+    subject: Merge branch 'master' into lsusb-leech
+  date: "2019-03-19T13:38:17Z"
+  version: 2.7.0
+- commits:
+  - author: dt-rush
+    body: ""
+    footers:
+      change-type: patch
+      signed-off-by: Nick Payne <nickp@balena.io>
+    hash: 371445f5c360ca05d06e31b38926c1fd6001daaf
+    subject: added df -ih to check inodes space
+  - author: xginn8
+    body: ""
+    hash: c29b143d06428f5579c3e900f9ee3f7b1a836512
+    subject: Merge branch 'master' into inodes
+  date: "2019-03-19T12:45:46Z"
+  version: 2.6.2
+- commits:
+  - author: Gergely Imreh
+    body: ""
+    footers:
+      change-type: patch
+      signed-off-by: Gergely Imreh <gergely@balena.io>
+    hash: 58c27e2238a2a84df89f88be34740026a71e4425
+    subject: Add CODEOWNERS file
+  date: "2019-03-11T10:56:23Z"
+  version: 2.6.1
+- commits:
+  - author: Matthew McGinn
+    body: ""
+    footers:
+      change-type: minor
+      connects-to: balena-io/resin-proxy#334
+      hq: balena-io/balena#1663
+      signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+    hash: 5a08e41cb91a2f88fb85409739b4351c6d7e8e28
+    subject: Re-use proxy container engine logic
+  date: "2019-02-21T17:08:20Z"
+  version: 2.6.0
+- commits:
+  - author: Matthew McGinn
+    body: ""
+    footers:
+      change-type: minor
+      connects-to: '#63'
+      signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+    hash: 8012f2c0c57701feca607d218beca12e23504190
+    subject: Add 'sysctl -a' to leech output
+  date: "2019-02-04T18:10:14Z"
+  version: 2.5.0
+- commits:
+  - author: Matthew McGinn
+    body: ""
+    footers:
+      change-type: minor
+      signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+    hash: fbf942949f4525cd8b71bc12113cd92800c55b9e
+    subject: Add "uptime" to leech output
+  date: "2019-02-04T16:27:49Z"
+  version: 2.4.0
+- commits:
+  - author: Matthew McGinn
+    body: ""
+    footers:
+      change-type: minor
+      connects-to: '#66'
+      signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+    hash: a16499450180c1a03f8350b7b3b8a3d280ff10ad
+    subject: Get temperature data from all thermal zones
+  date: "2019-02-04T16:09:45Z"
+  version: 2.3.0
+- commits:
+  - author: Gergely Imreh
+    body: ""
+    footers:
+      change-type: patch
+      signed-off-by: Gergely Imreh <gergely@balena.io>
+    hash: 47e999d4a7ec4c3f127388e084a1b00da8bde27e
+    subject: 'package.json: add private tag for Versionist to be happy'
+  - author: Gergely Imreh
+    body: |-
+      Required by gulp on node 11.
+      See more in https://github.com/gulpjs/gulp/issues/2246
+    footers:
+      change-type: patch
+      signed-off-by: Gergely Imreh <gergely@balena.io>
+    hash: 9360ec9cd8503c91c8246ef2259e3aa939dbea54
+    subject: 'dependency: add natives module for Node 11 builds'
+  - author: Matthew McGinn
+    body: ""
+    footers:
+      change-type: minor
+      connects-to: '#52'
+      signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+    hash: 7ee4a79a54ccd4ce055b8f8bde46e882ff178541
+    subject: Update resin-settings-client to balena-settings-client to look in the
+      right place for auth tokens
+  - author: Gergely Imreh
+    body: ""
+    hash: 84f939cc6d2212ee2ca230b2a01e380a2fe24ec8
+    subject: Merge branch 'master' into leech-fix
+  date: "2019-02-04T15:39:05Z"
+  version: 2.2.0
+- commits:
+  - author: Gergely Imreh
+    body: |-
+      The previous file name had ':' characters, which are not acceptable
+      on Windows, and hence running leech failed. Use a similar, but
+      simplified file name, as well as path normalization (so paths
+      are handled correctly and uniformly on all platforms).
+    footers:
+      change-type: patch
+    hash: 9ea6703ceae0fa55e707e43de5ce476a3047d0d3
+    subject: change output file name to be compatible with running on Windows
+  date: "2018-03-02T16:06:57Z"
+  version: 2.1.3
+- commits:
+  - author: Gergely Imreh
+    body: ""
+    footers:
+      change-type: patch
+    hash: cd1fcb8d855087975871ab2f993952052cf9863b
+    subject: update tests for CircleCI and switch to v2
+  date: "2018-02-13T11:42:02Z"
+  version: 2.1.2
+- commits:
+  - author: Gergely Imreh
+    body: ""
+    footers:
+      change-type: patch
+    hash: 1da753597e47aabc7322cf69bc1b54089fc7c766
+    subject: run prettier on the code
+  - author: Gergely Imreh
+    body: ""
+    hash: 73e91f87e5351e59cebfa9b263a02963f8193a02
+    subject: add pre-commit and pre-push hooks for prettier and tests
+  date: "2018-02-12T12:03:21Z"
+  version: 2.1.1
+- commits:
+  - author: Gergely Imreh
+    body: ""
+    footers:
+      change-type: minor
+    hash: 6fe58b5b8b98c7bef10840c5622f9e18bdaa5be1
+    subject: updating the diagnostics script, combining fixes and adding balena support
+  date: "2018-02-08T13:23:40Z"
+  version: 2.1.0
+- commits:
+  - author: Gergely Imreh
+    body: Pulled types definitons from the CLI with a few adjustments.
+    footers:
+      change-type: patch
+    hash: c339aa359846142464f01571ba67c40e8bbc87a8
+    subject: completing Capitano type definitions to let the package be installed
+  date: "2018-02-06T15:11:58Z"
+  version: 2.0.3
+- commits:
+  - author: Gergely Imreh
+    body: ""
+    footers:
+      change-type: patch
+    hash: c11ae6dab0782b6495bbd60a2c72c777aa6cfe55
+    subject: add missing prettier-check for tests
+  date: "2017-12-08T17:47:52Z"
+  version: 2.0.2
+- commits:
+  - author: craig-mulligan
+    body: ""
+    footers:
+      change-type: patch
+    hash: 17d99cffaf8fd442c3f8dd709e08525033488b70
+    subject: Add CI
+  date: "2017-12-08T11:34:37Z"
+  version: 2.0.1
+- commits:
+  - author: craig-mulligan
+    body: 'connects to #24'
+    footers:
+      change-type: major
+    hash: 13063c06cc26acba1901fec691c5816b40852618
+    subject: Add node cli + analytics
+  - author: Gergely Imreh
+    body: ""
+    footers:
+      change-type: patch
+    hash: 49e1b72d6e1bcc5b69f18d09e1123429ac03bd68
+    subject: updating versionist configuration for the module change
+  - author: Gergely Imreh
+    body: ""
+    hash: bf89d11159002c70685654a4699e73487508fd1b
+    subject: remove old leech.sh script
+  - author: craig-mulligan
+    body: ""
+    hash: 1e67290874fc068aa4992e4c0d1a2d82fbb07d0d
+    subject: use new ssh command
+  date: "2017-12-01T17:35:12Z"
+  version: 2.0.0
+- commits:
+  - author: Andreas Fitzek
+    body: This changes the arguments of the tool. A new second argument the username
+      of the resin account used to access the device is required.
+    footers:
+      change-type: minor
+      connects-to: '#30'
+      signed-off-by: Andreas Fitzek <andreas@resin.io>
+    hash: 956f3f6ac79f9087701bd2b96b2bf97e5282ae4f
+    subject: Use the new ssh device access method for leech.
+  - author: Andreas Fitzek
+    body: ""
+    hash: 4bf0f283da39540227c8428b488c3afd9797ec96
+    subject: addressed review
+  date: "2017-11-24T18:01:19Z"
+  version: 1.3.0
+- commits:
+  - author: Pablo Carranza Velez
+    body: |-
+      This will help diagnose problems with container configurations getting corrupted, or any scenario
+      where having detailed information of containers is relevant.
+      We filter out the containers' environments, since they may contain sensitive information (resin-related keys and user secrets).
+    footers:
+      change-type: minor
+      signed-off-by: Pablo Carranza Velez <pablo@resin.io>
+    hash: 6897a57e5c2c2350b0c087059454d2fd776b0357
+    subject: Add a command to inspect all containers on the device
+  date: "2017-10-30T21:33:21Z"
+  version: 1.2.0
+- commits:
+  - author: Pagan Gazzard
+    body: ""
+    footers:
+      change-type: patch
+    hash: ccb41c653bade78d18f3fc65b6c7d42a952693df
+    subject: Add .gitattributes to make sure line endings for bash scripts are always
+      linux style
+  date: "2017-08-16T20:18:21Z"
+  version: 1.1.7
+- commits:
+  - author: Gergely Imreh
+    body: |-
+      Being a spoilsport, rewriting the config.json key filtering,
+      so all hidden values are consistenly marked as `<hidden>`,
+      and also make it easier expandable, if needed.
+      It would have been great, if our `jq` version had support for the
+      `test` keyword, in which case we could have had a simpler version
+      such as this (recording for reference):
+      cat /mnt/boot/config.json | jq '. | with_entries(if .key | test("apiKey|deviceApiKey|pubnubSubscribeKey|pubnubPublishKey|mixpanelToken|wifiKey|files") then .value = "<hidden>" else . end)'
+      Unfortunately have to use `contains("key")`, and that's what this PR
+      does.
+    footers:
+      change-type: patch
+    hash: e7b617dbb3e984f116c552a40eadf0715c1a2032
+    subject: config.json key filtering rewrite
+  date: "2017-07-24T21:13:18Z"
+  version: 1.1.6
+- commits:
+  - author: Gergely Imreh
+    body: ""
+    footers:
+      change-type: patch
+    hash: 56da14b95ed94ec8183d543f3dc66c87c775e75f
+    subject: improving heuristics for btrfs and non-btrfs system checks
+  date: "2017-07-24T21:11:55Z"
+  version: 1.1.5
+- commits:
+  - author: Gergely Imreh
+    body: |-
+      Before the commands were not protected until they are evaluated,
+      and thus any command with pipes didn't execute properly.
+    footers:
+      change-type: patch
+    hash: 27293b69f694439beb34c4242d23dfd6f0ea55f9
+    subject: fix command listing and exectution
+  date: "2017-07-24T21:10:22Z"
+  version: 1.1.4
+- commits:
+  - author: Gergely Imreh
+    body: ""
+    footers:
+      change-type: patch
+    hash: 8c0e8f3734b09fa5b68b4581fe2ae31b292027bf
+    subject: 'fix typo: wrong docker parameter name'
+  date: "2017-07-21T09:14:11Z"
+  version: 1.1.3
+- commits:
+  - author: Gergely Imreh
+    body: ""
+    footers:
+      change-type: patch
+    hash: dba2645f9349df5facff766f4a4b8011766d2ecd
+    subject: add version check, and bail if not on the latest remote version
+  date: "2017-07-19T10:12:01Z"
+  version: 1.1.2
+- commits:
+  - author: Gergely Imreh
+    body: |-
+      New commands enable checking whether NTP is synchronized and
+      have some useful stats about the containers that can help diagnose
+      resource usage.
+    footers:
+      change-type: patch
+      signed-off-by: Gergely Imreh <imrehg@gmail.com>
+    hash: 6dc23d79e7626f21b4e65437e340832ca0edb182
+    subject: 'add new commands: time sync status and docker stats'
+  date: "2017-07-03T17:33:02Z"
+  version: 1.1.1
+- commits:
+  - author: Pablo Carranza Velez
+    body: ""
+    footers:
+      change-type: patch
+      signed-off-by: Pablo Carranza Velez <pablo@resin.io>
+    hash: f75e8002848f7a9ddc199f6ebd71eef0b724017b
+    subject: Do not show keys from config.json in output
+  date: "2017-06-21T20:38:35Z"
+  version: 1.0.3
+- commits:
+  - author: Gergely Imreh
+    body: ""
+    footers:
+      change-type: patch
+    hash: 4b6fa252c177fed179db2bb2d8dea02d8c5f8b2f
+    subject: 'versionist support: add config and update changelog header'
+  date: "2017-06-13T10:47:23Z"
+  version: 1.0.2
+- commits:
+  - author: Gergely Imreh
+    body: ""
+    footers:
+      change-type: patch
+    hash: 91aff114b46766c9f66f4acedd0753d8f039a243
+    subject: add version info to the output
+  - author: Kostas Lekkas
+    body: Today I bumped into a device where the supervisor container was appearing
+      to run normally but had no logs. I often run `netstat -ntl` on the hostOS; if
+      `48484` port is not marked as listening, it is an indication that the supervisor
+      app in the container is not functioning properly
+    hash: 86254ee6462d6fc10b2615df5d91c49de25eccf4
+    subject: Add netstat to diagnose.sh
+  - author: Kostas Lekkas
+    body: ""
+    hash: 94023f194a4bc08f8d71820092194743b48fbfaf
+    subject: Add test for supervisor ping endpoint
+  date: "2017-06-13T09:19:39Z"
+  version: 1.0.1
+- commits:
+  - author: Gergely Imreh
+    body: ""
+    hash: 2d5e9f46e5639ce141682b53b871312a5e51df7e
+    subject: 'error log: single place to set the error log location'
+  - author: Gergely Imreh
+    body: ""
+    hash: 8c69e204afc71af66a258fa2be0b948a602a790b
+    subject: readme updates
+  - author: Pablo Carranza Velez
+    body: |-
+      Add journalctl checks for docker, vpn and supervisor (newer supervisors log
+      to journal). Add OS release check. Add checks for boot files present in
+      newer OS, including config.txt and uEnv files. Add curl check for Resin API.
+    footers:
+      change-type: minor
+      signed-off-by: Pablo Carranza Velez <pablo@resin.io>
+    hash: fe95920c7f37534e5e36e5a2e6592c84dcb43b87
+    subject: Add some extra commands to diagnose.sh
+  - author: Andrew Scheller
+    body: Looks like at some point `diagnose_template.sh` must have been renamed to
+      `diagnose.sh`
+    hash: cdd1331e5a8e224ea0c8c8a39f658357b5da6f22
+    subject: Update README.md
+  - author: gaudi
+    body: ""
+    hash: b65d080e20b96797315d6e04341da5909aabc78f
+    subject: add pubnub curl
+  date: "2017-05-29T22:22:00Z"
+  version: 1.0.0
