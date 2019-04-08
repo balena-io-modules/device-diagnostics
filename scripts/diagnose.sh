@@ -1,5 +1,9 @@
 #!/bin/bash
 DIAGNOSE_VERSION=2.9.1
+# Don't run anything before this source as it sets PATH here
+# shellcheck disable=SC1091
+source /etc/profile
+
 # Determine whether we're using the older 'rce'-aliased docker or not.
 # stolen directly from the proxy:
 # (https://github.com/balena-io/resin-proxy/blob/master/src/common/host-scripts.ts#L28)
