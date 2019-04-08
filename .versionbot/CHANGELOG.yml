@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'diagnose: source /etc/profile first to set path correctly'
+      hash: 34c68a2be30279faca9267f08415f88520d42f75
+      body: ''
+      footer:
+        Connects-to: '#77'
+        connects-to: '#77'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+        signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+      author: Matthew McGinn
+  version: 2.9.2
+  date: 2019-04-08T12:33:35.615Z
+- commits:
     - subject: 'versionbot: Add CHANGELOG.yml (for nested changelogs)'
       hash: 369b180f3e57a12123684e4cb846d5cdb4d48437
       body: ''
