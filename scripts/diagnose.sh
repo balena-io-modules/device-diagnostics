@@ -116,6 +116,7 @@ commands=(
 	'cat /var/log/provisioning-progress.log'
 	'dmesg'
 	'find /mnt/data/resinhup/*log -mtime -30 | xargs tail -n 10 -v'
+	'journalctl --list-boots --no-pager'
 	'journalctl -n500 -a'
 	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
 	'ps'
