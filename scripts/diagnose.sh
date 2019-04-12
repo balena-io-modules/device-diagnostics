@@ -72,6 +72,10 @@ commands=(
 	'cat /proc/cpuinfo'
 	'cat /proc/device-tree/model'
 	'cat /proc/meminfo'
+	'ps'
+	'top -b -n 1'
+	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
+	'cat /var/log/provisioning-progress.log'
 	'df -h'
 	'df -ih'
 	'for i in /sys/class/thermal/thermal* ; do if [ -e \$i/temp ]; then echo \$i && cat \$i/temp; fi ; done'
@@ -115,6 +119,7 @@ commands=(
 	'journalctl -n500 -a'
 	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
 	'ps'
+	'stat /var/lock/resinhup.lock'
 	'sysctl -a'
 	'top -b -n 1'
 
