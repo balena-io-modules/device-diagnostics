@@ -1,4 +1,18 @@
 - commits:
+    - subject: >-
+        diagnostics: improve command formatting to group related commands by
+        subject
+      hash: b79d21c1e613485dad16456311dd9dadadb6cb4e
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+        signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+      author: Matthew McGinn
+  version: 2.11.0
+  date: 2019-04-10T16:51:41.479Z
+- commits:
     - subject: Refactor leech to be more action-server friendly
       hash: 0990e39cd724797f4d6be19de2ea5b8d6127c7d6
       body: |
