@@ -57,68 +57,81 @@ filter_container_envs='jq "del(.[].Config.Env)"'
 # Commands
 # shellcheck disable=SC2016
 commands=(
-	'uptime'
-	'cat /etc/os-release'
-	'uname -a'
-	'free -h'
-	'cat /proc/cpuinfo'
-	'cat /proc/meminfo'
-	'cat /proc/device-tree/model'
-	'ps'
-	'top -b -n 1'
-	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
-	'cat /var/log/provisioning-progress.log'
-	'df -h'
-	'df -ih'
-	'btrfs filesystem df /mnt/data-disk' # legacy
-	'btrfs filesystem df /mnt/data'
-	'btrfs filesystem usage /mnt/data-disk' # legacy
-	'btrfs filesystem usage /mnt/data'
-	'cat /mnt/data-disk/config.json | $filter_config_keys'  # legacy
-	'cat /mnt/conf/config.json | $filter_config_keys' # legacy
-	'cat /mnt/boot/config.json | $filter_config_keys'
-	'ls -l /mnt/boot/system-connections'
-	'cat /mnt/boot/config.txt' # only for rpi...
-	'cat /mnt/boot/uEnv.txt' # only for uboot devices
-	'cat /mnt/boot/resinOS_uEnv.txt' # ibidem
-	'mount'
-	'ls -l /dev'
-	'date'
-	'lsusb -vvv'
-	'timedatectl status'
-	'/sbin/ip addr'
-	'curl https://www.google.co.uk'
-	'curl https://pubnub.com'
-	'curl https://api.resin.io/ping'
-	'journalctl -n500 -a'
-	'for i in /sys/class/thermal/thermal* ; do if [ -e \$i/temp ]; then echo \$i && cat \$i/temp; fi ; done'
-	'dmesg'
-	'cat /var/log/messages' # legacy
-	'cat /etc/resolv.conf'
-	'cat /proc/net/dev'
-	'cat /proc/net/udp'
-	'cat /proc/net/snmp'
-	'find /mnt/data/resinhup/*log -mtime -30 | xargs tail -n 10 -v'
-	'netstat -ntl'
-	'sysctl -a'
-	'curl --max-time 5 localhost:48484/ping'
+	# BALENA specific commands
+	'echo === BALENA ==='
 	'$ENG --version'
-	'ping -c 1 -W 3 google.co.uk'
 	'$ENG images'
 	'$ENG ps -a'
 	'$ENG stats --all --no-stream'
-	'systemctl status resin-supervisor'
-	'journalctl -n 200 --no-pager -a -u resin-supervisor'
-	'$ENG logs resin_supervisor'
 	'systemctl status $ENG'
 	'journalctl -n 200 --no-pager -a -u $ENG'
-	'systemctl status openvpn-resin'
-	'journalctl -n 200 --no-pager -a -u openvpn-resin'
+	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
+
+	# HARDWARE specific commands
+	'echo === HARDWARE ==='
+	'cat /proc/cpuinfo'
+	'cat /proc/device-tree/model'
+	'cat /proc/meminfo'
+	'df -h'
+	'df -ih'
+	'for i in /sys/class/thermal/thermal* ; do if [ -e \$i/temp ]; then echo \$i && cat \$i/temp; fi ; done'
+	'free -h'
+	'ls -l /dev'
+	'lsusb -vvv'
+	'mount'
+	'uname -a'
+
+	# NETWORK specific commands
+	'echo === NETWORK ==='
+	'/sbin/ip addr'
+	'cat /etc/resolv.conf'
+	'cat /proc/net/dev'
+	'cat /proc/net/snmp'
+	'cat /proc/net/udp'
+	'curl https://api.resin.io/ping'
+	'curl https://pubnub.com'
+	'curl https://www.google.co.uk'
 	'iptables -n -L'
 	'iptables -n -t nat -L'
-	'$ENG exec resin_supervisor cat /etc/resolv.conf'
-	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
+	'journalctl -n 200 --no-pager -a -u openvpn-resin'
+	'ls -l /mnt/boot/system-connections'
+	'netstat -ntl'
+	'ping -c 1 -W 3 google.co.uk'
+	'systemctl status openvpn-resin'
+
+	# OS specific commands
+	'echo === OS ==='
+	'cat /etc/os-release'
+	'cat /mnt/boot/config.json | $filter_config_keys'
+	'cat /mnt/boot/config.txt' # only for rpi...
+	'cat /mnt/boot/resinOS_uEnv.txt' # ibidem
+	'cat /mnt/boot/uEnv.txt' # only for uboot devices
+	'cat /mnt/conf/config.json | $filter_config_keys' # legacy
+	'cat /mnt/data-disk/config.json | $filter_config_keys'  # legacy
+	'cat /var/log/messages' # legacy
+	'cat /var/log/provisioning-progress.log'
+	'dmesg'
+	'find /mnt/data/resinhup/*log -mtime -30 | xargs tail -n 10 -v'
+	'journalctl -n500 -a'
 	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
+	'ps'
+	'sysctl -a'
+	'top -b -n 1'
+
+	# SUPERVISOR specific commands
+	'echo === SUPERVISOR ==='
+	'$ENG exec resin_supervisor cat /etc/resolv.conf'
+	'$ENG logs resin_supervisor'
+	'curl --max-time 5 localhost:48484/ping'
+	'journalctl -n 200 --no-pager -a -u resin-supervisor'
+	'systemctl status resin-supervisor'
+	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
+
+	# TIME specific commands
+	'echo === TIME ==='
+	'date'
+	'timedatectl status'
+	'uptime'
 )
 
 function each_command()
