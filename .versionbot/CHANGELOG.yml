@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'diagnostics: add journalctl --list-boots'
+      hash: 0293b7d058437e4d067d656a8fcba88450efc3cd
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+        signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+      author: Matthew McGinn
+  version: 2.13.0
+  date: 2019-04-15T12:58:14.880Z
+- commits:
     - subject: 'diagnose: stat resinhup lockfile'
       hash: 4bbb57e32650064b52f88f0cf0fed1981a3609d4
       body: ''
