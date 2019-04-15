@@ -25,6 +25,7 @@ GLOBAL_TIMEOUT=60
 GLOBAL_TIMEOUT_CMD="timeout --preserve-status --kill-after=$(( GLOBAL_TIMEOUT * 2 ))"
 TIMEOUT_VERBOSE="timeout -v 1"
 # timeout (GNU coreutils) 8.26 does not support -v
+echo "{ \"meta\": \"\"" #| tee /dev/stderr
 if ${TIMEOUT_VERBOSE} echo ; then
         GLOBAL_TIMEOUT_CMD="${GLOBAL_TIMEOUT_CMD} -v"
 fi
@@ -33,7 +34,7 @@ GLOBAL_TIMEOUT_CMD="${GLOBAL_TIMEOUT_CMD} ${GLOBAL_TIMEOUT}"
 if [ -e "/usr/bin/time" ] ; then
 	TIME_CMD="/usr/bin/time -o /dev/stdout"
 	# resinOS v1 busybox does not support `time -o`
-	if ! ${TIME_CMD} echo ; then
+	if ! ${TIME_CMD} echo > /dev/null 2>&1 ; then
 		TIME_CMD="/usr/bin/time"
 	fi
 else
@@ -50,25 +51,23 @@ GLOBAL_CMD_PREFIX="${DATE_CMD} ; ${TIME_CMD} ${GLOBAL_TIMEOUT_CMD} bash -c"
 ## DIAGNOSTIC COMMANDS BELOW.
 # Helper variables
 # shellcheck disable=SC2034
-filter_config_keys='jq ". | with_entries(if .key | (contains(\"apiKey\") or contains(\"deviceApiKey\") or contains(\"pubnubSubscribeKey\") or contains(\"pubnubPublishKey\") or contains(\"mixpanelToken\") or contains(\"wifiKey\") or contains(\"files\")) then .value = \"<hidden>\" else . end)"'
+filter_config_keys="jq '. | with_entries(if .key | (contains('apiKey' 'deviceApiKey' 'pubnubSubscribeKey' 'pubnubPublishKey' 'mixpanelToken' 'wifiKey' 'files') then .value = '<hidden>' else . end))'"
 # shellcheck disable=SC2034
-filter_container_envs='jq "del(.[].Config.Env)"'
+filter_container_envs="jq 'del(.[].Config.Env)'"
 
 # Commands
 # shellcheck disable=SC2016
 commands=(
 	# BALENA specific commands
-	'echo === BALENA ==='
 	'$ENG --version'
 	'$ENG images'
 	'$ENG ps -a'
 	'$ENG stats --all --no-stream'
 	'systemctl status $ENG'
 	'journalctl -n 200 --no-pager -a -u $ENG'
-	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
+	"$ENG inspect $($ENG ps --all --quiet | tr '\\n' ' ') | $filter_container_envs"
 
 	# HARDWARE specific commands
-	'echo === HARDWARE ==='
 	'cat /proc/cpuinfo'
 	'cat /proc/device-tree/model'
 	'cat /proc/meminfo'
@@ -86,7 +85,6 @@ commands=(
 	'uname -a'
 
 	# NETWORK specific commands
-	'echo === NETWORK ==='
 	'/sbin/ip addr'
 	'cat /etc/resolv.conf'
 	'cat /proc/net/dev'
@@ -104,7 +102,6 @@ commands=(
 	'systemctl status openvpn-resin'
 
 	# OS specific commands
-	'echo === OS ==='
 	'cat /etc/os-release'
 	'cat /mnt/boot/config.json | $filter_config_keys'
 	'cat /mnt/boot/config.txt' # only for rpi...
@@ -118,14 +115,13 @@ commands=(
 	'find /mnt/data/resinhup/*log -mtime -30 | xargs tail -n 10 -v'
 	'journalctl --list-boots --no-pager'
 	'journalctl -n500 -a'
-	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
+	'ls -lR /proc/ 2>/dev/null | grep /data/ | grep "(deleted)"'
 	'ps'
 	'stat /var/lock/resinhup.lock'
 	'sysctl -a'
 	'top -b -n 1'
 
 	# SUPERVISOR specific commands
-	'echo === SUPERVISOR ==='
 	'$ENG exec resin_supervisor cat /etc/resolv.conf'
 	'$ENG logs resin_supervisor'
 	'curl --max-time 5 localhost:48484/ping'
@@ -134,7 +130,6 @@ commands=(
 	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
 
 	# TIME specific commands
-	'echo === TIME ==='
 	'date'
 	'timedatectl status'
 	'uptime'
@@ -149,25 +144,38 @@ function each_command()
 	done
 }
 
+function end_block()
+{
+	echo "}" #| tee /dev/stderr
+}
+
+function json_announce()
+{
+	echo ", \"$1\": \"$2\"" #| tee /dev/stderr
+}
+
+function json_announce_bool()
+{
+	echo ", \"$1\": {\"$1\": true" #| tee /dev/stderr
+}
+
+function json_announce_no_quote()
+{
+	echo ", \"$1\": $2" #| tee /dev/stderr
+}
+
 function announce()
 {
-	echo | tee /dev/stderr
-	echo "--- $* ---" | tee /dev/stderr
-	echo | tee /dev/stderr
+	echo #| tee /dev/stderr
+	echo "--- $* ---" #| tee /dev/stderr
+	echo #| tee /dev/stderr
 }
 
 # Sadly set -x outputs to stderr and with redirection the interleaving gets
 # screwed up :( let's do manually for now.
 function announce_run()
 {
-	announce "$@"
-	eval "${GLOBAL_CMD_PREFIX} '$*'"
-}
-
-function announce_version()
-{
-	announce "diagnose ${DIAGNOSE_VERSION}"
-	announce "NOTE: not all commands are expected to succeed on all device types"
+	json_announce_no_quote "$@" "$(eval "${GLOBAL_CMD_PREFIX} '$*'" | jq -Rs '. / "\n" - [""]')"
 }
 
 function get_meminfo_field()
@@ -227,6 +235,7 @@ function check_write_latency()
     #     This is the total number of milliseconds spent by all writes (as
     #     measured from __make_request() to end_that_request_last()).
 
+    # TODO: ok text/multiline awk
     awk -v limit=${slow_disk_write} '!/(loop|ram)/{if ($11/(($8>0)?$8:1)>limit){print "DISK PARTITION WRITES SLOW: " $3": " $11/(($8>0)?$8:1) "ms / write, sample size " $8}}' /proc/diskstats
 }
 
@@ -235,7 +244,7 @@ function check_diskspace()
 
 	if ! [ -x "$(command -v btrfs)" ]; then
 		# Not a resinOS 1.x device, as btrfs does not exist
-		echo "DISK: BTRFS SKIP: not resinOS 1.x device"
+		echo -n "DISK: BTRFS SKIP: not resinOS 1.x device"
 	else
 		if ! is_mounted $mountpoint; then
 			echo "DISK: DANGER: BTRFS filesystem not mounted at $mountpoint!"
@@ -342,30 +351,32 @@ function check_dns()
 
 function run_checks()
 {
-	announce CHECKS
-
-	check_memory
-	check_docker
-	check_supervisor
-	check_dns
-	check_diskspace
-	check_write_latency
-	check_metadata
+	json_announce check_memory "$(check_memory)"
+	json_announce check_docker "$(check_docker)"
+	json_announce check_supervisor "$(check_supervisor)"
+	json_announce check_dns "$(check_dns)"
+	json_announce check_diskspace "$(check_diskspace)"
+	json_announce check_write_latency "$(check_write_latency)"
+	json_announce check_metadata "$(check_metadata)"
 }
 
 function run_commands()
 {
-	announce COMMANDS
-	announce "prefixing commands with '${GLOBAL_CMD_PREFIX}'"
+	json_announce "global_prefix" "${GLOBAL_CMD_PREFIX}"
 	# List commands.
-	each_command echo
 	# announce each command, then run it.
 	each_command announce_run
 }
 
-announce_version
+json_announce version "${DIAGNOSE_VERSION}"
+json_announce note "NOTE: not all commands are expected to succeed on all device types"
+json_announce_bool checks
 run_checks
+end_block
+json_announce_bool commands
 run_commands
+end_block
+end_block
 
 # Don't return a spurious error code.
 exit
