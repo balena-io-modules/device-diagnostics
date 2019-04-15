@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'diagnose: stat resinhup lockfile'
+      hash: 4bbb57e32650064b52f88f0cf0fed1981a3609d4
+      body: ''
+      footer:
+        Connects-to: 'https://github.com/balena-os/resinhup/issues/216'
+        connects-to: 'https://github.com/balena-os/resinhup/issues/216'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+        signed-off-by: Matthew McGinn <mamcgi@gmail.com>
+      author: Matthew McGinn
+  version: 2.12.0
+  date: 2019-04-13T23:54:25.642Z
+- commits:
     - subject: >-
         diagnostics: improve command formatting to group related commands by
         subject
