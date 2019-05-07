@@ -95,12 +95,14 @@ commands=(
 	'curl https://api.resin.io/ping'
 	'curl https://pubnub.com'
 	'curl https://www.google.co.uk'
+	'ifconfig'
 	'iptables -n -L'
 	'iptables -n -t nat -L'
 	'journalctl -n 200 --no-pager -a -u openvpn-resin'
 	'ls -l /mnt/boot/system-connections'
 	'netstat -ntl'
 	'ping -c 1 -W 3 google.co.uk'
+	'systemctl kill -s USR1 dnsmasq'
 	'systemctl status openvpn-resin'
 
 	# OS specific commands
