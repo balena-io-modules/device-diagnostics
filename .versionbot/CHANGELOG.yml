@@ -1,4 +1,18 @@
 - commits:
+    - subject: >-
+        networking: add 'ifconfig' and 'kill -USR1 dnsmasq' for more flaky
+        network data
+      hash: a48c39c95edbbd1943459d2ebe8ac7c3bcfa0cf9
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 2.14.0
+  date: 2019-05-02T17:21:21.213Z
+- commits:
     - subject: 'diagnostics: add journalctl --list-boots'
       hash: 0293b7d058437e4d067d656a8fcba88450efc3cd
       body: ''
