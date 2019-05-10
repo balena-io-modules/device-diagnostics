@@ -3,6 +3,8 @@ DIAGNOSE_VERSION=2.14.0
 # Don't run anything before this source as it sets PATH here
 # shellcheck disable=SC1091
 source /etc/profile
+# shellcheck disable=SC1091
+source /usr/sbin/resin-vars
 
 # Determine whether we're using the older 'rce'-aliased docker or not.
 # stolen directly from the proxy:
@@ -92,7 +94,7 @@ commands=(
 	'cat /proc/net/dev'
 	'cat /proc/net/snmp'
 	'cat /proc/net/udp'
-	'curl https://api.resin.io/ping'
+	'curl $API_ENDPOINT'
 	'curl https://pubnub.com'
 	'curl https://www.google.co.uk'
 	'ifconfig'
