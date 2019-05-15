@@ -20,14 +20,13 @@ mountpoint="/var/lib/$ENG"
 
 low_mem_threshold=10 #%
 low_disk_threshold=10 #%
-low_metadata_threshold=30 #%
 
 slow_disk_write=1000 #ms
 GLOBAL_TIMEOUT=60
 GLOBAL_TIMEOUT_CMD="timeout --preserve-status --kill-after=$(( GLOBAL_TIMEOUT * 2 ))"
 TIMEOUT_VERBOSE="timeout -v 1"
 # timeout (GNU coreutils) 8.26 does not support -v
-if ${TIMEOUT_VERBOSE} echo ; then
+if "${TIMEOUT_VERBOSE}" echo > /dev/null ; then
         GLOBAL_TIMEOUT_CMD="${GLOBAL_TIMEOUT_CMD} -v"
 fi
 GLOBAL_TIMEOUT_CMD="${GLOBAL_TIMEOUT_CMD} ${GLOBAL_TIMEOUT}"
@@ -180,18 +179,20 @@ function get_meminfo_field()
 	grep "^$1:" /proc/meminfo | awk '{print $2}'
 }
 
-function btrfs_get_data()
-{
-	btrfs filesystem df --raw "$1" \
-		| grep "^$2" \
-		| grep -o '[0-9]*' \
-		| paste - -
-}
-
 function is_mounted()
 {
 	# busybox grep doesn't like long options.
 	mount | grep -q "on $1"
+}
+
+function check_resin1x()
+{
+	# test resinOS 1.x based on matches like the following:
+	# VERSION="1.24.0"
+	# PRETTY_NAME="Resin OS 1.24.0"
+	if grep -q -e '^VERSION="1.*$' -e '^PRETTY_NAME="Resin OS 1.*$' /etc/os-release; then
+		echo "WARNING: resinOS 1.x is now completely deprecated"
+	fi
 }
 
 function check_memory()
@@ -223,100 +224,39 @@ function check_memory()
 
 function check_write_latency()
 {
-    # from https://www.kernel.org/doc/Documentation/iostats.txt:
-    #
-    # Field  5 -- # of writes completed
-    #     This is the total number of writes completed successfully.
-    # Field  8 -- # of milliseconds spent writing
-    #     This is the total number of milliseconds spent by all writes (as
-    #     measured from __make_request() to end_that_request_last()).
+# from https://www.kernel.org/doc/Documentation/iostats.txt:
+#
+# Field  5 -- # of writes completed
+#     This is the total number of writes completed successfully.
+# Field  8 -- # of milliseconds spent writing
+#     This is the total number of milliseconds spent by all writes (as
+#     measured from __make_request() to end_that_request_last()).
 
-    awk -v limit=${slow_disk_write} '!/(loop|ram)/{if ($11/(($8>0)?$8:1)>limit){print "DISK PARTITION WRITES SLOW: " $3": " $11/(($8>0)?$8:1) "ms / write, sample size " $8}}' /proc/diskstats
+	awk -v limit=${slow_disk_write} '!/(loop|ram)/{if ($11/(($8>0)?$8:1)>limit){print "DISK PARTITION WRITES SLOW: " $3": " $11/(($8>0)?$8:1) "ms / write, sample size " $8}}' /proc/diskstats
 }
 
 function check_diskspace()
 {
-
-	if ! [ -x "$(command -v btrfs)" ]; then
-		# Not a resinOS 1.x device, as btrfs does not exist
-		echo "DISK: BTRFS SKIP: not resinOS 1.x device"
-	else
-		if ! is_mounted $mountpoint; then
-			echo "DISK: DANGER: BTRFS filesystem not mounted at $mountpoint!"
-			return
-		fi
-	fi
 
 	# Last +0 forces the field to a number, stripping the '%' on the end.
 	# Tested working on busybox.
 	used_percent=$(df $mountpoint | tail -n 1 | awk '{print $5+0}')
 	free_percent=$((100 - used_percent))
 
-	# First, check that df indicates low space. If not, no need to check
-	# btrfs df. This is because btrfs allocates more space than is needed,
-	# so df saying we're out of space doesn't mean we actually are.
 	if [ "$free_percent" -gt "$low_disk_threshold" ]; then
 		echo "DISK: OK (df reports ${free_percent}% free.)"
 		return
 	fi
 
-	if ! [ -x "$(command -v btrfs)" ]; then
-		# if btrfs command does not exists, that's all we can check
-		echo "DISK: DANGER: LOW SPACE: df reports ${free_percent}%"
-	else
-		# resinOS 1.x device needs check of btrfs
-		read -r total used <<<"$(btrfs_get_data $mountpoint "Data, single")"
-		if [ -z "$total" ]; then
-			read -r total used <<<"$(btrfs_get_data $mountpoint "Data+Metadata")"
-		fi
-
-		used_percent_btrfs=$((used*100/total))
-		free_percent_btrfs=$((100 - used_percent_btrfs))
-
-		if [ "$free_percent_btrfs" -lt "$low_disk_threshold" ]; then
-			echo "DISK: DANGER: LOW SPACE: df reports ${free_percent}%, btrfs reports ${free_percent_btrfs}%."
-		else
-			echo "DISK: OK (df reports ${free_percent}% free, but btrfs reports ${free_percent_btrfs}% free.)"
-		fi
-	fi
+	echo "DISK: DANGER: LOW SPACE: df reports ${free_percent}%"
 }
 
-function check_metadata()
-{
-	if ! [ -x "$(command -v btrfs)" ]; then
-		# Not a resinOS 1.x device, as btrfs does not exists, so no metadata
-		echo "METADATA: SKIP: not resinOS 1.x device"
-		return
-	fi
-	if ! is_mounted $mountpoint; then
-		echo "METADATA: SKIP: BTRFS filesystem not mounted."
-		return
-	fi
-
-	read -r total used <<<"$(btrfs_get_data $mountpoint "Data+Metadata")"
-	if [ -n "$total" ]; then
-		echo "BTRFS MODE: MIXED"
-	else
-		read -r total used <<<"$(btrfs_get_data $mountpoint "Metadata, DUP")"
-		echo "BTRFS MODE: DUP"
-	fi
-
-	used_percent=$((used*100/total))
-	free_percent=$((100 - used_percent))
-
-	if [ "$free_percent" -lt "$low_metadata_threshold" ]; then
-		echo "METADATA: DANGER: LOW SPACE: ${free_percent}% btrfs metadata free."
-	else
-		echo "METADATA: OK (${free_percent}% btrfs metadata free.)"
-	fi
-}
-
-function check_docker()
+function check_container_engine()
 {
 	if (pidof $ENG >/dev/null); then
-		echo "DOCKER: OK (docker is running.)"
+		echo "CONTAINER ENGINE: OK: container engine $ENG is running!"
 	else
-		echo "DOCKER: DANGER: docker is NOT running!"
+		echo "CONTAINER ENGINE: DANGER: container engine $ENG is NOT running!"
 	fi
 }
 
@@ -348,8 +288,9 @@ function run_checks()
 {
 	announce CHECKS
 
+	check_resin1x
 	check_memory
-	check_docker
+	check_container_engine
 	check_supervisor
 	check_dns
 	check_diskspace
