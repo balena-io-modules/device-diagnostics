@@ -1,4 +1,27 @@
 - commits:
+    - subject: 'diagnostics: remove support for 1.x devices'
+      hash: df281b76731c790ff408aa83b077f04a750c33a8
+      body: ''
+      footer:
+        Connects-to: '#82'
+        connects-to: '#82'
+        Change-type: major
+        change-type: major
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+    - subject: 'diagnose: update backend URL to API_ENDPOINT env var'
+      hash: b8926414c5b437d2d42c94ef29c104ac0360d4e8
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 3.0.0
+  date: 2019-05-15T15:10:50.124Z
+- commits:
     - subject: >-
         networking: add 'ifconfig' and 'kill -USR1 dnsmasq' for more flaky
         network data
