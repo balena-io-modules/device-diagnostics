@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'resin1x: remove spurious undefined resin1x check'
+      hash: 100c91468d3042401e57a0e0065f98c929d712df
+      body: ''
+      footer:
+        Connects-to: '#82'
+        connects-to: '#82'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 3.0.2
+  date: 2019-05-27T13:30:27.389Z
+- commits:
     - subject: 'networking: add back lost /ping endpoint from api check'
       hash: 230012ccb7acc4cf93b1251d210d86a5eb4b45e7
       body: |
