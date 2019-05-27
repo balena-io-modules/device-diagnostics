@@ -2,7 +2,7 @@
   "name": "leech",
   "version": "3.1.0",
   "description": "leech cli",
-  "homepage": "https://github.com/resin-io/leech#readme",
+  "homepage": "https://github.com/balena-io/leech#readme",
   "main": "./build/index.js",
   "bin": "./build/index.js",
   "types": "lib/index.ts",
@@ -10,10 +10,10 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/resin-io/leech"
+    "url": "https://github.com/balena-io/leech"
   },
   "bugs": {
-    "url": "https://github.com/resin-io/leech/issues"
+    "url": "https://github.com/balena-io/leech/issues"
   },
   "private": true,
   "scripts": {
@@ -25,11 +25,12 @@
     "prepublishOnly": "npm run build",
     "prettier-check": "prettier-check --single-quote --write ./lib/*.ts",
     "prettier": "prettier --single-quote --write ./lib/*.ts",
-    "test": "mocha -r ts-node/register --reporter spec tests/**/*.spec.ts"
+    "test": "mocha -r ts-node/register --reporter spec tests/**/*.spec.ts",
+    "lint": "shellcheck scripts/*.sh"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run prettier",
+      "pre-commit": "npm run prettier && npm run lint",
       "pre-push": "npm run prettier-check && npm test"
     }
   },
@@ -66,6 +67,7 @@
     "mocha": "3.5.0",
     "natives": "^1.1.6",
     "resin-cli-visuals": "1.4.0",
-    "resin-token": "4.2.1"
+    "resin-token": "4.2.1",
+    "shellcheck": "^0.2.3"
   }
 }
