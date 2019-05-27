@@ -1,4 +1,17 @@
 - commits:
+    - subject: 'networking: add back lost /ping endpoint from api check'
+      hash: 230012ccb7acc4cf93b1251d210d86a5eb4b45e7
+      body: |
+        remove legacy pubnub ping check
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 3.0.1
+  date: 2019-05-15T17:23:46.502Z
+- commits:
     - subject: 'diagnostics: remove support for 1.x devices'
       hash: df281b76731c790ff408aa83b077f04a750c33a8
       body: ''
