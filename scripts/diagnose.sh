@@ -294,7 +294,6 @@ function run_checks()
 	check_dns
 	check_diskspace
 	check_write_latency
-	check_metadata
 }
 
 function run_commands()
