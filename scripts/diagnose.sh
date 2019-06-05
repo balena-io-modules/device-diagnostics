@@ -55,6 +55,9 @@ filter_config_keys='jq ". | with_entries(if .key | (contains(\"apiKey\") or cont
 # shellcheck disable=SC2034
 filter_container_envs='jq "del(.[].Config.Env)"'
 
+# shellcheck disable=SC2034
+RESINHUP_LOG='/mnt/data/resinhup'
+
 # Commands
 # shellcheck disable=SC2016
 commands=(
@@ -117,7 +120,7 @@ commands=(
 	'cat /var/log/messages' # legacy
 	'cat /var/log/provisioning-progress.log'
 	'dmesg'
-	'find /mnt/data/resinhup/*log -mtime -30 | xargs tail -n 10 -v'
+	"find $RESINHUP_LOG/*log -mtime -30 -exec tail -n 10 -v {} + | grep '.*' || find $RESINHUP_LOG/*log -printf '%TY.%Tm.%Td %p\n' | sort -nr | awk 'NR==1{print $NF}' | xargs tail -n 10 -v"
 	'journalctl --list-boots --no-pager'
 	'journalctl -n500 -a'
 	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
