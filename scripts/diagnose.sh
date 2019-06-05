@@ -6,14 +6,7 @@ source /etc/profile
 # shellcheck disable=SC1091
 source /usr/sbin/resin-vars
 
-# Determine whether we're using the older 'rce'-aliased docker or not.
-# stolen directly from the proxy:
-# (https://github.com/balena-io/resin-proxy/blob/master/src/common/host-scripts.ts#L28)
-X=/usr/bin/
-ENG=rce
-[ -x $X$ENG ] || ENG=docker
-[ -x $X$ENG ] || ENG=balena
-[ -x $X$ENG ] || ENG=balena-engine
+# {{eng}}
 
 # docker's mount is also the core btrfs filesystem.
 mountpoint="/var/lib/$ENG"
@@ -67,6 +60,7 @@ commands=(
 	'systemctl status $ENG'
 	'journalctl -n 200 --no-pager -a -u $ENG'
 	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
+	# {{balenaCmds}}
 
 	# HARDWARE specific commands
 	'echo === HARDWARE ==='
@@ -85,6 +79,7 @@ commands=(
 	'lsusb -vvv'
 	'mount'
 	'uname -a'
+	# {{hardwareCmds}}
 
 	# NETWORK specific commands
 	'echo === NETWORK ==='
@@ -104,6 +99,7 @@ commands=(
 	'ping -c 1 -W 3 google.co.uk'
 	'systemctl kill -s USR1 dnsmasq'
 	'systemctl status openvpn-resin'
+	# {{networkCmds}}
 
 	# OS specific commands
 	'echo === OS ==='
@@ -125,6 +121,7 @@ commands=(
 	'stat /var/lock/resinhup.lock'
 	'sysctl -a'
 	'top -b -n 1'
+	# {{osCmds}}
 
 	# SUPERVISOR specific commands
 	'echo === SUPERVISOR ==='
@@ -134,12 +131,14 @@ commands=(
 	'journalctl -n 200 --no-pager -a -u resin-supervisor'
 	'systemctl status resin-supervisor'
 	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
+	# {{supervisorCmds}}
 
 	# TIME specific commands
 	'echo === TIME ==='
 	'date'
 	'timedatectl status'
 	'uptime'
+	# {{timeCmds}}
 )
 
 function each_command()
@@ -239,7 +238,7 @@ function check_diskspace()
 
 	# Last +0 forces the field to a number, stripping the '%' on the end.
 	# Tested working on busybox.
-	used_percent=$(df $mountpoint | tail -n 1 | awk '{print $5+0}')
+	used_percent=$(df "$mountpoint" | tail -n 1 | awk '{print $5+0}')
 	free_percent=$((100 - used_percent))
 
 	if [ "$free_percent" -gt "$low_disk_threshold" ]; then
@@ -252,7 +251,7 @@ function check_diskspace()
 
 function check_container_engine()
 {
-	if (pidof $ENG >/dev/null); then
+	if (pidof "$ENG" >/dev/null); then
 		echo "CONTAINER ENGINE: OK: container engine $ENG is running!"
 	else
 		echo "CONTAINER ENGINE: DANGER: container engine $ENG is NOT running!"
@@ -283,6 +282,8 @@ function check_dns()
 	echo "DNS: OK (first DNS server is ${first_server}.)"
 }
 
+# {{extraCheckDefinitions}}
+
 function run_checks()
 {
 	announce CHECKS
@@ -294,6 +295,7 @@ function run_checks()
 	check_dns
 	check_diskspace
 	check_write_latency
+	# {{extraChecks}}
 }
 
 function run_commands()
