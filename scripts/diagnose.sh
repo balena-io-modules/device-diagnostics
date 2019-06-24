@@ -1,5 +1,5 @@
 #!/bin/bash
-DIAGNOSE_VERSION=3.0.2
+DIAGNOSE_VERSION=3.0.3
 # Don't run anything before this source as it sets PATH here
 # shellcheck disable=SC1091
 source /etc/profile

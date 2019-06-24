@@ -1,4 +1,17 @@
 - commits:
+    - subject: 'ci: fix up broken node12 builds'
+      hash: 56275a19977a41b063c999f4c8dda23f781e7f92
+      body: |
+        ..by updating gulp to v4
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 3.0.3
+  date: 2019-05-27T14:05:17.958Z
+- commits:
     - subject: 'resin1x: remove spurious undefined resin1x check'
       hash: 100c91468d3042401e57a0e0065f98c929d712df
       body: ''
