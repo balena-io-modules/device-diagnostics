@@ -64,6 +64,7 @@ commands=(
 	'$ENG images'
 	'$ENG ps -a'
 	'$ENG stats --all --no-stream'
+	'$ENG system df'
 	'systemctl status $ENG'
 	'journalctl -n 200 --no-pager -a -u $ENG'
 	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
