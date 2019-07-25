@@ -99,6 +99,7 @@ commands=(
 	'ifconfig'
 	'iptables -n -L'
 	'iptables -n -t nat -L'
+	'iwconfig'
 	'journalctl -n 200 --no-pager -a -u openvpn-resin'
 	'ls -l /mnt/boot/system-connections'
 	'netstat -ntl'
