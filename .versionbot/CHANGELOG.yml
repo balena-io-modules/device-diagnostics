@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'dmesg: add check for under-voltage warnings'
+      hash: c3053cbcbe448a82331262ef30daf7542f4c0e77
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 3.2.0
+  date: 2019-07-17T22:19:04.988Z
+- commits:
     - subject: 'diagnose: add balena system df'
       hash: b9c6a3d9fd8b2499a091c7c3e1247d8d467e5e96
       body: ''
