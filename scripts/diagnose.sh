@@ -185,6 +185,14 @@ function is_mounted()
 	mount | grep -q "on $1"
 }
 
+function check_under_voltage(){
+	if dmesg | grep -q "Under-voltage detected\!"; then
+		echo "WARNING: Under-voltage events detected, check/change the power supply ASAP"
+	else
+		echo "OK: No under-voltage events detected"
+	fi
+}
+
 function check_resin1x()
 {
 	# test resinOS 1.x based on matches like the following:
@@ -289,6 +297,7 @@ function run_checks()
 	announce CHECKS
 
 	check_resin1x
+	check_under_voltage
 	check_memory
 	check_container_engine
 	check_supervisor
