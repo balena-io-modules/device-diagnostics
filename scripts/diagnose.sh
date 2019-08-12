@@ -286,6 +286,32 @@ function check_dns()
 	echo "DNS: OK (first DNS server is ${first_server}.)"
 }
 
+function check_service_restarts()
+{
+	local restarting=()
+	local restarting_count=0
+
+	local services
+
+	services=$("${ENG}" ps -q)
+	if [ "$(echo "${services}" | wc -l)" -gt 0 ]; then
+		# shellcheck disable=SC2086
+		for i in ${services}; do
+			count=$("${ENG}" inspect ${i} -f '{{.Name}} {{.RestartCount}}')
+			if [[ "$(echo "${count}" | awk '{print $2}')" -ne 0 ]]; then
+				label="$(echo "${count}" | awk '{print "(service: "$1" restart count: "$2")"}')"
+				restarting+=("${label}")
+				restarting_count+=1
+			fi
+		done
+	fi
+	if [[ "${restarting_count}" -ne 0 ]]; then
+		echo "SERVICES DANGER: some services restarting: ${restarting[*]}"
+	else
+		echo "SERVICES OK: no services restarting"
+	fi
+}
+
 function run_checks()
 {
 	announce CHECKS
@@ -297,6 +323,7 @@ function run_checks()
 	check_supervisor
 	check_dns
 	check_diskspace
+	check_service_restarts
 	check_write_latency
 }
 
