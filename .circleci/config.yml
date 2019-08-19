@@ -2,53 +2,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10
+      - image: alpine:edge
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Build
-          command: npm run build
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-      - persist_to_workspace:
-          root: node_modules
-          paths:
-              - .
-
-  test:
-    docker:
-      - image: circleci/node:10
-    steps:
-      - checkout
-      - attach_workspace:
-          at: node_modules
       - run:
           name: Install test dependencies
           command: |
-            sudo apt update
-            sudo apt install shellcheck
-      - run:
-          name: Prettier check
-          command: npm run prettier-check
-      - run:
-          name: Test
-          command: npm test
+            apk add --no-cache shellcheck
       - run:
           name: Shellcheck
           command: shellcheck scripts/*
-
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build

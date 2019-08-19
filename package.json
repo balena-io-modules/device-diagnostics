@@ -1,71 +1,16 @@
 {
-  "name": "leech",
+  "name": "device-diagnostics",
   "version": "3.3.0",
-  "description": "leech cli",
-  "homepage": "https://github.com/resin-io/leech#readme",
-  "main": "./build/index.js",
-  "bin": "./build/index.js",
-  "types": "lib/index.ts",
+  "description": "on-device diagnostics tool",
+  "homepage": "https://github.com/balena-io/device-diagnostics#readme",
   "author": "",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/resin-io/leech"
+    "url": "https://github.com/balena-io/device-diagnostics"
   },
   "bugs": {
-    "url": "https://github.com/resin-io/leech/issues"
+    "url": "https://github.com/balena-io/device-diagnostics/issues"
   },
-  "private": true,
-  "scripts": {
-    "start": "node build/index.js",
-    "postinstall": "gulp build",
-    "build": "gulp build",
-    "watch": "gulp watch",
-    "prepublish": "require-npm4-to-publish",
-    "prepublishOnly": "npm run build",
-    "prettier-check": "prettier-check --single-quote --write ./lib/*.ts",
-    "prettier": "prettier --single-quote --write ./lib/*.ts",
-    "test": "mocha -r ts-node/register --reporter spec tests/**/*.spec.ts"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run prettier",
-      "pre-push": "npm run prettier-check && npm test"
-    }
-  },
-  "devDependencies": {
-    "@types/byline": "4.2.31",
-    "@types/chai": "^4.0.1",
-    "@types/chalk": "0.4.31",
-    "@types/lodash": "^4.14.101",
-    "@types/mocha": "2.2.41",
-    "@types/node": "^8.5.9",
-    "chai": "4.1.1",
-    "gulp": "^4.0.2",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-typescript": "^3.2.4",
-    "gulp-util": "^3.0.7",
-    "gulp-watch": "4.3.11",
-    "husky": "^0.15.0-rc.8",
-    "prettier": "^1.5.3",
-    "prettier-check": "^2.0.0",
-    "require-npm4-to-publish": "^1.0.0",
-    "ts-node": "^3.3.0",
-    "typescript": "^2.1.5"
-  },
-  "dependencies": {
-    "@types/dateformat": "^1.0.1",
-    "balena-settings-client": "^4.0.1",
-    "byline": "5.0.0",
-    "capitano": "1.7.4",
-    "chalk": "2.0.1",
-    "dateformat": "^3.0.3",
-    "lodash": "4.17.4",
-    "mixpanel": "0.7.0",
-    "mkdirp-promise": "5.0.1",
-    "mocha": "3.5.0",
-    "natives": "^1.1.6",
-    "resin-cli-visuals": "1.4.0",
-    "resin-token": "4.2.1"
-  }
+  "private": true
 }
