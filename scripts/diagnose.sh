@@ -179,12 +179,6 @@ function get_meminfo_field()
 	grep "^$1:" /proc/meminfo | awk '{print $2}'
 }
 
-function is_mounted()
-{
-	# busybox grep doesn't like long options.
-	mount | grep -q "on $1"
-}
-
 function check_under_voltage(){
 	if dmesg | grep -q "Under-voltage detected\!"; then
 		echo "WARNING: Under-voltage events detected, check/change the power supply ASAP"
