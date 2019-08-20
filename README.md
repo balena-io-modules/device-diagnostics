@@ -1,5 +1,6 @@
 # Device-diagnostics
 
+
 ## Usage
 The diagnostics commands are triggered remotely via the proxy server. Navigate to
 `https://dashboard.balena-cloud.com/devices/{{UUID}}/diagnostics` to run and view the output.
