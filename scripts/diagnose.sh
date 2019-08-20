@@ -180,7 +180,7 @@ function get_meminfo_field()
 }
 
 function check_under_voltage(){
-	if dmesg | grep -q "Under-voltage detected\!"; then
+	if dmesg | grep -q "Under-voltage detected!"; then
 		echo "WARNING: Under-voltage events detected, check/change the power supply ASAP"
 	else
 		echo "OK: No under-voltage events detected"
