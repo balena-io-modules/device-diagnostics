@@ -1,4 +1,20 @@
 - commits:
+    - subject: >-
+        container-engine: check for service restarts (indicates service restart
+        cycling)
+      hash: 5b8b2393e90d0bc138a54859b0c923bffbe8e1c9
+      body: ''
+      footer:
+        Connects-to: '#100'
+        connects-to: '#100'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 3.3.0
+  date: 2019-08-20T14:17:58.012Z
+- commits:
     - subject: 'diagnose: remove extra is_mounted function'
       hash: dfc1b28aa7744dac3bc9d09812701e4e6868eaf4
       body: |
