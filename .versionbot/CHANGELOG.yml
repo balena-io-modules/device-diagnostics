@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'meta: remove all legacy leech codepaths and config'
+      hash: 38d176efbc98f3665aa2e8e4c8b3c6f6063fa4d3
+      body: ''
+      footer:
+        Closes: 'https://github.com/balena-io/device-diagnostics/issues/54'
+        closes: 'https://github.com/balena-io/device-diagnostics/issues/54'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 3.4.0
+  date: 2019-08-20T14:37:24.145Z
+- commits:
     - subject: >-
         container-engine: check for service restarts (indicates service restart
         cycling)
