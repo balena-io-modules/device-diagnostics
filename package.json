@@ -1,6 +1,6 @@
 {
   "name": "leech",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "leech cli",
   "homepage": "https://github.com/resin-io/leech#readme",
   "main": "./build/index.js",

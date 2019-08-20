@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'diagnose: remove extra is_mounted function'
+      hash: dfc1b28aa7744dac3bc9d09812701e4e6868eaf4
+      body: |
+        This `is_mounted` function isn't used anywhere (it was a relic of
+        resin1x that didn't get removed in df281b7)
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 3.2.1
+  date: 2019-08-20T13:45:30.614Z
+- commits:
     - subject: 'dmesg: add check for under-voltage warnings'
       hash: c3053cbcbe448a82331262ef30daf7542f4c0e77
       body: ''
