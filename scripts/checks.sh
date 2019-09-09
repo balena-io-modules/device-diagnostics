@@ -137,7 +137,7 @@ function check_container_engine()
 
 function check_supervisor()
 {
-	if ! ($ENG ps | grep resin_supervisor) 2> /dev/null; then
+	if ! ($ENG ps | grep -q resin_supervisor) 2> /dev/null; then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Supervisor is NOT running"
 	else
 		log_status "${GOOD}" "${FUNCNAME[0]}" "Supervisor is running"
@@ -158,6 +158,29 @@ function check_dns()
 	log_status "${GOOD}" "${FUNCNAME[0]}" "First DNS server is ${first_server}"
 }
 
+function check_service_restarts()
+{
+	local restarting=()
+	local -i restarting_count=0
+
+	mapfile -t services < <("${ENG}" ps -q 2> /dev/null)
+	if (( ${#services[@]} > 0 )); then
+		for service in "${services[@]}"; do
+			servicename_count=$("${ENG}" inspect "${service}" -f '{{.Name}} {{.RestartCount}}')
+			if [[ "$(echo "${servicename_count}" | awk '{print $2}')" -ne 0 ]]; then
+				label="$(echo "${servicename_count}" | awk '{print "(service: "$1" restart count: "$2")"}')"
+				restarting+=("${label}")
+				restarting_count+=1
+			fi
+		done
+	fi
+	if (( "${restarting_count}" != 0 )); then
+		log_status "${BAD}" "${FUNCNAME[0]}" "Some services are restarting unexpectedly: ${restarting[*]}"
+	else
+		log_status "${GOOD}" "${FUNCNAME[0]}" "No services are restarting unexpectedly"
+	fi
+}
+
 function run_checks()
 {
 	# TODO remove echo | jq
@@ -169,6 +192,7 @@ function run_checks()
 	"$(check_dns)" \
 	"$(check_diskspace)" \
 	"$(check_write_latency)" \
+	"$(check_service_restarts)" \
 	| jq -s 'add | {checks:.}'
 }
 
