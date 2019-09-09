@@ -1,4 +1,23 @@
 - commits:
+    - subject: 'diagnostics: split check and data collection tasks'
+      hash: dd38efa77268ae73cfc5f25120742817743d3eac
+      body: |
+        A `check` in this context is defined as a function that returns a result
+        (good/bad status plus some descriptive text), whereas a command is
+        simply a data collection tool without any filtering or logic built in).
+        Checks are intended to be used by everyone, while typically command
+        output is used by support/subject matter experts and power users.
+      footer:
+        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/51'
+        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/51'
+        Change-type: major
+        change-type: major
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.0.0
+  date: 2019-09-09T13:02:54.419Z
+- commits:
     - subject: 'meta: remove all legacy leech codepaths and config'
       hash: 38d176efbc98f3665aa2e8e4c8b3c6f6063fa4d3
       body: ''
