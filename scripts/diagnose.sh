@@ -15,13 +15,6 @@ ENG=rce
 [ -x $X$ENG ] || ENG=balena
 [ -x $X$ENG ] || ENG=balena-engine
 
-# docker's mount is also the core btrfs filesystem.
-mountpoint="/var/lib/$ENG"
-
-low_mem_threshold=10 #%
-low_disk_threshold=10 #%
-
-slow_disk_write=1000 #ms
 GLOBAL_TIMEOUT=60
 GLOBAL_TIMEOUT_CMD="timeout --preserve-status --kill-after=$(( GLOBAL_TIMEOUT * 2 ))"
 TIMEOUT_VERBOSE="timeout -v 1"
@@ -173,160 +166,6 @@ function announce_version()
 	announce "NOTE: not all commands are expected to succeed on all device types"
 }
 
-function get_meminfo_field()
-{
-	# Thankfully this works even with busybox :)
-	grep "^$1:" /proc/meminfo | awk '{print $2}'
-}
-
-function check_under_voltage(){
-	if dmesg | grep -q "Under-voltage detected!"; then
-		echo "WARNING: Under-voltage events detected, check/change the power supply ASAP"
-	else
-		echo "OK: No under-voltage events detected"
-	fi
-}
-
-function check_resin1x()
-{
-	# test resinOS 1.x based on matches like the following:
-	# VERSION="1.24.0"
-	# PRETTY_NAME="Resin OS 1.24.0"
-	if grep -q -e '^VERSION="1.*$' -e '^PRETTY_NAME="Resin OS 1.*$' /etc/os-release; then
-		echo "WARNING: resinOS 1.x is now completely deprecated"
-	fi
-}
-
-function check_memory()
-{
-	total_kb=$(get_meminfo_field MemTotal)
-	avail_kb=$(get_meminfo_field MemAvailable)
-
-	if [ -z "$avail_kb" ]; then
-		# For kernels that don't support MemAvailable.
-		# Not as accurate, but a good approximation.
-
-		avail_kb=$(get_meminfo_field MemFree)
-		avail_kb=$((avail_kb + $(get_meminfo_field Cached)))
-		avail_kb=$((avail_kb + $(get_meminfo_field Buffers)))
-	fi
-
-	total_mb=$((total_kb/1024))
-	avail_mb=$((avail_kb/1024))
-
-	used_mb=$((total_mb - avail_mb))
-	percent=$((100*avail_kb/total_kb))
-
-	if [ "$percent" -lt "${low_mem_threshold}" ]; then
-		echo "MEM: DANGER: LOW MEMORY: ${percent}% (${avail_mb}MB) available. ${used_mb}MB/${total_mb}MB used."
-	else
-		echo "MEM: OK (${percent}% available.)"
-	fi
-}
-
-function check_write_latency()
-{
-# from https://www.kernel.org/doc/Documentation/iostats.txt:
-#
-# Field  5 -- # of writes completed
-#     This is the total number of writes completed successfully.
-# Field  8 -- # of milliseconds spent writing
-#     This is the total number of milliseconds spent by all writes (as
-#     measured from __make_request() to end_that_request_last()).
-
-	awk -v limit=${slow_disk_write} '!/(loop|ram)/{if ($11/(($8>0)?$8:1)>limit){print "DISK PARTITION WRITES SLOW: " $3": " $11/(($8>0)?$8:1) "ms / write, sample size " $8}}' /proc/diskstats
-}
-
-function check_diskspace()
-{
-
-	# Last +0 forces the field to a number, stripping the '%' on the end.
-	# Tested working on busybox.
-	used_percent=$(df $mountpoint | tail -n 1 | awk '{print $5+0}')
-	free_percent=$((100 - used_percent))
-
-	if [ "$free_percent" -gt "$low_disk_threshold" ]; then
-		echo "DISK: OK (df reports ${free_percent}% free.)"
-		return
-	fi
-
-	echo "DISK: DANGER: LOW SPACE: df reports ${free_percent}%"
-}
-
-function check_container_engine()
-{
-	if (pidof $ENG >/dev/null); then
-		echo "CONTAINER ENGINE: OK: container engine $ENG is running!"
-	else
-		echo "CONTAINER ENGINE: DANGER: container engine $ENG is NOT running!"
-	fi
-}
-
-function check_supervisor()
-{
-	container_running=$($ENG ps | grep resin_supervisor)
-	if [ -z "$container_running" ]; then
-		echo "SUPERVISOR: DANGER (supervisor is NOT running!)"
-	else
-		echo "SUPERVISOR: OK (supervisor is running)."
-	fi
-}
-
-function check_dns()
-{
-	if [ ! -f /etc/resolv.conf ]; then
-		echo "DNS: DANGER: /etc/resolv.conf missing!!"
-		return
-	fi
-
-	first_server=$(grep "^nameserver" /etc/resolv.conf | \
-				  head -n 1 | \
-				  awk '{print $2}')
-
-	echo "DNS: OK (first DNS server is ${first_server}.)"
-}
-
-function check_service_restarts()
-{
-	local restarting=()
-	local restarting_count=0
-
-	local services
-
-	services=$("${ENG}" ps -q)
-	if [ "$(echo "${services}" | wc -l)" -gt 0 ]; then
-		# shellcheck disable=SC2086
-		for i in ${services}; do
-			count=$("${ENG}" inspect ${i} -f '{{.Name}} {{.RestartCount}}')
-			if [[ "$(echo "${count}" | awk '{print $2}')" -ne 0 ]]; then
-				label="$(echo "${count}" | awk '{print "(service: "$1" restart count: "$2")"}')"
-				restarting+=("${label}")
-				restarting_count+=1
-			fi
-		done
-	fi
-	if [[ "${restarting_count}" -ne 0 ]]; then
-		echo "SERVICES DANGER: some services restarting: ${restarting[*]}"
-	else
-		echo "SERVICES OK: no services restarting"
-	fi
-}
-
-function run_checks()
-{
-	announce CHECKS
-
-	check_resin1x
-	check_under_voltage
-	check_memory
-	check_container_engine
-	check_supervisor
-	check_dns
-	check_diskspace
-	check_service_restarts
-	check_write_latency
-}
-
 function run_commands()
 {
 	announce COMMANDS
@@ -338,7 +177,6 @@ function run_commands()
 }
 
 announce_version
-run_checks
 run_commands
 
 # Don't return a spurious error code.

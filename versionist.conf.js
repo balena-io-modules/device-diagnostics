@@ -57,16 +57,17 @@ module.exports = {
     // We need to update both the `package.json` and `diagnose.sh` file here
     const fs = require('fs');
     const packageFile = `${cwd}/package.json`;
-    const diagnoseScript = `${cwd}/scripts/diagnose.sh`;
     let packageData = require(packageFile);
     packageData.version = version;
     fs.writeFileSync(packageFile, `${JSON.stringify(packageData, null, 2)}\n`);
-
-    // Now update the version in diagnose.sh
-    const data = fs.readFileSync(diagnoseScript, 'utf8')
-    // Alter the DIAGNOSE_VERSION in the script
-    const result = data.replace(/DIAGNOSE_VERSION=[0-9\.]*/g, `DIAGNOSE_VERSION=${version}`);
-    fs.writeFileSync(diagnoseScript, result);
+    const filesToUpdate = [ `${cwd}/scripts/diagnose.sh`,`${cwd}/scripts/checks.sh`];
+    for (var i = 0; i < filesToUpdate.length; i++) {
+        // Now update the version
+        const data = fs.readFileSync(filesToUpdate[i], 'utf8')
+        // Alter the DIAGNOSE_VERSION in the script
+        const result = data.replace(/DIAGNOSE_VERSION=[0-9\.]*/g, `DIAGNOSE_VERSION=${version}`);
+        fs.writeFileSync(filesToUpdate[i], result);
+    }
   },
 
   template: [
