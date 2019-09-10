@@ -87,7 +87,7 @@ function check_memory()
 	percent=$((100*avail_kb/total_kb))
 
 	if [ "$percent" -lt "${low_mem_threshold}" ]; then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Low memory: ${percent}% (${avail_mb}%MB) available. ${used_mb}MB/${total_mb}MB used."
+		log_status "${BAD}" "${FUNCNAME[0]}" "Low memory: ${percent}% (${avail_mb}%MB) available, ${used_mb}MB/${total_mb}MB used"
 	else
 		log_status "${GOOD}" "${FUNCNAME[0]}" "${percent}% memory available"
 	fi
@@ -120,7 +120,7 @@ function check_diskspace()
 	free_percent=$((100 - used_percent))
 
 	if [ "${free_percent}" -lt "${low_disk_threshold}" ]; then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Low disk space: (df reports ${free_percent}% free.)"
+		log_status "${BAD}" "${FUNCNAME[0]}" "Low disk space: (df reports ${free_percent}% free)"
 	else
 		log_status "${GOOD}" "${FUNCNAME[0]}" "df reports ${free_percent}% free"
 	fi
@@ -128,18 +128,17 @@ function check_diskspace()
 
 function check_container_engine()
 {
-	if (! pidof $ENG >/dev/null); then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Container engine ${ENG} is NOT running!"
+	if (! pidof $ENG > /dev/null); then
+		log_status "${BAD}" "${FUNCNAME[0]}" "Container engine ${ENG} is NOT running"
 	else
-		log_status "${GOOD}" "${FUNCNAME[0]}" "Container engine ${ENG} is running!"
+		log_status "${GOOD}" "${FUNCNAME[0]}" "Container engine ${ENG} is running"
 	fi
 }
 
 function check_supervisor()
 {
-	container_running=$($ENG ps | grep resin_supervisor)
-	if [ -z "$container_running" ]; then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Supervisor is NOT running!"
+	if ! ($ENG ps | grep resin_supervisor) 2> /dev/null; then
+		log_status "${BAD}" "${FUNCNAME[0]}" "Supervisor is NOT running"
 	else
 		log_status "${GOOD}" "${FUNCNAME[0]}" "Supervisor is running"
 	fi
@@ -148,7 +147,7 @@ function check_supervisor()
 function check_dns()
 {
 	if [ ! -f /etc/resolv.conf ]; then
-		log_status "${BAD}" "${FUNCNAME[0]}" "/etc/resolv.conf missing!"
+		log_status "${BAD}" "${FUNCNAME[0]}" "/etc/resolv.conf missing"
 		return
 	fi
 
