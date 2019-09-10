@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'UI: small stylistic cleanups'
+      hash: a4f8fd1f5c8dff6dc067b30796606d2622ab9868
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.0.1
+  date: 2019-09-10T18:35:24.482Z
+- commits:
     - subject: 'diagnostics: split check and data collection tasks'
       hash: dd38efa77268ae73cfc5f25120742817743d3eac
       body: |
