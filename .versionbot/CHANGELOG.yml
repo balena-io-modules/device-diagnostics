@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'docs: check documentation cleanup'
+      hash: 734bdc00ba6195faafff556d8583ed1fb3c04b90
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.0.3
+  date: 2019-09-11T19:55:07.937Z
+- commits:
     - subject: 'diagnostics: remove duplicated supervisor check, add nmcli version'
       hash: 82217fa02f5777181226533c50e159b6f82485c6
       body: |
