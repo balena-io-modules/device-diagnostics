@@ -69,7 +69,6 @@ commands=(
 	'cat /proc/meminfo'
 	'ps'
 	'top -b -n 1'
-	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
 	'cat /var/log/provisioning-progress.log'
 	'df -h'
 	'df -ih'
@@ -95,6 +94,7 @@ commands=(
 	'journalctl -n 200 --no-pager -a -u openvpn-resin'
 	'ls -l /mnt/boot/system-connections'
 	'netstat -ntl'
+	'nmcli --version'
 	'ping -c 1 -W 3 google.co.uk'
 	'systemctl kill -s USR1 dnsmasq'
 	'systemctl status openvpn-resin'
