@@ -1,4 +1,22 @@
 - commits:
+    - subject: 'service-restarts: reinstate check_service_restarts'
+      hash: be3f9d7e819cbfb08d54064c8f3333476a6f7f83
+      body: |
+        this check was mistakenly dropped as part of rebasing
+
+        clean up extra output from supervisor grep
+
+        also add missing checks-description for `check_write_latency` and
+        `check_service_restarts`
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.0.4
+  date: 2019-09-11T21:45:05.950Z
+- commits:
     - subject: 'docs: check documentation cleanup'
       hash: 734bdc00ba6195faafff556d8583ed1fb3c04b90
       body: ''
