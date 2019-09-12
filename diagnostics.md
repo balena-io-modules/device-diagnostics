@@ -65,3 +65,19 @@ If a local disk fills up, there are often knock-on issues in the supervisor and 
 Run `du -a /mnt/data/docker | sort -nr | head -10` in the hostOS shell to list the ten largest files and directories.
 If the results indicate large files in `/mnt/data/docker/containers`, this result often indicates a leakage in an
 application container that can be cleaned up (runaway logs, too much local data, etc).
+
+### check_write_latency
+#### Summary
+This check compares each partition's average write latency to a predefined target.
+
+#### Triage
+Slow disk writes could indicate faulty hardware or heavy disk I/O. It is best to investigate the hardware further for
+signs of degradation.
+
+### check_service_restarts
+#### Summary
+This check interrogates the engine to see if any services are restarting uncleanly/unexpectedly.
+
+#### Triage
+Investigate the logs of whichever service(s) are restarting uncleanly; this issue could be a bug in the error handling
+or start-up of the aforementioned unhealthy services.
