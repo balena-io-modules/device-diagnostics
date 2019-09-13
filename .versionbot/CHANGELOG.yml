@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'docs: correct erroneous check info'
+      hash: 40ee0047b47526fcbda74ad32d800d7c0c136954
+      body: ''
+      footer:
+        Connects-to: 'https://github.com/balena-io/docs/pull/1174'
+        connects-to: 'https://github.com/balena-io/docs/pull/1174'
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+        Change-type: patch
+        change-type: patch
+      author: Matthew McGinn
+  version: 4.0.5
+  date: 2019-09-13T17:51:06.801Z
+- commits:
     - subject: 'service-restarts: reinstate check_service_restarts'
       hash: be3f9d7e819cbfb08d54064c8f3333476a6f7f83
       body: |
