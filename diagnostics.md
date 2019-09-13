@@ -84,3 +84,5 @@ This check interrogates the engine to see if any services are restarting unclean
 #### Triage
 Investigate the logs of whichever service(s) are restarting uncleanly; this issue could be a bug in the error handling
 or start-up of the aforementioned unhealthy services.
+
+#### DIAGNOSE_VERSION=4.2.0
