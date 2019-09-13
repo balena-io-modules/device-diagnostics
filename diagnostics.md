@@ -1,7 +1,7 @@
 # Check Descriptions
 
-As part of the diagnostics suite, you will find various checks that can be run on-device. Below is a description of each
-check and what each means or how to triage.
+As part of the diagnostics suite, you will find a group of checks that can be collectively run on-device. Below is a
+description of each check and what each means or how to triage.
 
 A `check` in this context is defined as a function that returns a result (good/bad status plus some descriptive text), whereas a
 command is simply a data collection tool without any filtering or logic built in). Checks are intended to be used by
@@ -20,12 +20,13 @@ Upgrade your device to `balenaOS 2.x` (contact support).
 Often seen on Raspberry Pi devices, these kernel messages indicate that the power supply is insufficient for the device and any peripherals that might be attached. These errors also precede seemingly erratic behavior.
 
 #### Triage
-Replace the power supply with a known-good supply (typically supplying at least 2.5V).
+Replace the power supply with a known-good supply (supplying at least 5V / >2.5A).
 
 ### check_memory
 #### Summary
 This check simply confirms that a given device is running at a given memory threshold (set to 90% at the moment).
-Oversubsribed memory can lead to OOM events.
+Oversubsribed memory can lead to OOM events (learn more about the out-of-memory killer
+[here](https://www.kernel.org/doc/html/latest/admin-guide/mm/concepts.html#oom-killer)).
 
 #### Triage
 Using a tool like `top`, scan the process table for which process(es) are consuming the most memory (`%VSZ`) and check
