@@ -1,201 +1,282 @@
-# Check Descriptions
-
-As part of the diagnostics suite, you will find a group of checks that can be collectively run on-device. Below is a
-description of each check and what each means or how to triage.
-
-A `check` in this context is defined as a function that returns a result (good/bad status plus some descriptive text), whereas a
-command is simply a data collection tool without any filtering or logic built in. Checks are intended to be used by
-everyone, while typically command output is used by support/subject matter experts and power users.
-
-### check_balenaOS
+# Diagnostics Descriptions
+## balenaEngine specific commands
+### echo === BALENA ===
 #### Summary
-This check confirms that the version of balenaOS is >2.x. There is further confirmation that the OS release has not since
-been removed from production.
+You have arrived at the balenaEngine section of the log output.
 
-As of May 1, 2019, `balenaOS 1.x` has been deprecated. These OSes are now unsupported. For more information, read our
-blog post: https://www.balena.io/blog/all-good-things-come-to-an-end-including-balenaos-1-x/.
-
-#### Triage
-Upgrade your device to the latest `balenaOS 2.x` (contact support if running 1.x).
-
-#### Depends on
-Parts of this check depend on fully functional networking stack (see [check_networking](#check_networking)).
-
-### check_under_voltage
+### $ENG --version
 #### Summary
-Often seen on Raspberry Pi devices, these kernel messages indicate that the power supply is insufficient for the device and any peripherals that might be attached. These errors also precede seemingly erratic behavior.
+This command simply gathers the balenaEngine version information.
 
-#### Triage
-Replace the power supply with a known-good supply (supplying at least 5V / >2.5A).
-
-### check_memory
+### $ENG images
 #### Summary
-This check simply confirms that a given device is running at a given memory threshold (set to 90% at the moment).
-Oversubscribed memory can lead to OOM events (learn more about the out-of-memory killer
-[here](https://www.kernel.org/doc/html/latest/admin-guide/mm/concepts.html#oom-killer)).
+Show information about balenaEngine images.
 
-#### Triage
-Using a tool like `top`, scan the process table for which process(es) are consuming the most memory (`%VSZ`) and check
-for memory leaks in those applications.
-
-### check_container_engine
+### $ENG ps -a
 #### Summary
-This check confirms the container engine is up and healthy. Additionally, this check confirms that there have been no
-unclean restarts of the engine. These restarts could be caused by crashlooping. The container engine is an integral part
-of the balenaCloud pipeline.
+Show information about containers running currently in balenaEngine.
 
-#### Triage
-It is best to let balena's support team take a look before restarting the container engine. At the very least, take a
-diagnostics snapshot before restarting anything.
-
-### check_supervisor
+### $ENG stats --all --no-stream
 #### Summary
-This check confirms the Supervisor is up and healthy. The Supervisor is an integral part of the balenaCloud pipeline.
-The Supervisor depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
-There is also a check to confirm the running Supervisor is a released version, and that the Supervisor is running the
-intended release from the API.
+Display a live stream of container(s) resource usage statistics.
 
-#### Triage
-It is best to let balena's support team take a look before restarting the supervisor. At the very least, take a
-diagnostics snapshot before restarting anything.
-
-### check_localdisk
+### $ENG system df
 #### Summary
-This check combines a few metrics about the local storage media and reports back any potential issues.
+Show balenaEngine disk usage (may differ from df results).
 
-#### test_disk_space
-##### Summary
-This test simply confirms that a given device is running beneath a given disk utilization threshold (set to 90% at the moment).
-If a local disk fills up, there are often knock-on issues in the supervisor and application containers.
-
-##### Triage
-Run `du -a /mnt/data/docker | sort -nr | head -10` in the hostOS shell to list the ten largest files and directories.
-If the results indicate large files in `/mnt/data/docker/containers`, this result often indicates a leakage in an
-application container that can be cleaned up (runaway logs, too much local data, etc).
-
-#### test_write_latency
-##### Summary
-This test compares each partition's average write latency to a predefined target (1s). There are some caveats to this
-test that are worth considering. Since it attempts to categorize a distribution with a point sample, the reported sample
-size should always be considered. Smaller sample sizes are prone to fluctuations that do not necessarily indicate
-failure. Additionally, the metric sampled is merely the number of writes disregarding the size of each write, which
-again may be noisy with few samples. Writes come primarily from application workloads and less often from operating
-system operations. For more information, see the [relevant kernel
-documentation](https://www.kernel.org/doc/Documentation/iostats.txt).
-
-##### Triage
-Slow disk writes could indicate faulty hardware or heavy disk I/O. It is best to investigate the hardware further for
-signs of degradation.
-
-#### test_disk_expansion
-##### Summary
-This test confirms that the host OS properly and fully expanded the partition at boot (>80% of the total disk space has
-been allocated).
-
-##### Triage
-Failure to expand the root filesystem can indicate an unhealthy storage medium or potentially a failure during the
-provisioning process. It is best to contact support, replace the storage media and re-provision the device.
-
-### check_service_restarts
+### systemctl status $ENG
 #### Summary
-This check interrogates the engine to see if any services are restarting uncleanly/unexpectedly.
+Get the service status of the balenaEngine from systemd.
 
-#### Triage
-Investigate the logs of whichever service(s) are restarting uncleanly; this issue could be a bug in the error handling
-or start-up of the aforementioned unhealthy services.
-
-#### Depends on
-This check depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
-
-### check_timesync
+### journalctl -n 200 --no-pager -a -u $ENG
 #### Summary
-This check confirms that the system clock is actively disciplined.
+Tail the balenaEngine journal and decode any messages.
 
-#### Triage
-Confirm that NTP is not blocked at the network level, and that any specified upstream NTP servers are accessible. If
-absolutely necessary, it is possible to temporarily sync the clock using HTTP headers (though this change will not
-persist across reboots).
-
-#### Depends on
-This check depends on a fully functional networking stack (see [check_networking](#check_networking)).
-
-### check_temperature
+### $ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs
 #### Summary
-If there are onboard temperature sensors, this check confirms that the temperature is below 80C (at which point
-throttling begins).
+Get the configuration of each container, filtering out any privileged variables.
 
-#### Triage
-In order to triage, either reduce the load on the device or replace/reseat/upgrade any heatsinks that may be attached to
-the CPU directly. Additionally, adding other cooling mechanisms like fans or improving the location of the device can
-help address heat issues.
+## Hardware specific commands
 
-### check_os_rollback
+### echo === HARDWARE ===
 #### Summary
-This check confirms that the host OS has not noted any failed boots & rollbacks.
+You have arrived at the hardware section of the log output.
 
-#### Triage
-More information available [here](https://github.com/balena-os/meta-balena/blob/development/docs/rollbacks.md), contact
-support to investigate fully.
-
-### check_networking
+### cat /proc/cpuinfo
 #### Summary
-This check tests various common failures at install locations required for a healthy container lifecycle.
-More information on networking requirements can be found [here](https://www.balena.io/docs/reference/OS/network/2.x/#network-requirements).
 
-##### test_upstream_dns
-This test confirms that certain FQDNs are resolvable by each configured upstream DNS server.
-
-##### test_wifi
-This test confirms that if a device is using wifi, the signal level is above a threshold.
-
-##### test_ping
-This test confirms that packets are not dropped during a ICMP ping.
-
-##### test_balena_api
-This test confirms that the device can communicate with the balenaCloud API. Commonly, firewalls or MiTM devices can
-cause SSL failures here.
-
-##### test_dockerhub
-This test confirms that the device can communicate with the Docker Hub.
-
-###### Depends on
-This test depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
-
-##### test_balena_registry
-This test is an end-to-end check that tries to authenticate with the balenaCloud registry, confirming that all other
-points in the networking stack are behaving properly.
-
-###### Depends on
-This test depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
-
-#### Triage
-Depending on what part of this check failed, there are various fixes and workarounds. Most however will involve a
-restrictive local network, or an unreliable connection.
-
-
-### check_image_corruption
+### cat /proc/device-tree/model
 #### Summary
-This check verifies container image layers stored on the device.  If the check reports that images are corrupted, there
-is likely an issue with the engine corrupting layers that constitute an image. If the check reports that a timeout has
-occurred, more investigation is needed (see https://github.com/balena-io/device-diagnostics/issues/203 for more
-information). In order to return the checks in a timely fashion, the process is timed out rather than being allowed to
-complete in an arbitrary amount of time.
 
-#### Triage Check that the device has sufficient disk space (see [check_localdisk](#check_localdisk)).  If this does not
-resolve the issue, it is best to contact support for further assistance.
-
-#### Depends on This check depends on the container engine being healthy (see
-[check_container_engine](#check_container_engine)) and having sufficient disk space (see
-[check_localdisk](#check_localdisk)).
-
-### check_user_services
+### cat /proc/meminfo
 #### Summary
-Any checks with names beginning with `service_` come from user applications. These checks allow users to provide their
-own health checks using the [HEALTHCHECK directive](https://docs.docker.com/engine/reference/builder/#healthcheck)
-defined in the Dockerfile. Any healthcheck output will be collected as-is, truncated to 100 characters, and shown as
-output along with the exit code of the healthcheck.
 
-#### Triage
-These checks are wholly limited in scope to user services and should be triaged by the application developer.
+### top -b -n 1
+#### Summary
+Grab a snapshot of the current usage statistics.
 
-#### DIAGNOSE_VERSION=4.17.9
+### cat /var/log/provisioning-progress.log
+#### Summary
+
+### df -h
+#### Summary
+This command lists disk space (used/available/total) [see also the `check_localdisk` check].
+
+### df -ih
+#### Summary
+This command lists number of disk inodes (used/available/total).
+
+### for i in /sys/class/thermal/thermal\* ; do if [ -e \$i/temp ]; then echo \$i && cat \$i/temp; fi ; done
+#### Summary
+This command lists all available temperature readings from onboard sensors. If one is abnormally hot, that may be worth
+investigating further.
+
+### free -h
+#### Summary
+Lists memory usage statistics (see also the `check_memory` check)
+
+### ls -l /dev
+#### Summary
+Show all available files in the `/dev` virtual filesystem.
+
+### lsusb -vvv
+#### Summary
+Get lots of information about any connected USB devices.
+
+### mount
+#### Summary
+Show all mounted partitions and their configuration.
+
+### uname -a
+#### Summary
+Show system information (kernel, hostname, build time, architecture)
+
+## Network specific commands
+
+### echo === NETWORK ===
+#### Summary
+You have arrived at the networking section of the log output.
+
+### /sbin/ip addr
+#### Summary
+Show configured network interface data.
+
+### cat /etc/resolv.conf
+#### Summary
+Show configured upstream DNS servers.
+
+### cat /proc/net/dev
+#### Summary
+
+### cat /proc/net/snmp
+#### Summary
+
+### cat /proc/net/udp
+#### Summary
+
+### curl $API_ENDPOINT/ping
+#### Summary
+Contact the balenaCloud backend and confirm communications.
+
+### curl https://www.google.co.uk
+#### Summary
+Contact a widely accessible third-party backend and confirm communications.
+
+### ifconfig
+#### Summary
+Show statistics about all network interfaces on a device. Specifically, TX/RX errors/drops/overruns are useful in
+debugging a flaky network.
+
+### iptables -n -L
+#### Summary
+
+### iptables -n -t nat -L
+#### Summary
+
+### journalctl -n 200 --no-pager -a -u openvpn-resin
+#### Summary
+Tail the VPN log.
+
+### ls -l /mnt/boot/system-connections
+#### Summary
+
+### netstat -ntl
+#### Summary
+
+### nmcli --version
+#### Summary
+Get the version of NetworkManager.
+
+### ping -c 1 -W 3 google.co.uk
+#### Summary
+Ping a widely accessible third-party backend and confirm communications.
+
+### systemctl kill -s USR1 dnsmasq
+#### Summary
+Force dnsmasq to dump statistics to the journal.
+
+### systemctl status openvpn-resin
+#### Summary
+Get the service status of the VPN from systemd.
+
+## BalenaOS specific commands
+### echo === OS ===
+#### Summary
+You have arrived at the balenaOS section of the log output.
+
+### cat /etc/os-release
+#### Summary
+Show balenaOS specific build information, including real device type.
+
+### cat /mnt/boot/config.json | $filter_config_keys
+#### Summary
+Grab all relevant config.json fields that are not secret keys.
+
+### cat /mnt/boot/config.txt # only for rpi...
+#### Summary
+
+### cat /mnt/boot/resinOS_uEnv.txt # only for rpi...
+#### Summary
+
+### cat /mnt/boot/uEnv.txt # only for uboot devices
+#### Summary
+
+### cat /mnt/conf/config.json | $filter_config_keys
+#### Summary
+(command for legacy devices)
+
+### cat /mnt/data-disk/config.json | $filter_config_keys
+#### Summary
+(command for legacy devices)
+
+### cat /var/log/messages
+#### Summary
+(command for legacy devices)
+
+### cat /var/log/provisioning-progress.log
+#### Summary
+
+### dmesg
+#### Summary
+Get the kernel log.
+
+### find /mnt/data/resinhup/\*log -mtime -30 | xargs tail -n 10 -v
+#### Summary
+Show the end of any balenaHUP logs. These logs will indicate the time and status of all balenaHUPs that have been
+issued.
+
+### journalctl --list-boots --no-pager
+#### Summary
+Show all boot times that have been written to the journal (more useful if persistent logging is enabled).
+
+### journalctl -n500 -a
+#### Summary
+Tail the journal generally and decode any messages.
+
+### ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)
+#### Summary
+
+### ps
+#### Summary
+Show the process table.
+
+### stat /var/lock/resinhup.lock
+#### Summary
+See if there's a leftover (or currently held) balenaHUP lock.
+
+### sysctl -a
+#### Summary
+Show all configured sysctl parameters. This output can be useful for comparing any potentially altered sysctls from a
+standard balenaOS build.
+
+### top -b -n 1
+#### Summary
+
+## Supervisor specific commands
+
+### echo === SUPERVISOR ===
+#### Summary
+You have arrived at the balena-supervisor section of the log output.
+
+### $ENG exec resin_supervisor cat /etc/resolv.conf
+#### Summary
+Check if there are configured NTP servers for the supervisor container.
+
+### $ENG logs resin_supervisor
+#### Summary
+Get the supervisor logs from balenaEngine.
+
+### curl --max-time 5 localhost:48484/ping
+#### Summary
+Check if the supervisor API is up & responding to requests.
+
+### journalctl -n 200 --no-pager -a -u resin-supervisor
+#### Summary
+Tail the supervisor journal and decode any messages.
+
+### systemctl status resin-supervisor
+#### Summary
+Get the service status of the supervisor from systemd.
+
+### tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log
+#### Summary
+(command for legacy devices)
+
+## Time specific commands
+
+### echo === TIME ===
+#### Summary
+You have arrived at the time section of the log output.
+
+### date
+#### Summary
+Get the device's configured date. If this date does not reflect the runtime from the diagnostics panel, there may be
+time sync problems.
+
+### timedatectl status
+#### Summary
+Get real-time clock information, as well as synchronization status of the NTP service.
+
+### uptime
+#### Summary
+Get how long the device thinks it has been up. This command only carries significance from balenaOS TODO and onwards.
