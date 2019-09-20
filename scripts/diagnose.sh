@@ -124,7 +124,7 @@ commands=(
 	'echo === SUPERVISOR ==='
 	'$ENG exec resin_supervisor cat /etc/resolv.conf'
 	'$ENG logs resin_supervisor'
-	'curl --max-time 5 localhost:48484/ping'
+	'curl --max-time 5 localhost:48484/v1/healthy'
 	'journalctl -n 200 --no-pager -a -u resin-supervisor'
 	'systemctl status resin-supervisor'
 	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
