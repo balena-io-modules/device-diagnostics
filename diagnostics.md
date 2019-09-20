@@ -7,13 +7,16 @@ A `check` in this context is defined as a function that returns a result (good/b
 command is simply a data collection tool without any filtering or logic built in). Checks are intended to be used by
 everyone, while typically command output is used by support/subject matter experts and power users.
 
-### check_resin1x
+### check_balenaOS
 #### Summary
-As of May 1, 2019, `resinOS 1.x` has been deprecated. These OSes are now unsupported. For more information, read our
-blog post: https://www.balena.io/blog/all-good-things-come-to-an-end-including-balenaos-1-x/
+This check confirms that the version of balenaOS is >2.x. There is further confirmation that the OS release has not since
+been yanked.
+
+As of May 1, 2019, `balenaOS 1.x` has been deprecated. These OSes are now unsupported. For more information, read our
+blog post: https://www.balena.io/blog/all-good-things-come-to-an-end-including-balenaos-1-x/.
 
 #### Triage
-Upgrade your device to `balenaOS 2.x` (contact support).
+Upgrade your device to the latest `balenaOS 2.x` (contact support if running 1.x).
 
 ### check_under_voltage
 #### Summary
