@@ -73,6 +73,7 @@ commands=(
 	'df -h'
 	'df -ih'
 	'for i in /sys/class/thermal/thermal* ; do if [ -e \$i/temp ]; then echo \$i && cat \$i/temp; fi ; done'
+	'for i in /sys/class/mmc_host/mmc*/mmc* ; do if [ -e \$i/oemid ]; then echo \$i; for j in manfid oemid name hwrev fwrev; do printf \$j: && cat \$i/\$j; done; fi; done'
 	'free -h'
 	'ls -l /dev'
 	'lsusb -vvv'
