@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'diagnose: get SD card information from /sys'
+      hash: 36bba221252d9399f465811009d3790ae89363a0
+      body: ''
+      footer:
+        Connects-to: '#105'
+        connects-to: '#105'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.4.0
+  date: 2019-09-30T19:58:35.370Z
+- commits:
     - subject: 'supervisor: refactor diagnostics and checks to use health endpoint'
       hash: 9c2a2a23c2034594c178cc55568b2b8891168def
       body: ''
