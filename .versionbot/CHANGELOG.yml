@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'supervisor: refactor diagnostics and checks to use health endpoint'
+      hash: 9c2a2a23c2034594c178cc55568b2b8891168def
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.3.0
+  date: 2019-09-30T19:43:24.599Z
+- commits:
     - subject: 'docs: add version info to the docs'
       hash: 3942fc253a12e56d91b633f41237fcc6c16ff416
       body: ''
