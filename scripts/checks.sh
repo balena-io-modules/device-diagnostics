@@ -137,7 +137,16 @@ function check_container_engine()
 	if (! pidof $ENG > /dev/null); then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Container engine ${ENG} is NOT running"
 	else
-		log_status "${GOOD}" "${FUNCNAME[0]}" "Container engine ${ENG} is running"
+		local -i engine_restarts
+		engine_restarts=$(systemctl show -p NRestarts $ENG | awk -F= '{print $2}')
+		if (( engine_restarts > 0 )); then
+			local start_timestamp
+			start_timestamp=$(systemctl show -p ExecMainStartTimestamp $ENG | awk -F= '{print $2}')
+			log_status "${BAD}" "${FUNCNAME[0]}" "Container engine ${ENG} is up, but has ${engine_restarts} \
+unclean restarts and may be crashlooping (most recent start time: ${start_timestamp})"
+		else
+			log_status "${GOOD}" "${FUNCNAME[0]}" "Container engine ${ENG} is running and has not restarted uncleanly"
+		fi
 	fi
 }
 

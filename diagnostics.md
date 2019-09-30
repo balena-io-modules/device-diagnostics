@@ -34,8 +34,9 @@ for memory leaks in those applications.
 
 ### check_container_engine
 #### Summary
-This check confirms the container engine is up and healthy. The container engine is an integral part of the balenaCloud
-pipeline.
+This check confirms the container engine is up and healthy. Additionally, this check confirms that there have been no
+unclean restarts of the engine. These restarts could be caused by crashlooping. The container engine is an integral part
+of the balenaCloud pipeline.
 
 #### Triage
 It is best to let balena's support team take a look before restarting the container engine. At the very least, take a
@@ -44,6 +45,7 @@ diagnostics snapshot before restarting anything.
 ### check_supervisor
 #### Summary
 This check confirms the supervisor is up and healthy. The supervisor is an integral part of the balenaCloud pipeline.
+The supervisor depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
 
 #### Triage
 It is best to let balena's support team take a look before restarting the supervisor. At the very least, take a
