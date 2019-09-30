@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'docs: add version info to the docs'
+      hash: 3942fc253a12e56d91b633f41237fcc6c16ff416
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.2.1
+  date: 2019-09-30T19:33:54.837Z
+- commits:
     - subject: 'checks: check for ENG unclean restart count'
       hash: 274affdfc0244e18a176b165ff09b324778a41b0
       body: ''
