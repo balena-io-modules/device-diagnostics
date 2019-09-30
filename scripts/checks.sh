@@ -68,28 +68,32 @@ function check_resin1x()
 
 function check_memory()
 {
+	local -i total_kb
+	local -i avail_kb
 	total_kb=$(get_meminfo_field MemTotal)
 	avail_kb=$(get_meminfo_field MemAvailable)
 
-	if [ -z "$avail_kb" ]; then
+	if [ -z "${avail_kb}" ]; then
 		# For kernels that don't support MemAvailable.
 		# Not as accurate, but a good approximation.
-
-		avail_kb=$(get_meminfo_field MemFree)
-		avail_kb=$((avail_kb + $(get_meminfo_field Cached)))
-		avail_kb=$((avail_kb + $(get_meminfo_field Buffers)))
+		avail_kb=$(( $(get_meminfo_field MemFree) + \
+			$(get_meminfo_field Cached) + \
+			$(get_meminfo_field Buffers) ))
 	fi
 
-	total_mb=$((total_kb/1024))
-	avail_mb=$((avail_kb/1024))
+	local -i percent_avail
+	percent_avail=$(( 100 * avail_kb / total_kb ))
 
-	used_mb=$((total_mb - avail_mb))
-	percent=$((100*avail_kb/total_kb))
-
-	if [ "$percent" -lt "${low_mem_threshold}" ]; then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Low memory: ${percent}% (${avail_mb}%MB) available, ${used_mb}MB/${total_mb}MB used"
+	if (( percent_avail < low_mem_threshold )); then
+		local -i total_mb
+		local -i avail_mb
+		total_mb=$(( total_kb / 1024 ))
+		avail_mb=$(( avail_kb / 1024 ))
+		local -i used_mb
+		used_mb=$(( total_mb - avail_mb ))
+		log_status "${BAD}" "${FUNCNAME[0]}" "Low memory: ${percent_avail}% (${avail_mb}MB) available, ${used_mb}MB/${total_mb}MB used"
 	else
-		log_status "${GOOD}" "${FUNCNAME[0]}" "${percent}% memory available"
+		log_status "${GOOD}" "${FUNCNAME[0]}" "${percent_avail}% memory available"
 	fi
 }
 
@@ -116,10 +120,12 @@ function check_diskspace()
 
 	# Last +0 forces the field to a number, stripping the '%' on the end.
 	# Tested working on busybox.
+	local -i used_percent
+	local -i free_percent
 	used_percent=$(df ${mountpoint} | tail -n 1 | awk '{print $5+0}')
-	free_percent=$((100 - used_percent))
+	free_percent=$(( 100 - used_percent ))
 
-	if [ "${free_percent}" -lt "${low_disk_threshold}" ]; then
+	if (( free_percent < low_disk_threshold )); then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Low disk space: (df reports ${free_percent}% free)"
 	else
 		log_status "${GOOD}" "${FUNCNAME[0]}" "df reports ${free_percent}% free"
