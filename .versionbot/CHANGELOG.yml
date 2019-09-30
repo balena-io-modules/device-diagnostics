@@ -1,4 +1,20 @@
 - commits:
+    - subject: 'checks: clean up bash math for memory + disk checks'
+      hash: b73ef1ca65c7d09e4883c489b5cd920f391fb4ac
+      body: |
+        This also cleans up the output for low memory failures, which has an
+        extra "%"
+      footer:
+        Closes: '#107'
+        closes: '#107'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.1.0
+  date: 2019-09-19T12:00:06.969Z
+- commits:
     - subject: 'docs: correct erroneous check info'
       hash: 40ee0047b47526fcbda74ad32d800d7c0c136954
       body: ''
