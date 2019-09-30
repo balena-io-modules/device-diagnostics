@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: check for ENG unclean restart count'
+      hash: 274affdfc0244e18a176b165ff09b324778a41b0
+      body: ''
+      footer:
+        Connects-to: '#122'
+        connects-to: '#122'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.2.0
+  date: 2019-09-30T19:26:54.598Z
+- commits:
     - subject: 'checks: clean up bash math for memory + disk checks'
       hash: b73ef1ca65c7d09e4883c489b5cd920f391fb4ac
       body: |
