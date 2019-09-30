@@ -60,7 +60,7 @@ module.exports = {
     let packageData = require(packageFile);
     packageData.version = version;
     fs.writeFileSync(packageFile, `${JSON.stringify(packageData, null, 2)}\n`);
-    const filesToUpdate = [ `${cwd}/scripts/diagnose.sh`,`${cwd}/scripts/checks.sh`];
+    const filesToUpdate = [ `${cwd}/scripts/diagnose.sh`,`${cwd}/scripts/checks.sh`, `${cwd}/diagnostics.md`];
     for (var i = 0; i < filesToUpdate.length; i++) {
         // Now update the version
         const data = fs.readFileSync(filesToUpdate[i], 'utf8')
