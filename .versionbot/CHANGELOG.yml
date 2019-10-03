@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: confirm that the OS is still accessible remotely'
+      hash: f57452aaaee3e8696c24870b7297d049f3716dd8
+      body: ''
+      footer:
+        Connects-to: '#118'
+        connects-to: '#118'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.5.0
+  date: 2019-10-03T15:20:05.105Z
+- commits:
     - subject: 'diagnose: get SD card information from /sys'
       hash: 36bba221252d9399f465811009d3790ae89363a0
       body: ''
