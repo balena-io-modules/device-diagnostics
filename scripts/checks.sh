@@ -124,6 +124,16 @@ function check_write_latency()
 		log_status "${GOOD}" "${FUNCNAME[0]}" "No slow disk writes detected"
 	fi
 }
+function check_timesync()
+{
+	local is_time_synced
+	is_time_synced=$(timedatectl show --value -p NTPSynchronized)
+	if [[ "${is_time_synced}" != "yes" ]]; then
+		log_status "${BAD}" "${FUNCNAME[0]}" "Time is not being synchronized via NTP"
+	else
+		log_status "${GOOD}" "${FUNCNAME[0]}" "Time is synchronized"
+	fi
+}
 
 function check_diskspace()
 {
@@ -222,6 +232,7 @@ function run_checks()
 	"$(check_diskspace)" \
 	"$(check_write_latency)" \
 	"$(check_service_restarts)" \
+	"$(check_timesync)" \
 	| jq -s 'add | {checks:.}'
 }
 
