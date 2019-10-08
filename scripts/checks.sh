@@ -127,7 +127,7 @@ function check_write_latency()
 function check_timesync()
 {
 	local is_time_synced
-	is_time_synced=$(timedatectl show --value -p NTPSynchronized)
+	is_time_synced=$(timedatectl | awk -F": " '/(System clock|NTP) synchronized:/{print $2}')
 	if [[ "${is_time_synced}" != "yes" ]]; then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Time is not being synchronized via NTP"
 	else
