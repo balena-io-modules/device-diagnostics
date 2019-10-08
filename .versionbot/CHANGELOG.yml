@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: add check_timesync to confirm NTP is syncing'
+      hash: ede99c6bb6a6a7d9fa43c825f4feb0f1dc0c24c1
+      body: ''
+      footer:
+        Closes: '#127'
+        closes: '#127'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.6.0
+  date: 2019-10-03T22:07:04.349Z
+- commits:
     - subject: 'checks: confirm that the OS is still accessible remotely'
       hash: f57452aaaee3e8696c24870b7297d049f3716dd8
       body: ''
