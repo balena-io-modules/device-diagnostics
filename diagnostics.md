@@ -88,4 +88,13 @@ This check interrogates the engine to see if any services are restarting unclean
 Investigate the logs of whichever service(s) are restarting uncleanly; this issue could be a bug in the error handling
 or start-up of the aforementioned unhealthy services.
 
+### check_timesync
+#### Summary
+This check confirms that the system clock is actively disciplined.
+
+#### Triage
+Confirm that NTP is not blocked at the network level, and that any specified upstream NTP servers are accessible. If
+absolutely necessary, it is possible to temporarily sync the clock using HTTP headers (though this change will not
+persist across reboots).
+
 #### DIAGNOSE_VERSION=4.5.0
