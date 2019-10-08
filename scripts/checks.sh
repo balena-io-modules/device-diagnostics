@@ -66,7 +66,7 @@ function check_balenaOS()
 		source /etc/os-release
 		local versions
 		versions=$(curl -qs --max-time 5 --retry 3 --retry-connrefused "${API_ENDPOINT}/device-types/v1/${SLUG}/images")
-		if ! echo "${versions}" | jq -e --arg v "${VERSION_ID}.${VARIANT_ID}" '.versions | index($v)' > /dev/null; then
+		if ! echo "${versions}" | jq -e --arg v "${VERSION}.${VARIANT_ID}" '.versions | index($v)' > /dev/null; then
 			local latest
 			latest=$(echo "${versions}" | jq -r '.latest' | sed -e 's/\.prod$//;s/\.dev$//')
 			log_status "${BAD}" "${FUNCNAME[0]}" "balenaOS 2.x detected, but this version is not currently available in ${API_ENDPOINT} (latest version is ${latest})"
