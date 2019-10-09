@@ -58,7 +58,7 @@ commands=(
 	'$ENG ps -a'
 	'$ENG stats --all --no-stream'
 	'$ENG system df'
-	'systemctl status $ENG'
+	'systemctl status $ENG --no-pager'
 	'journalctl -n 200 --no-pager -a -u $ENG'
 	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
 
@@ -98,7 +98,7 @@ commands=(
 	'nmcli --version'
 	'ping -c 1 -W 3 google.co.uk'
 	'systemctl kill -s USR1 dnsmasq'
-	'systemctl status openvpn-resin'
+	'systemctl status openvpn-resin --no-pager'
 
 	# OS specific commands
 	'echo === OS ==='
@@ -114,7 +114,7 @@ commands=(
 	'dmesg'
 	'find /mnt/data/resinhup/*log -mtime -30 | xargs tail -n 10 -v'
 	'journalctl --list-boots --no-pager'
-	'journalctl -n500 -a'
+	'journalctl -n500 -a --no-pager'
 	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
 	'ps'
 	'stat /var/lock/resinhup.lock'
@@ -127,7 +127,7 @@ commands=(
 	'$ENG logs resin_supervisor'
 	'curl --max-time 5 localhost:48484/v1/healthy'
 	'journalctl -n 200 --no-pager -a -u resin-supervisor'
-	'systemctl status resin-supervisor'
+	'systemctl status resin-supervisor --no-pager'
 	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
 
 	# TIME specific commands
