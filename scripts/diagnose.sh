@@ -15,7 +15,7 @@ ENG=rce
 [ -x $X$ENG ] || ENG=balena
 [ -x $X$ENG ] || ENG=balena-engine
 
-GLOBAL_TIMEOUT=60
+GLOBAL_TIMEOUT=10
 GLOBAL_TIMEOUT_CMD="timeout --preserve-status --kill-after=$(( GLOBAL_TIMEOUT * 2 ))"
 TIMEOUT_VERBOSE="timeout -v 1"
 # timeout (GNU coreutils) 8.26 does not support -v
