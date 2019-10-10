@@ -97,4 +97,4 @@ Confirm that NTP is not blocked at the network level, and that any specified ups
 absolutely necessary, it is possible to temporarily sync the clock using HTTP headers (though this change will not
 persist across reboots).
 
-#### DIAGNOSE_VERSION=4.6.0
+#### DIAGNOSE_VERSION=4.6.1

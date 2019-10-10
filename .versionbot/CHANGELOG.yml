@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'docs: remove extraneous parenthesis'
+      hash: c0c30ad271b72f64257a6b03a5f3e2474129b2ff
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.6.1
+  date: 2019-10-09T08:13:33.702Z
+- commits:
     - subject: 'checks: add check_timesync to confirm NTP is syncing'
       hash: ede99c6bb6a6a7d9fa43c825f4feb0f1dc0c24c1
       body: ''
