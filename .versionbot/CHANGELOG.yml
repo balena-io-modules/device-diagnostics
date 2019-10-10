@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'diagnostics: adjust global timeout to 10s (20s fallback)'
+      hash: 959073664fecacb1cebf37f9e0d421ba44e92a23
+      body: ''
+      footer:
+        Connects-to: '#135'
+        connects-to: '#135'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.7.2
+  date: 2019-10-10T14:11:25.068Z
+- commits:
     - subject: 'checks: use VERSION instead of VERSION_ID for balenaOS compat'
       hash: 8eca010fa9003aed787b20025b34ce36585f527b
       body: ''
