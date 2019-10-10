@@ -4,7 +4,7 @@ As part of the diagnostics suite, you will find a group of checks that can be co
 description of each check and what each means or how to triage.
 
 A `check` in this context is defined as a function that returns a result (good/bad status plus some descriptive text), whereas a
-command is simply a data collection tool without any filtering or logic built in). Checks are intended to be used by
+command is simply a data collection tool without any filtering or logic built in. Checks are intended to be used by
 everyone, while typically command output is used by support/subject matter experts and power users.
 
 ### check_balenaOS
