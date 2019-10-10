@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: use VERSION instead of VERSION_ID for balenaOS compat'
+      hash: 8eca010fa9003aed787b20025b34ce36585f527b
+      body: ''
+      footer:
+        Connects-to: '#126'
+        connects-to: '#126'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.7.1
+  date: 2019-10-10T14:02:49.016Z
+- commits:
     - subject: 'diagnostics: pass --no-pager to all systemctl and journalctl calls'
       hash: a2e09b335bacc7347fd8b1c715ecb8f17908f398
       body: ''
