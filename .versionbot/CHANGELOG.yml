@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: add timeout for ENG inspect'
+      hash: bafff55eb4d8d2346213ab37574d4360affc6883
+      body: ''
+      footer:
+        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/135'
+        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/135'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.8.0
+  date: 2019-10-10T16:44:38.861Z
+- commits:
     - subject: 'checks: make check_timesync backwards compatible'
       hash: c4e67c112f9855fcc8cb412d208b1b1d55ed9202
       body: ''
