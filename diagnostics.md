@@ -115,4 +115,33 @@ This check confirms that the host OS has not noted any failed boots & rollbacks.
 More information available [here](https://github.com/balena-os/meta-balena/blob/development/docs/rollbacks.md), contact
 support to investigate fully.
 
+### check_networking
+#### Summary
+This check tests various common failures at install locations required for a healthy container lifecycle.
+More information on networking requirements can be found [here](https://www.balena.io/docs/reference/OS/network/2.x/#network-requirements).
+
+##### test_upstream_dns
+This test confirms that certain FQDNs are resolvable by each configured upstream DNS server.
+
+##### test_wifi
+This test confirms that if a device is using wifi, the signal level is above a threshold.
+
+##### test_ping
+This test confirms that packets are not dropped during a ICMP ping.
+
+##### test_balena_api
+This test confirms that the device can communicate with the balenaCloud API. Commonly, firewalls or MiTM devices can
+cause SSL failures here.
+
+##### test_dockerhub
+This test confirms that the device can communicate with the Docker Hub.
+
+##### test_balena_registry
+This test is an end-to-end check that tries to authenticate with the balenaCloud registry, confirming that all other
+points in the networking stack are behaving properly.
+
+#### Triage
+Depending on what part of this check failed, there are various fixes and workarounds. Most however will involve a
+restrictive local network, or an unreliable connection.
+
 #### DIAGNOSE_VERSION=4.11.6

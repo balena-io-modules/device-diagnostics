@@ -20,8 +20,11 @@ TIMEOUT_CMD="timeout --kill-after=$(( TIMEOUT * 2 )) ${TIMEOUT}"
 # docker's mount is also the core btrfs filesystem.
 mountpoint="/var/lib/${ENG}"
 
+external_fqdn="0.resinio.pool.ntp.org"
+
 low_mem_threshold=10 #%
 low_disk_threshold=10 #%
+wifi_threshold=40 #%, very handwavy
 
 slow_disk_write=1000 #ms
 GOOD="true"
@@ -46,7 +49,105 @@ function log_status()
 	jq -cn --argjson g "${1}" --arg f "${2}" --arg s "${3}" '[{"name":$f,"success":$g,"status":$s}]'
 }
 
+function test_upstream_dns()
+{
+	# force dnsmasq to print statistics to journal to read them back
+	systemctl kill -s USR1 dnsmasq
+	for i in $(journalctl -u dnsmasq | awk 'match($0, /[12]?[0-9]?[0-9]\.[12]?[0-9]?[0-9]\.[12]?[0-9]?[0-9]\.[12]?[0-9]?[0-9]/) {print substr($0, RSTART, RLENGTH)}'| sort -u); do
+		# shellcheck disable=SC2001
+		for j in "${external_fqdn}" "$(echo "${API_ENDPOINT}" | sed -e 's@^https*://@@')"; do
+			if ! nslookup "${j}" "${i}" > /dev/null 2>&1; then
+				echo "${FUNCNAME[0]}: DNS lookup failed for ${j} via upstream: ${i}"
+			fi
+		done;
+	done
+}
+
+function test_wifi()
+{
+	local -i wifi_active_interfaces
+	wifi_active_interfaces=$(nmcli --fields TYPE,STATE device status | grep -c '^wifi *connected')
+	if (( wifi_active_interfaces > 0 )); then
+		local -i wifi_strength
+		wifi_strength=$(nmcli -f IN-USE,SIGNAL device wifi list | awk '/^\*/{print $2}')
+		if (( wifi_strength < wifi_threshold )); then
+			echo "${FUNCNAME[0]}: Configured wifi network has a weak signal (<${wifi_threshold}%)"
+		fi
+	fi
+}
+
+function test_ping()
+{
+	local -i lost_packets
+	lost_packets=$(${TIMEOUT_CMD} ping -c 3 "${external_fqdn}" 2>/dev/null | awk -F, '/loss/{print $7}')
+	if (( lost_packets > 0 )); then
+		echo "${FUNCNAME[0]}: Packets lost while pinging ${external_fqdn}"
+	fi
+}
+
+function test_dockerhub()
+{
+	local -i balena_results
+	balena_results=$(${TIMEOUT_CMD} ${ENG} search balena --limit 10 2>/dev/null | awk '/balena/' | wc -l)
+	if (( balena_results != 10 )); then
+		echo "${FUNCNAME[0]}: Could not query Docker Hub"
+	fi
+}
+
+function test_balena_api()
+{
+	# can we reach the API?
+	local api_ret
+	local -i api_retval
+	api_ret=$(${TIMEOUT_CMD} curl -qs "${API_ENDPOINT}/ping")
+	api_retval=$?
+	if [[ "${api_ret}" != "OK" ]]; then
+		if [ "${api_retval}" -eq 60 ]; then
+			echo "${FUNCNAME[0]}: There may be a firewall blocking traffic to ${API_ENDPOINT} (SSL errors)"
+			return
+		fi
+		echo "${FUNCNAME[0]}: Could not contact ${API_ENDPOINT}"
+	fi
+}
+
+function test_balena_registry()
+{
+	# can we authenticate with the registry? TODO: this isn't really a good check for auth, just for connectivity
+	# TODO: old OSes fail because no --password-stdin, so can't use that.
+	if ! ${TIMEOUT_CMD} ${ENG} login "${REGISTRY_ENDPOINT}" -u "d_${UUID}" \
+		--password "${DEVICE_API_KEY}" > /dev/null 2>&1; then
+		echo "${FUNCNAME[0]}: Could not communicate with ${REGISTRY_ENDPOINT} for authentication"
+	fi
+	${TIMEOUT_CMD} ${ENG} logout "${REGISTRY_ENDPOINT}" > /dev/null
+}
+
 # Check functions
+function check_networking()
+{
+	tests=(
+		   test_upstream_dns
+		   test_wifi
+		   test_ping
+		   test_balena_api
+		   test_dockerhub
+		   test_balena_registry
+	)
+	local output
+	output=""
+	local cmd_out
+	for i in "${tests[@]}"; do
+		cmd_out=$(${i})
+		if [ -n "${cmd_out}" ]; then
+			output+=$'\n'$(printf '%s' "${cmd_out}")
+		fi
+	done
+	if [ "$(echo "${output}" | wc -l)" -gt 1 ]; then
+		log_status "${BAD}" "${FUNCNAME[0]}" "Some networking issues detected: ${output}"
+	else
+		log_status "${GOOD}" "${FUNCNAME[0]}" "No networking issues detected"
+	fi
+}
+
 function check_under_voltage(){
 	if dmesg | grep -q "Under-voltage detected\!"; then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Under-voltage events detected, check/change the power supply ASAP"
@@ -275,6 +376,7 @@ function run_checks()
 	"$(check_container_engine)" \
 	"$(check_supervisor)" \
 	"$(check_dns)" \
+	"$(check_networking)" \
 	"$(check_diskspace)" \
 	"$(check_write_latency)" \
 	"$(check_service_restarts)" \
