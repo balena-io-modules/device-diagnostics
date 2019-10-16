@@ -119,7 +119,7 @@ function check_write_latency()
 	#     This is the total number of milliseconds spent by all writes (as
 	#     measured from __make_request() to end_that_request_last()).
 	local write_output
-	write_output=$(awk -v limit=${slow_disk_write} '!/(loop|ram)/{if ($11/(($8>0)?$8:1)>limit){print $3": " $11/(($8>0)?$8:1) "ms / write, sample size" $8}}' /proc/diskstats)
+	write_output=$(awk -v limit=${slow_disk_write} '!/(loop|ram)/{if ($11/(($8>0)?$8:1)>limit){print $3": " $11/(($8>0)?$8:1) "ms / write, sample size " $8}}' /proc/diskstats)
 	if [ -n "${write_output}" ]; then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Slow disk writes detected: ${write_output}"
 	else
