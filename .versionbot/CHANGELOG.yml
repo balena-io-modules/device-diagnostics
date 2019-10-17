@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'docs: update README.md with better hacking instructions'
+      hash: 007380d41cd7b3abdce33e100a99cfecfdfddb1c
+      body: ''
+      footer:
+        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/110'
+        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/110'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.8.1
+  date: 2019-10-17T16:28:58.546Z
+- commits:
     - subject: 'checks: add timeout for ENG inspect'
       hash: bafff55eb4d8d2346213ab37574d4360affc6883
       body: ''
