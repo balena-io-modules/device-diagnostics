@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'checks: fix up write latency output typo'
+      hash: e5cae0ccedb2292de982af3d02533524ef2345b4
+      body: ''
+      footer:
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+        Change-type: patch
+        change-type: patch
+      author: Matthew McGinn
+  version: 4.8.2
+  date: 2019-10-21T18:13:22.194Z
+- commits:
     - subject: 'docs: update README.md with better hacking instructions'
       hash: 007380d41cd7b3abdce33e100a99cfecfdfddb1c
       body: ''
