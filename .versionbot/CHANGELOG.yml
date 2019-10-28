@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'meta: add zubairlk as codeowner'
+      hash: 7d95815a78721ae266d8341b816981b70ac9d3b9
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.8.3
+  date: 2019-10-28T11:45:56.075Z
+- commits:
     - subject: 'checks: fix up write latency output typo'
       hash: e5cae0ccedb2292de982af3d02533524ef2345b4
       body: ''
