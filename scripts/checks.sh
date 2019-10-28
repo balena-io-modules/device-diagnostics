@@ -221,6 +221,20 @@ function check_dns()
 	log_status "${GOOD}" "${FUNCNAME[0]}" "First DNS server is ${first_server}"
 }
 
+function check_os_rollback()
+{
+	local health_path="/mnt/state/rollback-health-triggered"
+	local altboot_path="/mnt/state/rollback-altboot-triggered"
+	declare -a HEALTHCHECK_FILES=("${health_path}" "${altboot_path}")
+	for i in "${HEALTHCHECK_FILES[@]}"; do
+		if [ -f "${i}" ]; then
+			log_status "${BAD}" "${FUNCNAME[0]}" "OS rollbacks detected (${i} exists)"
+		fi
+	done
+
+	log_status "${GOOD}" "${FUNCNAME[0]}" "No OS rollbacks detected"
+}
+
 function check_service_restarts()
 {
 	local restarting=()
@@ -262,6 +276,7 @@ function run_checks()
 	"$(check_write_latency)" \
 	"$(check_service_restarts)" \
 	"$(check_timesync)" \
+	"$(check_os_rollback)" \
 	| jq -s 'add | {checks:.}'
 }
 

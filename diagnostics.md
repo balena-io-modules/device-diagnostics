@@ -107,4 +107,12 @@ In order to triage, either reduce the load on the device or replace/reseat/upgra
 the CPU directly. Additionally, adding other cooling mechanisms like fans or improving the location of the device can
 help address heat issues.
 
+### check_os_rollback
+#### Summary
+This check confirms that the host OS has not noted any failed boots & rollbacks.
+
+#### Triage
+More information available [here](https://github.com/balena-os/meta-balena/blob/development/docs/rollbacks.md), contact
+support to investigate fully.
+
 #### DIAGNOSE_VERSION=4.10.1
