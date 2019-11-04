@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'diagnostics: add ENG volume ls'
+      hash: 3b8be1b420ce5a1813919532a0a0cf92685d3793
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.9.0
+  date: 2019-11-04T17:11:55.605Z
+- commits:
     - subject: 'meta: add zubairlk as codeowner'
       hash: 7d95815a78721ae266d8341b816981b70ac9d3b9
       body: ''
