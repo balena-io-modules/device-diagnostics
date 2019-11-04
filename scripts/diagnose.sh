@@ -58,6 +58,7 @@ commands=(
 	'$ENG ps -a'
 	'$ENG stats --all --no-stream'
 	'$ENG system df'
+	'$ENG volume ls'
 	'systemctl status $ENG --no-pager'
 	'journalctl -n 200 --no-pager -a -u $ENG'
 	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
