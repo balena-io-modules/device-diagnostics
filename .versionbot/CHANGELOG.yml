@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'meta: remove imrehg as codeowner'
+      hash: 1b59dd04b43ccca835c50d2a47898c99743bce1f
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.9.1
+  date: 2019-11-06T16:06:49.015Z
+- commits:
     - subject: 'diagnostics: add ENG volume ls'
       hash: 3b8be1b420ce5a1813919532a0a0cf92685d3793
       body: ''
