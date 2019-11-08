@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'meta: add some scaffolding for open-sourcing'
+      hash: 716fe76d1a9a281943922c747c4fc438f918bdd3
+      body: ''
+      footer:
+        Connects-to: '#110'
+        connects-to: '#110'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.9.2
+  date: 2019-11-07T15:25:25.879Z
+- commits:
     - subject: 'meta: remove imrehg as codeowner'
       hash: 1b59dd04b43ccca835c50d2a47898c99743bce1f
       body: ''
