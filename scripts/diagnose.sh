@@ -60,6 +60,7 @@ filter_container_envs='jq "del(.[].Config.Env)"'
 commands=(
 	# BALENA specific commands
 	'echo === BALENA ==='
+	'curl --unix-socket /var/run/$ENG.sock http://./debug/pprof/goroutine?debug=2'
 	'$ENG --version'
 	'$ENG images'
 	'$ENG ps -a'
