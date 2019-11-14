@@ -56,6 +56,24 @@ function check_under_voltage(){
 	fi
 }
 
+function check_temperature(){
+	local -i temp
+	local -i therm_count=0
+	for i in /sys/class/thermal/thermal* ; do
+		if [ -e "$i/temp" ]; then
+			therm_count+=1
+			temp=$(cat "$i/temp")
+			if (( temp >= 80000 )); then
+				log_status "${BAD}" "${FUNCNAME[0]}" "Temperature above 80C detected ($i)"
+				return
+			fi
+		fi
+	done
+	if (( therm_count > 0 )); then
+		log_status "${GOOD}" "${FUNCNAME[0]}" "No abnormal temperature detected"
+	fi
+}
+
 function check_balenaOS()
 {
 	# test resinOS 1.x based on matches like the following:
@@ -236,6 +254,7 @@ function run_checks()
 	echo "$(check_balenaOS)" \
 	"$(check_under_voltage)" \
 	"$(check_memory)" \
+	"$(check_temperature)" \
 	"$(check_container_engine)" \
 	"$(check_supervisor)" \
 	"$(check_dns)" \
