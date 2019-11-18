@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'container-engine: properly check for aliveness of engine'
+      hash: 61b645a314de877d64ab0170b63a92195e730147
+      body: ''
+      footer:
+        Connects-to: '#151'
+        connects-to: '#151'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.9.3
+  date: 2019-11-15T16:51:24.466Z
+- commits:
     - subject: 'meta: add some scaffolding for open-sourcing'
       hash: 716fe76d1a9a281943922c747c4fc438f918bdd3
       body: ''
