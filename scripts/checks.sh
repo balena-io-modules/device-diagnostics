@@ -156,7 +156,7 @@ function check_diskspace()
 
 function check_container_engine()
 {
-	if (! pidof $ENG > /dev/null); then
+	if (! systemctl is-active $ENG > /dev/null); then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Container engine ${ENG} is NOT running"
 	else
 		local -i engine_restarts
