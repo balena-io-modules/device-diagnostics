@@ -97,4 +97,14 @@ Confirm that NTP is not blocked at the network level, and that any specified ups
 absolutely necessary, it is possible to temporarily sync the clock using HTTP headers (though this change will not
 persist across reboots).
 
+### check_temperature
+#### Summary
+If there are onboard temperature sensors, this check confirms that the temperature is below 80C (at which point
+throttling begins).
+
+#### Triage
+In order to triage, either reduce the load on the device or replace/reseat/upgrade any heatsinks that may be attached to
+the CPU directly. Additionally, adding other cooling mechanisms like fans or improving the location of the device can
+help address heat issues.
+
 #### DIAGNOSE_VERSION=4.9.4
