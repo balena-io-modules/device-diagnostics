@@ -62,10 +62,14 @@ function check_balenaOS()
 	# VERSION="1.24.0"
 	# PRETTY_NAME="Resin OS 1.24.0"
 	if grep -q -e '^VERSION="1.*$' -e '^PRETTY_NAME="Resin OS 1.*$' /etc/os-release; then
-		log_status "${BAD}" "${FUNCNAME[0]}" "resinOS 1.x is now completely deprecated"
+		log_status "${BAD}" "${FUNCNAME[0]}" "ResinOS 1.x is now completely deprecated"
 	else
 		# shellcheck disable=SC1091
 		source /etc/os-release
+		if [[ "${DEVICE_TYPE}" != "${SLUG}" ]]; then
+			log_status "${BAD}" "${FUNCNAME[0]}" "Custom balenaOS 2.x detected (custom device type)"
+			return
+		fi
 		local versions
 		versions=$(curl -qs --max-time 5 --retry 3 --retry-connrefused "${API_ENDPOINT}/device-types/v1/${SLUG}/images")
 		if ! echo "${versions}" | jq -e --arg v "${VERSION}.${VARIANT_ID}" '.versions | index($v)' > /dev/null; then
@@ -73,7 +77,7 @@ function check_balenaOS()
 			latest=$(echo "${versions}" | jq -r '.latest' | sed -e 's/\.prod$//;s/\.dev$//')
 			log_status "${BAD}" "${FUNCNAME[0]}" "balenaOS 2.x detected, but this version is not currently available in ${API_ENDPOINT} (latest version is ${latest})"
 		else
-			log_status "${GOOD}" "${FUNCNAME[0]}" "supported balenaOS 2.x detected"
+			log_status "${GOOD}" "${FUNCNAME[0]}" "Supported balenaOS 2.x detected"
 		fi
 	fi
 }
