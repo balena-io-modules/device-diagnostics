@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: add temperature > 80C check'
+      hash: d8682aaff9b28bee1fe8ccde4d5f819e57e10565
+      body: ''
+      footer:
+        Closes: '#143'
+        closes: '#143'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.10.0
+  date: 2019-11-19T15:47:39.421Z
+- commits:
     - subject: 'balenaOS: warn about a custom device type (custom OS)'
       hash: 8ad38bc398e499868cecea8cd0e12a04e2969ffc
       body: ''
