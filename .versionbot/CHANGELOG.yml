@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'balenaOS: warn about a custom device type (custom OS)'
+      hash: 8ad38bc398e499868cecea8cd0e12a04e2969ffc
+      body: ''
+      footer:
+        Connects-to: '#112'
+        connects-to: '#112'
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+        Change-type: patch
+        change-type: patch
+      author: Matthew McGinn
+  version: 4.9.4
+  date: 2019-11-19T14:39:39.431Z
+- commits:
     - subject: 'container-engine: properly check for aliveness of engine'
       hash: 61b645a314de877d64ab0170b63a92195e730147
       body: ''
