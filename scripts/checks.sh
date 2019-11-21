@@ -199,10 +199,10 @@ function check_supervisor()
 	if ! ($ENG ps | grep -q resin_supervisor) 2> /dev/null; then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Supervisor is NOT running"
 	else
-		if ! curl -qs --max-time 10 "localhost:48484/v1/healthy" > /dev/null; then
+		if ! curl -qs --max-time 10 "localhost:${LISTEN_PORT}/v1/healthy" > /dev/null; then
 			log_status "${BAD}" "${FUNCNAME[0]}" "Supervisor is running, but may be unhealthy"
 		else
-			log_status "${GOOD}" "${FUNCNAME[0]}" "Supervisor is running"
+			log_status "${GOOD}" "${FUNCNAME[0]}" "Supervisor is running & healthy"
 		fi
 	fi
 }
