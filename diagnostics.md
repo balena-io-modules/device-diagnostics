@@ -115,4 +115,4 @@ This check confirms that the host OS has not noted any failed boots & rollbacks.
 More information available [here](https://github.com/balena-os/meta-balena/blob/development/docs/rollbacks.md), contact
 support to investigate fully.
 
-#### DIAGNOSE_VERSION=4.10.1
+#### DIAGNOSE_VERSION=4.11.0

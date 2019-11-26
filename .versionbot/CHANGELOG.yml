@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'OS: add check for any failed boot/rollback breadcrumbs'
+      hash: f39cdb2b085783d817da511dc2cfc5d2de65ff5c
+      body: ''
+      footer:
+        Closes: '#140'
+        closes: '#140'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.11.0
+  date: 2019-11-26T18:29:23.046Z
+- commits:
     - subject: 'dmesg: add full timestamps to output'
       hash: 02c1ab8a9708d1c578967ef1a8810402246560d5
       body: ''
