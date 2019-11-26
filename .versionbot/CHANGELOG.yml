@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'supervisor: use LISTEN_PORT as sourced from config.json'
+      hash: 47f8f323d85120f14e588f69810f6a18a2169cad
+      body: ''
+      footer:
+        Connects-to: '#154'
+        connects-to: '#154'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.11.1
+  date: 2019-11-26T18:59:32.894Z
+- commits:
     - subject: 'OS: add check for any failed boot/rollback breadcrumbs'
       hash: f39cdb2b085783d817da511dc2cfc5d2de65ff5c
       body: ''
