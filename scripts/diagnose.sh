@@ -112,7 +112,7 @@ commands=(
 	'cat /mnt/data-disk/config.json | $filter_config_keys'  # legacy
 	'cat /var/log/messages' # legacy
 	'cat /var/log/provisioning-progress.log'
-	'dmesg'
+	'dmesg -T'
 	'find /mnt/data/resinhup/*log -mtime -30 | xargs tail -n 10 -v'
 	'journalctl --list-boots --no-pager'
 	'journalctl -n500 -a --no-pager'
