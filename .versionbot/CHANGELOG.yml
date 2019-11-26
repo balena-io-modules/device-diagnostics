@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'dmesg: add full timestamps to output'
+      hash: 02c1ab8a9708d1c578967ef1a8810402246560d5
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.10.1
+  date: 2019-11-26T18:16:53.369Z
+- commits:
     - subject: 'checks: add temperature > 80C check'
       hash: d8682aaff9b28bee1fe8ccde4d5f819e57e10565
       body: ''

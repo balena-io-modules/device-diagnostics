@@ -107,4 +107,4 @@ In order to triage, either reduce the load on the device or replace/reseat/upgra
 the CPU directly. Additionally, adding other cooling mechanisms like fans or improving the location of the device can
 help address heat issues.
 
-#### DIAGNOSE_VERSION=4.10.0
+#### DIAGNOSE_VERSION=4.10.1
