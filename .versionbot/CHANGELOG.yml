@@ -1,4 +1,20 @@
 - commits:
+    - subject: >-
+        check_memory: restore fallback behavior if a device type does not expose
+        MemAvailable
+      hash: b06c9acad7963f8313c7549a9669b87541d9f5b8
+      body: ''
+      footer:
+        Connects-to: '#159'
+        connects-to: '#159'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.11.2
+  date: 2019-12-10T16:37:03.172Z
+- commits:
     - subject: 'supervisor: use LISTEN_PORT as sourced from config.json'
       hash: 47f8f323d85120f14e588f69810f6a18a2169cad
       body: ''
