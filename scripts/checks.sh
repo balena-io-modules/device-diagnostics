@@ -35,8 +35,7 @@ function announce_version()
 
 function get_meminfo_field()
 {
-	# Thankfully this works even with busybox :)
-	grep "^$1:" /proc/meminfo | awk '{print $2}'
+	awk '/^'"$1"':/{print $2}' /proc/meminfo
 }
 
 function log_status()
@@ -104,15 +103,19 @@ function check_memory()
 {
 	local -i total_kb
 	local -i avail_kb
-	total_kb=$(get_meminfo_field MemTotal)
-	avail_kb=$(get_meminfo_field MemAvailable)
+	local avail_exists
 
-	if [ -z "${avail_kb}" ]; then
+	total_kb=$(get_meminfo_field MemTotal)
+	avail_exists=$(get_meminfo_field MemAvailable)
+
+	if [ -z "${avail_exists}" ]; then
 		# For kernels that don't support MemAvailable.
 		# Not as accurate, but a good approximation.
 		avail_kb=$(( $(get_meminfo_field MemFree) + \
 			$(get_meminfo_field Cached) + \
 			$(get_meminfo_field Buffers) ))
+	else
+		avail_kb="${avail_exists}"
 	fi
 
 	local -i percent_avail
