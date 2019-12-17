@@ -93,7 +93,7 @@ commands=(
 	'ifconfig'
 	'iptables -n -L'
 	'iptables -n -t nat -L'
-	'journalctl -n 200 --no-pager -a -u openvpn-resin'
+	'journalctl -n 200 --no-pager -a -u \"openvpn*\"'
 	'ls -l /mnt/boot/system-connections'
 	'netstat -ntl'
 	'nmcli --version'
