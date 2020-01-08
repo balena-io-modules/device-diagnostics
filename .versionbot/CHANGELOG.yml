@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'openvpn: properly collect logs from journald'
+      hash: 2660a6f33e5ca61ab422af39ff5fe3156b97de8f
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.11.3
+  date: 2019-12-17T22:41:52.745Z
+- commits:
     - subject: >-
         check_memory: restore fallback behavior if a device type does not expose
         MemAvailable
