@@ -120,6 +120,7 @@ commands=(
 	'ps'
 	'stat /var/lock/resinhup.lock'
 	'sysctl -a'
+	'systemctl list-units --failed --no-pager'
 	'top -b -n 1'
 
 	# SUPERVISOR specific commands
