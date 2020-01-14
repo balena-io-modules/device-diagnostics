@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'OS: list failed units in diagnostics'
+      hash: 34c609f39ecb1dff8e4b3751d1c1b28e46d8a428
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.11.4
+  date: 2020-01-10T17:10:23.435Z
+- commits:
     - subject: 'openvpn: properly collect logs from journald'
       hash: 2660a6f33e5ca61ab422af39ff5fe3156b97de8f
       body: ''
