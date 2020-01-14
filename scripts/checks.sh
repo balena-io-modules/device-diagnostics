@@ -18,7 +18,7 @@ ENG=rce
 TIMEOUT=10
 TIMEOUT_CMD="timeout --kill-after=$(( TIMEOUT * 2 )) ${TIMEOUT}"
 # docker's mount is also the core btrfs filesystem.
-mountpoint="/var/lib/$ENG"
+mountpoint="/var/lib/${ENG}"
 
 low_mem_threshold=10 #%
 low_disk_threshold=10 #%
@@ -181,14 +181,14 @@ function check_diskspace()
 
 function check_container_engine()
 {
-	if (! systemctl is-active $ENG > /dev/null); then
+	if (! systemctl is-active ${ENG} > /dev/null); then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Container engine ${ENG} is NOT running"
 	else
 		local -i engine_restarts
-		engine_restarts=$(systemctl show -p NRestarts $ENG | awk -F= '{print $2}')
+		engine_restarts=$(systemctl show -p NRestarts ${ENG} | awk -F= '{print $2}')
 		if (( engine_restarts > 0 )); then
 			local start_timestamp
-			start_timestamp=$(systemctl show -p ExecMainStartTimestamp $ENG | awk -F= '{print $2}')
+			start_timestamp=$(systemctl show -p ExecMainStartTimestamp ${ENG} | awk -F= '{print $2}')
 			log_status "${BAD}" "${FUNCNAME[0]}" "Container engine ${ENG} is up, but has ${engine_restarts} \
 unclean restarts and may be crashlooping (most recent start time: ${start_timestamp})"
 		else
@@ -199,7 +199,7 @@ unclean restarts and may be crashlooping (most recent start time: ${start_timest
 
 function check_supervisor()
 {
-	if ! ($ENG ps | grep -q resin_supervisor) 2> /dev/null; then
+	if ! (${TIMEOUT_CMD} ${ENG} ps | grep -q resin_supervisor) 2> /dev/null; then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Supervisor is NOT running"
 	else
 		if ! curl -qs --max-time 10 "localhost:${LISTEN_PORT}/v1/healthy" > /dev/null; then
