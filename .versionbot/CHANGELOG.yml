@@ -1,4 +1,17 @@
 - commits:
+    - subject: 'supervisor: time out engine call'
+      hash: 3d76456c06c5f7eab895d9689a99595c26e1f2c7
+      body: |
+        replace all $ENG with cleaner ${ENG}
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.11.5
+  date: 2020-01-14T15:00:01.146Z
+- commits:
     - subject: 'OS: list failed units in diagnostics'
       hash: 34c609f39ecb1dff8e4b3751d1c1b28e46d8a428
       body: ''
