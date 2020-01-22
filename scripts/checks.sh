@@ -345,7 +345,7 @@ function check_service_restarts()
 	local -i restarting_count=0
 	local -i service_count=0
 
-	mapfile -t services < <("${ENG}" ps -q 2> /dev/null)
+	mapfile -t services < <(${TIMEOUT_CMD} "${ENG}" ps -q 2> /dev/null)
 	if (( ${#services[@]} > 0 )); then
 		for service in "${services[@]}"; do
 			servicename_count=$(${TIMEOUT_CMD} ${ENG} inspect "${service}" -f '{{.Name}} {{.RestartCount}}')
