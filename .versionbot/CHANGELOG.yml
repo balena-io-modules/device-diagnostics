@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: add catchall networking check'
+      hash: c624ed50c889bac696a76c92d4d579f4dc165304
+      body: ''
+      footer:
+        Connects-to: '#129'
+        connects-to: '#129'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.12.0
+  date: 2020-01-31T16:11:33.052Z
+- commits:
     - subject: 'meta: add wrboyce as CODEOWNER'
       hash: b87b0f50005d80fb8a4b049bfc27f3210ff27f83
       body: ''
