@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'checks: ensure every call to ENG is timed out'
+      hash: bc45e056838220baed4bf38fb434b0c3e4e1a21d
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.12.2
+  date: 2020-01-31T16:41:33.528Z
+- commits:
     - subject: 'CI: disable node testing'
       hash: 7449d63b91070ff429a09035388e4129cd41931a
       body: ''
