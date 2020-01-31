@@ -5,6 +5,8 @@ DIAGNOSE_VERSION=4.12.5
 source /etc/profile
 # shellcheck disable=SC1091
 source /usr/sbin/resin-vars
+# shellcheck disable=SC1091
+source /etc/os-release
 
 # Determine whether we're using the older 'rce'-aliased docker or not.
 # stolen directly from the proxy:
@@ -128,6 +130,26 @@ function test_balena_registry()
 	${TIMEOUT_CMD} ${ENG} logout "${REGISTRY_ENDPOINT}" > /dev/null
 }
 
+function is_valid_check()
+{
+	local list_type="${1}"
+	shift
+	local found=1
+	read -r -a args <<< "$@"
+	for i in ${args[*]}
+	do
+		if [ "${i}" == "${SLUG}" ] ; then
+			found=0
+			break
+		fi
+	done
+	if [[ "${list_type}" == "WHITELIST" ]]; then
+		return "${found}"
+	elif [[ "${list_type}" == "BLACKLIST" ]]; then
+		return $(( 1 - found ))
+	fi
+}
+
 # Check functions
 function check_networking()
 {
@@ -156,28 +178,35 @@ function check_networking()
 }
 
 function check_under_voltage(){
-	if dmesg | grep -q "Under-voltage detected\!"; then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Under-voltage events detected, check/change the power supply ASAP"
-	else
-		log_status "${GOOD}" "${FUNCNAME[0]}" "No under-voltage events detected"
+	local SLUG_WHITELIST=('raspberrypi3-64' 'raspberrypi4-64' 'raspberry-pi' 'raspberry-pi2' 'raspberrypi3' 'fincm3')
+	if is_valid_check WHITELIST "${SLUG_WHITELIST[*]}"; then
+		if dmesg | grep -q "Under-voltage detected\!"; then
+			log_status "${BAD}" "${FUNCNAME[0]}" "Under-voltage events detected, check/change the power supply ASAP"
+		else
+			log_status "${GOOD}" "${FUNCNAME[0]}" "No under-voltage events detected"
+		fi
 	fi
 }
 
 function check_temperature(){
-	local -i temp
-	local -i therm_count=0
-	for i in /sys/class/thermal/thermal* ; do
-		if [ -e "$i/temp" ]; then
-			therm_count+=1
-			temp=$(cat "$i/temp")
-			if (( temp >= 80000 )); then
-				log_status "${BAD}" "${FUNCNAME[0]}" "Temperature above 80C detected ($i)"
-				return
+	# see https://github.com/balena-io/device-diagnostics/issues/168
+	local SLUG_BLACKLIST=('jetson-nano' 'jn30b-nano')
+	if is_valid_check BLACKLIST "${SLUG_BLACKLIST[*]}"; then
+		local -i temp
+		local -i therm_count=0
+		for i in /sys/class/thermal/thermal* ; do
+			if [ -e "$i/temp" ]; then
+				therm_count+=1
+				temp=$(cat "$i/temp")
+				if (( temp >= 80000 )); then
+					log_status "${BAD}" "${FUNCNAME[0]}" "Temperature above 80C detected ($i)"
+					return
+				fi
 			fi
+		done
+		if (( therm_count > 0 )); then
+			log_status "${GOOD}" "${FUNCNAME[0]}" "No abnormal temperature detected"
 		fi
-	done
-	if (( therm_count > 0 )); then
-		log_status "${GOOD}" "${FUNCNAME[0]}" "No abnormal temperature detected"
 	fi
 }
 
@@ -189,8 +218,6 @@ function check_balenaOS()
 	if grep -q -e '^VERSION="1.*$' -e '^PRETTY_NAME="Resin OS 1.*$' /etc/os-release; then
 		log_status "${BAD}" "${FUNCNAME[0]}" "ResinOS 1.x is now completely deprecated"
 	else
-		# shellcheck disable=SC1091
-		source /etc/os-release
 		if [[ "${DEVICE_TYPE}" != "${SLUG}" ]]; then
 			log_status "${BAD}" "${FUNCNAME[0]}" "Custom balenaOS 2.x detected (custom device type)"
 			return
