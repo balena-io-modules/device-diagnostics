@@ -144,4 +144,4 @@ points in the networking stack are behaving properly.
 Depending on what part of this check failed, there are various fixes and workarounds. Most however will involve a
 restrictive local network, or an unreliable connection.
 
-#### DIAGNOSE_VERSION=4.12.0
+#### DIAGNOSE_VERSION=4.12.1

@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'CI: disable node testing'
+      hash: 7449d63b91070ff429a09035388e4129cd41931a
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.12.1
+  date: 2020-01-31T16:30:54.946Z
+- commits:
     - subject: 'checks: add catchall networking check'
       hash: c624ed50c889bac696a76c92d4d579f4dc165304
       body: ''
