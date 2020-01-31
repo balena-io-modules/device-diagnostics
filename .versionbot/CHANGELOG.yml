@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'meta: add wrboyce as CODEOWNER'
+      hash: b87b0f50005d80fb8a4b049bfc27f3210ff27f83
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.11.6
+  date: 2020-01-31T15:59:23.931Z
+- commits:
     - subject: 'supervisor: time out engine call'
       hash: 3d76456c06c5f7eab895d9689a99595c26e1f2c7
       body: |
