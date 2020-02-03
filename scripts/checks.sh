@@ -65,14 +65,18 @@ function test_upstream_dns()
 
 function test_wifi()
 {
-	local -i wifi_active_interfaces
-	wifi_active_interfaces=$(nmcli --fields TYPE,STATE device status | grep -c '^wifi *connected')
-	if (( wifi_active_interfaces > 0 )); then
+	local wifi_active_interfaces
+	wifi_active_interfaces=$(${TIMEOUT_CMD} nmcli --terse --fields DEVICE,TYPE,STATE device status | \
+		awk -F: '/wifi:connected$/{print $1}')
+	if [[ -n ${wifi_active_interfaces} ]]; then
 		local -i wifi_strength
-		wifi_strength=$(nmcli -f IN-USE,SIGNAL device wifi list | awk '/^\*/{print $2}')
-		if (( wifi_strength < wifi_threshold )); then
-			echo "${FUNCNAME[0]}: Configured wifi network has a weak signal (<${wifi_threshold}%)"
-		fi
+		wifi_strengths=$(${TIMEOUT_CMD} nmcli --terse --fields DEVICE,ACTIVE,SIGNAL device wifi list)
+		for ifname in ${wifi_active_interfaces}; do
+			wifi_strength=$(echo "${wifi_strengths}" | awk -F: '/^'"${ifname}"':yes:/{print $3}')
+			if (( wifi_strength < wifi_threshold )) && (( wifi_strength > 0 )); then
+				echo "${FUNCNAME[0]}: Configured wifi interface ${ifname} has a weak signal (<${wifi_threshold}%)"
+			fi
+		done
 	fi
 }
 
@@ -240,10 +244,10 @@ function check_write_latency()
 	# from https://www.kernel.org/doc/Documentation/iostats.txt:
 	#
 	# Field  5 -- # of writes completed
-	#     This is the total number of writes completed successfully.
+	#	  This is the total number of writes completed successfully.
 	# Field  8 -- # of milliseconds spent writing
-	#     This is the total number of milliseconds spent by all writes (as
-	#     measured from __make_request() to end_that_request_last()).
+	#	  This is the total number of milliseconds spent by all writes (as
+	#	  measured from __make_request() to end_that_request_last()).
 	local write_output
 	write_output=$(awk -v limit=${slow_disk_write} '!/(loop|ram)/{if ($11/(($8>0)?$8:1)>limit){print $3": " $11/(($8>0)?$8:1) "ms / write, sample size " $8}}' /proc/diskstats)
 	if [ -n "${write_output}" ]; then
