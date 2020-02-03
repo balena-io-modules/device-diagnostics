@@ -10,13 +10,16 @@ everyone, while typically command output is used by support/subject matter exper
 ### check_balenaOS
 #### Summary
 This check confirms that the version of balenaOS is >2.x. There is further confirmation that the OS release has not since
-been yanked.
+been removed from production.
 
 As of May 1, 2019, `balenaOS 1.x` has been deprecated. These OSes are now unsupported. For more information, read our
 blog post: https://www.balena.io/blog/all-good-things-come-to-an-end-including-balenaos-1-x/.
 
 #### Triage
 Upgrade your device to the latest `balenaOS 2.x` (contact support if running 1.x).
+
+#### Depends on
+Parts of this check depend on fully functional networking stack (see [check_networking](#check_networking)).
 
 ### check_under_voltage
 #### Summary
@@ -25,15 +28,19 @@ Often seen on Raspberry Pi devices, these kernel messages indicate that the powe
 #### Triage
 Replace the power supply with a known-good supply (supplying at least 5V / >2.5A).
 
+#### Depends on
+
 ### check_memory
 #### Summary
 This check simply confirms that a given device is running at a given memory threshold (set to 90% at the moment).
-Oversubsribed memory can lead to OOM events (learn more about the out-of-memory killer
+Oversubscribed memory can lead to OOM events (learn more about the out-of-memory killer
 [here](https://www.kernel.org/doc/html/latest/admin-guide/mm/concepts.html#oom-killer)).
 
 #### Triage
 Using a tool like `top`, scan the process table for which process(es) are consuming the most memory (`%VSZ`) and check
 for memory leaks in those applications.
+
+#### Depends on
 
 ### check_container_engine
 #### Summary
@@ -44,6 +51,8 @@ of the balenaCloud pipeline.
 #### Triage
 It is best to let balena's support team take a look before restarting the container engine. At the very least, take a
 diagnostics snapshot before restarting anything.
+
+#### Depends on
 
 ### check_supervisor
 #### Summary
@@ -62,6 +71,8 @@ aforementioned instance should always be the first entry.
 #### Triage
 Contact support to investigate further.
 
+#### Depends on
+
 ### check_diskspace
 #### Summary
 This check simply confirms that a given device is running beneath a given disk utilization threshold (set to 90% at the moment).
@@ -72,6 +83,8 @@ Run `du -a /mnt/data/docker | sort -nr | head -10` in the hostOS shell to list t
 If the results indicate large files in `/mnt/data/docker/containers`, this result often indicates a leakage in an
 application container that can be cleaned up (runaway logs, too much local data, etc).
 
+#### Depends on
+
 ### check_write_latency
 #### Summary
 This check compares each partition's average write latency to a predefined target.
@@ -79,6 +92,8 @@ This check compares each partition's average write latency to a predefined targe
 #### Triage
 Slow disk writes could indicate faulty hardware or heavy disk I/O. It is best to investigate the hardware further for
 signs of degradation.
+
+#### Depends on
 
 ### check_service_restarts
 #### Summary
@@ -88,6 +103,9 @@ This check interrogates the engine to see if any services are restarting unclean
 Investigate the logs of whichever service(s) are restarting uncleanly; this issue could be a bug in the error handling
 or start-up of the aforementioned unhealthy services.
 
+#### Depends on
+This check depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
+
 ### check_timesync
 #### Summary
 This check confirms that the system clock is actively disciplined.
@@ -96,6 +114,9 @@ This check confirms that the system clock is actively disciplined.
 Confirm that NTP is not blocked at the network level, and that any specified upstream NTP servers are accessible. If
 absolutely necessary, it is possible to temporarily sync the clock using HTTP headers (though this change will not
 persist across reboots).
+
+#### Depends on
+This check depends on fully functional networking stack (see [check_networking](#check_networking)).
 
 ### check_temperature
 #### Summary
@@ -107,6 +128,8 @@ In order to triage, either reduce the load on the device or replace/reseat/upgra
 the CPU directly. Additionally, adding other cooling mechanisms like fans or improving the location of the device can
 help address heat issues.
 
+#### Depends on
+
 ### check_os_rollback
 #### Summary
 This check confirms that the host OS has not noted any failed boots & rollbacks.
@@ -114,6 +137,8 @@ This check confirms that the host OS has not noted any failed boots & rollbacks.
 #### Triage
 More information available [here](https://github.com/balena-os/meta-balena/blob/development/docs/rollbacks.md), contact
 support to investigate fully.
+
+#### Depends on
 
 ### check_networking
 #### Summary
@@ -123,22 +148,36 @@ More information on networking requirements can be found [here](https://www.bale
 ##### test_upstream_dns
 This test confirms that certain FQDNs are resolvable by each configured upstream DNS server.
 
+###### Depends on
+
 ##### test_wifi
 This test confirms that if a device is using wifi, the signal level is above a threshold.
 
+###### Depends on
+
 ##### test_ping
 This test confirms that packets are not dropped during a ICMP ping.
+
+###### Depends on
 
 ##### test_balena_api
 This test confirms that the device can communicate with the balenaCloud API. Commonly, firewalls or MiTM devices can
 cause SSL failures here.
 
+###### Depends on
+
 ##### test_dockerhub
 This test confirms that the device can communicate with the Docker Hub.
+
+###### Depends on
+This test depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
 
 ##### test_balena_registry
 This test is an end-to-end check that tries to authenticate with the balenaCloud registry, confirming that all other
 points in the networking stack are behaving properly.
+
+###### Depends on
+This test depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
 
 #### Triage
 Depending on what part of this check failed, there are various fixes and workarounds. Most however will involve a
