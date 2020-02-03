@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'docs: add Depends on section, mention some inter-check dependencies'
+      hash: c76e00e7aa2eb466fb42f8480bedf21f9aac41ac
+      body: ''
+      footer:
+        Connects-to: '#172'
+        connects-to: '#172'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.12.3
+  date: 2020-02-03T20:03:09.746Z
+- commits:
     - subject: 'checks: ensure every call to ENG is timed out'
       hash: bc45e056838220baed4bf38fb434b0c3e4e1a21d
       body: ''
