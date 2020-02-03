@@ -10,13 +10,16 @@ everyone, while typically command output is used by support/subject matter exper
 ### check_balenaOS
 #### Summary
 This check confirms that the version of balenaOS is >2.x. There is further confirmation that the OS release has not since
-been yanked.
+been removed from production.
 
 As of May 1, 2019, `balenaOS 1.x` has been deprecated. These OSes are now unsupported. For more information, read our
 blog post: https://www.balena.io/blog/all-good-things-come-to-an-end-including-balenaos-1-x/.
 
 #### Triage
 Upgrade your device to the latest `balenaOS 2.x` (contact support if running 1.x).
+
+#### Depends on
+Parts of this check depend on fully functional networking stack (see [check_networking](#check_networking)).
 
 ### check_under_voltage
 #### Summary
@@ -28,7 +31,7 @@ Replace the power supply with a known-good supply (supplying at least 5V / >2.5A
 ### check_memory
 #### Summary
 This check simply confirms that a given device is running at a given memory threshold (set to 90% at the moment).
-Oversubsribed memory can lead to OOM events (learn more about the out-of-memory killer
+Oversubscribed memory can lead to OOM events (learn more about the out-of-memory killer
 [here](https://www.kernel.org/doc/html/latest/admin-guide/mm/concepts.html#oom-killer)).
 
 #### Triage
@@ -88,6 +91,9 @@ This check interrogates the engine to see if any services are restarting unclean
 Investigate the logs of whichever service(s) are restarting uncleanly; this issue could be a bug in the error handling
 or start-up of the aforementioned unhealthy services.
 
+#### Depends on
+This check depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
+
 ### check_timesync
 #### Summary
 This check confirms that the system clock is actively disciplined.
@@ -96,6 +102,9 @@ This check confirms that the system clock is actively disciplined.
 Confirm that NTP is not blocked at the network level, and that any specified upstream NTP servers are accessible. If
 absolutely necessary, it is possible to temporarily sync the clock using HTTP headers (though this change will not
 persist across reboots).
+
+#### Depends on
+This check depends on a fully functional networking stack (see [check_networking](#check_networking)).
 
 ### check_temperature
 #### Summary
@@ -136,9 +145,15 @@ cause SSL failures here.
 ##### test_dockerhub
 This test confirms that the device can communicate with the Docker Hub.
 
+###### Depends on
+This test depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
+
 ##### test_balena_registry
 This test is an end-to-end check that tries to authenticate with the balenaCloud registry, confirming that all other
 points in the networking stack are behaving properly.
+
+###### Depends on
+This test depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
 
 #### Triage
 Depending on what part of this check failed, there are various fixes and workarounds. Most however will involve a
