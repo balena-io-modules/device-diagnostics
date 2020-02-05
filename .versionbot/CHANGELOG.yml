@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'networking: make test_wifi play nicer with multiple configured ints'
+      hash: 971523925c8c788f82ec3395fcd731b1acca0d48
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.12.4
+  date: 2020-02-04T14:16:18.668Z
+- commits:
     - subject: 'docs: add Depends on section, mention some inter-check dependencies'
       hash: c76e00e7aa2eb466fb42f8480bedf21f9aac41ac
       body: ''

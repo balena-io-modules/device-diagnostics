@@ -159,4 +159,4 @@ This test depends on the container engine being healthy (see [check_container_en
 Depending on what part of this check failed, there are various fixes and workarounds. Most however will involve a
 restrictive local network, or an unreliable connection.
 
-#### DIAGNOSE_VERSION=4.12.3
+#### DIAGNOSE_VERSION=4.12.4
