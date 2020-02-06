@@ -27,8 +27,9 @@ external_fqdn="0.resinio.pool.ntp.org"
 low_mem_threshold=10 #%
 low_disk_threshold=10 #%
 wifi_threshold=40 #%, very handwavy
-
+expansion_threshold=80 #%
 slow_disk_write=1000 #ms
+
 GOOD="true"
 BAD="false"
 
@@ -400,6 +401,19 @@ function check_service_restarts()
 	fi
 }
 
+function check_disk_expansion()
+{
+	local -i expansion_perc
+	# TODO: ceil is better, but floor is supported back to jq-1.5
+	expansion_perc=$(lsblk -Jb -o NAME,SIZE,RM | jq -S '.blockdevices[] | select(.rm == "0").size as $total |
+		[.children[].size | tonumber] | 100 * add / ($total | tonumber) | floor')
+	if (( expansion_perc < expansion_threshold )) ; then
+		log_status "${BAD}" "${FUNCNAME[0]}" "Block media device may not have fully expanded (${expansion_perc}% of available space)"
+	else
+		log_status "${GOOD}" "${FUNCNAME[0]}" "Block media device has fully expanded"
+	fi
+}
+
 function run_checks()
 {
 	# TODO remove echo | jq
@@ -412,6 +426,7 @@ function run_checks()
 	"$(check_dns)" \
 	"$(check_networking)" \
 	"$(check_diskspace)" \
+	"$(check_disk_expansion)" \
 	"$(check_write_latency)" \
 	"$(check_service_restarts)" \
 	"$(check_timesync)" \
