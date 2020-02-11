@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'meta: add note about source of 60'
+      hash: e0397edcf8ca4f123fa8a5cd3c2791c777649d02
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.12.5
+  date: 2020-02-11T14:30:35.000Z
+- commits:
     - subject: 'networking: make test_wifi play nicer with multiple configured ints'
       hash: 971523925c8c788f82ec3395fcd731b1acca0d48
       body: ''
