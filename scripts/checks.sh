@@ -106,6 +106,9 @@ function test_balena_api()
 	api_ret=$(${TIMEOUT_CMD} curl -qs "${API_ENDPOINT}/ping")
 	api_retval=$?
 	if [[ "${api_ret}" != "OK" ]]; then
+		# from man curl:
+		# EXIT CODES
+		# 60     Peer certificate cannot be authenticated with known CA certificates.
 		if [ "${api_retval}" -eq 60 ]; then
 			echo "${FUNCNAME[0]}: There may be a firewall blocking traffic to ${API_ENDPOINT} (SSL errors)"
 			return
