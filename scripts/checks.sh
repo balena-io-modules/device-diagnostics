@@ -19,7 +19,6 @@ ENG=rce
 
 TIMEOUT=10
 TIMEOUT_CMD="timeout --kill-after=$(( TIMEOUT * 2 )) ${TIMEOUT}"
-# docker's mount is also the core btrfs filesystem.
 mountpoint="/var/lib/${ENG}"
 
 external_fqdn="0.resinio.pool.ntp.org"
@@ -131,6 +130,47 @@ function test_balena_registry()
 	${TIMEOUT_CMD} ${ENG} logout "${REGISTRY_ENDPOINT}" > /dev/null
 }
 
+function test_write_latency()
+{
+	# from https://www.kernel.org/doc/Documentation/iostats.txt:
+	#
+	# Field  5 -- # of writes completed
+	#	  This is the total number of writes completed successfully.
+	# Field  8 -- # of milliseconds spent writing
+	#	  This is the total number of milliseconds spent by all writes (as
+	#	  measured from __make_request() to end_that_request_last()).
+	local write_output
+	write_output=$(awk -v limit=${slow_disk_write} '!/(loop|ram)/{if ($11/(($8>0)?$8:1)>limit){print $3": " $11/(($8>0)?$8:1) "ms / write, sample size " $8}}' /proc/diskstats)
+	if [ -n "${write_output}" ]; then
+		echo "${FUNCNAME[0]}" "Slow disk writes detected: ${write_output}"
+	fi
+}
+
+function test_diskspace()
+{
+	# Last +0 forces the field to a number, stripping the '%' on the end.
+	# Tested working on busybox.
+	local -i used_percent
+	local -i free_percent
+	used_percent=$(df ${mountpoint} | tail -n 1 | awk '{print $5+0}')
+	free_percent=$(( 100 - used_percent ))
+
+	if (( free_percent < low_disk_threshold )); then
+		echo "${FUNCNAME[0]}" "Low disk space: (df reports ${free_percent}% free)"
+	fi
+}
+
+function test_disk_expansion()
+{
+	local -i expansion_perc
+	# TODO: ceil is better, but floor is supported back to jq-1.5
+	expansion_perc=$(lsblk -Jb -o NAME,SIZE,RM | jq -S '.blockdevices[] | select(has("children")) | select(.rm == "0").size as $total |
+		[.children[].size | tonumber] | 100 * add / ($total | tonumber) | floor')
+	if (( expansion_perc < expansion_threshold )) ; then
+		echo "${FUNCNAME[0]}" "Block media device may not have fully expanded (${expansion_perc}% of available space)"
+	fi
+}
+
 function is_valid_check()
 {
 	local list_type="${1}"
@@ -151,17 +191,16 @@ function is_valid_check()
 	fi
 }
 
-# Check functions
-function check_networking()
+function run_tests()
 {
-	tests=(
-		   test_upstream_dns
-		   test_wifi
-		   test_ping
-		   test_balena_api
-		   test_dockerhub
-		   test_balena_registry
-	)
+	local original_check
+	local subject
+	original_check=${1}
+	subject=${original_check//check_/}
+	shift;
+
+	local tests=("$@")
+
 	local output
 	output=""
 	local cmd_out
@@ -172,10 +211,33 @@ function check_networking()
 		fi
 	done
 	if [ "$(echo "${output}" | wc -l)" -gt 1 ]; then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Some networking issues detected: ${output}"
+		log_status "${BAD}" "${original_check}" "Some ${subject} issues detected: ${output}"
 	else
-		log_status "${GOOD}" "${FUNCNAME[0]}" "No networking issues detected"
+		log_status "${GOOD}" "${original_check}" "No ${subject} issues detected"
 	fi
+}
+
+# Check functions
+function check_networking()
+{
+	local tests=(
+		test_upstream_dns
+		test_wifi
+		test_ping
+		test_balena_api
+		test_dockerhub
+		test_balena_registry
+	)
+	run_tests "${FUNCNAME[0]}" "${tests[@]}"
+}
+
+function check_localdisk()
+{
+	local tests=(
+		test_write_latency
+		test_diskspace
+	)
+	run_tests "${FUNCNAME[0]}" "${tests[@]}"
 }
 
 function check_under_voltage(){
@@ -270,23 +332,6 @@ function check_memory()
 	fi
 }
 
-function check_write_latency()
-{
-	# from https://www.kernel.org/doc/Documentation/iostats.txt:
-	#
-	# Field  5 -- # of writes completed
-	#	  This is the total number of writes completed successfully.
-	# Field  8 -- # of milliseconds spent writing
-	#	  This is the total number of milliseconds spent by all writes (as
-	#	  measured from __make_request() to end_that_request_last()).
-	local write_output
-	write_output=$(awk -v limit=${slow_disk_write} '!/(loop|ram)/{if ($11/(($8>0)?$8:1)>limit){print $3": " $11/(($8>0)?$8:1) "ms / write, sample size " $8}}' /proc/diskstats)
-	if [ -n "${write_output}" ]; then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Slow disk writes detected: ${write_output}"
-	else
-		log_status "${GOOD}" "${FUNCNAME[0]}" "No slow disk writes detected"
-	fi
-}
 function check_timesync()
 {
 	local is_time_synced
@@ -295,23 +340,6 @@ function check_timesync()
 		log_status "${BAD}" "${FUNCNAME[0]}" "Time is not being synchronized via NTP"
 	else
 		log_status "${GOOD}" "${FUNCNAME[0]}" "Time is synchronized"
-	fi
-}
-
-function check_diskspace()
-{
-
-	# Last +0 forces the field to a number, stripping the '%' on the end.
-	# Tested working on busybox.
-	local -i used_percent
-	local -i free_percent
-	used_percent=$(df ${mountpoint} | tail -n 1 | awk '{print $5+0}')
-	free_percent=$(( 100 - used_percent ))
-
-	if (( free_percent < low_disk_threshold )); then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Low disk space: (df reports ${free_percent}% free)"
-	else
-		log_status "${GOOD}" "${FUNCNAME[0]}" "df reports ${free_percent}% free"
 	fi
 }
 
@@ -396,19 +424,6 @@ function check_service_restarts()
 	fi
 }
 
-function check_disk_expansion()
-{
-	local -i expansion_perc
-	# TODO: ceil is better, but floor is supported back to jq-1.5
-	expansion_perc=$(lsblk -Jb -o NAME,SIZE,RM | jq -S '.blockdevices[] | select(has("children")) | select(.rm == "0").size as $total |
-		[.children[].size | tonumber] | 100 * add / ($total | tonumber) | floor')
-	if (( expansion_perc < expansion_threshold )) ; then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Block media device may not have fully expanded (${expansion_perc}% of available space)"
-	else
-		log_status "${GOOD}" "${FUNCNAME[0]}" "Block media device has fully expanded"
-	fi
-}
-
 function run_checks()
 {
 	# TODO remove echo | jq
@@ -419,9 +434,7 @@ function run_checks()
 	"$(check_container_engine)" \
 	"$(check_supervisor)" \
 	"$(check_networking)" \
-	"$(check_diskspace)" \
-	"$(check_disk_expansion)" \
-	"$(check_write_latency)" \
+	"$(check_localdisk)" \
 	"$(check_service_restarts)" \
 	"$(check_timesync)" \
 	"$(check_os_rollback)" \
