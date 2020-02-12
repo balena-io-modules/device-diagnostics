@@ -57,14 +57,6 @@ The supervisor depends on the container engine being healthy (see [check_contain
 It is best to let balena's support team take a look before restarting the supervisor. At the very least, take a
 diagnostics snapshot before restarting anything.
 
-### check_dns
-#### Summary
-Misconfigured DNS can often cause network issues if the local `dnsmasq` instance is bypassed. In the hostOS, the
-aforementioned instance should always be the first entry.
-
-#### Triage
-Contact support to investigate further.
-
 ### check_diskspace
 #### Summary
 This check simply confirms that a given device is running beneath a given disk utilization threshold (set to 90% at the moment).

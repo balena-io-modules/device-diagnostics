@@ -346,20 +346,6 @@ function check_supervisor()
 	fi
 }
 
-function check_dns()
-{
-	if [ ! -f /etc/resolv.conf ]; then
-		log_status "${BAD}" "${FUNCNAME[0]}" "/etc/resolv.conf missing"
-		return
-	fi
-
-	first_server=$(grep "^nameserver" /etc/resolv.conf | \
-				  head -n 1 | \
-				  awk '{print $2}')
-
-	log_status "${GOOD}" "${FUNCNAME[0]}" "First DNS server is ${first_server}"
-}
-
 function check_os_rollback()
 {
 	local health_path="/mnt/state/rollback-health-triggered"
@@ -428,7 +414,6 @@ function run_checks()
 	"$(check_temperature)" \
 	"$(check_container_engine)" \
 	"$(check_supervisor)" \
-	"$(check_dns)" \
 	"$(check_networking)" \
 	"$(check_diskspace)" \
 	"$(check_disk_expansion)" \
