@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: add white/blacklisting for device-specific checks'
+      hash: b609e498180f806ee5fab27f32fab1228a4abb11
+      body: ''
+      footer:
+        Connects-to: '#168'
+        connects-to: '#168'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.13.0
+  date: 2020-02-12T20:05:22.997Z
+- commits:
     - subject: 'meta: add note about source of 60'
       hash: e0397edcf8ca4f123fa8a5cd3c2791c777649d02
       body: ''
