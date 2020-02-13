@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: confirm root media has fully expanded'
+      hash: 5aca120238f2f26f9f0fef275d25872688e3dd1f
+      body: ''
+      footer:
+        Connects-to: '#162'
+        connects-to: '#162'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.14.0
+  date: 2020-02-12T20:15:12.376Z
+- commits:
     - subject: 'checks: add white/blacklisting for device-specific checks'
       hash: b609e498180f806ee5fab27f32fab1228a4abb11
       body: ''
