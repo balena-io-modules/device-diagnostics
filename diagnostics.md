@@ -159,4 +159,13 @@ This test depends on the container engine being healthy (see [check_container_en
 Depending on what part of this check failed, there are various fixes and workarounds. Most however will involve a
 restrictive local network, or an unreliable connection.
 
+### check_disk_expansion
+#### Summary
+This check confirms that the host OS properly and fully expanded the partition at boot (>80% of the total disk space has
+been allocated).
+
+#### Triage
+Failure to expand the root filesystem can indicate an unhealthy storage medium or potentially a failure during the
+provisioning process. It is best to contact support, replace the storage media and re-provision the device.
+
 #### DIAGNOSE_VERSION=4.13.0
