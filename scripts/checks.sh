@@ -364,14 +364,19 @@ function check_os_rollback()
 {
 	local health_path="/mnt/state/rollback-health-triggered"
 	local altboot_path="/mnt/state/rollback-altboot-triggered"
+	local rollback_detected=()
 	declare -a HEALTHCHECK_FILES=("${health_path}" "${altboot_path}")
 	for i in "${HEALTHCHECK_FILES[@]}"; do
 		if [ -f "${i}" ]; then
-			log_status "${BAD}" "${FUNCNAME[0]}" "OS rollbacks detected (${i} exists)"
+			rollback_detected+=("${i}")
 		fi
 	done
 
-	log_status "${GOOD}" "${FUNCNAME[0]}" "No OS rollbacks detected"
+	if (( ${#rollback_detected[@]} > 0 )); then
+	    log_status "${BAD}" "${FUNCNAME[0]}" "OS rollbacks detected (file(s): ${rollback_detected[*]})"
+	else
+	    log_status "${GOOD}" "${FUNCNAME[0]}" "No OS rollbacks detected"
+	fi
 }
 
 function check_service_restarts()
