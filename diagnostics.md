@@ -160,4 +160,4 @@ been allocated).
 Failure to expand the root filesystem can indicate an unhealthy storage medium or potentially a failure during the
 provisioning process. It is best to contact support, replace the storage media and re-provision the device.
 
-#### DIAGNOSE_VERSION=4.14.1
+#### DIAGNOSE_VERSION=4.14.2

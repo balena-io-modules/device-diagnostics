@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'checks: remove legacy check_dns in favor of revamped networking check'
+      hash: 62f4808acbe6d8b59f5ee496e07cb78874cf6b26
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.14.2
+  date: 2020-02-24T17:28:03.417Z
+- commits:
     - subject: 'os-rollbacks: properly detect either type of rollback'
       hash: e0ed442a337d30b7e2c7360d3241931b0dfe3bed
       body: ''
