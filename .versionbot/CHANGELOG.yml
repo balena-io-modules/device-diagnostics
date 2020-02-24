@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'os-rollbacks: properly detect either type of rollback'
+      hash: e0ed442a337d30b7e2c7360d3241931b0dfe3bed
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.14.1
+  date: 2020-02-13T21:57:41.386Z
+- commits:
     - subject: 'checks: confirm root media has fully expanded'
       hash: 5aca120238f2f26f9f0fef275d25872688e3dd1f
       body: ''
