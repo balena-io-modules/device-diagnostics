@@ -32,6 +32,8 @@ slow_disk_write=1000 #ms
 GOOD="true"
 BAD="false"
 
+mapfile -t USERVICES < <(${TIMEOUT_CMD} "${ENG}" ps --format "{{.Names}}" | awk '/(resin|balena)_supervisor/{next;}{print}' 2> /dev/null)
+
 # Helper functions
 function announce_version()
 {
@@ -364,6 +366,7 @@ unclean restarts and may be crashlooping (most recent start time: ${start_timest
 
 function check_supervisor()
 {
+	# TODO: grab healthcheck results here
 	local supervisor_version release_status api_version
 	local -i versions
 	supervisor_version=$(${TIMEOUT_CMD} ${ENG} ps -a --filter="name=(resin|balena).*supervisor" --format "{{.Image}}" | awk -F: '{print $2}')
@@ -415,9 +418,8 @@ function check_service_restarts()
 	local -i restarting_count=0
 	local -i service_count=0
 
-	mapfile -t services < <(${TIMEOUT_CMD} "${ENG}" ps -q 2> /dev/null)
-	if (( ${#services[@]} > 0 )); then
-		for service in "${services[@]}"; do
+	if (( ${#USERVICES[@]} > 0 )); then
+		for service in "${USERVICES[@]}"; do
 			if ! servicename_count=$(${TIMEOUT_CMD} ${ENG} inspect "${service}" -f '{{.Name}} {{.RestartCount}}'); then
 				timed_out+=("${service}")
 			else
@@ -432,7 +434,7 @@ function check_service_restarts()
 	fi
 	if (( restarting_count != 0 )); then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Some services are restarting unexpectedly: ${restarting[*]}"
-	elif (( "${service_count}" < "${#services[@]}" )); then
+	elif (( "${service_count}" < "${#USERVICES[@]}" )); then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Inspecting service(s) (${timed_out[*]}) has timed out, check data incomplete"
 	else
 		log_status "${GOOD}" "${FUNCNAME[0]}" "No services are restarting unexpectedly"
@@ -480,6 +482,29 @@ function check_image_corruption()
 	fi
 }
 
+function check_user_services()
+{
+	# TODO: might as well track restarts here as well (convert to aggregated check)
+	local checks_return="[]"
+	local out healthcheck_output inspect
+	if (( ${#USERVICES[@]} > 0 )); then
+		for service in "${USERVICES[@]}"; do
+			inspect=$(${TIMEOUT_CMD} "${ENG}" inspect "${service}")
+			healthcheck_output=$(echo "${inspect}" | jq -r '.[].State.Health')
+			if [[ -n "${healthcheck_output}" ]]; then
+				# artificially limited to 100 chars
+				# TODO: could probably be cleaned up
+				# TODO: if a service is failing, see how many times in a row (.FailingStreak)
+				out=$(echo "${healthcheck_output}" | jq -r '.Log[-1]|[.ExitCode,.Output[:100]]|"exit code: \(.[0]), output: \(.[1])"' | sed "s/\"/\'/g")
+				success=$(echo "${healthcheck_output}" | jq -r '.Status == "healthy"')
+				pretty_name=$(echo "${inspect}" | jq -r '.[].Config.Labels."io.balena.service-name"')
+				checks_return=$(echo "[{\"name\": \"${pretty_name}\", \"status\":\"${out}\",\"success\": ${success}}]" "${checks_return}" | jq -s 'add')
+			fi
+		done
+	fi
+	echo "${checks_return}"
+}
+
 function run_checks()
 {
 	# TODO remove echo | jq
@@ -495,6 +520,7 @@ function run_checks()
 	"$(check_timesync)" \
 	"$(check_os_rollback)" \
 	"$(check_image_corruption)" \
+	"$(check_user_services)" \
 	| jq -s 'add | {checks:.}'
 }
 
