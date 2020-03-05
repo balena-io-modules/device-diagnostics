@@ -2,7 +2,9 @@
 
 ## Usage
 The diagnostics commands are triggered remotely via balenaCloud. Navigate to
-`https://dashboard.balena-cloud.com/devices/{{UUID}}/diagnostics` to run and view the output.
+`https://dashboard.balena-cloud.com/devices/{{UUID}}/diagnostics` to run and view the output.  Only
+[multicontainer-capable devices (balenaOS v2.12.0 or higher)](https://www.balena.io/docs/learn/develop/multicontainer/)
+are fully supported and tested (see https://github.com/balena-io/device-diagnostics/issues/126 for more discussion).
 
 ## Hacking
 
