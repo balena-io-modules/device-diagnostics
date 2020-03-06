@@ -1,4 +1,29 @@
 - commits:
+    - subject: 'fs-expansion: only check devices with child partitions'
+      hash: f297d24ffa57957598ea5e05919951f56f77ad13
+      body: ''
+      footer:
+        Connects-to: '#184'
+        connects-to: '#184'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+    - subject: 'meta: add note with supported device OS versions'
+      hash: 54d77ea2f990c45770669a412d76f6357561540d
+      body: ''
+      footer:
+        Connects-to: '#184'
+        connects-to: '#184'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.14.3
+  date: 2020-03-05T14:42:36.101Z
+- commits:
     - subject: 'checks: remove legacy check_dns in favor of revamped networking check'
       hash: 62f4808acbe6d8b59f5ee496e07cb78874cf6b26
       body: ''
