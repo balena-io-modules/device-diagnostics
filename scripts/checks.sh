@@ -364,13 +364,27 @@ unclean restarts and may be crashlooping (most recent start time: ${start_timest
 
 function check_supervisor()
 {
+	local supervisor_version release_status api_version
+	local -i versions
+	supervisor_version=$(${TIMEOUT_CMD} ${ENG} ps -a --filter="name=(resin|balena).*supervisor" --format "{{.Image}}" | awk -F: '{print $2}')
+
+	versions=$(curl -qs --max-time 5 --retry 3 --retry-connrefused \
+		"${API_ENDPOINT}/v5/supervisor_release?\$filter=device_type%20eq%20'${DEVICE_TYPE}'%20and%20supervisor_version%20eq%20'${supervisor_version}'" | jq '. | length')
+	api_version=$(curl -qs --max-time 5 --retry 3 --retry-connrefused \
+		"${API_ENDPOINT}/v5/device?\$filter=uuid%20eq%20'${UUID}'" -H "Authorization: Bearer ${DEVICE_API_KEY}" | jq -r '[.d[0].supervisor_version] | "v\(.[0])"')
+	if (( versions == 0 )); then
+		release_status=" (unreleased Supervisor detected!)"
+	fi
+	if [[ "${api_version}" != "${supervisor_version}" ]]; then
+		release_status+=" (unmatched local and remote Supervisor versions)"
+	fi
 	if ! (${TIMEOUT_CMD} ${ENG} ps | grep -q resin_supervisor) 2> /dev/null; then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Supervisor is NOT running"
+		log_status "${BAD}" "${FUNCNAME[0]}" "Supervisor is NOT running${release_status}"
 	else
 		if ! curl -qs --max-time 10 "localhost:${LISTEN_PORT}/v1/healthy" > /dev/null; then
-			log_status "${BAD}" "${FUNCNAME[0]}" "Supervisor is running, but may be unhealthy"
+			log_status "${BAD}" "${FUNCNAME[0]}" "Supervisor is running, but may be unhealthy${release_status}"
 		else
-			log_status "${GOOD}" "${FUNCNAME[0]}" "Supervisor is running & healthy"
+			log_status "${GOOD}" "${FUNCNAME[0]}" "Supervisor is running & healthy${release_status}"
 		fi
 	fi
 }
