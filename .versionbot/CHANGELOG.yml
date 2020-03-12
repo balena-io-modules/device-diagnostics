@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'meta: update codeowners to include gareth for docs'
+      hash: 4e4a8c0171692d1c41fb419c470280affd4eba18
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.14.4
+  date: 2020-03-12T19:08:23.393Z
+- commits:
     - subject: 'fs-expansion: only check devices with child partitions'
       hash: f297d24ffa57957598ea5e05919951f56f77ad13
       body: ''
