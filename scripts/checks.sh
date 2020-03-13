@@ -368,25 +368,29 @@ function check_os_rollback()
 function check_service_restarts()
 {
 	local restarting=()
+	local timed_out=()
 	local -i restarting_count=0
 	local -i service_count=0
 
 	mapfile -t services < <(${TIMEOUT_CMD} "${ENG}" ps -q 2> /dev/null)
 	if (( ${#services[@]} > 0 )); then
 		for service in "${services[@]}"; do
-			servicename_count=$(${TIMEOUT_CMD} ${ENG} inspect "${service}" -f '{{.Name}} {{.RestartCount}}')
-			service_count+=1
-			if [[ "$(echo "${servicename_count}" | awk '{print $2}')" -ne 0 ]]; then
-				label="$(echo "${servicename_count}" | awk '{print "(service: "$1" restart count: "$2")"}')"
-				restarting+=("${label}")
-				restarting_count+=1
+			if ! servicename_count=$(${TIMEOUT_CMD} ${ENG} inspect "${service}" -f '{{.Name}} {{.RestartCount}}'); then
+				timed_out+=("${service}")
+			else
+				service_count+=1
+				if [[ "$(echo "${servicename_count}" | awk '{print $2}')" -ne 0 ]]; then
+					label="$(echo "${servicename_count}" | awk '{print "(service: "$1" restart count: "$2")"}')"
+					restarting+=("${label}")
+					restarting_count+=1
+				fi
 			fi
 		done
 	fi
 	if (( "${restarting_count}" != 0 )); then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Some services are restarting unexpectedly: ${restarting[*]}"
 	elif (( "${service_count}" < "${#services[@]}" )); then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Inspecting service ${service} has timed out, check data incomplete"
+		log_status "${BAD}" "${FUNCNAME[0]}" "Inspecting service(s) (${timed_out[*]}) has timed out, check data incomplete"
 	else
 		log_status "${GOOD}" "${FUNCNAME[0]}" "No services are restarting unexpectedly"
 	fi
