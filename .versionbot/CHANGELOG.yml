@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'service-restarts: properly count + track timed out service inspections'
+      hash: adf580ee8378b22d3d8e4c40e5a550c13246c4a0
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.14.5
+  date: 2020-03-13T13:36:23.082Z
+- commits:
     - subject: 'meta: update codeowners to include gareth for docs'
       hash: 4e4a8c0171692d1c41fb419c470280affd4eba18
       body: ''
