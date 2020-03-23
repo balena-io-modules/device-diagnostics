@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'check_localdisk: add back mistakenly dropped expansion test'
+      hash: 2f244df71cbbc6c21cacdf5e60be1b1a05e6e280
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.14.7
+  date: 2020-03-23T13:41:32.738Z
+- commits:
     - subject: >-
         check_localdisk: combine a few related tests into holistic local disk
         check
