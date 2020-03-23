@@ -236,6 +236,7 @@ function check_localdisk()
 	local tests=(
 		test_write_latency
 		test_diskspace
+		test_disk_expansion
 	)
 	run_tests "${FUNCNAME[0]}" "${tests[@]}"
 }
