@@ -57,23 +57,36 @@ The supervisor depends on the container engine being healthy (see [check_contain
 It is best to let balena's support team take a look before restarting the supervisor. At the very least, take a
 diagnostics snapshot before restarting anything.
 
-### check_diskspace
+### check_localdisk
 #### Summary
-This check simply confirms that a given device is running beneath a given disk utilization threshold (set to 90% at the moment).
+This check combines a few metrics about the local storage media and reports back any potential issues.
+
+#### test_disk_space
+##### Summary
+This test simply confirms that a given device is running beneath a given disk utilization threshold (set to 90% at the moment).
 If a local disk fills up, there are often knock-on issues in the supervisor and application containers.
 
-#### Triage
+##### Triage
 Run `du -a /mnt/data/docker | sort -nr | head -10` in the hostOS shell to list the ten largest files and directories.
 If the results indicate large files in `/mnt/data/docker/containers`, this result often indicates a leakage in an
 application container that can be cleaned up (runaway logs, too much local data, etc).
 
-### check_write_latency
-#### Summary
-This check compares each partition's average write latency to a predefined target.
+#### test_write_latency
+##### Summary
+This test compares each partition's average write latency to a predefined target.
 
-#### Triage
+##### Triage
 Slow disk writes could indicate faulty hardware or heavy disk I/O. It is best to investigate the hardware further for
 signs of degradation.
+
+#### test_disk_expansion
+##### Summary
+This test confirms that the host OS properly and fully expanded the partition at boot (>80% of the total disk space has
+been allocated).
+
+##### Triage
+Failure to expand the root filesystem can indicate an unhealthy storage medium or potentially a failure during the
+provisioning process. It is best to contact support, replace the storage media and re-provision the device.
 
 ### check_service_restarts
 #### Summary
@@ -150,14 +163,5 @@ This test depends on the container engine being healthy (see [check_container_en
 #### Triage
 Depending on what part of this check failed, there are various fixes and workarounds. Most however will involve a
 restrictive local network, or an unreliable connection.
-
-### check_disk_expansion
-#### Summary
-This check confirms that the host OS properly and fully expanded the partition at boot (>80% of the total disk space has
-been allocated).
-
-#### Triage
-Failure to expand the root filesystem can indicate an unhealthy storage medium or potentially a failure during the
-provisioning process. It is best to contact support, replace the storage media and re-provision the device.
 
 #### DIAGNOSE_VERSION=4.14.5
