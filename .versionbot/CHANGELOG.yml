@@ -1,4 +1,18 @@
 - commits:
+    - subject: >-
+        check_localdisk: combine a few related tests into holistic local disk
+        check
+      hash: 814fc6466bf3a63146561233288ed7da7075c5fa
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.14.6
+  date: 2020-03-20T18:06:22.667Z
+- commits:
     - subject: 'service-restarts: properly count + track timed out service inspections'
       hash: adf580ee8378b22d3d8e4c40e5a550c13246c4a0
       body: ''
