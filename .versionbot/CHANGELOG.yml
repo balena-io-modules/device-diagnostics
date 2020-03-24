@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: confirm running supervisor is a released edition and matches API'
+      hash: 4d33f6227ffaece920fbff36800f879378118ba0
+      body: ''
+      footer:
+        Connects-to: '#118'
+        connects-to: '#118'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.14.8
+  date: 2020-03-24T13:56:33.528Z
+- commits:
     - subject: 'check_localdisk: add back mistakenly dropped expansion test'
       hash: 2f244df71cbbc6c21cacdf5e60be1b1a05e6e280
       body: ''
