@@ -50,8 +50,10 @@ diagnostics snapshot before restarting anything.
 
 ### check_supervisor
 #### Summary
-This check confirms the supervisor is up and healthy. The supervisor is an integral part of the balenaCloud pipeline.
-The supervisor depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
+This check confirms the Supervisor is up and healthy. The Supervisor is an integral part of the balenaCloud pipeline.
+The Supervisor depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
+There is also a check to confirm the running Supervisor is a released version, and that the Supervisor is running the
+intended release from the API.
 
 #### Triage
 It is best to let balena's support team take a look before restarting the supervisor. At the very least, take a
