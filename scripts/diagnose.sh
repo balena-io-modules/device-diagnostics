@@ -60,8 +60,8 @@ commands=(
 	'$ENG system df'
 	'$ENG volume ls'
 	'systemctl status $ENG --no-pager'
-	'journalctl -n 200 --no-pager -a -u $ENG'
-	'journalctl -at balenad --no-pager'
+	'journalctl --no-pager --no-hostname -n 200 -a -u $ENG'
+	'journalctl --no-pager --no-hostname -at balenad'
 	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
 
 	# HARDWARE specific commands
@@ -94,7 +94,7 @@ commands=(
 	'ifconfig'
 	'iptables -n -L'
 	'iptables -n -t nat -L'
-	'journalctl -n 200 --no-pager -a -u \"openvpn*\"'
+	'journalctl --no-pager --no-hostname -n 200 -a -u \"openvpn*\"'
 	'ls -l /mnt/boot/system-connections'
 	'netstat -ntl'
 	'nmcli --version'
@@ -115,8 +115,8 @@ commands=(
 	'cat /var/log/provisioning-progress.log'
 	'dmesg -T'
 	'find /mnt/data/resinhup/*log -mtime -30 | xargs tail -n 10 -v'
-	'journalctl --list-boots --no-pager'
-	'journalctl -n500 -a --no-pager'
+	'journalctl --no-pager --list-boots'
+	'journalctl --no-pager --no-hostname -n500 -a'
 	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
 	'ps'
 	'stat /var/lock/resinhup.lock'
@@ -129,7 +129,7 @@ commands=(
 	'$ENG exec resin_supervisor cat /etc/resolv.conf'
 	'$ENG logs resin_supervisor'
 	'curl --max-time 5 localhost:'"${LISTEN_PORT}"'/v1/healthy'
-	'journalctl -n 200 --no-pager -a -u resin-supervisor'
+	'journalctl --no-pager --no-hostname -n 200 -a -u resin-supervisor'
 	'systemctl status resin-supervisor --no-pager'
 	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
 
