@@ -61,6 +61,7 @@ commands=(
 	'$ENG volume ls'
 	'systemctl status $ENG --no-pager'
 	'journalctl -n 200 --no-pager -a -u $ENG'
+	'journalctl -at balenad --no-pager'
 	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
 
 	# HARDWARE specific commands
