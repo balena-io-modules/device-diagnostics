@@ -117,6 +117,7 @@ commands=(
 	'find /mnt/data/resinhup/*log -mtime -30 | xargs tail -n 10 -v'
 	'journalctl --no-pager --list-boots'
 	'journalctl --no-pager --no-hostname -n500 -a'
+	'journalctl --no-pager --no-hostname -pwarning -a'
 	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
 	'ps'
 	'stat /var/lock/resinhup.lock'
