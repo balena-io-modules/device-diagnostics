@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'container-image-corruption: Add container image corruption checks'
+      hash: 369019571ffc157edd859e5f55a38c0bad2cb96b
+      body: ''
+      footer:
+        Fixes: 'https://github.com/balena-io/device-diagnostics/issues/44'
+        fixes: 'https://github.com/balena-io/device-diagnostics/issues/44'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Kostas Lekkas
+  version: 4.15.0
+  date: 2020-04-03T13:34:23.257Z
+- commits:
     - subject: 'diagnose: add engine journal specifically (omitting user apps)'
       hash: 3ee288181007bccfab1fbba9c4765c081dcd2cd3
       body: ''
