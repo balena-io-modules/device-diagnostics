@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'checks: fix up math comparison'
+      hash: 5b723eebe95db198f745a16cc8b05dd3e9f3dfa0
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.15.1
+  date: 2020-04-10T21:01:32.459Z
+- commits:
     - subject: 'container-image-corruption: Add container image corruption checks'
       hash: 369019571ffc157edd859e5f55a38c0bad2cb96b
       body: ''
