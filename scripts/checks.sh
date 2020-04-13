@@ -430,7 +430,7 @@ function check_service_restarts()
 			fi
 		done
 	fi
-	if (( "${restarting_count}" != 0 )); then
+	if (( restarting_count != 0 )); then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Some services are restarting unexpectedly: ${restarting[*]}"
 	elif (( "${service_count}" < "${#services[@]}" )); then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Inspecting service(s) (${timed_out[*]}) has timed out, check data incomplete"
@@ -444,7 +444,8 @@ function check_image_corruption()
 	local images output result="${GOOD}"
 	local corrupted=()
 	local timeout=()
-	local -i corrupted_count timeout_count
+	local -i corrupted_count
+	local -i timeout_count
 	# TODO: this command is filtering out any images with a size <1Kb (for delta-based images)
 	images=$(${TIMEOUT_CMD} ${ENG} image ls --format "{{.ID}} {{.Size}}" | awk '/[0-9]+B/{next;}{print $1}' | sort -u)
 
@@ -464,11 +465,11 @@ function check_image_corruption()
 				fi
 			fi
 		done
-		if (( "${corrupted_count}" != 0 )); then
+		if (( corrupted_count != 0 )); then
 			output+="Some images may be corrupted: ${corrupted[*]}\n"
 			result="${BAD}"
 		fi
-		if (( "${timeout_count}" != 0 )); then
+		if (( timeout_count != 0 )); then
 			output+="Saving images timed out, check data incomplete: ${timeout[*]}\n"
 			result="${BAD}"
 		fi
