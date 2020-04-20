@@ -460,9 +460,9 @@ function check_image_corruption()
 		do
 			# TODO: the timeout here is probably too short to be effective in most cases, but let's gather
 			# data and change if necessary
-			if ! ${TIMEOUT_CMD} ${ENG} save "${i}" > /dev/null ; then
+			if ! ${TIMEOUT_CMD} ${ENG} save "${i}" > /dev/null 2>&1; then
 				# this retval indicates a timeout
-				if (( $? = 124 )); then
+				if [[ "$?" -eq 124 ]]; then
 					timeout_count+=1
 					timeout+=("${i}")
 				else
