@@ -175,4 +175,4 @@ collected as-is and truncated to 100 characters.
 #### Triage
 These checks are wholly limited in scope to user services and should be triaged by the application developer.
 
-#### DIAGNOSE_VERSION=4.15.1
+#### DIAGNOSE_VERSION=4.16.0

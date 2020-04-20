@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: add support for user service health checking'
+      hash: 8b3b4fbb1f7d66b4cce962e53bf09008678e44bb
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/157'
+        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/157'
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.16.0
+  date: 2020-04-15T11:26:35.298Z
+- commits:
     - subject: 'checks: fix up math comparison'
       hash: 5b723eebe95db198f745a16cc8b05dd3e9f3dfa0
       body: ''
