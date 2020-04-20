@@ -166,4 +166,13 @@ This test depends on the container engine being healthy (see [check_container_en
 Depending on what part of this check failed, there are various fixes and workarounds. Most however will involve a
 restrictive local network, or an unreliable connection.
 
+### check_user_services
+#### Summary
+This check allows users to provide their own health checks using the [HEALTHCHECK
+directive](https://docs.docker.com/engine/reference/builder/#healthcheck) defined in the Dockerfile. The output will be
+collected as-is and truncated to 100 characters.
+
+#### Triage
+These checks are wholly limited in scope to user services and should be triaged by the application developer.
+
 #### DIAGNOSE_VERSION=4.15.1
