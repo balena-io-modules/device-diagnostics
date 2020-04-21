@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: prefix user service checks appropriately'
+      hash: 8183c77d7121fff11f850f8b7147b45f564aa346
+      body: ''
+      footer:
+        Connects-to: '#157'
+        connects-to: '#157'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.16.1
+  date: 2020-04-21T12:39:08.399Z
+- commits:
     - subject: 'checks: add support for user service health checking'
       hash: 8b3b4fbb1f7d66b4cce962e53bf09008678e44bb
       body: ''
