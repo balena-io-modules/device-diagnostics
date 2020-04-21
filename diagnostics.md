@@ -168,9 +168,10 @@ restrictive local network, or an unreliable connection.
 
 ### check_user_services
 #### Summary
-This check allows users to provide their own health checks using the [HEALTHCHECK
-directive](https://docs.docker.com/engine/reference/builder/#healthcheck) defined in the Dockerfile. The output will be
-collected as-is and truncated to 100 characters.
+Any checks with names beginning with `service_` come from user applications. These checks allow users to provide their
+own health checks using the [HEALTHCHECK directive](https://docs.docker.com/engine/reference/builder/#healthcheck)
+defined in the Dockerfile. Any healthcheck output will be collected as-is, truncated to 100 characters, and shown as
+output along with the exit code of the healthcheck.
 
 #### Triage
 These checks are wholly limited in scope to user services and should be triaged by the application developer.

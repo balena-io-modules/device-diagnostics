@@ -498,7 +498,7 @@ function check_user_services()
 				out=$(echo "${healthcheck_output}" | jq -r '.Log[-1]|[.ExitCode,.Output[:100]]|"exit code: \(.[0]), output: \(.[1])"' | sed "s/\"/\'/g")
 				success=$(echo "${healthcheck_output}" | jq -r '.Status == "healthy"')
 				pretty_name=$(echo "${inspect}" | jq -r '.[].Config.Labels."io.balena.service-name"')
-				checks_return=$(echo "[{\"name\": \"${pretty_name}\", \"status\":\"${out}\",\"success\": ${success}}]" "${checks_return}" | jq -s 'add')
+				checks_return=$(echo "[{\"name\": \"service_${pretty_name}\", \"status\":\"${out}\",\"success\": ${success}}]" "${checks_return}" | jq -s 'add')
 			fi
 		done
 	fi
