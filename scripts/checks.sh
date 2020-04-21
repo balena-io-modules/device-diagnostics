@@ -497,7 +497,7 @@ function check_user_services()
 	if (( ${#USERVICES[@]} > 0 )); then
 		for service in "${USERVICES[@]}"; do
 			inspect=$(${TIMEOUT_CMD} "${ENG}" inspect "${service}")
-			healthcheck_output=$(echo "${inspect}" | jq -r '.[].State.Health')
+			healthcheck_output=$(echo "${inspect}" | jq -r '.[].State.Health | select(. != null)')
 			if [[ -n "${healthcheck_output}" ]]; then
 				# artificially limited to 100 chars
 				# TODO: could probably be cleaned up
