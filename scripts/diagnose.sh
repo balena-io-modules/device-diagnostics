@@ -6,6 +6,10 @@ source /etc/profile
 # shellcheck disable=SC1091
 source /usr/sbin/resin-vars
 
+# workaround for self-signed certs, waiting for https://github.com/balena-os/meta-balena/issues/1398
+TMPCRT=$(mktemp)
+echo "${BALENA_ROOT_CA}" | base64 -d > "${TMPCRT}"
+
 # Determine whether we're using the older 'rce'-aliased docker or not.
 # stolen directly from the proxy:
 # (https://github.com/balena-io/resin-proxy/blob/master/src/common/host-scripts.ts#L28)
@@ -89,7 +93,7 @@ commands=(
 	'cat /proc/net/dev'
 	'cat /proc/net/snmp'
 	'cat /proc/net/udp'
-	'curl $API_ENDPOINT/ping'
+	'CURL_CA_BUNDLE=${TMPCRT} curl $API_ENDPOINT/ping'
 	'curl https://www.google.co.uk'
 	'ifconfig'
 	'iptables -n -L'
@@ -184,5 +188,6 @@ function run_commands()
 announce_version
 run_commands
 
+rm -f "${TMPCRT}" > /dev/null 2>&1
 # Don't return a spurious error code.
 exit
