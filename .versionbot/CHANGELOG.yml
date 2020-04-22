@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'networking: reuse root CA for permitted MiTM'
+      hash: a53a80703516032fcb80326da34499e7fff19ff8
+      body: ''
+      footer:
+        Connects-to: 'https://github.com/balena-os/meta-balena/issues/1398'
+        connects-to: 'https://github.com/balena-os/meta-balena/issues/1398'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.0
+  date: 2020-04-22T17:42:49.012Z
+- commits:
     - subject: 'checks: prefix user service checks appropriately'
       hash: 8183c77d7121fff11f850f8b7147b45f564aa346
       body: ''
