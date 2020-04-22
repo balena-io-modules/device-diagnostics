@@ -23,6 +23,10 @@ mountpoint="/var/lib/${ENG}"
 
 external_fqdn="0.resinio.pool.ntp.org"
 
+# workaround for self-signed certs, waiting for https://github.com/balena-os/meta-balena/issues/1398
+TMPCRT=$(mktemp)
+echo "${BALENA_ROOT_CA}" | base64 -d > "${TMPCRT}"
+
 low_mem_threshold=10 #%
 low_disk_threshold=10 #%
 wifi_threshold=40 #%, very handwavy
@@ -107,7 +111,7 @@ function test_balena_api()
 	# can we reach the API?
 	local api_ret
 	local -i api_retval
-	api_ret=$(${TIMEOUT_CMD} curl -qs "${API_ENDPOINT}/ping")
+	api_ret=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "${API_ENDPOINT}/ping")
 	api_retval=$?
 	if [[ "${api_ret}" != "OK" ]]; then
 		# from man curl:
@@ -525,3 +529,4 @@ function run_checks()
 }
 
 jq --argjson a1 "$(announce_version)" --argjson a2 "$(run_checks)" -cn '$a1 + $a2'
+rm -f "${TMPCRT}" > /dev/null 2>&1
