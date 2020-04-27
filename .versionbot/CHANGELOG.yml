@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'meta: add saintaardvark as CODEOWNER'
+      hash: 7c340f4860c6dc994beec9515c7285c6f2c12444
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.1
+  date: 2020-04-27T12:51:10.913Z
+- commits:
     - subject: 'networking: reuse root CA for permitted MiTM'
       hash: a53a80703516032fcb80326da34499e7fff19ff8
       body: ''
