@@ -26,6 +26,7 @@ external_fqdn="0.resinio.pool.ntp.org"
 # workaround for self-signed certs, waiting for https://github.com/balena-os/meta-balena/issues/1398
 TMPCRT=$(mktemp)
 echo "${BALENA_ROOT_CA}" | base64 -d > "${TMPCRT}"
+cat /etc/ssl/certs/ca-certificates.crt >> "${TMPCRT}"
 
 low_mem_threshold=10 #%
 low_disk_threshold=10 #%
@@ -293,7 +294,7 @@ function check_balenaOS()
 			return
 		fi
 		local versions
-		versions=$(curl -qs --max-time 5 --retry 3 --retry-connrefused "${API_ENDPOINT}/device-types/v1/${SLUG}/images")
+		versions=$(CURL_CA_BUNDLE=${TMPCRT} curl -qs --max-time 5 --retry 3 --retry-connrefused "${API_ENDPOINT}/device-types/v1/${SLUG}/images")
 		if ! echo "${versions}" | jq -e --arg v "${VERSION}.${VARIANT_ID}" '.versions | index($v)' > /dev/null; then
 			local latest
 			latest=$(echo "${versions}" | jq -r '.latest' | sed -e 's/\.prod$//;s/\.dev$//')
@@ -375,9 +376,9 @@ function check_supervisor()
 	local -i versions
 	supervisor_version=$(${TIMEOUT_CMD} ${ENG} ps -a --filter="name=(resin|balena).*supervisor" --format "{{.Image}}" | awk -F: '{print $2}')
 
-	versions=$(curl -qs --max-time 5 --retry 3 --retry-connrefused \
+	versions=$(CURL_CA_BUNDLE=${TMPCRT} curl -qs --max-time 5 --retry 3 --retry-connrefused \
 		"${API_ENDPOINT}/v5/supervisor_release?\$filter=device_type%20eq%20'${DEVICE_TYPE}'%20and%20supervisor_version%20eq%20'${supervisor_version}'" | jq '. | length')
-	api_version=$(curl -qs --max-time 5 --retry 3 --retry-connrefused \
+	api_version=$(CURL_CA_BUNDLE=${TMPCRT} curl -qs --max-time 5 --retry 3 --retry-connrefused \
 		"${API_ENDPOINT}/v5/device?\$filter=uuid%20eq%20'${UUID}'" -H "Authorization: Bearer ${DEVICE_API_KEY}" | jq -r '[.d[0].supervisor_version] | "v\(.[0])"')
 	if (( versions == 0 )); then
 		release_status=" (unreleased Supervisor detected!)"
