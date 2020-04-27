@@ -1,4 +1,28 @@
 - commits:
+    - subject: 'checks: prefix user service checks appropriately'
+      hash: 9f6675fa35a07821d61b083a594b38a685c9b1f7
+      body: ''
+      footer:
+        Connects-to: '#157'
+        connects-to: '#157'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+    - subject: 'typo: do a proper comparison not an assignment'
+      hash: 07e743411cab071648e6fdf868c0cdb163c1cbad
+      body: |
+        redirect stderr to /dev/null
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.2
+  date: 2020-04-27T13:36:48.888Z
+- commits:
     - subject: 'meta: add saintaardvark as CODEOWNER'
       hash: 7c340f4860c6dc994beec9515c7285c6f2c12444
       body: ''
