@@ -398,18 +398,19 @@ function check_supervisor()
 
 function check_os_rollback()
 {
-	local health_path="/mnt/state/rollback-health-triggered"
-	local altboot_path="/mnt/state/rollback-altboot-triggered"
-	local rollback_detected=()
-	declare -a HEALTHCHECK_FILES=("${health_path}" "${altboot_path}")
-	for i in "${HEALTHCHECK_FILES[@]}"; do
-		if [ -f "${i}" ]; then
-			rollback_detected+=("${i}")
+	local root="/mnt/state"
+	local health_name="rollback-health-triggered"
+	local altboot_name="rollback-altboot-triggered"
+	local rolled_back
+	for i in "${health_name}" "${altboot_name}"; do
+		if [ -f "${root}/${i}" ]; then
+			rolled_back="${i}"
+			break
 		fi
 	done
 
-	if (( ${#rollback_detected[@]} > 0 )); then
-	    log_status "${BAD}" "${FUNCNAME[0]}" "OS rollbacks detected (file(s): ${rollback_detected[*]})"
+	if [[ -n "${rolled_back}" ]]; then
+	    log_status "${BAD}" "${FUNCNAME[0]}" "OS rollback detected: ${rolled_back}"
 	else
 	    log_status "${GOOD}" "${FUNCNAME[0]}" "No OS rollbacks detected"
 	fi
