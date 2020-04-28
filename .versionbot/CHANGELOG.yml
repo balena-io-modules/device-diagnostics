@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'checks: clean up rollback notifications'
+      hash: d8c3523922d6abdc37e94c4e97a9399fcd56cd5d
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.3
+  date: 2020-04-28T11:58:08.850Z
+- commits:
     - subject: 'checks: prefix user service checks appropriately'
       hash: 9f6675fa35a07821d61b083a594b38a685c9b1f7
       body: ''
