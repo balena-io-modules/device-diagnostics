@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'TLS: expand allowed bundles to include all available device bundles'
+      hash: 421902ff6174a5f8bc092bf2617b42d796aa5664
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.4
+  date: 2020-04-29T18:45:58.582Z
+- commits:
     - subject: 'checks: clean up rollback notifications'
       hash: d8c3523922d6abdc37e94c4e97a9399fcd56cd5d
       body: ''
