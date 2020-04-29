@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'checks: filter null service healthchecks from results'
+      hash: 387c9f7df0da413df71a5fac3b6fbc2bb391dab7
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.5
+  date: 2020-04-29T18:53:08.297Z
+- commits:
     - subject: 'TLS: expand allowed bundles to include all available device bundles'
       hash: 421902ff6174a5f8bc092bf2617b42d796aa5664
       body: ''
