@@ -1,4 +1,16 @@
 - commits:
+    - subject: Add documentation for check_image_corruption to diagnostics.md
+      hash: 60a0c44bf48291cbbc7e2fc87771c4e7dcf54a89
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Hugh Brown <hugh@balena.io>
+        signed-off-by: Hugh Brown <hugh@balena.io>
+      author: Hugh Brown
+  version: 4.17.6
+  date: 2020-04-29T21:07:47.929Z
+- commits:
     - subject: 'checks: filter null service healthchecks from results'
       hash: 387c9f7df0da413df71a5fac3b6fbc2bb391dab7
       body: ''
