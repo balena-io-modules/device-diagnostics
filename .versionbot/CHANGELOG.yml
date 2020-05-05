@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'docs: update check_image_corruption docs to mention timeouts'
+      hash: 0d2e2af3b97001feda3dcf85819f0d037f5fb9e1
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.7
+  date: 2020-05-05T13:58:58.431Z
+- commits:
     - subject: Add documentation for check_image_corruption to diagnostics.md
       hash: 60a0c44bf48291cbbc7e2fc87771c4e7dcf54a89
       body: ''
