@@ -169,13 +169,18 @@ restrictive local network, or an unreliable connection.
 
 ### check_image_corruption
 #### Summary
-This check verifies container image layers stored on the device.  If it fails, at least one image has been corrupted.
+This check verifies container image layers stored on the device.  If the check reports that images are corrupted, there
+is likely an issue with the engine corrupting layers that constitute an image. If the check reports that a timeout has
+occurred, more investigation is needed (see https://github.com/balena-io/device-diagnostics/issues/203 for more
+information). In order to return the checks in a timely fashion, the process is timed out rather than being allowed to
+complete in an arbitrary amount of time.
 
-#### Triage
-Check that the device has sufficient disk space (see [check_localdisk](#check_localdisk)).  If this does not resolve the issue, it is best to contact support for further assistance.
+#### Triage Check that the device has sufficient disk space (see [check_localdisk](#check_localdisk)).  If this does not
+resolve the issue, it is best to contact support for further assistance.
 
-#### Depends on
-This check depends on the container engine being healthy (see [check_container_engine](#check_container_engine)) and having sufficient disk space (see [check_localdisk](#check_localdisk)).
+#### Depends on This check depends on the container engine being healthy (see
+[check_container_engine](#check_container_engine)) and having sufficient disk space (see
+[check_localdisk](#check_localdisk)).
 
 ### check_user_services
 #### Summary
