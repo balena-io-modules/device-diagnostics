@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'docs: clarify the nuance surrounding write latency calculations'
+      hash: 16ed57aa087da6bb06e000ba758233f379865af3
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.8
+  date: 2020-05-07T20:19:07.593Z
+- commits:
     - subject: 'docs: update check_image_corruption docs to mention timeouts'
       hash: 0d2e2af3b97001feda3dcf85819f0d037f5fb9e1
       body: ''
