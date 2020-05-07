@@ -75,7 +75,13 @@ application container that can be cleaned up (runaway logs, too much local data,
 
 #### test_write_latency
 ##### Summary
-This test compares each partition's average write latency to a predefined target.
+This test compares each partition's average write latency to a predefined target (1s). There are some caveats to this
+test that are worth considering. Since it attempts to categorize a distribution with a point sample, the reported sample
+size should always be considered. Smaller sample sizes are prone to fluctuations that do not necessarily indicate
+failure. Additionally, the metric sampled is merely the number of writes disregarding the size of each write, which
+again may be noisy with few samples. Writes come primarily from application workloads and less often from operating
+system operations. For more information, see the [relevant kernel
+documentation](https://www.kernel.org/doc/Documentation/iostats.txt).
 
 ##### Triage
 Slow disk writes could indicate faulty hardware or heavy disk I/O. It is best to investigate the hardware further for
