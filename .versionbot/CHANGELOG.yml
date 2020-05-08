@@ -1,4 +1,17 @@
 - commits:
+    - subject: remove gareth as codeowner of markdown
+      hash: 029ec8f052a44376a4ceb34600d9932b5ecba7a9
+      body: |
+        i got the syntax wrong anyway
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.9
+  date: 2020-05-07T21:31:15.643Z
+- commits:
     - subject: 'docs: clarify the nuance surrounding write latency calculations'
       hash: 16ed57aa087da6bb06e000ba758233f379865af3
       body: ''
