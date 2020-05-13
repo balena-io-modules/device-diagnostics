@@ -1,4 +1,21 @@
 - commits:
+    - subject: 'check_balenaOS: adjust query to reflect public apps (ESR support)'
+      hash: af8abc40ea482389be6295b996eb510af6b7eb45
+      body: >
+        This is the same logic used in resinhup to perform delta updates:
+
+        https://github.com/balena-os/resinhup/blob/master/upgrade-2.x.sh#L721-L730
+      footer:
+        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/156'
+        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/156'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.11
+  date: 2020-05-13T18:18:13.001Z
+- commits:
     - subject: 'localdisk: select the correct boot media'
       hash: 54c92293dfe9a1d60090bc25261f8409c1d244dc
       body: ''
