@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'docs: add documentation for all diagnostics commands'
+      hash: 0283be34874b40cff332bf9b229725da11b1db52
+      body: ''
+      footer:
+        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/116'
+        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/116'
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+        Change-type: patch
+        change-type: patch
+      author: Matthew McGinn
+  version: 4.17.10
+  date: 2020-05-13T14:17:53.517Z
+- commits:
     - subject: remove gareth as codeowner of markdown
       hash: 029ec8f052a44376a4ceb34600d9932b5ecba7a9
       body: |
