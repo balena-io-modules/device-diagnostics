@@ -171,7 +171,7 @@ function test_disk_expansion()
 {
 	local -i expansion_perc
 	# TODO: ceil is better, but floor is supported back to jq-1.5
-	expansion_perc=$(lsblk -Jb -o NAME,SIZE,RM | jq -S '.blockdevices[] | select(has("children")) | select(.rm == "0").size as $total |
+	expansion_perc=$(lsblk -Jb -o NAME,SIZE,MOUNTPOINT | jq -S '.blockdevices[] | select(.children[]?.mountpoint == "/mnt/boot").size as $total |
 		[.children[].size | tonumber] | 100 * add / ($total | tonumber) | floor')
 	if (( expansion_perc < expansion_threshold )) ; then
 		echo "${FUNCNAME[0]}" "Block media device may not have fully expanded (${expansion_perc}% of available space)"
