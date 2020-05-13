@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'balena-engine: add extra debug stacktrace for balena-engine'
+      hash: fe60bbd5afe7f12ea483046598e14fc603240429
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.12
+  date: 2020-05-13T18:43:01.000Z
+- commits:
     - subject: 'check_balenaOS: adjust query to reflect public apps (ESR support)'
       hash: af8abc40ea482389be6295b996eb510af6b7eb45
       body: >
