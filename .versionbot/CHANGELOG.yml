@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'localdisk: select the correct boot media'
+      hash: 54c92293dfe9a1d60090bc25261f8409c1d244dc
+      body: ''
+      footer:
+        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/200'
+        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/200'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.10
+  date: 2020-05-13T13:44:46.794Z
+- commits:
     - subject: remove gareth as codeowner of markdown
       hash: 029ec8f052a44376a4ceb34600d9932b5ecba7a9
       body: |
