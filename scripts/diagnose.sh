@@ -25,7 +25,7 @@ GLOBAL_TIMEOUT_CMD="timeout --preserve-status --kill-after=$(( GLOBAL_TIMEOUT * 
 TIMEOUT_VERBOSE="timeout -v 1"
 # timeout (GNU coreutils) 8.26 does not support -v
 if "${TIMEOUT_VERBOSE}" echo > /dev/null ; then
-        GLOBAL_TIMEOUT_CMD="${GLOBAL_TIMEOUT_CMD} -v"
+	GLOBAL_TIMEOUT_CMD="${GLOBAL_TIMEOUT_CMD} -v"
 fi
 GLOBAL_TIMEOUT_CMD="${GLOBAL_TIMEOUT_CMD} ${GLOBAL_TIMEOUT}"
 # resinOS v1 busybox does not support `time -o`
@@ -122,13 +122,13 @@ commands=(
 	'cat /var/log/messages' # legacy
 	'cat /var/log/provisioning-progress.log'
 	'dmesg -T'
-	'find /mnt/data/resinhup/*log -mtime -30 | xargs tail -n 10 -v'
+	'find /mnt/data/*hup/*log -mtime -30 | xargs tail -n 10 -v'
 	'journalctl --no-pager --no-hostname  --list-boots'
 	'journalctl --no-pager --no-hostname -n500 -a'
 	'journalctl --no-pager --no-hostname -pwarning -a'
 	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
 	'ps'
-	'stat /var/lock/resinhup.lock'
+	'stat /var/lock/*hup.lock'
 	'sysctl -a'
 	'systemctl list-units --failed --no-pager'
 	'top -b -n 1'
