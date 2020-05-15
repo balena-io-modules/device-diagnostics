@@ -181,12 +181,13 @@ occurred, more investigation is needed (see https://github.com/balena-io/device-
 information). In order to return the checks in a timely fashion, the process is timed out rather than being allowed to
 complete in an arbitrary amount of time.
 
-#### Triage Check that the device has sufficient disk space (see [check_localdisk](#check_localdisk)).  If this does not
-resolve the issue, it is best to contact support for further assistance.
+#### Triage
+Check that the device has sufficient disk space (see [check_localdisk](#check_localdisk)).  If this does not resolve the
+issue, it is best to contact support for further assistance.
 
-#### Depends on This check depends on the container engine being healthy (see
-[check_container_engine](#check_container_engine)) and having sufficient disk space (see
-[check_localdisk](#check_localdisk)).
+#### Depends on
+This check depends on the container engine being healthy (see [check_container_engine](#check_container_engine)) and
+having sufficient disk space (see [check_localdisk](#check_localdisk)).
 
 ### check_user_services
 #### Summary
