@@ -1,4 +1,27 @@
 - commits:
+    - subject: 'docs: fix up markdown formatting'
+      hash: 4f11bf3f17b793b86daf8d6017c1dc9d5651d8ba
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+    - subject: 'balenahup: prepare for resin -> balena rename'
+      hash: 48054ae3c8d8c2ca6b9b9e1da3f6ae9cf9ef1d4a
+      body: ''
+      footer:
+        Connects-to: 'https://github.com/balena-os/balenahup/issues/266'
+        connects-to: 'https://github.com/balena-os/balenahup/issues/266'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.13
+  date: 2020-05-15T12:16:13.414Z
+- commits:
     - subject: 'balena-engine: add extra debug stacktrace for balena-engine'
       hash: fe60bbd5afe7f12ea483046598e14fc603240429
       body: ''
