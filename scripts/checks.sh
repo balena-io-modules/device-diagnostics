@@ -413,9 +413,9 @@ function check_os_rollback()
 	done
 
 	if [[ -n "${rolled_back}" ]]; then
-	    log_status "${BAD}" "${FUNCNAME[0]}" "OS rollback detected: ${rolled_back}"
+		log_status "${BAD}" "${FUNCNAME[0]}" "OS rollback detected: ${rolled_back}"
 	else
-	    log_status "${GOOD}" "${FUNCNAME[0]}" "No OS rollbacks detected"
+		log_status "${GOOD}" "${FUNCNAME[0]}" "No OS rollbacks detected"
 	fi
 }
 
