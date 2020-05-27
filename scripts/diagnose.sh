@@ -145,6 +145,7 @@ commands=(
 	# TIME specific commands
 	'echo === TIME ==='
 	'date'
+	'journalctl --no-pager --no-hostname -u chronyd'
 	'timedatectl status'
 	'uptime'
 )
