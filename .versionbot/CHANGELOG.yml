@@ -1,4 +1,25 @@
 - commits:
+    - subject: 'diagnostics: add chronyd logs to output'
+      hash: 8190d8b921ba40526276e0367056b0152849ee9c
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+    - subject: 'meta: fix up inconsistent indentation'
+      hash: 218fd54225d2ea60d8e4920511d0a92f7d3ed679
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.17.15
+  date: 2020-05-27T18:31:06.887Z
+- commits:
     - subject: 'codeowners: remove zubairlk'
       hash: 3c01af6e6f17bee9adcc87443a9cac777d7d61a6
       body: ''
