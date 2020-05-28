@@ -1,4 +1,37 @@
 - commits:
+    - subject: 'Remove image corruption check, as it is currently too noisy'
+      hash: a7b20a7d00b5e0bd72c49b709e26f4d236b3aacd
+      body: |
+        This check in its current form has a number of disadvantages:
+
+        - It causes a lot of IO.  Under the hood, balena-engine is:
+
+          - reading the individual layers;
+          - writing them out to /var/lib/docker/tmp;
+          - then reading them all back in, so it can write to stdout.
+
+        - One consequence is that the `docker save` command can take longer
+        than the current 10s timeout (particularly if there are a lot of
+        images, or if the images are large), despite the device and its
+        storage being perfectly healthy.
+
+        - While it is good to know if an image has corruption, it's probably
+        more important to know if the underlying storage is having problems;
+        this check is not a great way of determining if that is happening.
+
+        Thus, for now we're better off without this check.  We can investigate
+        other approaches to verifying images, or examining storage for problems.
+      footer:
+        Connects-to: '#203'
+        connects-to: '#203'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Hugh Brown <hugh@balena.io>
+        signed-off-by: Hugh Brown <hugh@balena.io>
+      author: Hugh Brown
+  version: 4.18.0
+  date: 2020-05-28T20:29:37.017Z
+- commits:
     - subject: 'diagnostics: add chronyd logs to output'
       hash: 8190d8b921ba40526276e0367056b0152849ee9c
       body: ''
