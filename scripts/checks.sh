@@ -251,8 +251,10 @@ function check_localdisk()
 function check_under_voltage(){
 	local SLUG_WHITELIST=('raspberrypi3-64' 'raspberrypi4-64' 'raspberry-pi' 'raspberry-pi2' 'raspberrypi3' 'fincm3')
 	if is_valid_check WHITELIST "${SLUG_WHITELIST[*]}"; then
-		if dmesg | grep -q "Under-voltage detected\!"; then
-			log_status "${BAD}" "${FUNCNAME[0]}" "Under-voltage events detected, check/change the power supply ASAP"
+		local -i UNDERVOLTAGE_COUNT
+		UNDERVOLTAGE_COUNT=$(dmesg | grep -c "Under-voltage detected\!")
+		if (( UNDERVOLTAGE_COUNT > 0 )); then
+			log_status "${BAD}" "${FUNCNAME[0]}" "${UNDERVOLTAGE_COUNT} under-voltage events detected, check/change the power supply ASAP"
 		else
 			log_status "${GOOD}" "${FUNCNAME[0]}" "No under-voltage events detected"
 		fi
