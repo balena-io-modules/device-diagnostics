@@ -449,48 +449,6 @@ function check_service_restarts()
 	fi
 }
 
-function check_image_corruption()
-{
-	local images output result="${GOOD}"
-	local corrupted=()
-	local timeout=()
-	local -i corrupted_count
-	local -i timeout_count
-	local -i retval
-	# TODO: this command is filtering out any images with a size <1Kb (for delta-based images)
-	images=$(${TIMEOUT_CMD} ${ENG} image ls --format "{{.ID}} {{.Size}}" | awk '/[0-9]+B/{next;}{print $1}' | sort -u)
-
-	if (( ${#images[@]} > 0 )); then
-		for i in ${images};
-		do
-			# TODO: the timeout here is probably too short to be effective in most cases, but let's gather
-			# data and change if necessary
-			${TIMEOUT_CMD} ${ENG} save "${i}" > /dev/null 2>&1
-			retval=$?
-			# this retval indicates a timeout
-			if (( retval == 124 )); then
-				timeout_count+=1
-				timeout+=("${i}")
-			elif (( retval > 0 )); then
-				corrupted_count+=1
-				corrupted+=("${i}")
-			fi
-		done
-		if (( corrupted_count != 0 )); then
-			output+="Some images may be corrupted: ${corrupted[*]}"
-			result="${BAD}"
-		fi
-		if (( timeout_count != 0 )); then
-			output+=$'\n'$(printf '%s' "Saving images timed out, check data incomplete: ${timeout[*]}")
-			result="${BAD}"
-		fi
-		if [ -z "${output}" ]; then
-			output="No signs of ${ENG} image corruption"
-		fi
-		log_status "${result}" "${FUNCNAME[0]}" "$(echo "${output}" | sed '/^$/d')"
-	fi
-}
-
 function check_user_services()
 {
 	# TODO: might as well track restarts here as well (convert to aggregated check)
@@ -528,7 +486,6 @@ function run_checks()
 	"$(check_service_restarts)" \
 	"$(check_timesync)" \
 	"$(check_os_rollback)" \
-	"$(check_image_corruption)" \
 	"$(check_user_services)" \
 	| jq -s 'add | {checks:.}'
 }
