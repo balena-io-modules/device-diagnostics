@@ -300,9 +300,11 @@ function check_balenaOS()
 			-H "Content-Type: application/json" \
 			-H "Authorization: Bearer ${DEVICE_API_KEY}" \
 			"${API_ENDPOINT}/v5/release?\$expand=release_tag,belongs_to__application,contains__image/image&\$filter=(belongs_to__application/any(a:a/device_type%20eq%20'${SLUG}'))%20and%20(release_tag/any(rt:(rt/tag_key%20eq%20'version')%20and%20(rt/value%20eq%20'${VERSION}')))" \
-			| jq -r ".d[] | select(.release_tag[].value == (\"${VARIANT}\" | ascii_downcase)) | length")
-		if (( versions < 1 )); then
+			| jq -r "[.d[] | select(.release_tag[].value == (\"${VARIANT}\" | ascii_downcase))] | length")
+		if (( versions == 0 )); then
 			log_status "${BAD}" "${FUNCNAME[0]}" "balenaOS 2.x detected, but this version is not currently available in ${API_ENDPOINT}"
+		elif (( versions > 1 )); then
+			log_status "${BAD}" "${FUNCNAME[0]}" "balenaOS 2.x detected, but more than one hostapp release available in ${API_ENDPOINT}"
 		else
 			log_status "${GOOD}" "${FUNCNAME[0]}" "Supported balenaOS 2.x detected"
 		fi
