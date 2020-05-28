@@ -1,4 +1,18 @@
 - commits:
+    - subject: Include count of under-voltage events when reporting problems
+      hash: 54eda02363e5d83cf574bb0dc0253e75cf7cfc96
+      body: ''
+      footer:
+        Connects-to: '#217'
+        connects-to: '#217'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Hugh Brown <hugh@balena.io>
+        signed-off-by: Hugh Brown <hugh@balena.io>
+      author: Hugh Brown
+  version: 4.19.0
+  date: 2020-05-28T20:39:32.143Z
+- commits:
     - subject: 'Remove image corruption check, as it is currently too noisy'
       hash: a7b20a7d00b5e0bd72c49b709e26f4d236b3aacd
       body: |
