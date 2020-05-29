@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'check_balenaOS: handle case of multiple upstream hostapps'
+      hash: 301a87e3d26bc6f28be1b72cb4d4f05c3741e046
+      body: ''
+      footer:
+        Connects-to: '#222'
+        connects-to: '#222'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.19.1
+  date: 2020-05-28T23:55:56.746Z
+- commits:
     - subject: Include count of under-voltage events when reporting problems
       hash: 54eda02363e5d83cf574bb0dc0253e75cf7cfc96
       body: ''
