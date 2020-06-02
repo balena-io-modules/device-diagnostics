@@ -121,8 +121,21 @@ This check depends on a fully functional networking stack (see [check_networking
 
 ### check_temperature
 #### Summary
-If there are onboard temperature sensors, this check confirms that the temperature is below 80C (at which point
-throttling begins).
+This check looks for evidence of high temperature and CPU throttling.
+
+#### test_temperature_now
+##### Summary
+If there are sensors, this check confirms that the temperature is below 80C (at which point throttling begins).
+
+#### test_throttling_dmesg
+##### Summary
+
+This looks for evidence of CPU throttling in kernel log messages.
+
+#### test_throttling_vcgencmd
+##### Summary
+
+This test is currently limited to Raspberry Pi 4 devices, and uses the Raspberry Pi utility `vcgencmd get_throttled` to query the device for evidence of CPU throttling. 
 
 #### Triage
 In order to triage, either reduce the load on the device or replace/reseat/upgrade any heatsinks that may be attached to

@@ -262,6 +262,15 @@ function check_under_voltage(){
 }
 
 function check_temperature(){
+	local tests=(
+		test_temperature_now
+		test_throttling_dmesg
+		test_throttling_vcgencmd
+	)
+	run_tests "${FUNCNAME[0]}" "${tests[@]}"
+}
+
+function test_temperature_now(){
 	# see https://github.com/balena-io/device-diagnostics/issues/168
 	local SLUG_BLACKLIST=('jetson-nano' 'jn30b-nano')
 	if is_valid_check BLACKLIST "${SLUG_BLACKLIST[*]}"; then
@@ -272,13 +281,52 @@ function check_temperature(){
 				therm_count+=1
 				temp=$(cat "$i/temp")
 				if (( temp >= 80000 )); then
-					log_status "${BAD}" "${FUNCNAME[0]}" "Temperature above 80C detected ($i)"
+					echo "${FUNCNAME[0]}" "Temperature above 80C detected ($i)"
 					return
 				fi
 			fi
 		done
-		if (( therm_count > 0 )); then
-			log_status "${GOOD}" "${FUNCNAME[0]}" "No abnormal temperature detected"
+	fi
+}
+
+
+function test_throttling_dmesg(){
+	# see https://github.com/balena-io/device-diagnostics/issues/183
+	local -i TEMP_THROTTLING_COUNT
+	TEMP_THROTTLING_COUNT=$(dmesg | grep -cE 'Temperature above threshold, cpu clock throttled')
+	if (( TEMP_THROTTLING_COUNT > 0 )); then
+		echo "${FUNCNAME[0]}" "${TEMP_THROTTLING_COUNT} cpu throttling events detected, check CPU temperature"
+	fi
+
+}
+
+function test_throttling_vcgencmd(){
+	# Limited to Raspberry Pi 4 until https://github.com/balena-os/balena-raspberrypi/issues/485 resolved
+	local SLUG_WHITELIST=('raspberrypi4-64')
+	if is_valid_check WHITELIST "${SLUG_WHITELIST[*]}"; then
+		local THROTTLE_MSG
+		local -i RAW_THROTTLE_OUTPUT
+		RAW_THROTTLE_OUTPUT=$(vcgencmd get_throttled | awk -F"=" '{print $2}')
+		# Reference: https://www.raspberrypi.org/documentation/raspbian/applications/vcgencmd.md
+		# Bit 	Meaning
+		# 0 	Under-voltage detected
+		# 1 	Arm frequency capped
+		# 2 	Currently throttled
+		# 3 	Soft temperature limit active
+		# 16 	Under-voltage has occurred
+		# 17 	Arm frequency capping has occurred
+		# 18 	Throttling has occurred
+		# 19 	Soft temperature limit has occurred
+		if (( RAW_THROTTLE_OUTPUT > 0 )); then
+			(( RAW_THROTTLE_OUTPUT & 0x2 ))		&& THROTTLE_MSG="${THROTTLE_MSG} ARM freq capped"
+			(( RAW_THROTTLE_OUTPUT & 0x4 ))		&& THROTTLE_MSG="${THROTTLE_MSG} Currently throttled"
+			(( RAW_THROTTLE_OUTPUT & 0x8 ))		&& THROTTLE_MSG="${THROTTLE_MSG} Soft temp limit active"
+			(( RAW_THROTTLE_OUTPUT & 0x20000 ))	&& THROTTLE_MSG="${THROTTLE_MSG} ARM freq capping has occurred"
+			(( RAW_THROTTLE_OUTPUT & 0x40000 ))	&& THROTTLE_MSG="${THROTTLE_MSG} Throttling has occured"
+			(( RAW_THROTTLE_OUTPUT & 0x80000 ))	&& THROTTLE_MSG="${THROTTLE_MSG} Soft temp limnit has occurred"
+		fi
+		if [[ -n $THROTTLE_MSG ]]; then
+			echo "${FUNCNAME[0]}" "Raspberry Pi throttling events detected: $THROTTLE_MSG"
 		fi
 	fi
 }
