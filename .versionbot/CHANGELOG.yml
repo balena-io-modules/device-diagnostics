@@ -1,4 +1,34 @@
 - commits:
+    - subject: Detect CPU throttling events
+      hash: 72d23f32fdb05d9940052122e7936a243bf2ab35
+      body: >
+        This adds two checks that take different approaches to detecting CPU
+
+        throttling:
+
+
+        - test_throttling_dmesg examines dmesg output for throttling events
+
+
+        - test_throttling_vcgencmd examines the output of the Raspberry Pi
+        utility `vcgencmd` to determine if throttling is currently happening, or
+        has occurred in the past.
+
+
+        These are both called by check_throttling, which glues the output of
+
+        both together.
+      footer:
+        Connects-to: '#183, #209'
+        connects-to: '#183, #209'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Hugh Brown <hugh@balena.io>
+        signed-off-by: Hugh Brown <hugh@balena.io>
+      author: Hugh Brown
+  version: 4.20.0
+  date: 2020-06-02T15:36:56.834Z
+- commits:
     - subject: 'check_balenaOS: handle case of multiple upstream hostapps'
       hash: 301a87e3d26bc6f28be1b72cb4d4f05c3741e046
       body: ''
