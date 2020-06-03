@@ -33,6 +33,7 @@ low_disk_threshold=10 #%
 wifi_threshold=40 #%, very handwavy
 expansion_threshold=80 #%
 slow_disk_write=1000 #ms
+temperature_threshold=80000 #millidegree C
 
 GOOD="true"
 BAD="false"
@@ -263,26 +264,23 @@ function check_under_voltage(){
 
 function check_temperature(){
 	local tests=(
-		test_temperature_now
+		test_current_temperature
 		test_throttling_dmesg
 		test_throttling_vcgencmd
 	)
 	run_tests "${FUNCNAME[0]}" "${tests[@]}"
 }
 
-function test_temperature_now(){
+function test_current_temperature(){
 	# see https://github.com/balena-io/device-diagnostics/issues/168
 	local SLUG_BLACKLIST=('jetson-nano' 'jn30b-nano')
 	if is_valid_check BLACKLIST "${SLUG_BLACKLIST[*]}"; then
 		local -i temp
-		local -i therm_count=0
 		for i in /sys/class/thermal/thermal* ; do
 			if [ -e "$i/temp" ]; then
-				therm_count+=1
 				temp=$(cat "$i/temp")
-				if (( temp >= 80000 )); then
-					echo "${FUNCNAME[0]}" "Temperature above 80C detected ($i)"
-					return
+				if (( temp >= temperature_threshold )); then
+					echo "${FUNCNAME[0]}" "Temperature above $(( temperature_threshold / 1000 ))C detected ($i)"
 				fi
 			fi
 		done
@@ -527,17 +525,18 @@ function check_user_services()
 function run_checks()
 {
 	# TODO remove echo | jq
-	echo "$(check_balenaOS)" \
-	"$(check_under_voltage)" \
-	"$(check_memory)" \
-	"$(check_temperature)" \
+	echo \
+	"$(check_balenaOS)" \
 	"$(check_container_engine)" \
-	"$(check_supervisor)" \
-	"$(check_networking)" \
 	"$(check_localdisk)" \
-	"$(check_service_restarts)" \
-	"$(check_timesync)" \
+	"$(check_memory)" \
+	"$(check_networking)" \
 	"$(check_os_rollback)" \
+	"$(check_service_restarts)" \
+	"$(check_supervisor)" \
+	"$(check_temperature)" \
+	"$(check_timesync)" \
+	"$(check_under_voltage)" \
 	"$(check_user_services)" \
 	| jq -s 'add | {checks:.}'
 }
