@@ -1,4 +1,18 @@
 - commits:
+    - subject: >-
+        check_temperature: clean up current temp check to read from multiple
+        sensors
+      hash: 74128a115d204bbae2da8560eb85c0cdcfca3654
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.1
+  date: 2020-06-03T16:53:56.458Z
+- commits:
     - subject: Detect CPU throttling events
       hash: 72d23f32fdb05d9940052122e7936a243bf2ab35
       body: >
