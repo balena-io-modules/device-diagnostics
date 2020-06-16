@@ -87,6 +87,7 @@ commands=(
 	'free -h'
 	'ls -l /dev'
 	'lsusb -vvv'
+	'mmcli -L'
 	'mount'
 	'uname -a'
 
@@ -104,6 +105,7 @@ commands=(
 	'iptables -n -t nat -L'
 	'journalctl --no-pager --no-hostname -n 200 -a -u \"openvpn*\"'
 	'ls -l /mnt/boot/system-connections'
+	'mmcli -m 0'
 	'netstat -ntl'
 	'nmcli --version'
 	'ping -c 1 -W 3 google.co.uk'
