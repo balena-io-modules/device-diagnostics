@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'diagnostics: start grabbing modem data'
+      hash: e2ccb2fcc7badccc9799f28e18e686d63072d8e8
+      body: ''
+      footer:
+        Connects-to: '#153'
+        connects-to: '#153'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.2
+  date: 2020-06-16T12:32:46.602Z
+- commits:
     - subject: >-
         check_temperature: clean up current temp check to read from multiple
         sensors
