@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'time: get chrony''s source & tracking information'
+      hash: 0ff22f5cd532c79be9bd8d88d7605f3c49304eb8
+      body: ''
+      footer:
+        Connects-to: 'https://github.com/balena-os/meta-balena/issues/1852'
+        connects-to: 'https://github.com/balena-os/meta-balena/issues/1852'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.4
+  date: 2020-06-18T12:20:38.566Z
+- commits:
     - subject: 'diagnostics: add extlinux support'
       hash: 18154375f3eba3ddb40645c43f2a89e2a8b22aee
       body: ''
