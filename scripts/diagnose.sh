@@ -147,6 +147,7 @@ commands=(
 
 	# TIME specific commands
 	'echo === TIME ==='
+	'cat /tmp/chrony_added_dhcp_ntp_servers'
 	'chronyc sources'
 	'chronyc tracking'
 	'date'
