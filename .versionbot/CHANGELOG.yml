@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'timesync: check if DHCP passed in any local timeservers'
+      hash: 6e4daba7654bf723e96e0cff88462a06e000d98b
+      body: >
+        written to during config:
+        https://github.com/balena-os/meta-balena/blob/9ace976ea9d757d3d928ed59ce60c4118bb9d557/meta-balena-common/recipes-connectivity/networkmanager/resin-files/99dhcp_ntp#L3
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.5
+  date: 2020-06-18T14:55:15.125Z
+- commits:
     - subject: 'time: get chrony''s source & tracking information'
       hash: 0ff22f5cd532c79be9bd8d88d7605f3c49304eb8
       body: ''
