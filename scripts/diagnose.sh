@@ -147,6 +147,8 @@ commands=(
 
 	# TIME specific commands
 	'echo === TIME ==='
+	'chronyc sources'
+	'chronyc tracking'
 	'date'
 	'journalctl --no-pager --no-hostname -u chronyd'
 	'timedatectl status'
