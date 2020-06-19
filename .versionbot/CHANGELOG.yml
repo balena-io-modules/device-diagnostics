@@ -1,4 +1,29 @@
 - commits:
+    - subject: 'diagnose.sh: fix timeout ''command not found'' error'
+      hash: c248883a4b38236c6e746bcc0886df5595840312
+      body: |
+        The dashboard 'Standard error' display for 'Device Diagnostics'
+        reports the following error:
+        'bash: line 27: timeout -v 1: command not found'
+
+        This issue is due to the double quotes used in the corresponding
+        'if' statement. Adding an additional redirect of stderr to this
+        commands hides any error messages for the cases where the '-v'
+        option is not supported by the version of 'timeout' being used.
+
+        This fix has been tested as a simple, isolated code snippet on the
+        balenaOS (2.51.1+rev1) command line running on a RPi3.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Connects-to: '#234'
+        connects-to: '#234'
+        Signed-off-by: Mark Corbin <mark@balena.io>
+        signed-off-by: Mark Corbin <mark@balena.io>
+      author: Mark Corbin
+  version: 4.20.6
+  date: 2020-06-19T14:07:16.789Z
+- commits:
     - subject: 'timesync: check if DHCP passed in any local timeservers'
       hash: 6e4daba7654bf723e96e0cff88462a06e000d98b
       body: >
