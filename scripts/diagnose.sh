@@ -24,7 +24,7 @@ GLOBAL_TIMEOUT=10
 GLOBAL_TIMEOUT_CMD="timeout --preserve-status --kill-after=$(( GLOBAL_TIMEOUT * 2 ))"
 TIMEOUT_VERBOSE="timeout -v 1"
 # timeout (GNU coreutils) 8.26 does not support -v
-if "${TIMEOUT_VERBOSE}" echo > /dev/null ; then
+if ${TIMEOUT_VERBOSE} echo > /dev/null 2>&1 ; then
 	GLOBAL_TIMEOUT_CMD="${GLOBAL_TIMEOUT_CMD} -v"
 fi
 GLOBAL_TIMEOUT_CMD="${GLOBAL_TIMEOUT_CMD} ${GLOBAL_TIMEOUT}"
