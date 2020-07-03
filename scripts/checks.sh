@@ -403,21 +403,35 @@ function check_timesync()
 	fi
 }
 
-function check_container_engine()
-{
+function check_container_engine() {
+	local tests=(
+		test_container_engine_running_now
+		test_container_engine_restarts
+		test_container_engine_responding
+	)
+	run_tests "${FUNCNAME[0]}" "${tests[@]}"
+}
+
+function test_container_engine_running_now() {
 	if (! systemctl is-active ${ENG} > /dev/null); then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Container engine ${ENG} is NOT running"
-	else
-		local -i engine_restarts
-		engine_restarts=$(systemctl show -p NRestarts ${ENG} | awk -F= '{print $2}')
-		if (( engine_restarts > 0 )); then
-			local start_timestamp
-			start_timestamp=$(systemctl show -p ExecMainStartTimestamp ${ENG} | awk -F= '{print $2}')
-			log_status "${BAD}" "${FUNCNAME[0]}" "Container engine ${ENG} is up, but has ${engine_restarts} \
-unclean restarts and may be crashlooping (most recent start time: ${start_timestamp})"
-		else
-			log_status "${GOOD}" "${FUNCNAME[0]}" "Container engine ${ENG} is running and has not restarted uncleanly"
-		fi
+		echo "${FUNCNAME[0]}" "Container engine ${ENG} is NOT running"
+	fi
+}
+
+function test_container_engine_restarts() {
+	local -i engine_restarts
+	engine_restarts=$(systemctl show -p NRestarts ${ENG} | awk -F= '{print $2}')
+	if (( engine_restarts > 0 )); then
+		local start_timestamp
+		start_timestamp=$(systemctl show -p ExecMainStartTimestamp ${ENG} | awk -F= '{print $2}')
+		echo "${FUNCNAME[0]}" "Container engine ${ENG} has ${engine_restarts} \
+restarts and may be crashlooping (most recent start time: ${start_timestamp})"
+	fi
+}
+
+function test_container_engine_responding() {
+	if ! ERRMSG=$(${TIMEOUT_CMD} "${ENG}" ps 2>&1); then
+	    echo "${FUNCNAME[0]}" "Error querying container engine: ${ERRMSG}"
 	fi
 }
 
