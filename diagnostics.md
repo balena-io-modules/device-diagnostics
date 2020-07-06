@@ -71,7 +71,8 @@ If a local disk fills up, there are often knock-on issues in the supervisor and 
 ##### Triage
 Run `du -a /mnt/data/docker | sort -nr | head -10` in the hostOS shell to list the ten largest files and directories.
 If the results indicate large files in `/mnt/data/docker/containers`, this result often indicates a leakage in an
-application container that can be cleaned up (runaway logs, too much local data, etc).
+application container that can be cleaned up (runaway logs, too much local data, etc). Further info can be found
+in the [Device Debugging Masterclass](https://www.balena.io/docs/learn/more/masterclasses/device-debugging/#111-out-of-space-issues).
 
 #### test_write_latency
 ##### Summary
@@ -114,7 +115,7 @@ This check confirms that the system clock is actively disciplined.
 #### Triage
 Confirm that NTP is not blocked at the network level, and that any specified upstream NTP servers are accessible. If
 absolutely necessary, it is possible to temporarily sync the clock using HTTP headers (though this change will not
-persist across reboots).
+persist across reboots).  Further info can be found in the [Device Debugging Masterclass](https://www.balena.io/docs/learn/more/masterclasses/device-debugging/#61-ntp-failure).
 
 #### Depends on
 This check depends on a fully functional networking stack (see [check_networking](#check_networking)).
