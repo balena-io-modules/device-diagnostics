@@ -1,4 +1,16 @@
 - commits:
+    - subject: Add links to balena Masterclass documents where appropriate
+      hash: 608ab850ed2119da803d33045296386486b9fe92
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Hugh Brown <hugh@balena.io>
+        signed-off-by: Hugh Brown <hugh@balena.io>
+      author: Hugh Brown
+  version: 4.20.7
+  date: 2020-07-03T22:38:08.463Z
+- commits:
     - subject: 'diagnose.sh: fix timeout ''command not found'' error'
       hash: c248883a4b38236c6e746bcc0886df5595840312
       body: |
@@ -1447,7 +1459,7 @@
       body: ''
       footers:
         change-type: patch
-        hq: 'balena-io/balena#1663'
+        hq: balena-io/balena#1663
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: dd89118490c9daf3219c95153d208b1853882719
       subject: 'diagnostics: fix versioning information, add note about failing commands'
@@ -1459,7 +1471,7 @@
       footers:
         change-type: patch
         connects-to: '#74'
-        hq: 'balena-io/balena#1663'
+        hq: balena-io/balena#1663
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: 43ce8cd1a00f767bd23528fbe441afe94fb81754
       subject: 'diagnose: limit btrfs checks to resinOS 1.x devices'
@@ -1519,8 +1531,8 @@
       body: ''
       footers:
         change-type: minor
-        connects-to: 'balena-io/resin-proxy#334'
-        hq: 'balena-io/balena#1663'
+        connects-to: balena-io/resin-proxy#334
+        hq: balena-io/balena#1663
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: 5a08e41cb91a2f88fb85409739b4351c6d7e8e28
       subject: Re-use proxy container engine logic
