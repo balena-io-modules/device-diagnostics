@@ -1,4 +1,18 @@
 - commits:
+    - subject: Add check to see if container engine responding to commands
+      hash: 9502fc92424aa47584c07cf1ce4cf928de1e137e
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Connects-to: '#226'
+        connects-to: '#226'
+        Signed-off-by: Hugh Brown <hugh@balena.io>
+        signed-off-by: Hugh Brown <hugh@balena.io>
+      author: Hugh Brown
+  version: 4.20.8
+  date: 2020-07-15T16:31:57.849Z
+- commits:
     - subject: Add links to balena Masterclass documents where appropriate
       hash: 608ab850ed2119da803d33045296386486b9fe92
       body: ''
