@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'hup: start grabbing more HUP logs for future debugging'
+      hash: 6231369b36b6a97d55f70d55f942e3ab965733b1
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.9
+  date: 2020-08-05T11:47:11.361Z
+- commits:
     - subject: Add check to see if container engine responding to commands
       hash: 9502fc92424aa47584c07cf1ce4cf928de1e137e
       body: ''
