@@ -338,7 +338,7 @@ function check_balenaOS()
 		log_status "${BAD}" "${FUNCNAME[0]}" "ResinOS 1.x is now completely deprecated"
 	else
 		if [[ "${DEVICE_TYPE}" != "${SLUG}" ]]; then
-			log_status "${BAD}" "${FUNCNAME[0]}" "Custom balenaOS 2.x detected (custom device type)"
+			log_status "${BAD}" "${FUNCNAME[0]}" "Custom balenaOS 2.x detected (custom device type: ${SLUG})"
 			return
 		fi
 		local -i versions
