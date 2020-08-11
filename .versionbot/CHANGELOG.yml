@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'check_balenaos: report the custom device type slug upon failure'
+      hash: 7d3e9a55c4ce45f42d47f12c4c428786456ad6a3
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.10
+  date: 2020-08-11T19:06:50.147Z
+- commits:
     - subject: 'hup: start grabbing more HUP logs for future debugging'
       hash: 6231369b36b6a97d55f70d55f942e3ab965733b1
       body: ''
