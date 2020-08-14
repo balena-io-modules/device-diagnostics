@@ -521,15 +521,15 @@ function check_user_services()
 	if (( ${#USERVICES[@]} > 0 )); then
 		for service in "${USERVICES[@]}"; do
 			inspect=$(${TIMEOUT_CMD} "${ENG}" inspect "${service}")
-			healthcheck_output=$(echo "${inspect}" | jq -r '.[].State.Health | select(. != null)')
+			healthcheck_output=$(echo -E "${inspect}" | jq -r '.[].State.Health | select(. != null)')
 			if [[ -n "${healthcheck_output}" ]]; then
 				# artificially limited to 100 chars
 				# TODO: could probably be cleaned up
 				# TODO: if a service is failing, see how many times in a row (.FailingStreak)
-				out=$(echo "${healthcheck_output}" | jq -r '.Log[-1]|[.ExitCode,.Output[:100]]|"exit code: \(.[0]), output: \(.[1])"' | sed "s/\"/\'/g")
-				success=$(echo "${healthcheck_output}" | jq -r '.Status == "healthy"')
-				pretty_name=$(echo "${inspect}" | jq -r '.[].Config.Labels."io.balena.service-name"')
-				checks_return=$(echo "[{\"name\": \"service_${pretty_name}\", \"status\":\"${out}\",\"success\": ${success}}]" "${checks_return}" | jq -s 'add')
+				out=$(echo -E "${healthcheck_output}" | jq -ar '.Log[-1]|[.ExitCode,.Output[:100]]|"exit code: \(.[0]), output: \(.[1])"' | sed "s/\"/\'/g")
+				success=$(echo -E "${healthcheck_output}" | jq -r '.Status == "healthy"')
+				pretty_name=$(echo -E "${inspect}" | jq -r '.[].Config.Labels."io.balena.service-name"')
+				checks_return=$(echo -E "[{\"name\": \"service_${pretty_name}\", \"status\":\"${out}\",\"success\": ${success}}]" "${checks_return}" | jq -s 'add')
 			fi
 		done
 	fi
@@ -539,7 +539,7 @@ function check_user_services()
 function run_checks()
 {
 	# TODO remove echo | jq
-	echo \
+	echo -E \
 	"$(check_balenaOS)" \
 	"$(check_container_engine)" \
 	"$(check_localdisk)" \
