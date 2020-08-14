@@ -1,4 +1,19 @@
 - commits:
+    - subject: do not interpret control characters when echoing into jq
+      hash: cd9ea1ce8291a818da155b4a3b4276b6d0c978a1
+      body: |
+        when output is potentially user-controlled, interpret as ascii
+      footer:
+        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/246'
+        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/246'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.11
+  date: 2020-08-14T15:53:00.514Z
+- commits:
     - subject: 'check_balenaos: report the custom device type slug upon failure'
       hash: 7d3e9a55c4ce45f42d47f12c4c428786456ad6a3
       body: ''
