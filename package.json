@@ -1,6 +1,6 @@
 {
   "name": "device-diagnostics",
-  "version": "4.20.11",
+  "version": "4.20.12",
   "description": "on-device diagnostics tool",
   "homepage": "https://github.com/balena-io/device-diagnostics#readme",
   "author": "",

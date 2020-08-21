@@ -1,4 +1,21 @@
 - commits:
+    - subject: Add test for mounted data partition
+      hash: 5ea55ed646fb98bc4bd88912ddf1810af12d415f
+      body: >
+        In some cases, filesystem or storage media corruption prevents the data
+        partition from mounting properly. This causes a number of follow-on
+        errors.
+      footer:
+        Connects-To: '#242'
+        connects-to: '#242'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Hugh Brown <hugh@balena.io>
+        signed-off-by: Hugh Brown <hugh@balena.io>
+      author: Hugh Brown
+  version: 4.20.12
+  date: 2020-08-21T14:42:10.634Z
+- commits:
     - subject: do not interpret control characters when echoing into jq
       hash: cd9ea1ce8291a818da155b4a3b4276b6d0c978a1
       body: |
