@@ -97,6 +97,13 @@ been allocated).
 Failure to expand the root filesystem can indicate an unhealthy storage medium or potentially a failure during the
 provisioning process. It is best to contact support, replace the storage media and re-provision the device.
 
+#### test_data_partition_mounted
+##### Summary
+This test confirms that the data partition for the device has been mounted properly.
+
+##### Triage
+Failure to mount the data partition can indicate an unhealthy storage medium or other problems on the device.  It is best to contact support to investigate further.
+
 ### check_service_restarts
 #### Summary
 This check interrogates the engine to see if any services are restarting uncleanly/unexpectedly.

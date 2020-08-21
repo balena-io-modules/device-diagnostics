@@ -179,6 +179,13 @@ function test_disk_expansion()
 	fi
 }
 
+function test_data_partition_mounted()
+{
+	if ! lsblk -J -o NAME,MOUNTPOINT | jq -er '.blockdevices[].children[]? | select (.mountpoint == "/mnt/data") | length >= 1' > /dev/null ; then
+		echo "${FUNCNAME[0]}" "Data partition not mounted"
+	fi
+}
+
 function is_valid_check()
 {
 	local list_type="${1}"
@@ -245,6 +252,7 @@ function check_localdisk()
 		test_write_latency
 		test_diskspace
 		test_disk_expansion
+		test_data_partition_mounted
 	)
 	run_tests "${FUNCNAME[0]}" "${tests[@]}"
 }
