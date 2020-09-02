@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'supervisor: grab all supervisor lock dirs in diagnostics'
+      hash: 4d07e1f1b04f32e764732afd57e7f853127a3fb8
+      body: >
+        ref.
+        https://www.flowdock.com/app/rulemotion/r-product/threads/gIr9O4P2AW5lBCaxAaJvdPPB187
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.13
+  date: 2020-09-02T20:08:30.443Z
+- commits:
     - subject: Add test for mounted data partition
       hash: 5ea55ed646fb98bc4bd88912ddf1810af12d415f
       body: >
