@@ -142,6 +142,7 @@ commands=(
 	'$ENG logs resin_supervisor'
 	'curl --max-time 5 localhost:'"${LISTEN_PORT}"'/v1/healthy'
 	'journalctl --no-pager --no-hostname -n 200 -a -u resin-supervisor'
+	'ls -lR /tmp/*-supervisor/**/*'
 	'systemctl status resin-supervisor --no-pager'
 	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
 
