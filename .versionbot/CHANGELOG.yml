@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'diagnostics: grab half a year of HUP logs'
+      hash: 7d1db6f11510caf05f5a4bce5ce862ef709e07d4
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.14
+  date: 2020-09-14T16:48:35.272Z
+- commits:
     - subject: 'supervisor: grab all supervisor lock dirs in diagnostics'
       hash: 4d07e1f1b04f32e764732afd57e7f853127a3fb8
       body: >
