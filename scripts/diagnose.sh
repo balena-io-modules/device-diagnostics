@@ -125,7 +125,7 @@ commands=(
 	'cat /var/log/messages' # legacy
 	'cat /var/log/provisioning-progress.log'
 	'dmesg -T'
-	'find /mnt/data/*hup/*log -mtime -30 | xargs tail -n 250 -v'
+	'find /mnt/data/*hup/*log -mtime -180 | xargs tail -n 250 -v'
 	'journalctl --no-pager --no-hostname  --list-boots'
 	'journalctl --no-pager --no-hostname -n500 -a'
 	'journalctl --no-pager --no-hostname -pwarning -a'
