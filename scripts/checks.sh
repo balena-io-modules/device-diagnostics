@@ -3,8 +3,22 @@ DIAGNOSE_VERSION=4.20.13
 # Don't run anything before this source as it sets PATH here
 # shellcheck disable=SC1091
 source /etc/profile
+
+# Newer OS versions do not set REGISTRY_ENDPOINT via
+# /usr/sbin/resin-vars; that's because the information provided by
+# balena cloud is meant to be the source of truth.  Thus, we add the
+# REGISTRY_ENDPOINT argument for this script, and will supply that
+# argument in the proxy when this script is called.  To avoid having
+# them overwritten by older versions of resin-vars, we save the CLI
+# arguments and pop them back out after sourcing resin-vars.
+
+# Set aside arguments, come back to them later
+current_args=( "$@" )
+set --
 # shellcheck disable=SC1091
 source /usr/sbin/resin-vars
+# Restore arguments passed in originally
+set -- "${current_args[@]}"
 # shellcheck disable=SC1091
 source /etc/os-release
 
@@ -41,6 +55,20 @@ BAD="false"
 mapfile -t USERVICES < <(${TIMEOUT_CMD} "${ENG}" ps --format "{{.Names}}" | awk '/(resin|balena)_supervisor/{next;}{print}' 2> /dev/null)
 
 # Helper functions
+function help()
+{
+        cat << EOF
+Script to run checks on balenaOS devices
+
+Options:
+  -h, --help
+        Display this help and exit.
+
+  --balenaos-registry
+        Upstream registry to use for host OS applications.
+EOF
+}
+
 function announce_version()
 {
 	jq -n --arg dv "${DIAGNOSE_VERSION}" '{"diagnose_version":$dv}'
@@ -562,6 +590,26 @@ function run_checks()
 	"$(check_user_services)" \
 	| jq -s 'add | {checks:.}'
 }
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+        arg="$1"
+
+        case $arg in
+                -h|--help)
+                        help
+                        exit 0
+                        ;;
+                --balenaos-registry)
+                        if [ -z "$2" ]; then
+                                log ERROR "\"$1\" argument needs a value."
+                        fi
+                        REGISTRY_ENDPOINT=$2
+                        shift
+                        ;;
+        esac
+        shift
+done
 
 jq --argjson a1 "$(announce_version)" --argjson a2 "$(run_checks)" -cn '$a1 + $a2'
 rm -f "${TMPCRT}" > /dev/null 2>&1
