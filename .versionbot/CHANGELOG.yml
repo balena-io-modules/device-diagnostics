@@ -1,4 +1,19 @@
 - commits:
+    - subject: Add argument for balena registry
+      hash: fa757245e8bb76c6aa74b2af9adc33e1a1fa24b6
+      body: |
+        Fixes https://github.com/balena-io/device-diagnostics/issues/249
+      footer:
+        Connected-to: 'https://github.com/balena-io/device-diagnostics/issues/249'
+        connected-to: 'https://github.com/balena-io/device-diagnostics/issues/249'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Hugh Brown <hugh@balena.io>
+        signed-off-by: Hugh Brown <hugh@balena.io>
+      author: Hugh Brown
+  version: 4.20.15
+  date: 2020-10-09T19:47:20.146Z
+- commits:
     - subject: 'diagnostics: grab half a year of HUP logs'
       hash: 7d1db6f11510caf05f5a4bce5ce862ef709e07d4
       body: ''
