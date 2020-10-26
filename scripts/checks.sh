@@ -209,9 +209,12 @@ function test_disk_expansion()
 
 function test_data_partition_mounted()
 {
-	if ! lsblk -J -o NAME,MOUNTPOINT | jq -er '.blockdevices[].children[]? | select (.mountpoint == "/mnt/data") | length >= 1' > /dev/null ; then
-		echo "${FUNCNAME[0]}" "Data partition not mounted"
-	fi
+	data_mounted=$(awk '($2 == "/mnt/data") {print $4}' /proc/mounts)
+	case $data_mounted in
+		*rw*) return ;;
+		*ro*) echo "${FUNCNAME[0]}" "Data partition not mounted read-write" ;;
+		"") echo "${FUNCNAME[0]}" "Data partition not mounted" ;;
+	esac
 }
 
 function is_valid_check()
