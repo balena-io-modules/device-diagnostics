@@ -1,4 +1,18 @@
 - commits:
+    - subject: Check if the data partition is mounted read-write
+      hash: 03e9a6c2b885849b7dc1fa32c04321a075545475
+      body: ''
+      footer:
+        Connects-to: '#251'
+        connects-to: '#251'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Hugh Brown <hugh@balena.io>
+        signed-off-by: Hugh Brown <hugh@balena.io>
+      author: Hugh Brown
+  version: 4.20.16
+  date: 2020-10-26T21:05:45.909Z
+- commits:
     - subject: Add argument for balena registry
       hash: fa757245e8bb76c6aa74b2af9adc33e1a1fa24b6
       body: |
