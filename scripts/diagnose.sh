@@ -135,6 +135,7 @@ commands=(
 	'sysctl -a'
 	'systemctl list-units --failed --no-pager'
 	'top -b -n 1'
+	'grep -vE \"/var/cache/ldconfig/aux-cache|md5sum|/etc/hostname|/etc/machine-id|/etc/resin-supervisor/supervisor.conf|/etc/systemd/timesyncd.conf|/home/root/.rnd\" /resinos.fingerprint | md5sum --quiet -c ' # https://github.com/balena-os/meta-balena/issues/1618
 
 	# SUPERVISOR specific commands
 	'echo === SUPERVISOR ==='
