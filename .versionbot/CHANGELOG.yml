@@ -1,4 +1,28 @@
 - commits:
+    - subject: Add md5sum fingerprint checking
+      hash: 278927b2ceb21244f8453adb50ecca936d163f75
+      body: >
+        Filter out a number of files that are likely to change, or cause
+
+        problems when acessing.  Reference:
+
+
+        -
+        https://jel.ly.fish/view-all-support-issues/scratchpad-entry-23139ed6-e984-47dc-a133-69feb4b7ffa7
+
+        -
+        https://jel.ly.fish/view-all-support-issues/scratchpad-entry-handful-of-files-fail-fingerprint-checks-aca9e981-a3e3-429c-9542-ecc4f35b185a
+      footer:
+        Change-type: patch
+        change-type: patch
+        Connects-to: '#106'
+        connects-to: '#106'
+        Signed-off-by: Hugh Brown <hugh@balena.io>
+        signed-off-by: Hugh Brown <hugh@balena.io>
+      author: Hugh Brown
+  version: 4.20.17
+  date: 2020-10-27T20:43:15.084Z
+- commits:
     - subject: Check if the data partition is mounted read-write
       hash: 03e9a6c2b885849b7dc1fa32c04321a075545475
       body: ''
