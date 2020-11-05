@@ -128,7 +128,7 @@ commands=(
 	'find /mnt/data/*hup/*log -mtime -180 | xargs tail -n 250 -v'
 	'journalctl --no-pager --no-hostname  --list-boots'
 	'journalctl --no-pager --no-hostname -n500 -a'
-	'journalctl --no-pager --no-hostname -pwarning -a'
+	'journalctl --no-pager --no-hostname -pwarning -perr -a'
 	'ls -lR /proc/ 2>/dev/null | grep '/data/' | grep \(deleted\)'
 	'ps'
 	'stat /var/lock/*hup.lock'
