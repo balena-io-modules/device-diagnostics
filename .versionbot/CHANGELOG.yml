@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'meta: update codeowners'
+      hash: 417c61ecd5b9b42fd2e4ac6c51a6eb0ea8c691ff
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.19
+  date: 2020-11-05T15:16:29.937Z
+- commits:
     - subject: 'diagnostics: grab error from journal'
       hash: 343546b45fa70028b72dd08d8ed6170d5fab71a6
       body: ''
