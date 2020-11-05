@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'diagnostics: grab error from journal'
+      hash: 343546b45fa70028b72dd08d8ed6170d5fab71a6
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.18
+  date: 2020-11-05T15:09:30.097Z
+- commits:
     - subject: Add md5sum fingerprint checking
       hash: 278927b2ceb21244f8453adb50ecca936d163f75
       body: >
