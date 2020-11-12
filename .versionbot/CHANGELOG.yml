@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'supervisor: stop checking for remote/local mismatch'
+      hash: 5910bf85d57b5628bda4e10183ba9d089bceee63
+      body: ''
+      footer:
+        Connects-to: 'https://github.com/balena-io/balena-api/pull/2786'
+        connects-to: 'https://github.com/balena-io/balena-api/pull/2786'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.20
+  date: 2020-11-12T22:08:09.867Z
+- commits:
     - subject: 'meta: update codeowners'
       hash: 417c61ecd5b9b42fd2e4ac6c51a6eb0ea8c691ff
       body: ''
