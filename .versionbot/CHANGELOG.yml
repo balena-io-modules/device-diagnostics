@@ -1,4 +1,16 @@
 - commits:
+    - subject: stick to consistent tabbing
+      hash: 58f426a40da59f925052d539d4880ed8c40fe329
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.21
+  date: 2020-11-12T22:14:09.751Z
+- commits:
     - subject: 'supervisor: stop checking for remote/local mismatch'
       hash: 5910bf85d57b5628bda4e10183ba9d089bceee63
       body: ''
