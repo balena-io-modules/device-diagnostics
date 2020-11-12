@@ -6,9 +6,9 @@ source /etc/profile
 
 # Newer OS versions do not set REGISTRY_ENDPOINT via
 # /usr/sbin/resin-vars; that's because the information provided by
-# balena cloud is meant to be the source of truth.  Thus, we add the
+# balena cloud is meant to be the source of truth. Thus, we add the
 # REGISTRY_ENDPOINT argument for this script, and will supply that
-# argument in the proxy when this script is called.  To avoid having
+# argument in the proxy when this script is called. To avoid having
 # them overwritten by older versions of resin-vars, we save the CLI
 # arguments and pop them back out after sourcing resin-vars.
 
@@ -57,15 +57,15 @@ mapfile -t USERVICES < <(${TIMEOUT_CMD} "${ENG}" ps --format "{{.Names}}" | awk 
 # Helper functions
 function help()
 {
-        cat << EOF
+	cat << EOF
 Script to run checks on balenaOS devices
 
 Options:
-  -h, --help
-        Display this help and exit.
+	-h, --help
+		Display this help and exit.
 
-  --balenaos-registry
-        Upstream registry to use for host OS applications.
+	--balenaos-registry
+		Upstream registry to use for host OS applications.
 EOF
 }
 
@@ -146,7 +146,7 @@ function test_balena_api()
 	if [[ "${api_ret}" != "OK" ]]; then
 		# from man curl:
 		# EXIT CODES
-		# 60     Peer certificate cannot be authenticated with known CA certificates.
+		# 60	 Peer certificate cannot be authenticated with known CA certificates.
 		if [ "${api_retval}" -eq 60 ]; then
 			echo "${FUNCNAME[0]}: There may be a firewall blocking traffic to ${API_ENDPOINT} (SSL errors)"
 			return
@@ -345,22 +345,22 @@ function test_throttling_vcgencmd(){
 		local -i RAW_THROTTLE_OUTPUT
 		RAW_THROTTLE_OUTPUT=$(vcgencmd get_throttled | awk -F"=" '{print $2}')
 		# Reference: https://www.raspberrypi.org/documentation/raspbian/applications/vcgencmd.md
-		# Bit 	Meaning
-		# 0 	Under-voltage detected
-		# 1 	Arm frequency capped
-		# 2 	Currently throttled
-		# 3 	Soft temperature limit active
-		# 16 	Under-voltage has occurred
-		# 17 	Arm frequency capping has occurred
-		# 18 	Throttling has occurred
-		# 19 	Soft temperature limit has occurred
+		# Bit	Meaning
+		# 0	Under-voltage detected
+		# 1	Arm frequency capped
+		# 2	Currently throttled
+		# 3	Soft temperature limit active
+		# 16	Under-voltage has occurred
+		# 17	Arm frequency capping has occurred
+		# 18	Throttling has occurred
+		# 19	Soft temperature limit has occurred
 		if (( RAW_THROTTLE_OUTPUT > 0 )); then
-			(( RAW_THROTTLE_OUTPUT & 0x2 ))		&& THROTTLE_MSG="${THROTTLE_MSG} ARM freq capped"
-			(( RAW_THROTTLE_OUTPUT & 0x4 ))		&& THROTTLE_MSG="${THROTTLE_MSG} Currently throttled"
-			(( RAW_THROTTLE_OUTPUT & 0x8 ))		&& THROTTLE_MSG="${THROTTLE_MSG} Soft temp limit active"
-			(( RAW_THROTTLE_OUTPUT & 0x20000 ))	&& THROTTLE_MSG="${THROTTLE_MSG} ARM freq capping has occurred"
-			(( RAW_THROTTLE_OUTPUT & 0x40000 ))	&& THROTTLE_MSG="${THROTTLE_MSG} Throttling has occured"
-			(( RAW_THROTTLE_OUTPUT & 0x80000 ))	&& THROTTLE_MSG="${THROTTLE_MSG} Soft temp limnit has occurred"
+			(( RAW_THROTTLE_OUTPUT & 0x2 )) && THROTTLE_MSG="${THROTTLE_MSG} ARM freq capped"
+			(( RAW_THROTTLE_OUTPUT & 0x4 )) && THROTTLE_MSG="${THROTTLE_MSG} Currently throttled"
+			(( RAW_THROTTLE_OUTPUT & 0x8 )) && THROTTLE_MSG="${THROTTLE_MSG} Soft temp limit active"
+			(( RAW_THROTTLE_OUTPUT & 0x20000 )) && THROTTLE_MSG="${THROTTLE_MSG} ARM freq capping has occurred"
+			(( RAW_THROTTLE_OUTPUT & 0x40000 )) && THROTTLE_MSG="${THROTTLE_MSG} Throttling has occurred"
+			(( RAW_THROTTLE_OUTPUT & 0x80000 )) && THROTTLE_MSG="${THROTTLE_MSG} Soft temp limnit has occurred"
 		fi
 		if [[ -n $THROTTLE_MSG ]]; then
 			echo "${FUNCNAME[0]}" "Raspberry Pi throttling events detected: $THROTTLE_MSG"
@@ -470,7 +470,7 @@ restarts and may be crashlooping (most recent start time: ${start_timestamp})"
 
 function test_container_engine_responding() {
 	if ! ERRMSG=$(${TIMEOUT_CMD} "${ENG}" ps 2>&1); then
-	    echo "${FUNCNAME[0]}" "Error querying container engine: ${ERRMSG}"
+		echo "${FUNCNAME[0]}" "Error querying container engine: ${ERRMSG}"
 	fi
 }
 
@@ -582,22 +582,22 @@ function run_checks()
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
-        arg="$1"
+	arg="$1"
 
-        case $arg in
-                -h|--help)
-                        help
-                        exit 0
-                        ;;
-                --balenaos-registry)
-                        if [ -z "$2" ]; then
-                                log ERROR "\"$1\" argument needs a value."
-                        fi
-                        REGISTRY_ENDPOINT=$2
-                        shift
-                        ;;
-        esac
-        shift
+	case $arg in
+		-h|--help)
+			help
+			exit 0
+			;;
+		--balenaos-registry)
+			if [ -z "$2" ]; then
+				log ERROR "\"$1\" argument needs a value."
+			fi
+			REGISTRY_ENDPOINT=$2
+			shift
+			;;
+	esac
+	shift
 done
 
 jq --argjson a1 "$(announce_version)" --argjson a2 "$(run_checks)" -cn '$a1 + $a2'
