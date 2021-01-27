@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'networking: dockerhub access is no longer a requirement'
+      hash: 706cf09efeae57dfd165d957fbe27ba8d536ad2f
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.22
+  date: 2021-01-27T15:50:11.152Z
+- commits:
     - subject: stick to consistent tabbing
       hash: 58f426a40da59f925052d539d4880ed8c40fe329
       body: ''
