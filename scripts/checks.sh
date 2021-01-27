@@ -127,15 +127,6 @@ function test_ping()
 	fi
 }
 
-function test_dockerhub()
-{
-	local -i balena_results
-	balena_results=$(${TIMEOUT_CMD} ${ENG} search balena --limit 10 2>/dev/null | awk '/balena/' | wc -l)
-	if (( balena_results != 10 )); then
-		echo "${FUNCNAME[0]}: Could not query Docker Hub"
-	fi
-}
-
 function test_balena_api()
 {
 	# can we reach the API?
@@ -271,7 +262,6 @@ function check_networking()
 		test_wifi
 		test_ping
 		test_balena_api
-		test_dockerhub
 		test_balena_registry
 	)
 	run_tests "${FUNCNAME[0]}" "${tests[@]}"
