@@ -103,6 +103,7 @@ commands=(
 	'ifconfig'
 	'iptables -n -L'
 	'iptables -n -t nat -L'
+	'journalctl --no-pager --no-hostname -a -u ModemManager'
 	'journalctl --no-pager --no-hostname -n 200 -a -u \"openvpn*\"'
 	'ls -l /mnt/boot/system-connections'
 	'mmcli -m 0'
