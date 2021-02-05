@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'diagnose: grab any logs from ModemManager'
+      hash: a9e3e0cae45ac2d5ecb35ed383d76ba53ac1c45f
+      body: ''
+      footer:
+        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/262'
+        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/262'
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.23
+  date: 2021-02-05T18:27:48.981Z
+- commits:
     - subject: 'networking: dockerhub access is no longer a requirement'
       hash: 706cf09efeae57dfd165d957fbe27ba8d536ad2f
       body: ''
