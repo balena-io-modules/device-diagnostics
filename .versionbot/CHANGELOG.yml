@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'device-type: grab device-type.json, drop custom OS detection'
+      hash: adf5aa1c273c7de9bd74c2e17ebddc30191722b4
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.24
+  date: 2021-02-24T15:35:11.037Z
+- commits:
     - subject: 'diagnose: grab any logs from ModemManager'
       hash: a9e3e0cae45ac2d5ecb35ed383d76ba53ac1c45f
       body: ''
