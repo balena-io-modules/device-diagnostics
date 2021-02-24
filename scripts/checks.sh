@@ -366,10 +366,6 @@ function check_balenaOS()
 	if grep -q -e '^VERSION="1.*$' -e '^PRETTY_NAME="Resin OS 1.*$' /etc/os-release; then
 		log_status "${BAD}" "${FUNCNAME[0]}" "ResinOS 1.x is now completely deprecated"
 	else
-		if [[ "${DEVICE_TYPE}" != "${SLUG}" ]]; then
-			log_status "${BAD}" "${FUNCNAME[0]}" "Custom balenaOS 2.x detected (custom device type: ${SLUG})"
-			return
-		fi
 		local -i versions
 		versions=$(CURL_CA_BUNDLE=${TMPCRT} curl -qs --retry 3 --max-time 5 --retry-connrefused -X GET \
 			-H "Content-Type: application/json" \

@@ -118,6 +118,7 @@ commands=(
 	'cat /etc/os-release'
 	'cat /mnt/boot/config.json | $filter_config_keys'
 	'cat /mnt/boot/config.txt' # only for rpi...
+	'cat /mnt/boot/device-type.json'
 	'cat /mnt/boot/extlinux/extlinux.conf'
 	'cat /mnt/boot/resinOS_uEnv.txt' # ibidem
 	'cat /mnt/boot/uEnv.txt' # only for uboot devices
