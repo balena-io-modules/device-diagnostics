@@ -15,8 +15,14 @@ source /etc/profile
 # Set aside arguments, come back to them later
 current_args=( "$@" )
 set --
+# We still need to include resin-vars on legacy systems
+if [ -f /usr/sbin/resin-vars ]; then
 # shellcheck disable=SC1091
-source /usr/sbin/resin-vars
+  source /usr/sbin/resin-vars
+else
+# shellcheck disable=SC1091
+  source /usr/sbin/balena-config-vars
+fi
 # Restore arguments passed in originally
 set -- "${current_args[@]}"
 # shellcheck disable=SC1091
