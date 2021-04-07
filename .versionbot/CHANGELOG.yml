@@ -1,4 +1,19 @@
 - commits:
+    - subject: 'checks: Allow temperature checks to run on Jetson devices'
+      hash: a4918aaa0324aaed69b4c2776ce4b0c78efdeb49
+      body: |
+        ... and ignore the PMIC-Die zone, because the actual
+        temperature cannot be determined. This because the driver
+        reports a constant value of 100C.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alexandru Costache <alexandru@balena.io>
+        signed-off-by: Alexandru Costache <alexandru@balena.io>
+      author: Alexandru Costache
+  version: 4.20.25
+  date: 2021-03-23T07:11:11.200Z
+- commits:
     - subject: 'device-type: grab device-type.json, drop custom OS detection'
       hash: adf5aa1c273c7de9bd74c2e17ebddc30191722b4
       body: ''
