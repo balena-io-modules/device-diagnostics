@@ -212,7 +212,7 @@ function is_valid_check()
 {
 	local list_type="${1}"
 	shift
-	local found=1
+	local found=1 i
 	read -r -a args <<< "$@"
 	for i in ${args[*]}
 	do
@@ -302,18 +302,24 @@ function check_temperature(){
 
 function test_current_temperature(){
 	# see https://github.com/balena-io/device-diagnostics/issues/168
-	local SLUG_BLACKLIST=('jetson-nano' 'jn30b-nano')
-	if is_valid_check BLACKLIST "${SLUG_BLACKLIST[*]}"; then
-		local -i temp
-		for i in /sys/class/thermal/thermal* ; do
-			if [ -e "$i/temp" ]; then
-				temp=$(cat "$i/temp")
-				if (( temp >= temperature_threshold )); then
+	SLUG_WHITELIST=('astro-tx2' 'blackboard-tx2' 'cti-rogue-xavier' 'jetson-nano-2gb-devkit' 'jetson-nano-emmc' 'jetson-nano' \
+		'jetson-tx1' 'jetson-tx2' 'jetson-xavier-nx-devkit-emmc' 'jetson-xavier-nx-devkit' 'jetson-xavier' \
+		'jn30b-nano' 'n310-tx2' 'n510-tx2' 'nru120s-xavier' 'orbitty-tx2' 'photon-nano' 'photon-xavier-nx' \
+		'spacely-tx2' 'skx2' 'apollo-tx2' 'j120-tx2' 'srd3-tx2')
+	local -i temp
+	for i in /sys/class/thermal/thermal* ; do
+		if [ -e "$i/temp" ]; then
+			temp=$(cat "$i/temp")
+			if (( temp >= temperature_threshold )); then
+				if is_valid_check WHITELIST "${SLUG_WHITELIST[*]}" && [ -e "$i/type" ] && grep -q "PMIC-Die" "$i/type"; then
+					:
+					# Ignore PMIC-Die because it reports a dummy value on Jetsons: https://forums.developer.nvidia.com/t/pmic-temperature-in-tegrastats-output/75582
+				else
 					echo "${FUNCNAME[0]}" "Temperature above $(( temperature_threshold / 1000 ))C detected ($i)"
 				fi
 			fi
-		done
-	fi
+		fi
+	done
 }
 
 
