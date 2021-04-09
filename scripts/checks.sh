@@ -302,7 +302,7 @@ function check_temperature(){
 
 function test_current_temperature(){
 	# see https://github.com/balena-io/device-diagnostics/issues/168
-	SLUG_WHITELIST=('astro-tx2' 'blackboard-tx2' 'cti-rogue-xavier' 'jetson-nano-2gb-devkit' 'jetson-nano-emmc' 'jetson-nano' \
+	SLUG_WHITELIST=('astro-tx2' 'blackboard-tx2' 'cti-rogue-xavier' 'jetson-nano-2gb-devkit' 'jetson-nano-emmc' 'jetson-nano' 'floyd-nano' \
 		'jetson-tx1' 'jetson-tx2' 'jetson-xavier-nx-devkit-emmc' 'jetson-xavier-nx-devkit' 'jetson-xavier' \
 		'jn30b-nano' 'n310-tx2' 'n510-tx2' 'nru120s-xavier' 'orbitty-tx2' 'photon-nano' 'photon-xavier-nx' \
 		'spacely-tx2' 'skx2' 'apollo-tx2' 'j120-tx2' 'srd3-tx2')
