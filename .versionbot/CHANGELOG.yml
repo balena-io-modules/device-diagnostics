@@ -1,4 +1,18 @@
 - commits:
+    - subject: 'checks: Add Floyd Nano device type to temperature whitelist'
+      hash: 2787e9f25d1e38161cf088313bd6afc2189ee249
+      body: |
+        This is a newly supported device, let's add it to our
+        list for temperature checking.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alexandru Costache <alexandru@balena.io>
+        signed-off-by: Alexandru Costache <alexandru@balena.io>
+      author: Alexandru Costache
+  version: 4.20.26
+  date: 2021-04-09T12:26:00.025Z
+- commits:
     - subject: 'checks: Allow temperature checks to run on Jetson devices'
       hash: a4918aaa0324aaed69b4c2776ce4b0c78efdeb49
       body: |
