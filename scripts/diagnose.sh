@@ -3,9 +3,14 @@ DIAGNOSE_VERSION=4.20.26
 # Don't run anything before this source as it sets PATH here
 # shellcheck disable=SC1091
 source /etc/profile
+# We still need to include resin-vars on legacy systems
+if [ -f /usr/sbin/resin-vars ]; then
 # shellcheck disable=SC1091
-source /usr/sbin/resin-vars
-
+  source /usr/sbin/resin-vars
+else
+# shellcheck disable=SC1091
+  source /usr/sbin/balena-config-vars
+fi
 # workaround for self-signed certs, waiting for https://github.com/balena-os/meta-balena/issues/1398
 TMPCRT=$(mktemp)
 echo "${BALENA_ROOT_CA}" | base64 -d > "${TMPCRT}"
