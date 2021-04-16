@@ -1,4 +1,21 @@
 - commits:
+    - subject: 'device-diagnostics: update references to resin-vars'
+      hash: 912f0f9ae045a4a2b1656a62af4953c3ab9c9bf1
+      body: |
+        Update all references to the 'resin-vars' script with
+        'balena-config-vars' as it has been renamed. Add a conditional
+        test for compatibility with legacy systems.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Changelog-entry: 'device-diagnostics: update references to resin-vars'
+        changelog-entry: 'device-diagnostics: update references to resin-vars'
+        Signed-off-by: Mark Corbin <mark@balena.io>
+        signed-off-by: Mark Corbin <mark@balena.io>
+      author: Mark Corbin
+  version: 4.20.27
+  date: 2021-04-12T09:11:11.264Z
+- commits:
     - subject: 'checks: Add Floyd Nano device type to temperature whitelist'
       hash: 2787e9f25d1e38161cf088313bd6afc2189ee249
       body: |
