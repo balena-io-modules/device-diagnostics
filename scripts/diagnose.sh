@@ -77,6 +77,11 @@ commands=(
 	'journalctl --no-pager --no-hostname -n 1000 -at balenad'
 	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
 
+	# Boot performance
+	'echo === BOOT ==='
+	'systemd-analyze'
+	'systemd-analyze critical-chain'
+
 	# HARDWARE specific commands
 	'echo === HARDWARE ==='
 	'cat /proc/cpuinfo'
