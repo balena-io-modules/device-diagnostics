@@ -1,4 +1,22 @@
 - commits:
+    - subject: Add diagnostics for boot performance
+      hash: 2d0538a5e246ef4751b8922e9089c0a886abe815
+      body: |
+        Some users have applications that are sensitive to boot performance, and
+        diagnostics can help trace the cause of regressions in boot time, or
+        misbehaving services.
+
+        Add `systemd-analyze` and `systemd-analyze critical-chain` to
+        diagnostics to get an overall boot time, as well as a breakdown by unit.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Joseph Kogut <joseph@balena.io>
+        signed-off-by: Joseph Kogut <joseph@balena.io>
+      author: Joseph Kogut
+  version: 4.20.28
+  date: 2021-05-04T18:37:06.645Z
+- commits:
     - subject: 'device-diagnostics: update references to resin-vars'
       hash: 912f0f9ae045a4a2b1656a62af4953c3ab9c9bf1
       body: |
