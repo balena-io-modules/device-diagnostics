@@ -1,4 +1,17 @@
 - commits:
+    - subject: Rename resin-supervisor to balena-supervisor
+      hash: 627d46570ea4db28a906fbc3530d57db23b4d925
+      body: |
+        Keep references to resin namespaces for now
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+  version: 4.20.29
+  date: 2021-05-06T20:27:37.334Z
+- commits:
     - subject: Add diagnostics for boot performance
       hash: 2d0538a5e246ef4751b8922e9089c0a886abe815
       body: |
