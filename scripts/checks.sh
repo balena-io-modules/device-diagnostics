@@ -475,7 +475,7 @@ function test_container_engine_responding() {
 function check_supervisor()
 {
 	# TODO: grab healthcheck results here
-	if ! (${TIMEOUT_CMD} ${ENG} ps | grep -q resin_supervisor) 2> /dev/null; then
+	if ! (${TIMEOUT_CMD} ${ENG} ps --filter "name=resin_supervisor" --filter "name=balena_supervisor" -q) 2> /dev/null; then
 		log_status "${BAD}" "${FUNCNAME[0]}" "Supervisor is NOT running"
 	else
 		if ! curl -qs --max-time 10 "localhost:${LISTEN_PORT}/v1/healthy" > /dev/null; then

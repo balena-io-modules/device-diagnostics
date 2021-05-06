@@ -147,16 +147,16 @@ commands=(
 	'sysctl -a'
 	'systemctl list-units --failed --no-pager'
 	'top -b -n 1'
-	'grep -vE \"/var/cache/ldconfig/aux-cache|md5sum|/etc/hostname|/etc/machine-id|/etc/resin-supervisor/supervisor.conf|/etc/systemd/timesyncd.conf|/home/root/.rnd\" /resinos.fingerprint | md5sum --quiet -c ' # https://github.com/balena-os/meta-balena/issues/1618
+	'grep -vE \"/var/cache/ldconfig/aux-cache|md5sum|/etc/hostname|/etc/machine-id|/etc/balena-supervisor/supervisor.conf|/etc/resin-supervisor/supervisor.conf|/etc/systemd/timesyncd.conf|/home/root/.rnd\" /resinos.fingerprint | md5sum --quiet -c ' # https://github.com/balena-os/meta-balena/issues/1618
 
 	# SUPERVISOR specific commands
 	'echo === SUPERVISOR ==='
-	'$ENG exec resin_supervisor cat /etc/resolv.conf'
-	'$ENG logs resin_supervisor'
+	'$ENG exec $($ENG ps --filter "name=resin_supervisor" --filter "name=balena_supervisor" -q) cat /etc/resolv.conf'
+	'$ENG logs $($ENG ps --filter "name=resin_supervisor" --filter "name=balena_supervisor" -q)'
 	'curl --max-time 5 localhost:'"${LISTEN_PORT}"'/v1/healthy'
-	'journalctl --no-pager --no-hostname -n 200 -a -u resin-supervisor'
+	'journalctl --no-pager --no-hostname -n 200 -a -u balena-supervisor -u resin-supervisor'
 	'ls -lR /tmp/*-supervisor/**/*'
-	'systemctl status resin-supervisor --no-pager'
+	'systemctl status balena-supervisor resin-supervisor --no-pager'
 	'tail -500 /var/log/supervisor-log/resin_supervisor_stdout.log' # legacy
 
 	# TIME specific commands
