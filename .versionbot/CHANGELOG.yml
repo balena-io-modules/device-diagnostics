@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'throttling: drop vcgencmd-dependent check'
+      hash: 35d4281264e3120207220c8ee3e646b65a19a753
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: Matthew McGinn
+  version: 4.20.30
+  date: 2021-05-20T14:06:58.361Z
+- commits:
     - subject: Rename resin-supervisor to balena-supervisor
       hash: 627d46570ea4db28a906fbc3530d57db23b4d925
       body: |
