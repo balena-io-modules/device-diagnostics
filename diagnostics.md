@@ -140,16 +140,6 @@ If there are sensors, this check confirms that the temperature is below 80C (at 
 
 This looks for evidence of CPU throttling in kernel log messages.
 
-#### test_throttling_vcgencmd
-##### Summary
-
-This test is currently limited to Raspberry Pi 4 devices, and uses the Raspberry Pi utility `vcgencmd get_throttled` to query the device for evidence of CPU throttling. 
-
-#### Triage
-In order to triage, either reduce the load on the device or replace/reseat/upgrade any heatsinks that may be attached to
-the CPU directly. Additionally, adding other cooling mechanisms like fans or improving the location of the device can
-help address heat issues.
-
 ### check_os_rollback
 #### Summary
 This check confirms that the host OS has not noted any failed boots & rollbacks.
