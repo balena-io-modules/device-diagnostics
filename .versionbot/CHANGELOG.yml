@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'meta: update codeowners'
+      hash: bf3a489f61587a0c2e77a965dd3174763e00f3e8
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+      author: xginn8
+  version: 4.20.31
+  date: 2021-05-20T14:25:36.885Z
+- commits:
     - subject: 'throttling: drop vcgencmd-dependent check'
       hash: 35d4281264e3120207220c8ee3e646b65a19a753
       body: ''
