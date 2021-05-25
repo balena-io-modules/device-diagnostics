@@ -1,4 +1,16 @@
 - commits:
+    - subject: 'supervisor: use output to confirm supervisor is up & running'
+      hash: ca512da7ed807e326b1111d456473f0c05fd39b7
+      body: ''
+      footer:
+        Signed-off-by: Matthew McGinn <matthew@balena.io>
+        signed-off-by: Matthew McGinn <matthew@balena.io>
+        Change-type: patch
+        change-type: patch
+      author: Matthew McGinn
+  version: 4.20.32
+  date: 2021-05-25T14:18:50.852Z
+- commits:
     - subject: 'meta: update codeowners'
       hash: bf3a489f61587a0c2e77a965dd3174763e00f3e8
       body: ''
