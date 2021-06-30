@@ -1,4 +1,14 @@
 - commits:
+    - subject: Delete CODEOWNERS
+      hash: 7e6c049b523a51867c36dbaead7da782a75969ec
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: dfunckt
+  version: 4.20.33
+  date: 2021-06-30T21:13:41.543Z
+- commits:
     - subject: 'supervisor: use output to confirm supervisor is up & running'
       hash: ca512da7ed807e326b1111d456473f0c05fd39b7
       body: ''
