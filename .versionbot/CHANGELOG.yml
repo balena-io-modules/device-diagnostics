@@ -1,4 +1,19 @@
 - commits:
+    - subject: 'checks: Filter dnsmasq servers by running instance'
+      hash: 1d0416afc4c57e96a941fbf70bec97d1674c4d6a
+      body: |
+        Avoid checking DNS servers that have since been
+        changed/removed by only parsing the logs of the running
+        dnsmasq instance.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+  version: 4.20.34
+  date: 2021-07-05T15:50:36.262Z
+- commits:
     - subject: Delete CODEOWNERS
       hash: 7e6c049b523a51867c36dbaead7da782a75969ec
       body: ''
