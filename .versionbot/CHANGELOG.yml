@@ -1,4 +1,14 @@
 - commits:
+    - subject: add docker network information
+      hash: b996a60251ac86181ad9ab3fccd457630ccde1f2
+      body: ''
+      footer:
+        Change-type: minor
+        change-type: minor
+      author: Martin Rauscher
+  version: 4.21.0
+  date: 2021-07-06T08:28:59.109Z
+- commits:
     - subject: 'checks: Filter dnsmasq servers by running instance'
       hash: 1d0416afc4c57e96a941fbf70bec97d1674c4d6a
       body: |
