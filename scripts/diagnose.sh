@@ -72,10 +72,12 @@ commands=(
 	'$ENG stats --all --no-stream'
 	'$ENG system df'
 	'$ENG volume ls'
+	'$ENG network ls'
 	'systemctl status $ENG --no-pager'
 	'journalctl --no-pager --no-hostname -n 200 -a -u $ENG'
 	'journalctl --no-pager --no-hostname -n 1000 -at balenad'
 	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
+	'$ENG network inspect \$($ENG ps --quiet | tr \"\\n\" \" \")'
 
 	# Boot performance
 	'echo === BOOT ==='
