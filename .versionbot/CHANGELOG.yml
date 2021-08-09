@@ -1,4 +1,16 @@
 - commits:
+    - subject: Rename applications to fleets as appropriate
+      hash: 5efa7a77a7e86989182a2a17f7850c90aeb8fafa
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Chris Crocker-White <chriscw@balena.io>
+        signed-off-by: Chris Crocker-White <chriscw@balena.io>
+      author: Chris Crocker-White
+  version: 4.21.1
+  date: 2021-08-09T21:07:30.055Z
+- commits:
     - subject: add docker network information
       hash: b996a60251ac86181ad9ab3fccd457630ccde1f2
       body: ''
