@@ -71,7 +71,7 @@ Options:
 		Display this help and exit.
 
 	--balenaos-registry
-		Upstream registry to use for host OS applications.
+		Upstream registry to use for host OS apps.
 EOF
 }
 
