@@ -36,7 +36,7 @@ Oversubscribed memory can lead to OOM events (learn more about the out-of-memory
 
 #### Triage
 Using a tool like `top`, scan the process table for which process(es) are consuming the most memory (`%VSZ`) and check
-for memory leaks in those applications.
+for memory leaks in those services.
 
 ### check_container_engine
 #### Summary
@@ -66,12 +66,11 @@ This check combines a few metrics about the local storage media and reports back
 #### test_disk_space
 ##### Summary
 This test simply confirms that a given device is running beneath a given disk utilization threshold (set to 90% at the moment).
-If a local disk fills up, there are often knock-on issues in the supervisor and application containers.
+If a local disk fills up, there are often knock-on issues in the supervisor and release containers.
 
 ##### Triage
 Run `du -a /mnt/data/docker | sort -nr | head -10` in the hostOS shell to list the ten largest files and directories.
-If the results indicate large files in `/mnt/data/docker/containers`, this result often indicates a leakage in an
-application container that can be cleaned up (runaway logs, too much local data, etc). Further info can be found
+If the results indicate large files in `/mnt/data/docker/containers`, this result often indicates a leakage in a container that can be cleaned up (runaway logs, too much local data, etc). Further info can be found
 in the [Device Debugging Masterclass](https://www.balena.io/docs/learn/more/masterclasses/device-debugging/#111-out-of-space-issues).
 
 #### test_write_latency
@@ -185,12 +184,12 @@ restrictive local network, or an unreliable connection.
 
 ### check_user_services
 #### Summary
-Any checks with names beginning with `service_` come from user applications. These checks allow users to provide their
+Any checks with names beginning with `service_` come from user services. These checks allow users to provide their
 own health checks using the [HEALTHCHECK directive](https://docs.docker.com/engine/reference/builder/#healthcheck)
 defined in the Dockerfile. Any healthcheck output will be collected as-is, truncated to 100 characters, and shown as
 output along with the exit code of the healthcheck.
 
 #### Triage
-These checks are wholly limited in scope to user services and should be triaged by the application developer.
+These checks are wholly limited in scope to user services and should be triaged by the developer.
 
 #### DIAGNOSE_VERSION=4.21.0
