@@ -97,7 +97,7 @@ function test_upstream_dns()
 {
 	# force dnsmasq to print statistics to journal to read them back
 	systemctl kill -s USR1 dnsmasq
-	for i in $(journalctl _SYSTEMD_INVOCATION_ID="$(systemctl show -p InvocationID --value dnsmasq.service)" | awk 'match($0, /[12]?[0-9]?[0-9]\.[12]?[0-9]?[0-9]\.[12]?[0-9]?[0-9]\.[12]?[0-9]?[0-9]/) {print substr($0, RSTART, RLENGTH)}'| sort -u); do
+	for i in $(journalctl _SYSTEMD_INVOCATION_ID="$(systemctl show -p InvocationID --value dnsmasq.service)" | awk '{print $NF}' | egrep -o '([12]?[0-9]?[0-9]\.[12]?[0-9]?[0-9]\.[12]?[0-9]?[0-9]\.[12]?[0-9]?[0-9])|(([a-f0-9:]+:+)+[a-f0-9]+)' | sort -u); do
 		# shellcheck disable=SC2001
 		for j in "${external_fqdn}" "$(echo "${API_ENDPOINT}" | sed -e 's@^https*://@@')"; do
 			if ! nslookup "${j}" "${i}" > /dev/null 2>&1; then
