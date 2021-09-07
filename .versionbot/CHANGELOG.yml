@@ -1,4 +1,16 @@
 - commits:
+    - subject: Check for IPv6 addresses
+      hash: 2ec5f867ecbda031779bc75941772390cce9743c
+      body: >
+        the upstream dns diagnostics check does not currently check for IPv6
+        addresses
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Zane Hitchcox
+  version: 4.21.2
+  date: 2021-09-07T11:41:19.845Z
+- commits:
     - subject: Rename applications to fleets as appropriate
       hash: 5efa7a77a7e86989182a2a17f7850c90aeb8fafa
       body: ''
