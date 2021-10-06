@@ -1,4 +1,16 @@
 - commits:
+    - subject: >-
+        skip first line and first 3 columns to avoid matching date instead of
+        IPv6 addresses
+      hash: 1cf9803ecddba05455337ad19571083f4473f3c4
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Zane Hitchcox
+  version: 4.21.4
+  date: 2021-10-06T04:16:18.344Z
+- commits:
     - subject: Deprecate references to VARIANT from os-config
       hash: 4bbe3433b9ef8b2e4258ea9759bf6415a2695378
       body: ''
