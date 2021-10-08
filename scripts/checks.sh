@@ -42,6 +42,8 @@ TIMEOUT_CMD="timeout --kill-after=$(( TIMEOUT * 2 )) ${TIMEOUT}"
 mountpoint="/var/lib/${ENG}"
 
 external_fqdn="0.resinio.pool.ntp.org"
+IPV4_ENDPOINT="ipv4.google.com"
+IPV6_ENDPOINT="ipv6.google.com"
 
 # workaround for self-signed certs, waiting for https://github.com/balena-os/meta-balena/issues/1398
 TMPCRT=$(mktemp)
@@ -163,6 +165,44 @@ function test_balena_registry()
 	${TIMEOUT_CMD} ${ENG} logout "${REGISTRY_ENDPOINT}" > /dev/null
 }
 
+function test_ipv4_stack()
+{
+	# can we reach an IPv4 HTTP service ?
+	local ipv4_check
+	local -i res 
+	ipv4_check=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV4_ENDPOINT}")
+	res=$?
+	if test "$res" != "0"; then
+		# from man curl:
+		# EXIT CODES
+		# 60	 Peer certificate cannot be authenticated with known CA certificates.
+		if [ "${res}" -eq 60 ]; then
+		echo "${FUNCNAME[0]}: There may be a firewall blocking traffic to https://${IPV4_ENDPOINT} (SSL errors)"
+		return
+		fi
+		echo "${FUNCNAME[0]}: Could not contact https://${IPV4_ENDPOINT}"
+	fi
+}
+
+function test_ipv6_stack()
+{
+	# can we reach an IPv6 HTTP service ?
+	local ipv6_check
+	local -i res
+	ipv6_check=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV6_ENDPOINT}")
+	res=$?
+	if test "$res" != "0"; then
+		# from man curl:
+		# EXIT CODES
+		# 60	 Peer certificate cannot be authenticated with known CA certificates.
+		if [ "${res}" -eq 60 ]; then
+				echo "${FUNCNAME[0]}: There may be a firewall blocking traffic to https://${IPV6_ENDPOINT} (SSL errors)"
+				return
+		fi
+		echo "${FUNCNAME[0]}: Could not contact https://${IPV6_ENDPOINT}"
+	fi
+}
+
 function test_write_latency()
 {
 	# from https://www.kernel.org/doc/Documentation/iostats.txt:
@@ -269,6 +309,8 @@ function check_networking()
 		test_ping
 		test_balena_api
 		test_balena_registry
+		test_ipv4_stack
+		test_ipv6_stack
 	)
 	run_tests "${FUNCNAME[0]}" "${tests[@]}"
 }
