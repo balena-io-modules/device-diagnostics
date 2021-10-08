@@ -1,4 +1,18 @@
 - commits:
+    - subject: Added network checks for functioning IPv4/IPv6 stacks
+      hash: 53adbfde2e40930eaac20d2342c70de8d4e5b177
+      body: ''
+      footer:
+        Closes: '#290'
+        closes: '#290'
+        Change-type: minor
+        change-type: minor
+        Signed-off-by: Miguel Casqueira <miguel@balena.io>
+        signed-off-by: Miguel Casqueira <miguel@balena.io>
+      author: Miguel Casqueira
+  version: 4.22.0
+  date: 2021-10-06T22:06:28.409Z
+- commits:
     - subject: >-
         skip first line and first 3 columns to avoid matching date instead of
         IPv6 addresses
