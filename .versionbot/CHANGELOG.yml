@@ -1,4 +1,25 @@
 - commits:
+    - subject: Refactor IP stack checks to check if device expects these stacks to work
+      hash: 6aefb7945a55b2c0a4dd4267e64846e1251e6233
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Miguel Casqueira <miguel@balena.io>
+        signed-off-by: Miguel Casqueira <miguel@balena.io>
+      author: Miguel Casqueira
+    - subject: Set pipefail in checks.sh
+      hash: 1b01086bb384d091db9cb23d18eb36ae34211a02
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Miguel Casqueira <miguel@balena.io>
+        signed-off-by: Miguel Casqueira <miguel@balena.io>
+      author: Miguel Casqueira
+  version: 4.22.1
+  date: 2021-11-09T05:53:59.392Z
+- commits:
     - subject: Added network checks for functioning IPv4/IPv6 stacks
       hash: 53adbfde2e40930eaac20d2342c70de8d4e5b177
       body: ''
