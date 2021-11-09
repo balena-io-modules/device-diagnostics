@@ -1,4 +1,6 @@
 #!/bin/bash
+set -o pipefail
+
 DIAGNOSE_VERSION=4.22.0
 # Don't run anything before this source as it sets PATH here
 # shellcheck disable=SC1091
@@ -42,6 +44,8 @@ TIMEOUT_CMD="timeout --kill-after=$(( TIMEOUT * 2 )) ${TIMEOUT}"
 mountpoint="/var/lib/${ENG}"
 
 external_fqdn="0.resinio.pool.ntp.org"
+IPV4_ADDRESS="1.1.1.1"
+IPV6_ADDRESS="2606:4700:4700:6400"
 IPV4_ENDPOINT="ipv4.google.com"
 IPV6_ENDPOINT="ipv6.google.com"
 
@@ -167,7 +171,12 @@ function test_balena_registry()
 
 function test_ipv4_stack()
 {
-	# can we reach an IPv4 HTTP service ?
+	# Check if device expects a functioning IPv4 stack
+	if ! ip -4 route get ${IPV4_ADDRESS} &>/dev/null; then
+		# Don't check if IPv4 stack works since device isn't configured to use it
+		return
+	fi 
+	# Check if we can reach an IPv4 HTTP service since device is configured to do so 
 	local ipv4_check
 	local -i res 
 	ipv4_check=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV4_ENDPOINT}")
@@ -186,7 +195,12 @@ function test_ipv4_stack()
 
 function test_ipv6_stack()
 {
-	# can we reach an IPv6 HTTP service ?
+	# Check if device expects a functioning IPv6 stack
+	if ! ip -6 route get ${IPV6_ADDRESS} &>/dev/null; then
+		# Don't check if IPv6 stack works since device isn't configured to use it
+		return
+	fi 
+	# Check if we can reach an IPv6 HTTP service since device is configured to do so 
 	local ipv6_check
 	local -i res
 	ipv6_check=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV6_ENDPOINT}")
