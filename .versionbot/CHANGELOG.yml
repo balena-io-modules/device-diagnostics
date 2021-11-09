@@ -1,4 +1,21 @@
 - commits:
+    - subject: 'engine: add storage migration check'
+      hash: 205e4eefc177e35ac8f90caa84b650a0507d4b3b
+      body: |
+        Add a check that triggers when we find a storage migration log file,
+        which will only exist after a failed migration.
+
+        And the equivalent line to the diagnose script to pull out the actual
+        logs when the file exists.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Robert Günzler <robertg@balena.io>
+        signed-off-by: Robert Günzler <robertg@balena.io>
+      author: Robert Günzler
+  version: 4.22.2
+  date: 2021-11-09T16:56:15.311Z
+- commits:
     - subject: Refactor IP stack checks to check if device expects these stacks to work
       hash: 6aefb7945a55b2c0a4dd4267e64846e1251e6233
       body: ''
