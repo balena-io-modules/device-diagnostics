@@ -178,7 +178,7 @@ function test_ipv4_stack()
 	fi 
 	# Check if we can reach an IPv4 HTTP service since device is configured to do so 
 	local ipv4_check
-	local -i res 
+	local -i res
 	ipv4_check=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV4_ENDPOINT}")
 	res=$?
 	if test "$res" != "0"; then
@@ -469,6 +469,7 @@ function check_container_engine() {
 		test_container_engine_running_now
 		test_container_engine_restarts
 		test_container_engine_responding
+		test_container_engine_migration_failed
 	)
 	run_tests "${FUNCNAME[0]}" "${tests[@]}"
 }
@@ -494,6 +495,15 @@ function test_container_engine_responding() {
 	if ! ERRMSG=$(${TIMEOUT_CMD} "${ENG}" ps 2>&1); then
 		echo "${FUNCNAME[0]}" "Error querying container engine: ${ERRMSG}"
 	fi
+}
+
+function test_container_engine_migration_failed() {
+    # needs to match the path here:
+    # https://github.com/balena-os/meta-balena/blob/master/meta-balena-common/recipes-containers/balena/balena/balena.conf.storagemigration#L3
+    local logpath="/mnt/state/balena-engine-storage-migration.log"
+    if [ -f "${logpath}" ]; then
+        echo "${FUNCNAME[0]}" "Storage migration to overlayfs failed. Check the logs at ${logpath}."
+    fi
 }
 
 function check_supervisor()
