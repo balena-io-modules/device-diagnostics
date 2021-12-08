@@ -44,8 +44,8 @@ TIMEOUT_CMD="timeout --kill-after=$(( TIMEOUT * 2 )) ${TIMEOUT}"
 mountpoint="/var/lib/${ENG}"
 
 external_fqdn="0.resinio.pool.ntp.org"
-IPV4_ADDRESS="1.1.1.1"
-IPV6_ADDRESS="2606:4700:4700:6400"
+IPV4_ADDRESS="1.1.1.1" # https://1.1.1.1/dns/
+IPV6_ADDRESS="2606:4700:4700::6400" # https://developers.cloudflare.com/1.1.1.1/ipv6-networks
 IPV4_ENDPOINT="ipv4.google.com"
 IPV6_ENDPOINT="ipv6.google.com"
 
