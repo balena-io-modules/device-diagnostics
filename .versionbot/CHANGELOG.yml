@@ -1,4 +1,14 @@
 - commits:
+    - subject: Fix IPv6 address (typo) used in the test_ipv6_stack check
+      hash: e1f7d4381d7bd9f13e24ab44ca18236e858d22e1
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Paulo Castro
+  version: 4.22.3
+  date: 2021-12-08T13:14:48.248Z
+- commits:
     - subject: 'engine: add storage migration check'
       hash: 205e4eefc177e35ac8f90caa84b650a0507d4b3b
       body: |
