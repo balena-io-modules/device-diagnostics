@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o pipefail
 
-DIAGNOSE_VERSION=4.22.3
+DIAGNOSE_VERSION=4.22.4
 # Don't run anything before this source as it sets PATH here
 # shellcheck disable=SC1091
 source /etc/profile

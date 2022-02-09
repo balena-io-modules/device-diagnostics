@@ -1,7 +1,22 @@
 - commits:
+    - subject: Remove the circleCI job config
+      hash: dde882a4a5924062a01d67a1ddb5748f36c72471
+      body: |
+        All it was doing was running shellcheck and we are working
+        to remove our dependency on circleCI entirely.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+  version: 4.22.4
+  title: "'Remove the circleCI job config'"
+  date: 2022-02-09T14:58:48.623Z
+- commits:
     - subject: Fix IPv6 address (typo) used in the test_ipv6_stack check
       hash: e1f7d4381d7bd9f13e24ab44ca18236e858d22e1
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -9,7 +24,7 @@
   version: 4.22.3
   date: 2021-12-08T13:14:48.248Z
 - commits:
-    - subject: 'engine: add storage migration check'
+    - subject: "engine: add storage migration check"
       hash: 205e4eefc177e35ac8f90caa84b650a0507d4b3b
       body: |
         Add a check that triggers when we find a storage migration log file,
@@ -28,7 +43,7 @@
 - commits:
     - subject: Refactor IP stack checks to check if device expects these stacks to work
       hash: 6aefb7945a55b2c0a4dd4267e64846e1251e6233
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -37,7 +52,7 @@
       author: Miguel Casqueira
     - subject: Set pipefail in checks.sh
       hash: 1b01086bb384d091db9cb23d18eb36ae34211a02
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -49,10 +64,10 @@
 - commits:
     - subject: Added network checks for functioning IPv4/IPv6 stacks
       hash: 53adbfde2e40930eaac20d2342c70de8d4e5b177
-      body: ''
+      body: ""
       footer:
-        Closes: '#290'
-        closes: '#290'
+        Closes: "#290"
+        closes: "#290"
         Change-type: minor
         change-type: minor
         Signed-off-by: Miguel Casqueira <miguel@balena.io>
@@ -61,11 +76,10 @@
   version: 4.22.0
   date: 2021-10-06T22:06:28.409Z
 - commits:
-    - subject: >-
-        skip first line and first 3 columns to avoid matching date instead of
+    - subject: skip first line and first 3 columns to avoid matching date instead of
         IPv6 addresses
       hash: 1cf9803ecddba05455337ad19571083f4473f3c4
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -75,7 +89,7 @@
 - commits:
     - subject: Deprecate references to VARIANT from os-config
       hash: 4bbe3433b9ef8b2e4258ea9759bf6415a2695378
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -99,7 +113,7 @@
 - commits:
     - subject: Rename applications to fleets as appropriate
       hash: 5efa7a77a7e86989182a2a17f7850c90aeb8fafa
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -111,7 +125,7 @@
 - commits:
     - subject: add docker network information
       hash: b996a60251ac86181ad9ab3fccd457630ccde1f2
-      body: ''
+      body: ""
       footer:
         Change-type: minor
         change-type: minor
@@ -119,7 +133,7 @@
   version: 4.21.0
   date: 2021-07-06T08:28:59.109Z
 - commits:
-    - subject: 'checks: Filter dnsmasq servers by running instance'
+    - subject: "checks: Filter dnsmasq servers by running instance"
       hash: 1d0416afc4c57e96a941fbf70bec97d1674c4d6a
       body: |
         Avoid checking DNS servers that have since been
@@ -136,7 +150,7 @@
 - commits:
     - subject: Delete CODEOWNERS
       hash: 7e6c049b523a51867c36dbaead7da782a75969ec
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -144,9 +158,9 @@
   version: 4.20.33
   date: 2021-06-30T21:13:41.543Z
 - commits:
-    - subject: 'supervisor: use output to confirm supervisor is up & running'
+    - subject: "supervisor: use output to confirm supervisor is up & running"
       hash: ca512da7ed807e326b1111d456473f0c05fd39b7
-      body: ''
+      body: ""
       footer:
         Signed-off-by: Matthew McGinn <matthew@balena.io>
         signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -156,9 +170,9 @@
   version: 4.20.32
   date: 2021-05-25T14:18:50.852Z
 - commits:
-    - subject: 'meta: update codeowners'
+    - subject: "meta: update codeowners"
       hash: bf3a489f61587a0c2e77a965dd3174763e00f3e8
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -168,9 +182,9 @@
   version: 4.20.31
   date: 2021-05-20T14:25:36.885Z
 - commits:
-    - subject: 'throttling: drop vcgencmd-dependent check'
+    - subject: "throttling: drop vcgencmd-dependent check"
       hash: 35d4281264e3120207220c8ee3e646b65a19a753
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -211,7 +225,7 @@
   version: 4.20.28
   date: 2021-05-04T18:37:06.645Z
 - commits:
-    - subject: 'device-diagnostics: update references to resin-vars'
+    - subject: "device-diagnostics: update references to resin-vars"
       hash: 912f0f9ae045a4a2b1656a62af4953c3ab9c9bf1
       body: |
         Update all references to the 'resin-vars' script with
@@ -220,15 +234,15 @@
       footer:
         Change-type: patch
         change-type: patch
-        Changelog-entry: 'device-diagnostics: update references to resin-vars'
-        changelog-entry: 'device-diagnostics: update references to resin-vars'
+        Changelog-entry: "device-diagnostics: update references to resin-vars"
+        changelog-entry: "device-diagnostics: update references to resin-vars"
         Signed-off-by: Mark Corbin <mark@balena.io>
         signed-off-by: Mark Corbin <mark@balena.io>
       author: Mark Corbin
   version: 4.20.27
   date: 2021-04-12T09:11:11.264Z
 - commits:
-    - subject: 'checks: Add Floyd Nano device type to temperature whitelist'
+    - subject: "checks: Add Floyd Nano device type to temperature whitelist"
       hash: 2787e9f25d1e38161cf088313bd6afc2189ee249
       body: |
         This is a newly supported device, let's add it to our
@@ -242,7 +256,7 @@
   version: 4.20.26
   date: 2021-04-09T12:26:00.025Z
 - commits:
-    - subject: 'checks: Allow temperature checks to run on Jetson devices'
+    - subject: "checks: Allow temperature checks to run on Jetson devices"
       hash: a4918aaa0324aaed69b4c2776ce4b0c78efdeb49
       body: |
         ... and ignore the PMIC-Die zone, because the actual
@@ -257,9 +271,9 @@
   version: 4.20.25
   date: 2021-03-23T07:11:11.200Z
 - commits:
-    - subject: 'device-type: grab device-type.json, drop custom OS detection'
+    - subject: "device-type: grab device-type.json, drop custom OS detection"
       hash: adf5aa1c273c7de9bd74c2e17ebddc30191722b4
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -269,12 +283,12 @@
   version: 4.20.24
   date: 2021-02-24T15:35:11.037Z
 - commits:
-    - subject: 'diagnose: grab any logs from ModemManager'
+    - subject: "diagnose: grab any logs from ModemManager"
       hash: a9e3e0cae45ac2d5ecb35ed383d76ba53ac1c45f
-      body: ''
+      body: ""
       footer:
-        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/262'
-        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/262'
+        Connects-to: https://github.com/balena-io/device-diagnostics/issues/262
+        connects-to: https://github.com/balena-io/device-diagnostics/issues/262
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -283,9 +297,9 @@
   version: 4.20.23
   date: 2021-02-05T18:27:48.981Z
 - commits:
-    - subject: 'networking: dockerhub access is no longer a requirement'
+    - subject: "networking: dockerhub access is no longer a requirement"
       hash: 706cf09efeae57dfd165d957fbe27ba8d536ad2f
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -297,7 +311,7 @@
 - commits:
     - subject: stick to consistent tabbing
       hash: 58f426a40da59f925052d539d4880ed8c40fe329
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -307,12 +321,12 @@
   version: 4.20.21
   date: 2020-11-12T22:14:09.751Z
 - commits:
-    - subject: 'supervisor: stop checking for remote/local mismatch'
+    - subject: "supervisor: stop checking for remote/local mismatch"
       hash: 5910bf85d57b5628bda4e10183ba9d089bceee63
-      body: ''
+      body: ""
       footer:
-        Connects-to: 'https://github.com/balena-io/balena-api/pull/2786'
-        connects-to: 'https://github.com/balena-io/balena-api/pull/2786'
+        Connects-to: https://github.com/balena-io/balena-api/pull/2786
+        connects-to: https://github.com/balena-io/balena-api/pull/2786
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -321,9 +335,9 @@
   version: 4.20.20
   date: 2020-11-12T22:08:09.867Z
 - commits:
-    - subject: 'meta: update codeowners'
+    - subject: "meta: update codeowners"
       hash: 417c61ecd5b9b42fd2e4ac6c51a6eb0ea8c691ff
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -333,9 +347,9 @@
   version: 4.20.19
   date: 2020-11-05T15:16:29.937Z
 - commits:
-    - subject: 'diagnostics: grab error from journal'
+    - subject: "diagnostics: grab error from journal"
       hash: 343546b45fa70028b72dd08d8ed6170d5fab71a6
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -353,16 +367,14 @@
         problems when acessing.  Reference:
 
 
-        -
-        https://jel.ly.fish/view-all-support-issues/scratchpad-entry-23139ed6-e984-47dc-a133-69feb4b7ffa7
+        - https://jel.ly.fish/view-all-support-issues/scratchpad-entry-23139ed6-e984-47dc-a133-69feb4b7ffa7
 
-        -
-        https://jel.ly.fish/view-all-support-issues/scratchpad-entry-handful-of-files-fail-fingerprint-checks-aca9e981-a3e3-429c-9542-ecc4f35b185a
+        - https://jel.ly.fish/view-all-support-issues/scratchpad-entry-handful-of-files-fail-fingerprint-checks-aca9e981-a3e3-429c-9542-ecc4f35b185a
       footer:
         Change-type: patch
         change-type: patch
-        Connects-to: '#106'
-        connects-to: '#106'
+        Connects-to: "#106"
+        connects-to: "#106"
         Signed-off-by: Hugh Brown <hugh@balena.io>
         signed-off-by: Hugh Brown <hugh@balena.io>
       author: Hugh Brown
@@ -371,10 +383,10 @@
 - commits:
     - subject: Check if the data partition is mounted read-write
       hash: 03e9a6c2b885849b7dc1fa32c04321a075545475
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#251'
-        connects-to: '#251'
+        Connects-to: "#251"
+        connects-to: "#251"
         Change-type: patch
         change-type: patch
         Signed-off-by: Hugh Brown <hugh@balena.io>
@@ -388,8 +400,8 @@
       body: |
         Fixes https://github.com/balena-io/device-diagnostics/issues/249
       footer:
-        Connected-to: 'https://github.com/balena-io/device-diagnostics/issues/249'
-        connected-to: 'https://github.com/balena-io/device-diagnostics/issues/249'
+        Connected-to: https://github.com/balena-io/device-diagnostics/issues/249
+        connected-to: https://github.com/balena-io/device-diagnostics/issues/249
         Change-type: patch
         change-type: patch
         Signed-off-by: Hugh Brown <hugh@balena.io>
@@ -398,9 +410,9 @@
   version: 4.20.15
   date: 2020-10-09T19:47:20.146Z
 - commits:
-    - subject: 'diagnostics: grab half a year of HUP logs'
+    - subject: "diagnostics: grab half a year of HUP logs"
       hash: 7d1db6f11510caf05f5a4bce5ce862ef709e07d4
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -410,7 +422,7 @@
   version: 4.20.14
   date: 2020-09-14T16:48:35.272Z
 - commits:
-    - subject: 'supervisor: grab all supervisor lock dirs in diagnostics'
+    - subject: "supervisor: grab all supervisor lock dirs in diagnostics"
       hash: 4d07e1f1b04f32e764732afd57e7f853127a3fb8
       body: >
         ref.
@@ -431,8 +443,8 @@
         partition from mounting properly. This causes a number of follow-on
         errors.
       footer:
-        Connects-To: '#242'
-        connects-to: '#242'
+        Connects-To: "#242"
+        connects-to: "#242"
         Change-type: patch
         change-type: patch
         Signed-off-by: Hugh Brown <hugh@balena.io>
@@ -446,8 +458,8 @@
       body: |
         when output is potentially user-controlled, interpret as ascii
       footer:
-        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/246'
-        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/246'
+        Connects-to: https://github.com/balena-io/device-diagnostics/issues/246
+        connects-to: https://github.com/balena-io/device-diagnostics/issues/246
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -456,9 +468,9 @@
   version: 4.20.11
   date: 2020-08-14T15:53:00.514Z
 - commits:
-    - subject: 'check_balenaos: report the custom device type slug upon failure'
+    - subject: "check_balenaos: report the custom device type slug upon failure"
       hash: 7d3e9a55c4ce45f42d47f12c4c428786456ad6a3
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -468,9 +480,9 @@
   version: 4.20.10
   date: 2020-08-11T19:06:50.147Z
 - commits:
-    - subject: 'hup: start grabbing more HUP logs for future debugging'
+    - subject: "hup: start grabbing more HUP logs for future debugging"
       hash: 6231369b36b6a97d55f70d55f942e3ab965733b1
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -482,12 +494,12 @@
 - commits:
     - subject: Add check to see if container engine responding to commands
       hash: 9502fc92424aa47584c07cf1ce4cf928de1e137e
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
-        Connects-to: '#226'
-        connects-to: '#226'
+        Connects-to: "#226"
+        connects-to: "#226"
         Signed-off-by: Hugh Brown <hugh@balena.io>
         signed-off-by: Hugh Brown <hugh@balena.io>
       author: Hugh Brown
@@ -496,7 +508,7 @@
 - commits:
     - subject: Add links to balena Masterclass documents where appropriate
       hash: 608ab850ed2119da803d33045296386486b9fe92
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -506,7 +518,7 @@
   version: 4.20.7
   date: 2020-07-03T22:38:08.463Z
 - commits:
-    - subject: 'diagnose.sh: fix timeout ''command not found'' error'
+    - subject: "diagnose.sh: fix timeout 'command not found' error"
       hash: c248883a4b38236c6e746bcc0886df5595840312
       body: |
         The dashboard 'Standard error' display for 'Device Diagnostics'
@@ -523,15 +535,15 @@
       footer:
         Change-type: patch
         change-type: patch
-        Connects-to: '#234'
-        connects-to: '#234'
+        Connects-to: "#234"
+        connects-to: "#234"
         Signed-off-by: Mark Corbin <mark@balena.io>
         signed-off-by: Mark Corbin <mark@balena.io>
       author: Mark Corbin
   version: 4.20.6
   date: 2020-06-19T14:07:16.789Z
 - commits:
-    - subject: 'timesync: check if DHCP passed in any local timeservers'
+    - subject: "timesync: check if DHCP passed in any local timeservers"
       hash: 6e4daba7654bf723e96e0cff88462a06e000d98b
       body: >
         written to during config:
@@ -545,12 +557,12 @@
   version: 4.20.5
   date: 2020-06-18T14:55:15.125Z
 - commits:
-    - subject: 'time: get chrony''s source & tracking information'
+    - subject: "time: get chrony's source & tracking information"
       hash: 0ff22f5cd532c79be9bd8d88d7605f3c49304eb8
-      body: ''
+      body: ""
       footer:
-        Connects-to: 'https://github.com/balena-os/meta-balena/issues/1852'
-        connects-to: 'https://github.com/balena-os/meta-balena/issues/1852'
+        Connects-to: https://github.com/balena-os/meta-balena/issues/1852
+        connects-to: https://github.com/balena-os/meta-balena/issues/1852
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -559,26 +571,26 @@
   version: 4.20.4
   date: 2020-06-18T12:20:38.566Z
 - commits:
-    - subject: 'diagnostics: add extlinux support'
+    - subject: "diagnostics: add extlinux support"
       hash: 18154375f3eba3ddb40645c43f2a89e2a8b22aee
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
-        Connects-to: '#229'
-        connects-to: '#229'
+        Connects-to: "#229"
+        connects-to: "#229"
         Signed-off-by: Matthew McGinn <matthew@balena.io>
         signed-off-by: Matthew McGinn <matthew@balena.io>
       author: Matthew McGinn
   version: 4.20.3
   date: 2020-06-17T12:32:36.790Z
 - commits:
-    - subject: 'diagnostics: start grabbing modem data'
+    - subject: "diagnostics: start grabbing modem data"
       hash: e2ccb2fcc7badccc9799f28e18e686d63072d8e8
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#153'
-        connects-to: '#153'
+        Connects-to: "#153"
+        connects-to: "#153"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -587,11 +599,10 @@
   version: 4.20.2
   date: 2020-06-16T12:32:46.602Z
 - commits:
-    - subject: >-
-        check_temperature: clean up current temp check to read from multiple
-        sensors
+    - subject: "check_temperature: clean up current temp check to read from multiple
+        sensors"
       hash: 74128a115d204bbae2da8560eb85c0cdcfca3654
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -612,17 +623,15 @@
         - test_throttling_dmesg examines dmesg output for throttling events
 
 
-        - test_throttling_vcgencmd examines the output of the Raspberry Pi
-        utility `vcgencmd` to determine if throttling is currently happening, or
-        has occurred in the past.
+        - test_throttling_vcgencmd examines the output of the Raspberry Pi utility `vcgencmd` to determine if throttling is currently happening, or has occurred in the past.
 
 
         These are both called by check_throttling, which glues the output of
 
         both together.
       footer:
-        Connects-to: '#183, #209'
-        connects-to: '#183, #209'
+        Connects-to: "#183, #209"
+        connects-to: "#183, #209"
         Change-type: minor
         change-type: minor
         Signed-off-by: Hugh Brown <hugh@balena.io>
@@ -631,12 +640,12 @@
   version: 4.20.0
   date: 2020-06-02T15:36:56.834Z
 - commits:
-    - subject: 'check_balenaOS: handle case of multiple upstream hostapps'
+    - subject: "check_balenaOS: handle case of multiple upstream hostapps"
       hash: 301a87e3d26bc6f28be1b72cb4d4f05c3741e046
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#222'
-        connects-to: '#222'
+        Connects-to: "#222"
+        connects-to: "#222"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -647,10 +656,10 @@
 - commits:
     - subject: Include count of under-voltage events when reporting problems
       hash: 54eda02363e5d83cf574bb0dc0253e75cf7cfc96
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#217'
-        connects-to: '#217'
+        Connects-to: "#217"
+        connects-to: "#217"
         Change-type: minor
         change-type: minor
         Signed-off-by: Hugh Brown <hugh@balena.io>
@@ -659,7 +668,7 @@
   version: 4.19.0
   date: 2020-05-28T20:39:32.143Z
 - commits:
-    - subject: 'Remove image corruption check, as it is currently too noisy'
+    - subject: Remove image corruption check, as it is currently too noisy
       hash: a7b20a7d00b5e0bd72c49b709e26f4d236b3aacd
       body: |
         This check in its current form has a number of disadvantages:
@@ -682,8 +691,8 @@
         Thus, for now we're better off without this check.  We can investigate
         other approaches to verifying images, or examining storage for problems.
       footer:
-        Connects-to: '#203'
-        connects-to: '#203'
+        Connects-to: "#203"
+        connects-to: "#203"
         Change-type: minor
         change-type: minor
         Signed-off-by: Hugh Brown <hugh@balena.io>
@@ -692,18 +701,18 @@
   version: 4.18.0
   date: 2020-05-28T20:29:37.017Z
 - commits:
-    - subject: 'diagnostics: add chronyd logs to output'
+    - subject: "diagnostics: add chronyd logs to output"
       hash: 8190d8b921ba40526276e0367056b0152849ee9c
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
         signed-off-by: Matthew McGinn <matthew@balena.io>
       author: Matthew McGinn
-    - subject: 'meta: fix up inconsistent indentation'
+    - subject: "meta: fix up inconsistent indentation"
       hash: 218fd54225d2ea60d8e4920511d0a92f7d3ed679
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -713,9 +722,9 @@
   version: 4.17.15
   date: 2020-05-27T18:31:06.887Z
 - commits:
-    - subject: 'codeowners: remove zubairlk'
+    - subject: "codeowners: remove zubairlk"
       hash: 3c01af6e6f17bee9adcc87443a9cac777d7d61a6
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -725,21 +734,21 @@
   version: 4.17.14
   date: 2020-05-15T21:01:43.009Z
 - commits:
-    - subject: 'docs: fix up markdown formatting'
+    - subject: "docs: fix up markdown formatting"
       hash: 4f11bf3f17b793b86daf8d6017c1dc9d5651d8ba
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
         signed-off-by: Matthew McGinn <matthew@balena.io>
       author: Matthew McGinn
-    - subject: 'balenahup: prepare for resin -> balena rename'
+    - subject: "balenahup: prepare for resin -> balena rename"
       hash: 48054ae3c8d8c2ca6b9b9e1da3f6ae9cf9ef1d4a
-      body: ''
+      body: ""
       footer:
-        Connects-to: 'https://github.com/balena-os/balenahup/issues/266'
-        connects-to: 'https://github.com/balena-os/balenahup/issues/266'
+        Connects-to: https://github.com/balena-os/balenahup/issues/266
+        connects-to: https://github.com/balena-os/balenahup/issues/266
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -748,9 +757,9 @@
   version: 4.17.13
   date: 2020-05-15T12:16:13.414Z
 - commits:
-    - subject: 'balena-engine: add extra debug stacktrace for balena-engine'
+    - subject: "balena-engine: add extra debug stacktrace for balena-engine"
       hash: fe60bbd5afe7f12ea483046598e14fc603240429
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -760,15 +769,15 @@
   version: 4.17.12
   date: 2020-05-13T18:43:01.000Z
 - commits:
-    - subject: 'check_balenaOS: adjust query to reflect public apps (ESR support)'
+    - subject: "check_balenaOS: adjust query to reflect public apps (ESR support)"
       hash: af8abc40ea482389be6295b996eb510af6b7eb45
       body: >
         This is the same logic used in resinhup to perform delta updates:
 
         https://github.com/balena-os/resinhup/blob/master/upgrade-2.x.sh#L721-L730
       footer:
-        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/156'
-        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/156'
+        Connects-to: https://github.com/balena-io/device-diagnostics/issues/156
+        connects-to: https://github.com/balena-io/device-diagnostics/issues/156
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -777,12 +786,12 @@
   version: 4.17.11
   date: 2020-05-13T18:18:13.001Z
 - commits:
-    - subject: 'localdisk: select the correct boot media'
+    - subject: "localdisk: select the correct boot media"
       hash: 54c92293dfe9a1d60090bc25261f8409c1d244dc
-      body: ''
+      body: ""
       footer:
-        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/200'
-        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/200'
+        Connects-to: https://github.com/balena-io/device-diagnostics/issues/200
+        connects-to: https://github.com/balena-io/device-diagnostics/issues/200
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -804,9 +813,9 @@
   version: 4.17.9
   date: 2020-05-07T21:31:15.643Z
 - commits:
-    - subject: 'docs: clarify the nuance surrounding write latency calculations'
+    - subject: "docs: clarify the nuance surrounding write latency calculations"
       hash: 16ed57aa087da6bb06e000ba758233f379865af3
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -816,9 +825,9 @@
   version: 4.17.8
   date: 2020-05-07T20:19:07.593Z
 - commits:
-    - subject: 'docs: update check_image_corruption docs to mention timeouts'
+    - subject: "docs: update check_image_corruption docs to mention timeouts"
       hash: 0d2e2af3b97001feda3dcf85819f0d037f5fb9e1
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -830,7 +839,7 @@
 - commits:
     - subject: Add documentation for check_image_corruption to diagnostics.md
       hash: 60a0c44bf48291cbbc7e2fc87771c4e7dcf54a89
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -840,9 +849,9 @@
   version: 4.17.6
   date: 2020-04-29T21:07:47.929Z
 - commits:
-    - subject: 'checks: filter null service healthchecks from results'
+    - subject: "checks: filter null service healthchecks from results"
       hash: 387c9f7df0da413df71a5fac3b6fbc2bb391dab7
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -852,9 +861,9 @@
   version: 4.17.5
   date: 2020-04-29T18:53:08.297Z
 - commits:
-    - subject: 'TLS: expand allowed bundles to include all available device bundles'
+    - subject: "TLS: expand allowed bundles to include all available device bundles"
       hash: 421902ff6174a5f8bc092bf2617b42d796aa5664
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -864,9 +873,9 @@
   version: 4.17.4
   date: 2020-04-29T18:45:58.582Z
 - commits:
-    - subject: 'checks: clean up rollback notifications'
+    - subject: "checks: clean up rollback notifications"
       hash: d8c3523922d6abdc37e94c4e97a9399fcd56cd5d
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -876,18 +885,18 @@
   version: 4.17.3
   date: 2020-04-28T11:58:08.850Z
 - commits:
-    - subject: 'checks: prefix user service checks appropriately'
+    - subject: "checks: prefix user service checks appropriately"
       hash: 9f6675fa35a07821d61b083a594b38a685c9b1f7
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#157'
-        connects-to: '#157'
+        Connects-to: "#157"
+        connects-to: "#157"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
         signed-off-by: Matthew McGinn <matthew@balena.io>
       author: Matthew McGinn
-    - subject: 'typo: do a proper comparison not an assignment'
+    - subject: "typo: do a proper comparison not an assignment"
       hash: 07e743411cab071648e6fdf868c0cdb163c1cbad
       body: |
         redirect stderr to /dev/null
@@ -900,9 +909,9 @@
   version: 4.17.2
   date: 2020-04-27T13:36:48.888Z
 - commits:
-    - subject: 'meta: add saintaardvark as CODEOWNER'
+    - subject: "meta: add saintaardvark as CODEOWNER"
       hash: 7c340f4860c6dc994beec9515c7285c6f2c12444
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -912,12 +921,12 @@
   version: 4.17.1
   date: 2020-04-27T12:51:10.913Z
 - commits:
-    - subject: 'networking: reuse root CA for permitted MiTM'
+    - subject: "networking: reuse root CA for permitted MiTM"
       hash: a53a80703516032fcb80326da34499e7fff19ff8
-      body: ''
+      body: ""
       footer:
-        Connects-to: 'https://github.com/balena-os/meta-balena/issues/1398'
-        connects-to: 'https://github.com/balena-os/meta-balena/issues/1398'
+        Connects-to: https://github.com/balena-os/meta-balena/issues/1398
+        connects-to: https://github.com/balena-os/meta-balena/issues/1398
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -926,12 +935,12 @@
   version: 4.17.0
   date: 2020-04-22T17:42:49.012Z
 - commits:
-    - subject: 'checks: prefix user service checks appropriately'
+    - subject: "checks: prefix user service checks appropriately"
       hash: 8183c77d7121fff11f850f8b7147b45f564aa346
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#157'
-        connects-to: '#157'
+        Connects-to: "#157"
+        connects-to: "#157"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -940,23 +949,23 @@
   version: 4.16.1
   date: 2020-04-21T12:39:08.399Z
 - commits:
-    - subject: 'checks: add support for user service health checking'
+    - subject: "checks: add support for user service health checking"
       hash: 8b3b4fbb1f7d66b4cce962e53bf09008678e44bb
-      body: ''
+      body: ""
       footer:
         Change-type: minor
         change-type: minor
-        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/157'
-        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/157'
+        Connects-to: https://github.com/balena-io/device-diagnostics/issues/157
+        connects-to: https://github.com/balena-io/device-diagnostics/issues/157
         Signed-off-by: Matthew McGinn <matthew@balena.io>
         signed-off-by: Matthew McGinn <matthew@balena.io>
       author: Matthew McGinn
   version: 4.16.0
   date: 2020-04-15T11:26:35.298Z
 - commits:
-    - subject: 'checks: fix up math comparison'
+    - subject: "checks: fix up math comparison"
       hash: 5b723eebe95db198f745a16cc8b05dd3e9f3dfa0
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -966,12 +975,12 @@
   version: 4.15.1
   date: 2020-04-10T21:01:32.459Z
 - commits:
-    - subject: 'container-image-corruption: Add container image corruption checks'
+    - subject: "container-image-corruption: Add container image corruption checks"
       hash: 369019571ffc157edd859e5f55a38c0bad2cb96b
-      body: ''
+      body: ""
       footer:
-        Fixes: 'https://github.com/balena-io/device-diagnostics/issues/44'
-        fixes: 'https://github.com/balena-io/device-diagnostics/issues/44'
+        Fixes: https://github.com/balena-io/device-diagnostics/issues/44
+        fixes: https://github.com/balena-io/device-diagnostics/issues/44
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -980,9 +989,9 @@
   version: 4.15.0
   date: 2020-04-03T13:34:23.257Z
 - commits:
-    - subject: 'diagnose: add engine journal specifically (omitting user apps)'
+    - subject: "diagnose: add engine journal specifically (omitting user apps)"
       hash: 3ee288181007bccfab1fbba9c4765c081dcd2cd3
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -992,12 +1001,13 @@
   version: 4.14.9
   date: 2020-04-02T22:12:12.605Z
 - commits:
-    - subject: 'checks: confirm running supervisor is a released edition and matches API'
+    - subject: "checks: confirm running supervisor is a released edition and matches
+        API"
       hash: 4d33f6227ffaece920fbff36800f879378118ba0
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#118'
-        connects-to: '#118'
+        Connects-to: "#118"
+        connects-to: "#118"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1006,9 +1016,9 @@
   version: 4.14.8
   date: 2020-03-24T13:56:33.528Z
 - commits:
-    - subject: 'check_localdisk: add back mistakenly dropped expansion test'
+    - subject: "check_localdisk: add back mistakenly dropped expansion test"
       hash: 2f244df71cbbc6c21cacdf5e60be1b1a05e6e280
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1018,11 +1028,10 @@
   version: 4.14.7
   date: 2020-03-23T13:41:32.738Z
 - commits:
-    - subject: >-
-        check_localdisk: combine a few related tests into holistic local disk
-        check
+    - subject: "check_localdisk: combine a few related tests into holistic local disk
+        check"
       hash: 814fc6466bf3a63146561233288ed7da7075c5fa
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1032,9 +1041,9 @@
   version: 4.14.6
   date: 2020-03-20T18:06:22.667Z
 - commits:
-    - subject: 'service-restarts: properly count + track timed out service inspections'
+    - subject: "service-restarts: properly count + track timed out service inspections"
       hash: adf580ee8378b22d3d8e4c40e5a550c13246c4a0
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1044,9 +1053,9 @@
   version: 4.14.5
   date: 2020-03-13T13:36:23.082Z
 - commits:
-    - subject: 'meta: update codeowners to include gareth for docs'
+    - subject: "meta: update codeowners to include gareth for docs"
       hash: 4e4a8c0171692d1c41fb419c470280affd4eba18
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1056,23 +1065,23 @@
   version: 4.14.4
   date: 2020-03-12T19:08:23.393Z
 - commits:
-    - subject: 'fs-expansion: only check devices with child partitions'
+    - subject: "fs-expansion: only check devices with child partitions"
       hash: f297d24ffa57957598ea5e05919951f56f77ad13
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#184'
-        connects-to: '#184'
+        Connects-to: "#184"
+        connects-to: "#184"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
         signed-off-by: Matthew McGinn <matthew@balena.io>
       author: Matthew McGinn
-    - subject: 'meta: add note with supported device OS versions'
+    - subject: "meta: add note with supported device OS versions"
       hash: 54d77ea2f990c45770669a412d76f6357561540d
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#184'
-        connects-to: '#184'
+        Connects-to: "#184"
+        connects-to: "#184"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1081,9 +1090,9 @@
   version: 4.14.3
   date: 2020-03-05T14:42:36.101Z
 - commits:
-    - subject: 'checks: remove legacy check_dns in favor of revamped networking check'
+    - subject: "checks: remove legacy check_dns in favor of revamped networking check"
       hash: 62f4808acbe6d8b59f5ee496e07cb78874cf6b26
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1093,9 +1102,9 @@
   version: 4.14.2
   date: 2020-02-24T17:28:03.417Z
 - commits:
-    - subject: 'os-rollbacks: properly detect either type of rollback'
+    - subject: "os-rollbacks: properly detect either type of rollback"
       hash: e0ed442a337d30b7e2c7360d3241931b0dfe3bed
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1105,12 +1114,12 @@
   version: 4.14.1
   date: 2020-02-13T21:57:41.386Z
 - commits:
-    - subject: 'checks: confirm root media has fully expanded'
+    - subject: "checks: confirm root media has fully expanded"
       hash: 5aca120238f2f26f9f0fef275d25872688e3dd1f
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#162'
-        connects-to: '#162'
+        Connects-to: "#162"
+        connects-to: "#162"
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1119,12 +1128,12 @@
   version: 4.14.0
   date: 2020-02-12T20:15:12.376Z
 - commits:
-    - subject: 'checks: add white/blacklisting for device-specific checks'
+    - subject: "checks: add white/blacklisting for device-specific checks"
       hash: b609e498180f806ee5fab27f32fab1228a4abb11
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#168'
-        connects-to: '#168'
+        Connects-to: "#168"
+        connects-to: "#168"
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1133,9 +1142,9 @@
   version: 4.13.0
   date: 2020-02-12T20:05:22.997Z
 - commits:
-    - subject: 'meta: add note about source of 60'
+    - subject: "meta: add note about source of 60"
       hash: e0397edcf8ca4f123fa8a5cd3c2791c777649d02
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1145,9 +1154,9 @@
   version: 4.12.5
   date: 2020-02-11T14:30:35.000Z
 - commits:
-    - subject: 'networking: make test_wifi play nicer with multiple configured ints'
+    - subject: "networking: make test_wifi play nicer with multiple configured ints"
       hash: 971523925c8c788f82ec3395fcd731b1acca0d48
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1157,12 +1166,12 @@
   version: 4.12.4
   date: 2020-02-04T14:16:18.668Z
 - commits:
-    - subject: 'docs: add Depends on section, mention some inter-check dependencies'
+    - subject: "docs: add Depends on section, mention some inter-check dependencies"
       hash: c76e00e7aa2eb466fb42f8480bedf21f9aac41ac
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#172'
-        connects-to: '#172'
+        Connects-to: "#172"
+        connects-to: "#172"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1171,9 +1180,9 @@
   version: 4.12.3
   date: 2020-02-03T20:03:09.746Z
 - commits:
-    - subject: 'checks: ensure every call to ENG is timed out'
+    - subject: "checks: ensure every call to ENG is timed out"
       hash: bc45e056838220baed4bf38fb434b0c3e4e1a21d
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1183,9 +1192,9 @@
   version: 4.12.2
   date: 2020-01-31T16:41:33.528Z
 - commits:
-    - subject: 'CI: disable node testing'
+    - subject: "CI: disable node testing"
       hash: 7449d63b91070ff429a09035388e4129cd41931a
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1195,12 +1204,12 @@
   version: 4.12.1
   date: 2020-01-31T16:30:54.946Z
 - commits:
-    - subject: 'checks: add catchall networking check'
+    - subject: "checks: add catchall networking check"
       hash: c624ed50c889bac696a76c92d4d579f4dc165304
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#129'
-        connects-to: '#129'
+        Connects-to: "#129"
+        connects-to: "#129"
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1209,9 +1218,9 @@
   version: 4.12.0
   date: 2020-01-31T16:11:33.052Z
 - commits:
-    - subject: 'meta: add wrboyce as CODEOWNER'
+    - subject: "meta: add wrboyce as CODEOWNER"
       hash: b87b0f50005d80fb8a4b049bfc27f3210ff27f83
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1221,7 +1230,7 @@
   version: 4.11.6
   date: 2020-01-31T15:59:23.931Z
 - commits:
-    - subject: 'supervisor: time out engine call'
+    - subject: "supervisor: time out engine call"
       hash: 3d76456c06c5f7eab895d9689a99595c26e1f2c7
       body: |
         replace all $ENG with cleaner ${ENG}
@@ -1234,9 +1243,9 @@
   version: 4.11.5
   date: 2020-01-14T15:00:01.146Z
 - commits:
-    - subject: 'OS: list failed units in diagnostics'
+    - subject: "OS: list failed units in diagnostics"
       hash: 34c609f39ecb1dff8e4b3751d1c1b28e46d8a428
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1246,9 +1255,9 @@
   version: 4.11.4
   date: 2020-01-10T17:10:23.435Z
 - commits:
-    - subject: 'openvpn: properly collect logs from journald'
+    - subject: "openvpn: properly collect logs from journald"
       hash: 2660a6f33e5ca61ab422af39ff5fe3156b97de8f
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1258,14 +1267,13 @@
   version: 4.11.3
   date: 2019-12-17T22:41:52.745Z
 - commits:
-    - subject: >-
-        check_memory: restore fallback behavior if a device type does not expose
-        MemAvailable
+    - subject: "check_memory: restore fallback behavior if a device type does not
+        expose MemAvailable"
       hash: b06c9acad7963f8313c7549a9669b87541d9f5b8
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#159'
-        connects-to: '#159'
+        Connects-to: "#159"
+        connects-to: "#159"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1274,12 +1282,12 @@
   version: 4.11.2
   date: 2019-12-10T16:37:03.172Z
 - commits:
-    - subject: 'supervisor: use LISTEN_PORT as sourced from config.json'
+    - subject: "supervisor: use LISTEN_PORT as sourced from config.json"
       hash: 47f8f323d85120f14e588f69810f6a18a2169cad
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#154'
-        connects-to: '#154'
+        Connects-to: "#154"
+        connects-to: "#154"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1288,12 +1296,12 @@
   version: 4.11.1
   date: 2019-11-26T18:59:32.894Z
 - commits:
-    - subject: 'OS: add check for any failed boot/rollback breadcrumbs'
+    - subject: "OS: add check for any failed boot/rollback breadcrumbs"
       hash: f39cdb2b085783d817da511dc2cfc5d2de65ff5c
-      body: ''
+      body: ""
       footer:
-        Closes: '#140'
-        closes: '#140'
+        Closes: "#140"
+        closes: "#140"
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1302,9 +1310,9 @@
   version: 4.11.0
   date: 2019-11-26T18:29:23.046Z
 - commits:
-    - subject: 'dmesg: add full timestamps to output'
+    - subject: "dmesg: add full timestamps to output"
       hash: 02c1ab8a9708d1c578967ef1a8810402246560d5
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1314,12 +1322,12 @@
   version: 4.10.1
   date: 2019-11-26T18:16:53.369Z
 - commits:
-    - subject: 'checks: add temperature > 80C check'
+    - subject: "checks: add temperature > 80C check"
       hash: d8682aaff9b28bee1fe8ccde4d5f819e57e10565
-      body: ''
+      body: ""
       footer:
-        Closes: '#143'
-        closes: '#143'
+        Closes: "#143"
+        closes: "#143"
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1328,12 +1336,12 @@
   version: 4.10.0
   date: 2019-11-19T15:47:39.421Z
 - commits:
-    - subject: 'balenaOS: warn about a custom device type (custom OS)'
+    - subject: "balenaOS: warn about a custom device type (custom OS)"
       hash: 8ad38bc398e499868cecea8cd0e12a04e2969ffc
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#112'
-        connects-to: '#112'
+        Connects-to: "#112"
+        connects-to: "#112"
         Signed-off-by: Matthew McGinn <matthew@balena.io>
         signed-off-by: Matthew McGinn <matthew@balena.io>
         Change-type: patch
@@ -1342,12 +1350,12 @@
   version: 4.9.4
   date: 2019-11-19T14:39:39.431Z
 - commits:
-    - subject: 'container-engine: properly check for aliveness of engine'
+    - subject: "container-engine: properly check for aliveness of engine"
       hash: 61b645a314de877d64ab0170b63a92195e730147
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#151'
-        connects-to: '#151'
+        Connects-to: "#151"
+        connects-to: "#151"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1356,12 +1364,12 @@
   version: 4.9.3
   date: 2019-11-15T16:51:24.466Z
 - commits:
-    - subject: 'meta: add some scaffolding for open-sourcing'
+    - subject: "meta: add some scaffolding for open-sourcing"
       hash: 716fe76d1a9a281943922c747c4fc438f918bdd3
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#110'
-        connects-to: '#110'
+        Connects-to: "#110"
+        connects-to: "#110"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1370,9 +1378,9 @@
   version: 4.9.2
   date: 2019-11-07T15:25:25.879Z
 - commits:
-    - subject: 'meta: remove imrehg as codeowner'
+    - subject: "meta: remove imrehg as codeowner"
       hash: 1b59dd04b43ccca835c50d2a47898c99743bce1f
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1382,9 +1390,9 @@
   version: 4.9.1
   date: 2019-11-06T16:06:49.015Z
 - commits:
-    - subject: 'diagnostics: add ENG volume ls'
+    - subject: "diagnostics: add ENG volume ls"
       hash: 3b8be1b420ce5a1813919532a0a0cf92685d3793
-      body: ''
+      body: ""
       footer:
         Change-type: minor
         change-type: minor
@@ -1394,9 +1402,9 @@
   version: 4.9.0
   date: 2019-11-04T17:11:55.605Z
 - commits:
-    - subject: 'meta: add zubairlk as codeowner'
+    - subject: "meta: add zubairlk as codeowner"
       hash: 7d95815a78721ae266d8341b816981b70ac9d3b9
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1406,9 +1414,9 @@
   version: 4.8.3
   date: 2019-10-28T11:45:56.075Z
 - commits:
-    - subject: 'checks: fix up write latency output typo'
+    - subject: "checks: fix up write latency output typo"
       hash: e5cae0ccedb2292de982af3d02533524ef2345b4
-      body: ''
+      body: ""
       footer:
         Signed-off-by: Matthew McGinn <matthew@balena.io>
         signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1418,12 +1426,12 @@
   version: 4.8.2
   date: 2019-10-21T18:13:22.194Z
 - commits:
-    - subject: 'docs: update README.md with better hacking instructions'
+    - subject: "docs: update README.md with better hacking instructions"
       hash: 007380d41cd7b3abdce33e100a99cfecfdfddb1c
-      body: ''
+      body: ""
       footer:
-        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/110'
-        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/110'
+        Connects-to: https://github.com/balena-io/device-diagnostics/issues/110
+        connects-to: https://github.com/balena-io/device-diagnostics/issues/110
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1432,12 +1440,12 @@
   version: 4.8.1
   date: 2019-10-17T16:28:58.546Z
 - commits:
-    - subject: 'checks: add timeout for ENG inspect'
+    - subject: "checks: add timeout for ENG inspect"
       hash: bafff55eb4d8d2346213ab37574d4360affc6883
-      body: ''
+      body: ""
       footer:
-        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/135'
-        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/135'
+        Connects-to: https://github.com/balena-io/device-diagnostics/issues/135
+        connects-to: https://github.com/balena-io/device-diagnostics/issues/135
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1446,12 +1454,12 @@
   version: 4.8.0
   date: 2019-10-10T16:44:38.861Z
 - commits:
-    - subject: 'checks: make check_timesync backwards compatible'
+    - subject: "checks: make check_timesync backwards compatible"
       hash: c4e67c112f9855fcc8cb412d208b1b1d55ed9202
-      body: ''
+      body: ""
       footer:
-        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/126'
-        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/126'
+        Connects-to: https://github.com/balena-io/device-diagnostics/issues/126
+        connects-to: https://github.com/balena-io/device-diagnostics/issues/126
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1460,12 +1468,12 @@
   version: 4.7.3
   date: 2019-10-10T14:36:55.176Z
 - commits:
-    - subject: 'diagnostics: adjust global timeout to 10s (20s fallback)'
+    - subject: "diagnostics: adjust global timeout to 10s (20s fallback)"
       hash: 959073664fecacb1cebf37f9e0d421ba44e92a23
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#135'
-        connects-to: '#135'
+        Connects-to: "#135"
+        connects-to: "#135"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1474,12 +1482,12 @@
   version: 4.7.2
   date: 2019-10-10T14:11:25.068Z
 - commits:
-    - subject: 'checks: use VERSION instead of VERSION_ID for balenaOS compat'
+    - subject: "checks: use VERSION instead of VERSION_ID for balenaOS compat"
       hash: 8eca010fa9003aed787b20025b34ce36585f527b
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#126'
-        connects-to: '#126'
+        Connects-to: "#126"
+        connects-to: "#126"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1488,12 +1496,12 @@
   version: 4.7.1
   date: 2019-10-10T14:02:49.016Z
 - commits:
-    - subject: 'diagnostics: pass --no-pager to all systemctl and journalctl calls'
+    - subject: "diagnostics: pass --no-pager to all systemctl and journalctl calls"
       hash: a2e09b335bacc7347fd8b1c715ecb8f17908f398
-      body: ''
+      body: ""
       footer:
-        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/135'
-        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/135'
+        Connects-to: https://github.com/balena-io/device-diagnostics/issues/135
+        connects-to: https://github.com/balena-io/device-diagnostics/issues/135
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1502,9 +1510,9 @@
   version: 4.7.0
   date: 2019-10-10T13:53:57.653Z
 - commits:
-    - subject: 'docs: remove extraneous parenthesis'
+    - subject: "docs: remove extraneous parenthesis"
       hash: c0c30ad271b72f64257a6b03a5f3e2474129b2ff
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1514,12 +1522,12 @@
   version: 4.6.1
   date: 2019-10-09T08:13:33.702Z
 - commits:
-    - subject: 'checks: add check_timesync to confirm NTP is syncing'
+    - subject: "checks: add check_timesync to confirm NTP is syncing"
       hash: ede99c6bb6a6a7d9fa43c825f4feb0f1dc0c24c1
-      body: ''
+      body: ""
       footer:
-        Closes: '#127'
-        closes: '#127'
+        Closes: "#127"
+        closes: "#127"
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1528,12 +1536,12 @@
   version: 4.6.0
   date: 2019-10-03T22:07:04.349Z
 - commits:
-    - subject: 'checks: confirm that the OS is still accessible remotely'
+    - subject: "checks: confirm that the OS is still accessible remotely"
       hash: f57452aaaee3e8696c24870b7297d049f3716dd8
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#118'
-        connects-to: '#118'
+        Connects-to: "#118"
+        connects-to: "#118"
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1542,12 +1550,12 @@
   version: 4.5.0
   date: 2019-10-03T15:20:05.105Z
 - commits:
-    - subject: 'diagnose: get SD card information from /sys'
+    - subject: "diagnose: get SD card information from /sys"
       hash: 36bba221252d9399f465811009d3790ae89363a0
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#105'
-        connects-to: '#105'
+        Connects-to: "#105"
+        connects-to: "#105"
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1556,9 +1564,9 @@
   version: 4.4.0
   date: 2019-09-30T19:58:35.370Z
 - commits:
-    - subject: 'supervisor: refactor diagnostics and checks to use health endpoint'
+    - subject: "supervisor: refactor diagnostics and checks to use health endpoint"
       hash: 9c2a2a23c2034594c178cc55568b2b8891168def
-      body: ''
+      body: ""
       footer:
         Change-type: minor
         change-type: minor
@@ -1568,9 +1576,9 @@
   version: 4.3.0
   date: 2019-09-30T19:43:24.599Z
 - commits:
-    - subject: 'docs: add version info to the docs'
+    - subject: "docs: add version info to the docs"
       hash: 3942fc253a12e56d91b633f41237fcc6c16ff416
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1580,12 +1588,12 @@
   version: 4.2.1
   date: 2019-09-30T19:33:54.837Z
 - commits:
-    - subject: 'checks: check for ENG unclean restart count'
+    - subject: "checks: check for ENG unclean restart count"
       hash: 274affdfc0244e18a176b165ff09b324778a41b0
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#122'
-        connects-to: '#122'
+        Connects-to: "#122"
+        connects-to: "#122"
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1594,14 +1602,14 @@
   version: 4.2.0
   date: 2019-09-30T19:26:54.598Z
 - commits:
-    - subject: 'checks: clean up bash math for memory + disk checks'
+    - subject: "checks: clean up bash math for memory + disk checks"
       hash: b73ef1ca65c7d09e4883c489b5cd920f391fb4ac
       body: |
         This also cleans up the output for low memory failures, which has an
         extra "%"
       footer:
-        Closes: '#107'
-        closes: '#107'
+        Closes: "#107"
+        closes: "#107"
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1610,12 +1618,12 @@
   version: 4.1.0
   date: 2019-09-19T12:00:06.969Z
 - commits:
-    - subject: 'docs: correct erroneous check info'
+    - subject: "docs: correct erroneous check info"
       hash: 40ee0047b47526fcbda74ad32d800d7c0c136954
-      body: ''
+      body: ""
       footer:
-        Connects-to: 'https://github.com/balena-io/docs/pull/1174'
-        connects-to: 'https://github.com/balena-io/docs/pull/1174'
+        Connects-to: https://github.com/balena-io/docs/pull/1174
+        connects-to: https://github.com/balena-io/docs/pull/1174
         Signed-off-by: Matthew McGinn <matthew@balena.io>
         signed-off-by: Matthew McGinn <matthew@balena.io>
         Change-type: patch
@@ -1624,7 +1632,7 @@
   version: 4.0.5
   date: 2019-09-13T17:51:06.801Z
 - commits:
-    - subject: 'service-restarts: reinstate check_service_restarts'
+    - subject: "service-restarts: reinstate check_service_restarts"
       hash: be3f9d7e819cbfb08d54064c8f3333476a6f7f83
       body: |
         this check was mistakenly dropped as part of rebasing
@@ -1642,9 +1650,9 @@
   version: 4.0.4
   date: 2019-09-11T21:45:05.950Z
 - commits:
-    - subject: 'docs: check documentation cleanup'
+    - subject: "docs: check documentation cleanup"
       hash: 734bdc00ba6195faafff556d8583ed1fb3c04b90
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1654,14 +1662,14 @@
   version: 4.0.3
   date: 2019-09-11T19:55:07.937Z
 - commits:
-    - subject: 'diagnostics: remove duplicated supervisor check, add nmcli version'
+    - subject: "diagnostics: remove duplicated supervisor check, add nmcli version"
       hash: 82217fa02f5777181226533c50e159b6f82485c6
       body: |
         The supervisor log tail is duplicated in the SUPERVISOR section (line
         137).
       footer:
-        Closes: 'https://github.com/balena-io/device-diagnostics/issues/50'
-        closes: 'https://github.com/balena-io/device-diagnostics/issues/50'
+        Closes: https://github.com/balena-io/device-diagnostics/issues/50
+        closes: https://github.com/balena-io/device-diagnostics/issues/50
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1670,9 +1678,9 @@
   version: 4.0.2
   date: 2019-09-11T07:47:07.731Z
 - commits:
-    - subject: 'UI: small stylistic cleanups'
+    - subject: "UI: small stylistic cleanups"
       hash: a4f8fd1f5c8dff6dc067b30796606d2622ab9868
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1682,7 +1690,7 @@
   version: 4.0.1
   date: 2019-09-10T18:35:24.482Z
 - commits:
-    - subject: 'diagnostics: split check and data collection tasks'
+    - subject: "diagnostics: split check and data collection tasks"
       hash: dd38efa77268ae73cfc5f25120742817743d3eac
       body: |
         A `check` in this context is defined as a function that returns a result
@@ -1691,8 +1699,8 @@
         Checks are intended to be used by everyone, while typically command
         output is used by support/subject matter experts and power users.
       footer:
-        Connects-to: 'https://github.com/balena-io/device-diagnostics/issues/51'
-        connects-to: 'https://github.com/balena-io/device-diagnostics/issues/51'
+        Connects-to: https://github.com/balena-io/device-diagnostics/issues/51
+        connects-to: https://github.com/balena-io/device-diagnostics/issues/51
         Change-type: major
         change-type: major
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1701,12 +1709,12 @@
   version: 4.0.0
   date: 2019-09-09T13:02:54.419Z
 - commits:
-    - subject: 'meta: remove all legacy leech codepaths and config'
+    - subject: "meta: remove all legacy leech codepaths and config"
       hash: 38d176efbc98f3665aa2e8e4c8b3c6f6063fa4d3
-      body: ''
+      body: ""
       footer:
-        Closes: 'https://github.com/balena-io/device-diagnostics/issues/54'
-        closes: 'https://github.com/balena-io/device-diagnostics/issues/54'
+        Closes: https://github.com/balena-io/device-diagnostics/issues/54
+        closes: https://github.com/balena-io/device-diagnostics/issues/54
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1715,14 +1723,13 @@
   version: 3.4.0
   date: 2019-08-20T14:37:24.145Z
 - commits:
-    - subject: >-
-        container-engine: check for service restarts (indicates service restart
-        cycling)
+    - subject: "container-engine: check for service restarts (indicates service
+        restart cycling)"
       hash: 5b8b2393e90d0bc138a54859b0c923bffbe8e1c9
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#100'
-        connects-to: '#100'
+        Connects-to: "#100"
+        connects-to: "#100"
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1731,7 +1738,7 @@
   version: 3.3.0
   date: 2019-08-20T14:17:58.012Z
 - commits:
-    - subject: 'diagnose: remove extra is_mounted function'
+    - subject: "diagnose: remove extra is_mounted function"
       hash: dfc1b28aa7744dac3bc9d09812701e4e6868eaf4
       body: |
         This `is_mounted` function isn't used anywhere (it was a relic of
@@ -1745,9 +1752,9 @@
   version: 3.2.1
   date: 2019-08-20T13:45:30.614Z
 - commits:
-    - subject: 'dmesg: add check for under-voltage warnings'
+    - subject: "dmesg: add check for under-voltage warnings"
       hash: c3053cbcbe448a82331262ef30daf7542f4c0e77
-      body: ''
+      body: ""
       footer:
         Change-type: minor
         change-type: minor
@@ -1757,9 +1764,9 @@
   version: 3.2.0
   date: 2019-07-17T22:19:04.988Z
 - commits:
-    - subject: 'diagnose: add balena system df'
+    - subject: "diagnose: add balena system df"
       hash: b9c6a3d9fd8b2499a091c7c3e1247d8d467e5e96
-      body: ''
+      body: ""
       footer:
         Change-type: minor
         change-type: minor
@@ -1769,7 +1776,7 @@
   version: 3.1.0
   date: 2019-06-24T16:35:43.551Z
 - commits:
-    - subject: 'ci: fix up broken node12 builds'
+    - subject: "ci: fix up broken node12 builds"
       hash: 56275a19977a41b063c999f4c8dda23f781e7f92
       body: |
         ..by updating gulp to v4
@@ -1782,12 +1789,12 @@
   version: 3.0.3
   date: 2019-05-27T14:05:17.958Z
 - commits:
-    - subject: 'resin1x: remove spurious undefined resin1x check'
+    - subject: "resin1x: remove spurious undefined resin1x check"
       hash: 100c91468d3042401e57a0e0065f98c929d712df
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#82'
-        connects-to: '#82'
+        Connects-to: "#82"
+        connects-to: "#82"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <matthew@balena.io>
@@ -1796,7 +1803,7 @@
   version: 3.0.2
   date: 2019-05-27T13:30:27.389Z
 - commits:
-    - subject: 'networking: add back lost /ping endpoint from api check'
+    - subject: "networking: add back lost /ping endpoint from api check"
       hash: 230012ccb7acc4cf93b1251d210d86a5eb4b45e7
       body: |
         remove legacy pubnub ping check
@@ -1809,20 +1816,20 @@
   version: 3.0.1
   date: 2019-05-15T17:23:46.502Z
 - commits:
-    - subject: 'diagnostics: remove support for 1.x devices'
+    - subject: "diagnostics: remove support for 1.x devices"
       hash: df281b76731c790ff408aa83b077f04a750c33a8
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#82'
-        connects-to: '#82'
+        Connects-to: "#82"
+        connects-to: "#82"
         Change-type: major
         change-type: major
         Signed-off-by: Matthew McGinn <matthew@balena.io>
         signed-off-by: Matthew McGinn <matthew@balena.io>
       author: Matthew McGinn
-    - subject: 'diagnose: update backend URL to API_ENDPOINT env var'
+    - subject: "diagnose: update backend URL to API_ENDPOINT env var"
       hash: b8926414c5b437d2d42c94ef29c104ac0360d4e8
-      body: ''
+      body: ""
       footer:
         Change-type: minor
         change-type: minor
@@ -1832,11 +1839,10 @@
   version: 3.0.0
   date: 2019-05-15T15:10:50.124Z
 - commits:
-    - subject: >-
-        networking: add 'ifconfig' and 'kill -USR1 dnsmasq' for more flaky
-        network data
+    - subject: "networking: add 'ifconfig' and 'kill -USR1 dnsmasq' for more flaky
+        network data"
       hash: a48c39c95edbbd1943459d2ebe8ac7c3bcfa0cf9
-      body: ''
+      body: ""
       footer:
         Change-type: minor
         change-type: minor
@@ -1846,9 +1852,9 @@
   version: 2.14.0
   date: 2019-05-02T17:21:21.213Z
 - commits:
-    - subject: 'diagnostics: add journalctl --list-boots'
+    - subject: "diagnostics: add journalctl --list-boots"
       hash: 0293b7d058437e4d067d656a8fcba88450efc3cd
-      body: ''
+      body: ""
       footer:
         Change-type: minor
         change-type: minor
@@ -1858,12 +1864,12 @@
   version: 2.13.0
   date: 2019-04-15T12:58:14.880Z
 - commits:
-    - subject: 'diagnose: stat resinhup lockfile'
+    - subject: "diagnose: stat resinhup lockfile"
       hash: 4bbb57e32650064b52f88f0cf0fed1981a3609d4
-      body: ''
+      body: ""
       footer:
-        Connects-to: 'https://github.com/balena-os/resinhup/issues/216'
-        connects-to: 'https://github.com/balena-os/resinhup/issues/216'
+        Connects-to: https://github.com/balena-os/resinhup/issues/216
+        connects-to: https://github.com/balena-os/resinhup/issues/216
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <mamcgi@gmail.com>
@@ -1872,11 +1878,10 @@
   version: 2.12.0
   date: 2019-04-13T23:54:25.642Z
 - commits:
-    - subject: >-
-        diagnostics: improve command formatting to group related commands by
-        subject
+    - subject: "diagnostics: improve command formatting to group related commands by
+        subject"
       hash: b79d21c1e613485dad16456311dd9dadadb6cb4e
-      body: ''
+      body: ""
       footer:
         Change-type: minor
         change-type: minor
@@ -1894,24 +1899,24 @@
         Let output write to either stdout/stderr as needed
         Fix up some README.md typos/rename issues
       footer:
-        Connects-to: '#58'
-        connects-to: '#58'
+        Connects-to: "#58"
+        connects-to: "#58"
         Change-type: minor
         change-type: minor
         Signed-off-by: Matthew McGinn <mamcgi@gmail.com>
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
-        HQ: 'https://github.com/balena-io/balena/issues/1663'
-        hq: 'https://github.com/balena-io/balena/issues/1663'
+        HQ: https://github.com/balena-io/balena/issues/1663
+        hq: https://github.com/balena-io/balena/issues/1663
       author: Matthew McGinn
   version: 2.10.0
   date: 2019-04-09T20:43:50.486Z
 - commits:
-    - subject: 'diagnose: source /etc/profile first to set path correctly'
+    - subject: "diagnose: source /etc/profile first to set path correctly"
       hash: 34c68a2be30279faca9267f08415f88520d42f75
-      body: ''
+      body: ""
       footer:
-        Connects-to: '#77'
-        connects-to: '#77'
+        Connects-to: "#77"
+        connects-to: "#77"
         Change-type: patch
         change-type: patch
         Signed-off-by: Matthew McGinn <mamcgi@gmail.com>
@@ -1920,9 +1925,9 @@
   version: 2.9.2
   date: 2019-04-08T12:33:35.615Z
 - commits:
-    - subject: 'versionbot: Add CHANGELOG.yml (for nested changelogs)'
+    - subject: "versionbot: Add CHANGELOG.yml (for nested changelogs)"
       hash: 369b180f3e57a12123684e4cb846d5cdb4d48437
-      body: ''
+      body: ""
       footer:
         Change-type: patch
         change-type: patch
@@ -1933,97 +1938,98 @@
   date: 2019-04-02T12:40:57.430Z
 - commits:
     - author: Matthew McGinn
-      body: ''
+      body: ""
       footers:
         change-type: minor
-        connects-to: '#60'
+        connects-to: "#60"
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: dfc768e0ef0b4daf801ac374260bbe47cd5693a1
       subject: Get any recent (<30d old) resinhup log tails
     - author: Matthew McGinn
-      body: ''
+      body: ""
       footers:
         change-type: minor
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: 3c71eea62645b5ef98ee2ffe6ff5edad1919f7b8
       subject: Warn if any disk takes more than 1s on average to write to
-  date: '2019-03-28T17:21:38Z'
+  date: 2019-03-28T17:21:38Z
   version: 2.9.0
 - commits:
     - author: Matthew McGinn
-      body: ''
+      body: ""
       footers:
         change-type: patch
         hq: balena-io/balena#1663
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: dd89118490c9daf3219c95153d208b1853882719
-      subject: 'diagnostics: fix versioning information, add note about failing commands'
-  date: '2019-03-28T16:57:47Z'
+      subject: "diagnostics: fix versioning information, add note about failing
+        commands"
+  date: 2019-03-28T16:57:47Z
   version: 2.8.2
 - commits:
     - author: Matthew McGinn
-      body: ''
+      body: ""
       footers:
         change-type: patch
-        connects-to: '#74'
+        connects-to: "#74"
         hq: balena-io/balena#1663
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: 43ce8cd1a00f767bd23528fbe441afe94fb81754
-      subject: 'diagnose: limit btrfs checks to resinOS 1.x devices'
-  date: '2019-03-26T18:36:03Z'
+      subject: "diagnose: limit btrfs checks to resinOS 1.x devices"
+  date: 2019-03-26T18:36:03Z
   version: 2.8.1
 - commits:
     - author: Matthew McGinn
-      body: ''
+      body: ""
       footers:
         change-type: minor
-        connects-to: '#70'
+        connects-to: "#70"
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: b3e5fda8e62ed2a12be6a74e5b61a913a90b2642
       subject: Add device hardware type to diagnostics
-  date: '2019-03-21T13:33:13Z'
+  date: 2019-03-21T13:33:13Z
   version: 2.8.0
 - commits:
     - author: Matthew McGinn
-      body: ''
+      body: ""
       footers:
         change-type: minor
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: 04f26f5d856b8d56bc205ca5d09a47b0bcf6b5f2
       subject: Add lsusb output to leech
     - author: xginn8
-      body: ''
+      body: ""
       hash: ef7756937f6f9385bbaa28bf17ac4bfd14ce0425
       subject: Merge branch 'master' into lsusb-leech
-  date: '2019-03-19T13:38:17Z'
+  date: 2019-03-19T13:38:17Z
   version: 2.7.0
 - commits:
     - author: dt-rush
-      body: ''
+      body: ""
       footers:
         change-type: patch
         signed-off-by: Nick Payne <nickp@balena.io>
       hash: 371445f5c360ca05d06e31b38926c1fd6001daaf
       subject: added df -ih to check inodes space
     - author: xginn8
-      body: ''
+      body: ""
       hash: c29b143d06428f5579c3e900f9ee3f7b1a836512
       subject: Merge branch 'master' into inodes
-  date: '2019-03-19T12:45:46Z'
+  date: 2019-03-19T12:45:46Z
   version: 2.6.2
 - commits:
     - author: Gergely Imreh
-      body: ''
+      body: ""
       footers:
         change-type: patch
         signed-off-by: Gergely Imreh <gergely@balena.io>
       hash: 58c27e2238a2a84df89f88be34740026a71e4425
       subject: Add CODEOWNERS file
-  date: '2019-03-11T10:56:23Z'
+  date: 2019-03-11T10:56:23Z
   version: 2.6.1
 - commits:
     - author: Matthew McGinn
-      body: ''
+      body: ""
       footers:
         change-type: minor
         connects-to: balena-io/resin-proxy#334
@@ -2031,48 +2037,48 @@
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: 5a08e41cb91a2f88fb85409739b4351c6d7e8e28
       subject: Re-use proxy container engine logic
-  date: '2019-02-21T17:08:20Z'
+  date: 2019-02-21T17:08:20Z
   version: 2.6.0
 - commits:
     - author: Matthew McGinn
-      body: ''
+      body: ""
       footers:
         change-type: minor
-        connects-to: '#63'
+        connects-to: "#63"
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: 8012f2c0c57701feca607d218beca12e23504190
       subject: Add 'sysctl -a' to leech output
-  date: '2019-02-04T18:10:14Z'
+  date: 2019-02-04T18:10:14Z
   version: 2.5.0
 - commits:
     - author: Matthew McGinn
-      body: ''
+      body: ""
       footers:
         change-type: minor
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: fbf942949f4525cd8b71bc12113cd92800c55b9e
       subject: Add "uptime" to leech output
-  date: '2019-02-04T16:27:49Z'
+  date: 2019-02-04T16:27:49Z
   version: 2.4.0
 - commits:
     - author: Matthew McGinn
-      body: ''
+      body: ""
       footers:
         change-type: minor
-        connects-to: '#66'
+        connects-to: "#66"
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: a16499450180c1a03f8350b7b3b8a3d280ff10ad
       subject: Get temperature data from all thermal zones
-  date: '2019-02-04T16:09:45Z'
+  date: 2019-02-04T16:09:45Z
   version: 2.3.0
 - commits:
     - author: Gergely Imreh
-      body: ''
+      body: ""
       footers:
         change-type: patch
         signed-off-by: Gergely Imreh <gergely@balena.io>
       hash: 47e999d4a7ec4c3f127388e084a1b00da8bde27e
-      subject: 'package.json: add private tag for Versionist to be happy'
+      subject: "package.json: add private tag for Versionist to be happy"
     - author: Gergely Imreh
       body: |-
         Required by gulp on node 11.
@@ -2081,22 +2087,21 @@
         change-type: patch
         signed-off-by: Gergely Imreh <gergely@balena.io>
       hash: 9360ec9cd8503c91c8246ef2259e3aa939dbea54
-      subject: 'dependency: add natives module for Node 11 builds'
+      subject: "dependency: add natives module for Node 11 builds"
     - author: Matthew McGinn
-      body: ''
+      body: ""
       footers:
         change-type: minor
-        connects-to: '#52'
+        connects-to: "#52"
         signed-off-by: Matthew McGinn <mamcgi@gmail.com>
       hash: 7ee4a79a54ccd4ce055b8f8bde46e882ff178541
-      subject: >-
-        Update resin-settings-client to balena-settings-client to look in the
+      subject: Update resin-settings-client to balena-settings-client to look in the
         right place for auth tokens
     - author: Gergely Imreh
-      body: ''
+      body: ""
       hash: 84f939cc6d2212ee2ca230b2a01e380a2fe24ec8
       subject: Merge branch 'master' into leech-fix
-  date: '2019-02-04T15:39:05Z'
+  date: 2019-02-04T15:39:05Z
   version: 2.2.0
 - commits:
     - author: Gergely Imreh
@@ -2109,40 +2114,39 @@
         change-type: patch
       hash: 9ea6703ceae0fa55e707e43de5ce476a3047d0d3
       subject: change output file name to be compatible with running on Windows
-  date: '2018-03-02T16:06:57Z'
+  date: 2018-03-02T16:06:57Z
   version: 2.1.3
 - commits:
     - author: Gergely Imreh
-      body: ''
+      body: ""
       footers:
         change-type: patch
       hash: cd1fcb8d855087975871ab2f993952052cf9863b
       subject: update tests for CircleCI and switch to v2
-  date: '2018-02-13T11:42:02Z'
+  date: 2018-02-13T11:42:02Z
   version: 2.1.2
 - commits:
     - author: Gergely Imreh
-      body: ''
+      body: ""
       footers:
         change-type: patch
       hash: 1da753597e47aabc7322cf69bc1b54089fc7c766
       subject: run prettier on the code
     - author: Gergely Imreh
-      body: ''
+      body: ""
       hash: 73e91f87e5351e59cebfa9b263a02963f8193a02
       subject: add pre-commit and pre-push hooks for prettier and tests
-  date: '2018-02-12T12:03:21Z'
+  date: 2018-02-12T12:03:21Z
   version: 2.1.1
 - commits:
     - author: Gergely Imreh
-      body: ''
+      body: ""
       footers:
         change-type: minor
       hash: 6fe58b5b8b98c7bef10840c5622f9e18bdaa5be1
-      subject: >-
-        updating the diagnostics script, combining fixes and adding balena
+      subject: updating the diagnostics script, combining fixes and adding balena
         support
-  date: '2018-02-08T13:23:40Z'
+  date: 2018-02-08T13:23:40Z
   version: 2.1.0
 - commits:
     - author: Gergely Imreh
@@ -2151,65 +2155,64 @@
         change-type: patch
       hash: c339aa359846142464f01571ba67c40e8bbc87a8
       subject: completing Capitano type definitions to let the package be installed
-  date: '2018-02-06T15:11:58Z'
+  date: 2018-02-06T15:11:58Z
   version: 2.0.3
 - commits:
     - author: Gergely Imreh
-      body: ''
+      body: ""
       footers:
         change-type: patch
       hash: c11ae6dab0782b6495bbd60a2c72c777aa6cfe55
       subject: add missing prettier-check for tests
-  date: '2017-12-08T17:47:52Z'
+  date: 2017-12-08T17:47:52Z
   version: 2.0.2
 - commits:
     - author: craig-mulligan
-      body: ''
+      body: ""
       footers:
         change-type: patch
       hash: 17d99cffaf8fd442c3f8dd709e08525033488b70
       subject: Add CI
-  date: '2017-12-08T11:34:37Z'
+  date: 2017-12-08T11:34:37Z
   version: 2.0.1
 - commits:
     - author: craig-mulligan
-      body: 'connects to #24'
+      body: "connects to #24"
       footers:
         change-type: major
       hash: 13063c06cc26acba1901fec691c5816b40852618
       subject: Add node cli + analytics
     - author: Gergely Imreh
-      body: ''
+      body: ""
       footers:
         change-type: patch
       hash: 49e1b72d6e1bcc5b69f18d09e1123429ac03bd68
       subject: updating versionist configuration for the module change
     - author: Gergely Imreh
-      body: ''
+      body: ""
       hash: bf89d11159002c70685654a4699e73487508fd1b
       subject: remove old leech.sh script
     - author: craig-mulligan
-      body: ''
+      body: ""
       hash: 1e67290874fc068aa4992e4c0d1a2d82fbb07d0d
       subject: use new ssh command
-  date: '2017-12-01T17:35:12Z'
+  date: 2017-12-01T17:35:12Z
   version: 2.0.0
 - commits:
     - author: Andreas Fitzek
-      body: >-
-        This changes the arguments of the tool. A new second argument the
-        username of the resin account used to access the device is required.
+      body: This changes the arguments of the tool. A new second argument the username
+        of the resin account used to access the device is required.
       footers:
         change-type: minor
-        connects-to: '#30'
+        connects-to: "#30"
         signed-off-by: Andreas Fitzek <andreas@resin.io>
       hash: 956f3f6ac79f9087701bd2b96b2bf97e5282ae4f
       subject: Use the new ssh device access method for leech.
     - author: Andreas Fitzek
-      body: ''
+      body: ""
       hash: 4bf0f283da39540227c8428b488c3afd9797ec96
       subject: addressed review
-  date: '2017-11-24T18:01:19Z'
+  date: 2017-11-24T18:01:19Z
   version: 1.3.0
 - commits:
     - author: Pablo Carranza Velez
@@ -2219,25 +2222,23 @@
 
         where having detailed information of containers is relevant.
 
-        We filter out the containers' environments, since they may contain
-        sensitive information (resin-related keys and user secrets).
+        We filter out the containers' environments, since they may contain sensitive information (resin-related keys and user secrets).
       footers:
         change-type: minor
         signed-off-by: Pablo Carranza Velez <pablo@resin.io>
       hash: 6897a57e5c2c2350b0c087059454d2fd776b0357
       subject: Add a command to inspect all containers on the device
-  date: '2017-10-30T21:33:21Z'
+  date: 2017-10-30T21:33:21Z
   version: 1.2.0
 - commits:
     - author: Pagan Gazzard
-      body: ''
+      body: ""
       footers:
         change-type: patch
       hash: ccb41c653bade78d18f3fc65b6c7d42a952693df
-      subject: >-
-        Add .gitattributes to make sure line endings for bash scripts are always
-        linux style
-  date: '2017-08-16T20:18:21Z'
+      subject: Add .gitattributes to make sure line endings for bash scripts are
+        always linux style
+  date: 2017-08-16T20:18:21Z
   version: 1.1.7
 - commits:
     - author: Gergely Imreh
@@ -2254,9 +2255,7 @@
 
         such as this (recording for reference):
 
-        cat /mnt/boot/config.json | jq '. | with_entries(if .key |
-        test("apiKey|deviceApiKey|pubnubSubscribeKey|pubnubPublishKey|mixpanelToken|wifiKey|files")
-        then .value = "<hidden>" else . end)'
+        cat /mnt/boot/config.json | jq '. | with_entries(if .key | test("apiKey|deviceApiKey|pubnubSubscribeKey|pubnubPublishKey|mixpanelToken|wifiKey|files") then .value = "<hidden>" else . end)'
 
         Unfortunately have to use `contains("key")`, and that's what this PR
 
@@ -2265,16 +2264,16 @@
         change-type: patch
       hash: e7b617dbb3e984f116c552a40eadf0715c1a2032
       subject: config.json key filtering rewrite
-  date: '2017-07-24T21:13:18Z'
+  date: 2017-07-24T21:13:18Z
   version: 1.1.6
 - commits:
     - author: Gergely Imreh
-      body: ''
+      body: ""
       footers:
         change-type: patch
       hash: 56da14b95ed94ec8183d543f3dc66c87c775e75f
       subject: improving heuristics for btrfs and non-btrfs system checks
-  date: '2017-07-24T21:11:55Z'
+  date: 2017-07-24T21:11:55Z
   version: 1.1.5
 - commits:
     - author: Gergely Imreh
@@ -2285,25 +2284,25 @@
         change-type: patch
       hash: 27293b69f694439beb34c4242d23dfd6f0ea55f9
       subject: fix command listing and exectution
-  date: '2017-07-24T21:10:22Z'
+  date: 2017-07-24T21:10:22Z
   version: 1.1.4
 - commits:
     - author: Gergely Imreh
-      body: ''
+      body: ""
       footers:
         change-type: patch
       hash: 8c0e8f3734b09fa5b68b4581fe2ae31b292027bf
-      subject: 'fix typo: wrong docker parameter name'
-  date: '2017-07-21T09:14:11Z'
+      subject: "fix typo: wrong docker parameter name"
+  date: 2017-07-21T09:14:11Z
   version: 1.1.3
 - commits:
     - author: Gergely Imreh
-      body: ''
+      body: ""
       footers:
         change-type: patch
       hash: dba2645f9349df5facff766f4a4b8011766d2ecd
-      subject: 'add version check, and bail if not on the latest remote version'
-  date: '2017-07-19T10:12:01Z'
+      subject: add version check, and bail if not on the latest remote version
+  date: 2017-07-19T10:12:01Z
   version: 1.1.2
 - commits:
     - author: Gergely Imreh
@@ -2315,57 +2314,55 @@
         change-type: patch
         signed-off-by: Gergely Imreh <imrehg@gmail.com>
       hash: 6dc23d79e7626f21b4e65437e340832ca0edb182
-      subject: 'add new commands: time sync status and docker stats'
-  date: '2017-07-03T17:33:02Z'
+      subject: "add new commands: time sync status and docker stats"
+  date: 2017-07-03T17:33:02Z
   version: 1.1.1
 - commits:
     - author: Pablo Carranza Velez
-      body: ''
+      body: ""
       footers:
         change-type: patch
         signed-off-by: Pablo Carranza Velez <pablo@resin.io>
       hash: f75e8002848f7a9ddc199f6ebd71eef0b724017b
       subject: Do not show keys from config.json in output
-  date: '2017-06-21T20:38:35Z'
+  date: 2017-06-21T20:38:35Z
   version: 1.0.3
 - commits:
     - author: Gergely Imreh
-      body: ''
+      body: ""
       footers:
         change-type: patch
       hash: 4b6fa252c177fed179db2bb2d8dea02d8c5f8b2f
-      subject: 'versionist support: add config and update changelog header'
-  date: '2017-06-13T10:47:23Z'
+      subject: "versionist support: add config and update changelog header"
+  date: 2017-06-13T10:47:23Z
   version: 1.0.2
 - commits:
     - author: Gergely Imreh
-      body: ''
+      body: ""
       footers:
         change-type: patch
       hash: 91aff114b46766c9f66f4acedd0753d8f039a243
       subject: add version info to the output
     - author: Kostas Lekkas
-      body: >-
-        Today I bumped into a device where the supervisor container was
-        appearing to run normally but had no logs. I often run `netstat -ntl` on
-        the hostOS; if `48484` port is not marked as listening, it is an
-        indication that the supervisor app in the container is not functioning
-        properly
+      body: Today I bumped into a device where the supervisor container was appearing
+        to run normally but had no logs. I often run `netstat -ntl` on the
+        hostOS; if `48484` port is not marked as listening, it is an indication
+        that the supervisor app in the container is not functioning properly
       hash: 86254ee6462d6fc10b2615df5d91c49de25eccf4
       subject: Add netstat to diagnose.sh
     - author: Kostas Lekkas
-      body: ''
+      body: ""
       hash: 94023f194a4bc08f8d71820092194743b48fbfaf
       subject: Add test for supervisor ping endpoint
-  date: '2017-06-13T09:19:39Z'
+  date: 2017-06-13T09:19:39Z
   version: 1.0.1
 - commits:
     - author: Gergely Imreh
-      body: ''
+      body: ""
       hash: 2d5e9f46e5639ce141682b53b871312a5e51df7e
-      subject: 'error log: single place to set the error log location'
+      subject: "error log: single place to set the error log location"
     - author: Gergely Imreh
-      body: ''
+      body: ""
       hash: 8c69e204afc71af66a258fa2be0b948a602a790b
       subject: readme updates
     - author: Pablo Carranza Velez
@@ -2375,22 +2372,20 @@
 
         to journal). Add OS release check. Add checks for boot files present in
 
-        newer OS, including config.txt and uEnv files. Add curl check for Resin
-        API.
+        newer OS, including config.txt and uEnv files. Add curl check for Resin API.
       footers:
         change-type: minor
         signed-off-by: Pablo Carranza Velez <pablo@resin.io>
       hash: fe95920c7f37534e5e36e5a2e6592c84dcb43b87
       subject: Add some extra commands to diagnose.sh
     - author: Andrew Scheller
-      body: >-
-        Looks like at some point `diagnose_template.sh` must have been renamed
-        to `diagnose.sh`
+      body: Looks like at some point `diagnose_template.sh` must have been renamed to
+        `diagnose.sh`
       hash: cdd1331e5a8e224ea0c8c8a39f658357b5da6f22
       subject: Update README.md
     - author: gaudi
-      body: ''
+      body: ""
       hash: b65d080e20b96797315d6e04341da5909aabc78f
       subject: add pubnub curl
-  date: '2017-05-29T22:22:00Z'
+  date: 2017-05-29T22:22:00Z
   version: 1.0.0
