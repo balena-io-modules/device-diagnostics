@@ -1,4 +1,17 @@
 - commits:
+    - subject: "patch: Add dashboard diagnostics screenshot"
+      hash: 75c1b0df1535e2e623e4fe2bb07d6e7f10aa15ec
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Vipul Gupta (@vipulgupta2048) <vipul@balena.io>
+        signed-off-by: Vipul Gupta (@vipulgupta2048) <vipul@balena.io>
+      author: Vipul Gupta (@vipulgupta2048)
+  version: 4.22.5
+  title: "'patch: Add dashboard diagnostics screenshot'"
+  date: 2022-02-15T20:20:00.855Z
+- commits:
     - subject: Remove the circleCI job config
       hash: dde882a4a5924062a01d67a1ddb5748f36c72471
       body: |
