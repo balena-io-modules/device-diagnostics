@@ -1,4 +1,27 @@
 - commits:
+    - subject: Update DNS check docs to indicate only failed tests are shown
+      hash: ed37dc8548be017332db3926a677914aa31c11df
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+    - subject: Replace egrep with grep -E as per shellcheck SC2196
+      hash: 12df0b715d5326de12e06f23747eb13f2c80e303
+      body: |
+        https://github.com/koalaman/shellcheck/wiki/SC2196
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+  version: 4.22.8
+  title: "'Update DNS check docs to indicate only failed tests are shown '"
+  date: 2022-02-16T17:52:20.929Z
+- commits:
     - subject: Link to docs when IPv6 tests fail
       hash: 19d380081d6311db1cb19e761fcf030c258df620
       body: ""
