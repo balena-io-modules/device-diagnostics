@@ -177,17 +177,15 @@ function test_ipv4_stack()
 		return
 	fi 
 	# Check if we can reach an IPv4 HTTP service since device is configured to do so 
-	local ipv4_check
 	local -i res
-	ipv4_check=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV4_ENDPOINT}")
-	res=$?
+	res=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV4_ENDPOINT}" ; echo $?)
 	if test "$res" != "0"; then
 		# from man curl:
 		# EXIT CODES
 		# 60	 Peer certificate cannot be authenticated with known CA certificates.
 		if [ "${res}" -eq 60 ]; then
-		echo "${FUNCNAME[0]}: There may be a firewall blocking traffic to https://${IPV4_ENDPOINT} (SSL errors)"
-		return
+			echo "${FUNCNAME[0]}: There may be a firewall blocking traffic to https://${IPV4_ENDPOINT} (SSL errors)"
+			return
 		fi
 		echo "${FUNCNAME[0]}: Could not contact https://${IPV4_ENDPOINT}"
 	fi
@@ -201,17 +199,15 @@ function test_ipv6_stack()
 		return
 	fi 
 	# Check if we can reach an IPv6 HTTP service since device is configured to do so 
-	local ipv6_check
 	local -i res
-	ipv6_check=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV6_ENDPOINT}")
-	res=$?
+	res=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV6_ENDPOINT}" ; echo $?)
 	if test "$res" != "0"; then
 		# from man curl:
 		# EXIT CODES
 		# 60	 Peer certificate cannot be authenticated with known CA certificates.
 		if [ "${res}" -eq 60 ]; then
-				echo "${FUNCNAME[0]}: There may be a firewall blocking traffic to https://${IPV6_ENDPOINT} (SSL errors)"
-				return
+			echo "${FUNCNAME[0]}: There may be a firewall blocking traffic to https://${IPV6_ENDPOINT} (SSL errors)"
+			return
 		fi
 		echo "${FUNCNAME[0]}: Could not contact https://${IPV6_ENDPOINT}"
 	fi

@@ -179,6 +179,13 @@ This test depends on the container engine being healthy (see [check_container_en
 This test is an end-to-end check that tries to authenticate with the balenaCloud registry, confirming that all other
 points in the networking stack are behaving properly.
 
+##### test_ipv4_stack
+This test confirms that the device can reach a public IPv4 endpoint when an IPv4 route is detected.
+
+##### test_ipv6_stack
+This test confirms that the device can reach a public IPv6 endpoint when an IPv6 route is detected.
+If necessary you can [disable IPv6 entirely](https://www.balena.io/docs/reference/OS/network/2.x/#disable-ipv6) on a device if it is experiencing issues.
+
 ###### Depends on
 This test depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
 
