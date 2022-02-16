@@ -7,7 +7,7 @@ A `check` in this context is defined as a function that returns a result (good/b
 command is simply a data collection tool without any filtering or logic built in. Checks are intended to be used by
 everyone, while typically command output is used by support/subject matter experts and power users.
 
-To run device diagnotics as part of balenaCloud, click the `Diagnotics` tab on the sidebar of the device page in the dashboard. Click `Run diagnostics` to start running the tests. 
+To run device diagnotics through balenaCloud dashboard, head to the `Diagnotics` tab in the sidebar and click the `Run checks` button to start the tests.
 
 ![diagnostics](https://user-images.githubusercontent.com/22801822/154141814-6953717d-f90a-456b-ad51-474b14dcc5e9.png)
 
