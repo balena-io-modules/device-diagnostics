@@ -1,4 +1,26 @@
 - commits:
+    - subject: Link to docs when IPv6 tests fail
+      hash: 19d380081d6311db1cb19e761fcf030c258df620
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+    - subject: Remove unused variable from ipv4 and ipv6 stack tests
+      hash: 4e72dd0285f959d1d94f672b5501245c5878019a
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+  version: 4.22.7
+  title: "'Link to docs when IPv6 tests fail'"
+  date: 2022-02-16T17:17:57.493Z
+- commits:
     - subject: "patch: Improve wording for diagnostics run"
       hash: c99a37461d788e17c1d55dd7a2c87424b4d2986f
       body: ""

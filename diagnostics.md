@@ -203,4 +203,4 @@ output along with the exit code of the healthcheck.
 #### Triage
 These checks are wholly limited in scope to user services and should be triaged by the developer.
 
-#### DIAGNOSE_VERSION=4.22.6
+#### DIAGNOSE_VERSION=4.22.7
