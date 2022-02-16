@@ -157,13 +157,21 @@ This check tests various common failures at install locations required for a hea
 More information on networking requirements can be found [here](https://www.balena.io/docs/reference/OS/network/2.x/#network-requirements).
 
 ##### test_upstream_dns
-This test confirms that certain FQDNs are resolvable by each configured upstream DNS server.
+This test confirms that certain FQDNs are resolvable by each of the configured upstream DNS addresses.
+Only the failed upstream DNS addresses will be shown in the test results.
 
 ##### test_wifi
 This test confirms that if a device is using wifi, the signal level is above a threshold.
 
 ##### test_ping
 This test confirms that packets are not dropped during a ICMP ping.
+
+##### test_ipv4_stack
+This test confirms that the device can reach a public IPv4 endpoint when an IPv4 route is detected.
+
+##### test_ipv6_stack
+This test confirms that the device can reach a public IPv6 endpoint when an IPv6 route is detected.
+If necessary you can [disable IPv6 entirely](https://www.balena.io/docs/reference/OS/network/2.x/#disable-ipv6) on a device if it is experiencing issues.
 
 ##### test_balena_api
 This test confirms that the device can communicate with the balenaCloud API. Commonly, firewalls or MiTM devices can
@@ -178,13 +186,6 @@ This test depends on the container engine being healthy (see [check_container_en
 ##### test_balena_registry
 This test is an end-to-end check that tries to authenticate with the balenaCloud registry, confirming that all other
 points in the networking stack are behaving properly.
-
-##### test_ipv4_stack
-This test confirms that the device can reach a public IPv4 endpoint when an IPv4 route is detected.
-
-##### test_ipv6_stack
-This test confirms that the device can reach a public IPv6 endpoint when an IPv6 route is detected.
-If necessary you can [disable IPv6 entirely](https://www.balena.io/docs/reference/OS/network/2.x/#disable-ipv6) on a device if it is experiencing issues.
 
 ###### Depends on
 This test depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
