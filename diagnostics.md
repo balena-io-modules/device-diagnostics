@@ -107,17 +107,6 @@ This test confirms that the data partition for the device has been mounted prope
 ##### Triage
 Failure to mount the data partition can indicate an unhealthy storage medium or other problems on the device.  It is best to contact support to investigate further.
 
-### check_service_restarts
-#### Summary
-This check interrogates the engine to see if any services are restarting uncleanly/unexpectedly.
-
-#### Triage
-Investigate the logs of whichever service(s) are restarting uncleanly; this issue could be a bug in the error handling
-or start-up of the aforementioned unhealthy services.
-
-#### Depends on
-This check depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
-
 ### check_timesync
 #### Summary
 This check confirms that the system clock is actively disciplined.
@@ -195,13 +184,23 @@ Depending on what part of this check failed, there are various fixes and workaro
 restrictive local network, or an unreliable connection.
 
 ### check_user_services
+
 #### Summary
-Any checks with names beginning with `service_` come from user services. These checks allow users to provide their
-own health checks using the [HEALTHCHECK directive](https://docs.docker.com/engine/reference/builder/#healthcheck)
-defined in the Dockerfile. Any healthcheck output will be collected as-is, truncated to 100 characters, and shown as
-output along with the exit code of the healthcheck.
+
+Any checks with names beginning with `service_` come from user-defined services.
+These checks interrogate the engine to see if any services are restarting uncleanly/unexpectedly or failing health checks.
+We allow users to provide their own health checks using the [HEALTHCHECK directive](https://docs.docker.com/engine/reference/builder/#healthcheck)
+defined in the Dockerfile or docker-compose file.
+Any health check output will be collected as-is, truncated to 100 characters, and shown as output along with the exit code.
 
 #### Triage
+
+Investigate the logs of whichever service(s) are restarting uncleanly or failing healthchecks.
+This issue could be a bug in the error handling or start-up of the aforementioned unhealthy services.
 These checks are wholly limited in scope to user services and should be triaged by the developer.
+
+#### Depends on
+
+This check depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
 
 #### DIAGNOSE_VERSION=4.22.8
