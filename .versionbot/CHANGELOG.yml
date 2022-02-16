@@ -1,4 +1,17 @@
 - commits:
+    - subject: "patch: Improve wording for diagnostics run"
+      hash: c99a37461d788e17c1d55dd7a2c87424b4d2986f
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Vipul Gupta (@vipulgupta2048) <vipul@balena.io>
+        signed-off-by: Vipul Gupta (@vipulgupta2048) <vipul@balena.io>
+      author: Vipul Gupta (@vipulgupta2048)
+  version: 4.22.6
+  title: "'Improve wording of diagnostics run'"
+  date: 2022-02-16T05:33:26.561Z
+- commits:
     - subject: "patch: Add dashboard diagnostics screenshot"
       hash: 75c1b0df1535e2e623e4fe2bb07d6e7f10aa15ec
       body: ""
