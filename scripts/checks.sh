@@ -178,7 +178,7 @@ function test_ipv4_stack()
 	fi 
 	# Check if we can reach an IPv4 HTTP service since device is configured to do so 
 	local -i res
-	res=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV4_ENDPOINT}" ; echo $?)
+	res=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV4_ENDPOINT}" 1>/dev/null 2>&1; echo $?)
 	if test "$res" != "0"; then
 		# from man curl:
 		# EXIT CODES
@@ -200,7 +200,7 @@ function test_ipv6_stack()
 	fi 
 	# Check if we can reach an IPv6 HTTP service since device is configured to do so 
 	local -i res
-	res=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV6_ENDPOINT}" ; echo $?)
+	res=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV6_ENDPOINT}" 1>/dev/null 2>&1; echo $?)
 	if test "$res" != "0"; then
 		# from man curl:
 		# EXIT CODES
@@ -543,7 +543,7 @@ function check_user_services()
 		for service in "${USERVICES[@]}"; do
 
 			if ! inspect=$(${TIMEOUT_CMD} "${ENG}" inspect "${service}"); then
-				status="User service (${service}) inspection timed out"
+				status="User service '${service}' inspection timed out"
 				log_status "${BAD}" "check_service_${service}" "${status}"
 				continue
 			fi
@@ -558,7 +558,7 @@ function check_user_services()
 				last_code=$(echo -E "${healthcheck_output}" | jq -ar '.Log[-1].ExitCode')
 				fail_streak=$(echo -E "${healthcheck_output}" | jq -r '.FailingStreak')
 
-				status="User service (${pretty_name}) healthcheck failed, count: ${fail_streak}"
+				status="User service '${pretty_name}' healthcheck failed, count: ${fail_streak}"
 				status+=$'\n'$(printf 'exit code: %s, output: %s' "${last_code}" "${last_output}")
 
 				log_status "${BAD}" "check_service_${pretty_name}" "${status}"
@@ -568,12 +568,12 @@ function check_user_services()
 			restart_count=$(echo -E "${inspect}" | jq -r '.[].RestartCount')
 
 			if [ "${restart_count}" -gt 0 ]; then
-				status="User service (${pretty_name}) is restarting unexpectedly, count: ${restart_count}"
+				status="User service '${pretty_name}' is restarting unexpectedly, count: ${restart_count}"
 				log_status "${BAD}" "check_service_${pretty_name}" "${status}"
 				continue
 			fi
 
-			status="User service (${pretty_name}) is running & healthy"
+			status="User service '${pretty_name}' is running & healthy"
 			log_status "${GOOD}" "check_service_${pretty_name}" "${status}"
 			continue
 
