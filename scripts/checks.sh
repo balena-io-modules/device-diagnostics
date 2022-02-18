@@ -178,7 +178,7 @@ function test_ipv4_stack()
 	fi 
 	# Check if we can reach an IPv4 HTTP service since device is configured to do so 
 	local -i res
-	res=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV4_ENDPOINT}" ; echo $?)
+	res=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV4_ENDPOINT}" 1>/dev/null 2>&1; echo $?)
 	if test "$res" != "0"; then
 		# from man curl:
 		# EXIT CODES
@@ -200,7 +200,7 @@ function test_ipv6_stack()
 	fi 
 	# Check if we can reach an IPv6 HTTP service since device is configured to do so 
 	local -i res
-	res=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV6_ENDPOINT}" ; echo $?)
+	res=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV6_ENDPOINT}" 1>/dev/null 2>&1; echo $?)
 	if test "$res" != "0"; then
 		# from man curl:
 		# EXIT CODES
@@ -536,57 +536,49 @@ function check_os_rollback()
 	fi
 }
 
-function check_service_restarts()
-{
-	local restarting=()
-	local timed_out=()
-	local -i restarting_count=0
-	local -i service_count=0
-
-	if (( ${#USERVICES[@]} > 0 )); then
-		for service in "${USERVICES[@]}"; do
-			if ! servicename_count=$(${TIMEOUT_CMD} ${ENG} inspect "${service}" -f '{{.Name}} {{.RestartCount}}'); then
-				timed_out+=("${service}")
-			else
-				service_count+=1
-				if [[ "$(echo "${servicename_count}" | awk '{print $2}')" -ne 0 ]]; then
-					label="$(echo "${servicename_count}" | awk '{print "(service: "$1" restart count: "$2")"}')"
-					restarting+=("${label}")
-					restarting_count+=1
-				fi
-			fi
-		done
-	fi
-	if (( restarting_count != 0 )); then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Some services are restarting unexpectedly: ${restarting[*]}"
-	elif (( "${service_count}" < "${#USERVICES[@]}" )); then
-		log_status "${BAD}" "${FUNCNAME[0]}" "Inspecting service(s) (${timed_out[*]}) has timed out, check data incomplete"
-	else
-		log_status "${GOOD}" "${FUNCNAME[0]}" "No services are restarting unexpectedly"
-	fi
-}
-
 function check_user_services()
 {
-	# TODO: might as well track restarts here as well (convert to aggregated check)
-	local checks_return="[]"
-	local out healthcheck_output inspect
+	local status healthcheck_output inspect fail_streak last_code last_output pretty_name healthy
 	if (( ${#USERVICES[@]} > 0 )); then
 		for service in "${USERVICES[@]}"; do
-			inspect=$(${TIMEOUT_CMD} "${ENG}" inspect "${service}")
-			healthcheck_output=$(echo -E "${inspect}" | jq -r '.[].State.Health | select(. != null)')
-			if [[ -n "${healthcheck_output}" ]]; then
-				# artificially limited to 100 chars
-				# TODO: could probably be cleaned up
-				# TODO: if a service is failing, see how many times in a row (.FailingStreak)
-				out=$(echo -E "${healthcheck_output}" | jq -ar '.Log[-1]|[.ExitCode,.Output[:100]]|"exit code: \(.[0]), output: \(.[1])"' | sed "s/\"/\'/g")
-				success=$(echo -E "${healthcheck_output}" | jq -r '.Status == "healthy"')
-				pretty_name=$(echo -E "${inspect}" | jq -r '.[].Config.Labels."io.balena.service-name"')
-				checks_return=$(echo -E "[{\"name\": \"service_${pretty_name}\", \"status\":\"${out}\",\"success\": ${success}}]" "${checks_return}" | jq -s 'add')
+
+			if ! inspect=$(${TIMEOUT_CMD} "${ENG}" inspect "${service}"); then
+				status="User service '${service}' inspection timed out"
+				log_status "${BAD}" "check_service_${service}" "${status}"
+				continue
 			fi
+
+			pretty_name=$(echo -E "${inspect}" | jq -r '.[].Config.Labels."io.balena.service-name"')
+			healthcheck_output=$(echo -E "${inspect}" | jq -r '.[].State.Health | select(. != null)')
+			healthy=$(echo -E "${healthcheck_output}" | jq -r '.Status == "healthy"')
+
+			if [ -n "${healthcheck_output}" ] && [ "${healthy}" = "false" ]; then
+				# artificially limited to 100 chars
+				last_output=$(echo -E "${healthcheck_output}" | jq -ar '.Log[-1].Output[:100]' | sed "s/\"/\'/g")
+				last_code=$(echo -E "${healthcheck_output}" | jq -ar '.Log[-1].ExitCode')
+				fail_streak=$(echo -E "${healthcheck_output}" | jq -r '.FailingStreak')
+
+				status="User service '${pretty_name}' healthcheck failed, count: ${fail_streak}"
+				status+=$'\n'$(printf 'exit code: %s, output: %s' "${last_code}" "${last_output}")
+
+				log_status "${BAD}" "check_service_${pretty_name}" "${status}"
+				continue
+			fi
+
+			restart_count=$(echo -E "${inspect}" | jq -r '.[].RestartCount')
+
+			if [ "${restart_count}" -gt 0 ]; then
+				status="User service '${pretty_name}' is restarting unexpectedly, count: ${restart_count}"
+				log_status "${BAD}" "check_service_${pretty_name}" "${status}"
+				continue
+			fi
+
+			status="User service '${pretty_name}' is running & healthy"
+			log_status "${GOOD}" "check_service_${pretty_name}" "${status}"
+			continue
+
 		done
 	fi
-	echo "${checks_return}"
 }
 
 function run_checks()
@@ -599,7 +591,6 @@ function run_checks()
 	"$(check_memory)" \
 	"$(check_networking)" \
 	"$(check_os_rollback)" \
-	"$(check_service_restarts)" \
 	"$(check_supervisor)" \
 	"$(check_temperature)" \
 	"$(check_timesync)" \
