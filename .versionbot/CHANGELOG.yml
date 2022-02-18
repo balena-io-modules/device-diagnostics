@@ -1,4 +1,26 @@
 - commits:
+    - subject: Redirect output of ipv4 and ipv6 checks
+      hash: 24a510376679e70b36f39d8111bf03a4affa3772
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+    - subject: Combine user service checks and container restart checks
+      hash: d4ed22778db4935554fa669c3bd6800dcd5f77c4
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+  version: 4.22.9
+  title: "'Combine user service checks and container restart checks'"
+  date: 2022-02-18T15:17:42.531Z
+- commits:
     - subject: Update DNS check docs to indicate only failed tests are shown
       hash: ed37dc8548be017332db3926a677914aa31c11df
       body: ""
