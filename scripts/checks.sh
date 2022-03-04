@@ -399,11 +399,15 @@ function check_balenaOS()
 		log_status "${BAD}" "${FUNCNAME[0]}" "ResinOS 1.x is now completely deprecated"
 	else
 		local -i versions
+		local filter="[.d[] | select(.release_tag[].value)] | length"
+		if [ -n "${VARIANT}" ]; then
+			filter="[.d[] | select(.release_tag[].value == (\"${VARIANT:-production}\" | ascii_downcase))] | length"
+		fi
 		versions=$(CURL_CA_BUNDLE=${TMPCRT} curl -qs --retry 3 --max-time 5 --retry-connrefused -X GET \
 			-H "Content-Type: application/json" \
 			-H "Authorization: Bearer ${DEVICE_API_KEY}" \
 			"${API_ENDPOINT}/v5/release?\$expand=release_tag,belongs_to__application,contains__image/image&\$filter=(belongs_to__application/any(a:a/device_type%20eq%20'${SLUG}'))%20and%20(release_tag/any(rt:(rt/tag_key%20eq%20'version')%20and%20(rt/value%20eq%20'${VERSION}')))" \
-			| jq -r "[.d[] | select(.release_tag[].value == (\"${VARIANT:-production}\" | ascii_downcase))] | length")
+			| jq -r "${filter}")
 		if (( versions == 0 )); then
 			log_status "${BAD}" "${FUNCNAME[0]}" "balenaOS 2.x detected, but this version is not currently available in ${API_ENDPOINT}"
 		elif (( versions > 1 )); then
