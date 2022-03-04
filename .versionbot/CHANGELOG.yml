@@ -1,4 +1,19 @@
 - commits:
+    - subject: "checks.sh: Modify balenaOS version check to support unified releases"
+      hash: bba05aef499b631f80b6065db211c962b9466362
+      body: |
+        Newer balenaOS releases have unified development and production and
+        do not have a VARIANT any more.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+  version: 4.22.10
+  title: "'checks.sh: Modify balenaOS version check to support unified releases'"
+  date: 2022-03-04T12:43:50.621Z
+- commits:
     - subject: Redirect output of ipv4 and ipv6 checks
       hash: 24a510376679e70b36f39d8111bf03a4affa3772
       body: ""
