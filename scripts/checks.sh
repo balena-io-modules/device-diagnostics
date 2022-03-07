@@ -395,6 +395,9 @@ function check_balenaOS()
 	# test resinOS 1.x based on matches like the following:
 	# VERSION="1.24.0"
 	# PRETTY_NAME="Resin OS 1.24.0"
+
+	local variant_tag=$(echo "${VARIANT:-production}" | tr "[:upper:]" "[:lower:]")
+
 	if grep -q -e '^VERSION="1.*$' -e '^PRETTY_NAME="Resin OS 1.*$' /etc/os-release; then
 		log_status "${BAD}" "${FUNCNAME[0]}" "ResinOS 1.x is now completely deprecated"
 	else
@@ -402,8 +405,8 @@ function check_balenaOS()
 		versions=$(CURL_CA_BUNDLE=${TMPCRT} curl -qs --retry 3 --max-time 5 --retry-connrefused -X GET \
 			-H "Content-Type: application/json" \
 			-H "Authorization: Bearer ${DEVICE_API_KEY}" \
-			"${API_ENDPOINT}/v5/release?\$expand=release_tag,belongs_to__application,contains__image/image&\$filter=(belongs_to__application/any(a:a/device_type%20eq%20'${SLUG}'))%20and%20(release_tag/any(rt:(rt/tag_key%20eq%20'version')%20and%20(rt/value%20eq%20'${VERSION}')))" \
-			| jq -r "[.d[] | select(.release_tag[].value == (\"${VARIANT:-production}\" | ascii_downcase))] | length")
+			"${API_ENDPOINT}/v6/release?\$select=id&\$expand=release_tag&\$filter=(belongs_to__application/any(a:a/is_for__device_type/any(dt:dt/slug%20eq%20'${SLUG}')%20and%20a/is_host%20eq%20true))%20and%20is_invalidated%20eq%20false%20and%20(release_tag/any(rt:(rt/tag_key%20eq%20'version')%20and%20(rt/value%20eq%20'${VERSION}')))%20and%20((release_tag/any(rt:(rt/tag_key%20eq%20'variant')%20and%20(rt/value%20eq%20'${variant_tag}')))%20or%20not(release_tag/any(rt:rt/tag_key%20eq%20'variant')))" \
+			| jq -r "[.d[]] | length"
 		if (( versions == 0 )); then
 			log_status "${BAD}" "${FUNCNAME[0]}" "balenaOS 2.x detected, but this version is not currently available in ${API_ENDPOINT}"
 		elif (( versions > 1 )); then
