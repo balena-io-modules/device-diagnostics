@@ -406,7 +406,7 @@ function check_balenaOS()
 			-H "Content-Type: application/json" \
 			-H "Authorization: Bearer ${DEVICE_API_KEY}" \
 			"${API_ENDPOINT}/v6/release?\$select=id&\$expand=release_tag&\$filter=(belongs_to__application/any(a:a/is_for__device_type/any(dt:dt/slug%20eq%20'${SLUG}')%20and%20a/is_host%20eq%20true))%20and%20is_invalidated%20eq%20false%20and%20(release_tag/any(rt:(rt/tag_key%20eq%20'version')%20and%20(rt/value%20eq%20'${VERSION}')))%20and%20((release_tag/any(rt:(rt/tag_key%20eq%20'variant')%20and%20(rt/value%20eq%20'${variant_tag}')))%20or%20not(release_tag/any(rt:rt/tag_key%20eq%20'variant')))" \
-			| jq -r "[.d[]] | length"
+			| jq -r "[.d[]] | length")
 		if (( versions == 0 )); then
 			log_status "${BAD}" "${FUNCNAME[0]}" "balenaOS 2.x detected, but this version is not currently available in ${API_ENDPOINT}"
 		elif (( versions > 1 )); then
