@@ -1,4 +1,17 @@
 - commits:
+    - subject: "checks.sh: Add missing parenthesis in check_balenaOS"
+      hash: 18e2df2a8719f2f74969244ded7b2ec31f75d154
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Kyle Harding <kyle@balena.io>
+        signed-off-by: Kyle Harding <kyle@balena.io>
+      author: Kyle Harding
+  version: 4.22.11
+  title: "'checks.sh: Add missing parenthesis in check_balenaOS'"
+  date: 2022-03-07T17:20:22.201Z
+- commits:
     - subject: make check_balenaOS account for prod/dev merge
       hash: d2244099870191f5c58fd69337d37d9ed75d531c
       body: ""
