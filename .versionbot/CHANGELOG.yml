@@ -1,4 +1,17 @@
 - commits:
+    - subject: make check_balenaOS account for prod/dev merge
+      hash: d2244099870191f5c58fd69337d37d9ed75d531c
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Ryan Cooke <ryan@balena.io>
+        signed-off-by: Ryan Cooke <ryan@balena.io>
+      author: rcooke-warwick
+  version: 4.22.10
+  title: "'make check_balenaOS account for prod/dev merge'"
+  date: 2022-03-07T11:16:05.711Z
+- commits:
     - subject: Redirect output of ipv4 and ipv6 checks
       hash: 24a510376679e70b36f39d8111bf03a4affa3772
       body: ""
