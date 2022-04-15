@@ -1,4 +1,19 @@
 - commits:
+    - subject: Fix Engine network diagnostic
+      hash: 3209e235b9b89c6054dc27cdc44119ebf1984220
+      body: |
+        We were passing container IDs to `balena network inspect`. This fixes
+        the command to pass network IDs, as expected.
+      footer:
+        Signed-off-by: Leandro Motta Barros <leandro@balena.io>
+        signed-off-by: Leandro Motta Barros <leandro@balena.io>
+        Change-type: patch
+        change-type: patch
+      author: Leandro Motta Barros
+  version: 4.22.12
+  title: "'Fix Engine network diagnostic'"
+  date: 2022-04-15T14:05:24.386Z
+- commits:
     - subject: "checks.sh: Add missing parenthesis in check_balenaOS"
       hash: 18e2df2a8719f2f74969244ded7b2ec31f75d154
       body: ""
