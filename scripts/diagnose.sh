@@ -77,7 +77,7 @@ commands=(
 	'journalctl --no-pager --no-hostname -n 200 -a -u $ENG'
 	'journalctl --no-pager --no-hostname -n 1000 -at balenad'
 	'$ENG inspect \$($ENG ps --all --quiet | tr \"\\n\" \" \") | $filter_container_envs'
-	'$ENG network inspect \$($ENG ps --quiet | tr \"\\n\" \" \")'
+	'$ENG network inspect \$($ENG network ls --quiet | tr \"\\n\" \" \")'
 	'test -f /mnt/state/balena-engine-storage-migration.log && cat /mnt/state/balena-engine-storage-migration.log'
 
 	# Boot performance
