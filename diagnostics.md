@@ -187,7 +187,7 @@ restrictive local network, or an unreliable connection.
 
 #### Summary
 
-Any checks with names beginning with `service_` come from user-defined services.
+Any checks with names beginning with `check_service_` come from user-defined services.
 These checks interrogate the engine to see if any services are restarting uncleanly/unexpectedly or failing health checks.
 We allow users to provide their own health checks using the [HEALTHCHECK directive](https://docs.docker.com/engine/reference/builder/#healthcheck)
 defined in the Dockerfile or docker-compose file.
