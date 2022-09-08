@@ -1,4 +1,17 @@
 - commits:
+    - subject: Fixes various documentation typos
+      hash: 0f90d683d6ce8e387726bac508ba0d6e9c7dfe7d
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Bucknall <alex.bucknall@gmail.com>
+        signed-off-by: Alex Bucknall <alex.bucknall@gmail.com>
+      author: Alex
+  version: 4.22.14
+  title: "'Fixes various documentation typos'"
+  date: 2022-09-08T22:54:17.446Z
+- commits:
     - subject: Update summary section of diagnostics.md to have the proper prefix for
         user-defined services
       hash: 79658f1a7d4f5ae6308a7f3c5a11f30d05228038
