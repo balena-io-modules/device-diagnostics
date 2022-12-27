@@ -1,4 +1,26 @@
-# Check Descriptions
+# Device Diagnostics
+
+### Getting Started
+
+The balenaCloud Dashboard includes the ability to run a set of diagnostics on
+a device to determine its current condition. This should, in most cases,
+be the first step in attempting to diagnose an issue without having to
+actually access the device via SSH. Ensuring diagnostics and health checks
+are examined first ensures that you have a good idea of the state a
+device is in before SSHing into it, as well as ensuring that the information can
+be accessed later if required (should a device be in a catastrophic state). This
+helps greatly in a support post-mortem should one be required.
+
+Currently, diagnosis feature is only available via the Dashboard.
+
+To run device diagnotics through balenaCloud dashboard, head to the `Diagnotics` tab in the sidebar and click the `Run checks` button to start the tests.
+
+Read more about other diagnostics you can run after checking your device:
+
+1. [Device Diagnostics](./device-diagnotics.md) 
+2. [Supervisor State](./supervisor-state.md) 
+
+## Check Descriptions
 
 As part of the diagnostics suite, you will find a group of checks that can be collectively run on-device. Below is a
 description of each check and what each means or how to triage.
@@ -7,9 +29,9 @@ A `check` in this context is defined as a function that returns a result (good/b
 command is simply a data collection tool without any filtering or logic built in. Checks are intended to be used by
 everyone, while typically command output is used by support/subject matter experts and power users.
 
-To run device diagnotics through balenaCloud dashboard, head to the `Diagnotics` tab in the sidebar and click the `Run checks` button to start the tests.
-
 ![diagnostics](https://user-images.githubusercontent.com/22801822/154141814-6953717d-f90a-456b-ad51-474b14dcc5e9.png)
+
+Diagnostics are split into three separate sections: Device health checks, Device diagnostics and Supervisor state.
 
 ### check_balenaOS
 #### Summary
