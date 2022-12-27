@@ -1,4 +1,17 @@
 - commits:
+    - subject: Add docs for device diagnostics from masterclass
+      hash: 440fff82d5c3ac04fb3923a25f733fc593168388
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Vipul Gupta (@vipulgupta2048) <vipul@balena.io>
+        signed-off-by: Vipul Gupta (@vipulgupta2048) <vipul@balena.io>
+      author: Vipul Gupta (@vipulgupta2048)
+  version: 4.22.14
+  title: ""
+  date: 2022-12-27T17:13:23.629Z
+- commits:
     - subject: Update summary section of diagnostics.md to have the proper prefix for
         user-defined services
       hash: 79658f1a7d4f5ae6308a7f3c5a11f30d05228038
