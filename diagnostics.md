@@ -225,4 +225,4 @@ These checks are wholly limited in scope to user services and should be triaged 
 
 This check depends on the container engine being healthy (see [check_container_engine](#check_container_engine)).
 
-#### DIAGNOSE_VERSION=4.22.13
+#### DIAGNOSE_VERSION=4.22.15
