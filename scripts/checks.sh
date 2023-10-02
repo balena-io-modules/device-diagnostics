@@ -340,7 +340,7 @@ function check_under_voltage(){
 	local SLUG_WHITELIST=('raspberrypi3-64' 'raspberrypi4-64' 'raspberry-pi' 'raspberry-pi2' 'raspberrypi3' 'fincm3')
 	if is_valid_check WHITELIST "${SLUG_WHITELIST[*]}"; then
 		local -i UNDERVOLTAGE_COUNT
-		UNDERVOLTAGE_COUNT=$(dmesg | grep -c "Under-voltage detected\!")
+		UNDERVOLTAGE_COUNT=$(dmesg | grep -E -c "Under-?voltage detected\!")
 		if (( UNDERVOLTAGE_COUNT > 0 )); then
 			log_status "${BAD}" "${FUNCNAME[0]}" "${UNDERVOLTAGE_COUNT} under-voltage events detected, check/change the power supply ASAP"
 		else
