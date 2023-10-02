@@ -54,12 +54,7 @@ module.exports = {
   },
 
   updateVersion: (cwd, version, callback) => {
-    // We need to update both the `package.json` and `diagnose.sh` file here
     const fs = require('fs');
-    const packageFile = `${cwd}/package.json`;
-    let packageData = require(packageFile);
-    packageData.version = version;
-    fs.writeFileSync(packageFile, `${JSON.stringify(packageData, null, 2)}\n`);
     const filesToUpdate = [ `${cwd}/scripts/diagnose.sh`,`${cwd}/scripts/checks.sh`, `${cwd}/diagnostics.md`];
     for (var i = 0; i < filesToUpdate.length; i++) {
         // Now update the version
