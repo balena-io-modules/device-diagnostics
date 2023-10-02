@@ -1,4 +1,25 @@
 - commits:
+    - subject: "checks: update undervoltage grep pattern to match in newer kernels"
+      hash: 8dc52d60111652223d22c5dbce685bab9a3db327
+      body: >
+        Used to come from;
+
+        https://github.com/raspberrypi/linux/blob/7688b39276ff9952df381d79de63b258e73971ce/drivers/firmware/raspberrypi.c#L266
+
+
+        Now comes from:
+
+        https://github.com/raspberrypi/linux/blob/14b35093ca68bf2c81bbc90aace5007142b40b40/drivers/hwmon/raspberrypi-hwmon.c#L52
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alex Gonzalez <alexg@balena.io>
+        signed-off-by: Alex Gonzalez <alexg@balena.io>
+      author: Alex Gonzalez
+  version: 4.22.16
+  title: ""
+  date: 2023-10-02T10:26:07.655Z
+- commits:
     - subject: "versionist: remove updating packages.json version"
       hash: 2dd55a7da8a3886bc65cb74d18930317775022d1
       body: |
