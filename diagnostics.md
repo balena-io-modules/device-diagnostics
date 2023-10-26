@@ -13,12 +13,13 @@ helps greatly in a support post-mortem should one be required.
 
 Currently, diagnosis feature is only available via the Dashboard.
 
-To run device diagnotics through balenaCloud dashboard, head to the `Diagnotics` tab in the sidebar and click the `Run checks` button to start the tests.
+To run device diagnostics through balenaCloud dashboard, head to the `Diagnostics` tab in the sidebar and click the `Run checks` button to start the tests.
 
 Read more about other diagnostics you can run after checking your device:
 
-1. [Device Diagnostics](./device-diagnotics.md) 
-2. [Supervisor State](./supervisor-state.md) 
+1. [Device Diagnostics](https://github.com/balena-io-modules/device-diagnostics/blob/master/device-diagnostics.md) 
+2. [Supervisor State](https://github.com/balena-io-modules/device-diagnostics/blob/master/supervisor-state.md) 
+
 
 ## Check Descriptions
 
