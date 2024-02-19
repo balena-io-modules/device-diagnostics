@@ -1,4 +1,15 @@
 - commits:
+    - subject: Revert to linking with docs path than GitHub URLs
+      hash: df8d946bf720436c4c58666229304e313eed4d24
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Vipul Gupta
+  version: 4.22.18
+  title: ""
+  date: 2024-02-19T11:45:55.649Z
+- commits:
     - subject: Fix diagnostics spelling/headings
       hash: 75081c597a17f02f367c5b1eec133205f6afc157
       body: ""
