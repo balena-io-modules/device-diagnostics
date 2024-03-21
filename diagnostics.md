@@ -17,8 +17,9 @@ To run device diagnostics through balenaCloud dashboard, head to the `Diagnostic
 
 Read more about other diagnostics you can run after checking your device:
 
-1. [Device Diagnostics](./device-diagnostics.md) 
-2. [Supervisor State](./supervisor-state.md) 
+1. [Device Diagnostics](https://github.com/balena-io-modules/device-diagnostics/blob/master/device-diagnostics.md) 
+2. [Supervisor State](https://github.com/balena-io-modules/device-diagnostics/blob/master/supervisor-state.md) 
+
 
 ## Check Descriptions
 
