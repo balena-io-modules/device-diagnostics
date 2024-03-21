@@ -207,10 +207,16 @@ restrictive local network, or an unreliable connection.
 #### Summary
 
 Any checks with names beginning with `check_service_` come from user-defined services.
-These checks interrogate the engine to see if any services are restarting uncleanly/unexpectedly or failing health checks.
-We allow users to provide their own health checks using the [HEALTHCHECK directive](https://docs.docker.com/engine/reference/builder/#healthcheck)
-defined in the Dockerfile or docker-compose file.
-Any health check output will be collected as-is, truncated to 100 characters, and shown as output along with the exit code.
+These checks query the engine to see if any services are restarting uncleanly/unexpectedly.
+
+#### Building & Surfacing your own healthchecks in the dashboard
+
+We allow users to provide their own health checks using the [HEALTHCHECK directive](https://docs.docker.com/engine/reference/builder/#healthcheck) defined in the Dockerfile or docker-compose file. With healthchecks, you can test a container to check that it's still working and healthy.
+
+Any health check output will be collected as-is, truncated to 100 characters, and shown as output along with the exit code. The result of the health check will be available in the dashboard in the `Diagnostics` page under the `Device health checks` tab.
+
+Here's a [working example](https://github.com/balena-io-examples/healthcheck-publicurl) of how **HEALTHCHECK directive** works in a balenaCloud dashboard demo. 
+
 
 #### Triage
 
