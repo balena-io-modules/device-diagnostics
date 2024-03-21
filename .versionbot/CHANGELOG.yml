@@ -1,4 +1,17 @@
 - commits:
+    - subject: Convert device health checks data to tables
+      hash: bb216bf3db16c0aaa248cf3a89ba4657cf6c5c93
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Vipul Gupta (@vipulgupta2048) <vipulgupta2048@gmail.com>
+        signed-off-by: Vipul Gupta (@vipulgupta2048) <vipulgupta2048@gmail.com>
+      author: Vipul Gupta (@vipulgupta2048)
+  version: 4.22.21
+  title: ""
+  date: 2024-03-21T19:40:21.963Z
+- commits:
     - subject: Document a way to surface healthchecks to dashboard
       hash: f5319589c0fab9a7d7d678f82e6b585bd868b079
       body: ""
