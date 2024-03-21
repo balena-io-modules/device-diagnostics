@@ -1,4 +1,17 @@
 - commits:
+    - subject: Create a one-pager for Diagnostics
+      hash: d6de4faf7e617754ae635a126655af2fd7ad9665
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Vipul Gupta (@vipulgupta2048) <vipulgupta2048@gmail.com>
+        signed-off-by: Vipul Gupta (@vipulgupta2048) <vipulgupta2048@gmail.com>
+      author: Vipul Gupta (@vipulgupta2048)
+  version: 4.22.19
+  title: ""
+  date: 2024-03-21T14:41:05.879Z
+- commits:
     - subject: Revert to linking with docs path than GitHub URLs
       hash: df8d946bf720436c4c58666229304e313eed4d24
       body: ""
@@ -589,9 +602,11 @@
         problems when acessing.  Reference:
 
 
-        - https://jel.ly.fish/view-all-support-issues/scratchpad-entry-23139ed6-e984-47dc-a133-69feb4b7ffa7
+        -
+        https://jel.ly.fish/view-all-support-issues/scratchpad-entry-23139ed6-e984-47dc-a133-69feb4b7ffa7
 
-        - https://jel.ly.fish/view-all-support-issues/scratchpad-entry-handful-of-files-fail-fingerprint-checks-aca9e981-a3e3-429c-9542-ecc4f35b185a
+        -
+        https://jel.ly.fish/view-all-support-issues/scratchpad-entry-handful-of-files-fail-fingerprint-checks-aca9e981-a3e3-429c-9542-ecc4f35b185a
       footer:
         Change-type: patch
         change-type: patch
@@ -845,7 +860,9 @@
         - test_throttling_dmesg examines dmesg output for throttling events
 
 
-        - test_throttling_vcgencmd examines the output of the Raspberry Pi utility `vcgencmd` to determine if throttling is currently happening, or has occurred in the past.
+        - test_throttling_vcgencmd examines the output of the Raspberry Pi
+        utility `vcgencmd` to determine if throttling is currently happening, or
+        has occurred in the past.
 
 
         These are both called by check_throttling, which glues the output of
@@ -2444,7 +2461,8 @@
 
         where having detailed information of containers is relevant.
 
-        We filter out the containers' environments, since they may contain sensitive information (resin-related keys and user secrets).
+        We filter out the containers' environments, since they may contain
+        sensitive information (resin-related keys and user secrets).
       footers:
         change-type: minor
         signed-off-by: Pablo Carranza Velez <pablo@resin.io>
@@ -2477,7 +2495,9 @@
 
         such as this (recording for reference):
 
-        cat /mnt/boot/config.json | jq '. | with_entries(if .key | test("apiKey|deviceApiKey|pubnubSubscribeKey|pubnubPublishKey|mixpanelToken|wifiKey|files") then .value = "<hidden>" else . end)'
+        cat /mnt/boot/config.json | jq '. | with_entries(if .key |
+        test("apiKey|deviceApiKey|pubnubSubscribeKey|pubnubPublishKey|mixpanelToken|wifiKey|files")
+        then .value = "<hidden>" else . end)'
 
         Unfortunately have to use `contains("key")`, and that's what this PR
 
@@ -2594,7 +2614,8 @@
 
         to journal). Add OS release check. Add checks for boot files present in
 
-        newer OS, including config.txt and uEnv files. Add curl check for Resin API.
+        newer OS, including config.txt and uEnv files. Add curl check for Resin
+        API.
       footers:
         change-type: minor
         signed-off-by: Pablo Carranza Velez <pablo@resin.io>
