@@ -14,13 +14,13 @@ To add more checks, first define the check function and then add the function to
 Checks should be fail-first, and defensive when possible. If a failing check will emit stderr, it is better to redirect
 away rather than allowing it to propagate through. All numerics should be declared as such if possible.
 
-Additionally, all checks should be documented in [diagnostics.md](./diagnostics.md).
+Additionally, all checks should be documented in [diagnostics.md](diagnostics.md).
 
 ### Diagnostic commands
 
-To add more commands, simply add the command  to the `commands` array in `diagnose.sh`. Additionally, all comands should be documented in [device-diagnostics.md](./device-diagnostics.md).
+To add more commands, simply add the command  to the `commands` array in `diagnose.sh`. Additionally, all comands should be documented in [device-diagnostics.md](diagnostics.md#device-diagnostics).
 
 ### Supervisor Diagnostic commands
 
-Supervisor state diagnostics are documented in [supervisor-state.md](./supervisor-state.md).
+Supervisor state diagnostics are documented in [supervisor-state.md](diagnostics.md#supervisor-state).
 
