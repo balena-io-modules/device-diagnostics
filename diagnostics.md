@@ -236,4 +236,4 @@ can be read from the fleet's 'Release' page in the Dashboard), as well
 as ensuring it's the commit that's expected.
 
 
-#### DIAGNOSE_VERSION=4.22.21
+#### DIAGNOSE_VERSION=4.23.0

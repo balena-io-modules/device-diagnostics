@@ -1,4 +1,17 @@
 - commits:
+    - subject: "check_balenaOS: Support detecting releases w/o release_tags"
+      hash: 01d7eee9031035a9967c32ed45cc88ba2878f4c2
+      body: ""
+      footer:
+        Change-type: minor
+        change-type: minor
+        See: https://balena.fibery.io/Work/Task/Change-the-device-Diagnostics-to-use-the-release-semver-fields-1868
+        see: https://balena.fibery.io/Work/Task/Change-the-device-Diagnostics-to-use-the-release-semver-fields-1868
+      author: Thodoris Greasidis
+  version: 4.23.0
+  title: ""
+  date: 2024-03-29T17:17:51.391Z
+- commits:
     - subject: Convert device health checks data to tables
       hash: bb216bf3db16c0aaa248cf3a89ba4657cf6c5c93
       body: ""
