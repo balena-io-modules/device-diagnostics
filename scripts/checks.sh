@@ -397,15 +397,19 @@ function check_balenaOS()
 	# PRETTY_NAME="Resin OS 1.24.0"
 
 	local variant_tag=$(echo "${VARIANT:-production}" | tr "[:upper:]" "[:lower:]")
+	local variant_slug=$(echo "${variant_tag}" | sed "s/production/prod/" | sed "s/development/dev/")
 
 	if grep -q -e '^VERSION="1.*$' -e '^PRETTY_NAME="Resin OS 1.*$' /etc/os-release; then
 		log_status "${BAD}" "${FUNCNAME[0]}" "ResinOS 1.x is now completely deprecated"
 	else
 		local -i versions
+		# We still need to try finding the hostApp release by filtering using the deprecated release_tags,
+		# since the versioning format of balenaOS [2019.10.0.dev, 2022.01.0] was non-semver compliant
+		# and they were not migrated to the release semver fields.
 		versions=$(CURL_CA_BUNDLE=${TMPCRT} curl -qs --retry 3 --max-time 5 --retry-connrefused -X GET \
 			-H "Content-Type: application/json" \
 			-H "Authorization: Bearer ${DEVICE_API_KEY}" \
-			"${API_ENDPOINT}/v6/release?\$select=id&\$expand=release_tag&\$filter=(belongs_to__application/any(a:a/is_for__device_type/any(dt:dt/slug%20eq%20'${SLUG}')%20and%20a/is_host%20eq%20true))%20and%20is_invalidated%20eq%20false%20and%20(release_tag/any(rt:(rt/tag_key%20eq%20'version')%20and%20(rt/value%20eq%20'${VERSION}')))%20and%20((release_tag/any(rt:(rt/tag_key%20eq%20'variant')%20and%20(rt/value%20eq%20'${variant_tag}')))%20or%20not(release_tag/any(rt:rt/tag_key%20eq%20'variant')))" \
+			"${API_ENDPOINT}/v6/release?\$select=id,semver&\$expand=release_tag&\$filter=(belongs_to__application/any(a:a/is_for__device_type/any(dt:dt/slug%20eq%20'${SLUG}')%20and%20a/is_host%20eq%20true))%20and%20is_invalidated%20eq%20false%20and%20(((semver%20eq%20%27${VERSION}%27)%20and%20(variant%20in%20(%27${variant_slug}%27,%20%27%27)))%20or%20((release_tag/any(rt:(rt/tag_key%20eq%20'version')%20and%20(rt/value%20eq%20'${VERSION}')))%20and%20((release_tag/any(rt:(rt/tag_key%20eq%20'variant')%20and%20(rt/value%20eq%20'${variant_tag}')))%20or%20not(release_tag/any(rt:rt/tag_key%20eq%20'variant')))))" \
 			| jq -r "[.d[]] | length")
 		if (( versions == 0 )); then
 			log_status "${BAD}" "${FUNCNAME[0]}" "balenaOS 2.x detected, but this version is not currently available in ${API_ENDPOINT}"
