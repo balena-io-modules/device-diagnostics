@@ -337,7 +337,7 @@ function check_localdisk()
 }
 
 function check_under_voltage(){
-	local SLUG_WHITELIST=('raspberrypi3-64' 'raspberrypi4-64' 'raspberry-pi' 'raspberry-pi2' 'raspberrypi3' 'fincm3')
+	local SLUG_WHITELIST=('raspberrypi3-64' 'raspberrypi4-64' 'raspberry-pi' 'raspberry-pi2' 'raspberrypi3' 'fincm3' 'raspberrypi0-2w-64' 'npe-x500-m3' 'raspberrypi3-unipi-neuron' 'raspberrypi4-superhub' 'raspberrypi4-unipi-neuron' 'raspberrypi400-64' 'raspberrypicm4-ioboard' 'revpi-connect-4' 'revpi-connect-s' 'revpi-connect' 'revpi-core-3' 'rt-rpi-300' 'raspberrypi5')
 	if is_valid_check WHITELIST "${SLUG_WHITELIST[*]}"; then
 		local -i UNDERVOLTAGE_COUNT
 		UNDERVOLTAGE_COUNT=$(dmesg | grep -E -c "Under-?voltage detected\!")
