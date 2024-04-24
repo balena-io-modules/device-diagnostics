@@ -1,4 +1,18 @@
 - commits:
+    - subject: "checks: Update current RPI boards list"
+      hash: 85960ba52a7e1644adf04fecea60c971dbb6b466
+      body: |
+        ... to include devices that have been added recently.
+      footer:
+        Change-type: patch
+        change-type: patch
+        Signed-off-by: Alexandru Costache <alexandru@balena.io>
+        signed-off-by: Alexandru Costache <alexandru@balena.io>
+      author: Alexandru Costache
+  version: 4.23.1
+  title: ""
+  date: 2024-04-24T13:58:40.963Z
+- commits:
     - subject: "check_balenaOS: Support detecting releases w/o release_tags"
       hash: 01d7eee9031035a9967c32ed45cc88ba2878f4c2
       body: ""
