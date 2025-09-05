@@ -409,7 +409,7 @@ function check_balenaOS()
 		versions=$(CURL_CA_BUNDLE=${TMPCRT} curl -qs --retry 3 --max-time 5 --retry-connrefused -X GET \
 			-H "Content-Type: application/json" \
 			-H "Authorization: Bearer ${DEVICE_API_KEY}" \
-			"${API_ENDPOINT}/v7/release?\$select=id,semver&\$filter=belongs_to__application/any(a:a/is_for__device_type/any(dt:dt/slug%20eq%20'${SLUG}')%20and%20a/is_host)%20and%20not%20is_invalidated%20and%20((semver%20eq%20%27${VERSION}%27%20and%20variant%20in%20(%27${variant_slug}%27,%20%27%27))%20or%20(release_tag/any(rt:rt/tag_key%20eq%20'version'%20and%20rt/value%20eq%20'${VERSION}')%20and%20(release_tag/any(rt:rt/tag_key%20eq%20'variant'%20and%20rt/value%20eq%20'${variant_tag}')%20or%20not release_tag/any(rt:rt/tag_key%20eq%20'variant'))))" \
+			"${API_ENDPOINT}/v7/release?\$select=id&\$filter=belongs_to__application/any(a:a/is_for__device_type/any(dt:dt/slug%20eq%20'${SLUG}')%20and%20a/is_host)%20and%20not%20is_invalidated%20and%20((semver%20eq%20%27${VERSION}%27%20and%20variant%20in%20(%27${variant_slug}%27,%20%27%27))%20or%20(release_tag/any(rt:rt/tag_key%20eq%20'version'%20and%20rt/value%20eq%20'${VERSION}')%20and%20(release_tag/any(rt:rt/tag_key%20eq%20'variant'%20and%20rt/value%20eq%20'${variant_tag}')%20or%20not release_tag/any(rt:rt/tag_key%20eq%20'variant'))))" \
 			| jq -r "[.d[]] | length")
 		if (( versions == 0 )); then
 			log_status "${BAD}" "${FUNCNAME[0]}" "balenaOS 2.x detected, but this version is not currently available in ${API_ENDPOINT}"
