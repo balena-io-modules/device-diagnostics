@@ -175,8 +175,8 @@ function test_ipv4_stack()
 	if ! ip -4 route get ${IPV4_ADDRESS} &>/dev/null; then
 		# Don't check if IPv4 stack works since device isn't configured to use it
 		return
-	fi 
-	# Check if we can reach an IPv4 HTTP service since device is configured to do so 
+	fi
+	# Check if we can reach an IPv4 HTTP service since device is configured to do so
 	local -i res
 	res=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV4_ENDPOINT}" 1>/dev/null 2>&1; echo $?)
 	if test "$res" != "0"; then
@@ -197,8 +197,8 @@ function test_ipv6_stack()
 	if ! ip -6 route get ${IPV6_ADDRESS} &>/dev/null; then
 		# Don't check if IPv6 stack works since device isn't configured to use it
 		return
-	fi 
-	# Check if we can reach an IPv6 HTTP service since device is configured to do so 
+	fi
+	# Check if we can reach an IPv6 HTTP service since device is configured to do so
 	local -i res
 	res=$(CURL_CA_BUNDLE=${TMPCRT} ${TIMEOUT_CMD} curl -qs "https://${IPV6_ENDPOINT}" 1>/dev/null 2>&1; echo $?)
 	if test "$res" != "0"; then
@@ -409,7 +409,7 @@ function check_balenaOS()
 		versions=$(CURL_CA_BUNDLE=${TMPCRT} curl -qs --retry 3 --max-time 5 --retry-connrefused -X GET \
 			-H "Content-Type: application/json" \
 			-H "Authorization: Bearer ${DEVICE_API_KEY}" \
-			"${API_ENDPOINT}/v6/release?\$select=id,semver&\$expand=release_tag&\$filter=(belongs_to__application/any(a:a/is_for__device_type/any(dt:dt/slug%20eq%20'${SLUG}')%20and%20a/is_host%20eq%20true))%20and%20is_invalidated%20eq%20false%20and%20(((semver%20eq%20%27${VERSION}%27)%20and%20(variant%20in%20(%27${variant_slug}%27,%20%27%27)))%20or%20((release_tag/any(rt:(rt/tag_key%20eq%20'version')%20and%20(rt/value%20eq%20'${VERSION}')))%20and%20((release_tag/any(rt:(rt/tag_key%20eq%20'variant')%20and%20(rt/value%20eq%20'${variant_tag}')))%20or%20not(release_tag/any(rt:rt/tag_key%20eq%20'variant')))))" \
+			"${API_ENDPOINT}/v7/release?\$select=id&\$filter=belongs_to__application/any(a:a/is_for__device_type/any(dt:dt/slug%20eq%20'${SLUG}')%20and%20a/is_host)%20and%20not%20is_invalidated%20and%20((semver%20eq%20%27${VERSION}%27%20and%20variant%20in%20(%27${variant_slug}%27,%20%27%27))%20or%20(release_tag/any(rt:rt/tag_key%20eq%20'version'%20and%20rt/value%20eq%20'${VERSION}')%20and%20(release_tag/any(rt:rt/tag_key%20eq%20'variant'%20and%20rt/value%20eq%20'${variant_tag}')%20or%20not release_tag/any(rt:rt/tag_key%20eq%20'variant'))))" \
 			| jq -r "[.d[]] | length")
 		if (( versions == 0 )); then
 			log_status "${BAD}" "${FUNCNAME[0]}" "balenaOS 2.x detected, but this version is not currently available in ${API_ENDPOINT}"
