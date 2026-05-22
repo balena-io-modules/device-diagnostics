@@ -1,4 +1,16 @@
 - commits:
+    - subject: Remove non-reference docs in favor of moving directly to docs
+      hash: 961c4c7da87a42e5b33229be1e68424fa1d58669
+      body: ""
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Matthew Yarmolinsky
+      nested: []
+  version: 4.23.2
+  title: ""
+  date: 2026-05-22T16:15:29.051Z
+- commits:
     - subject: "checks: Update current RPI boards list"
       hash: 85960ba52a7e1644adf04fecea60c971dbb6b466
       body: |
@@ -91,14 +103,11 @@
 - commits:
     - subject: "checks: update undervoltage grep pattern to match in newer kernels"
       hash: 8dc52d60111652223d22c5dbce685bab9a3db327
-      body: >
+      body: |
         Used to come from;
-
         https://github.com/raspberrypi/linux/blob/7688b39276ff9952df381d79de63b258e73971ce/drivers/firmware/raspberrypi.c#L266
 
-
         Now comes from:
-
         https://github.com/raspberrypi/linux/blob/14b35093ca68bf2c81bbc90aace5007142b40b40/drivers/hwmon/raspberrypi-hwmon.c#L52
       footer:
         Change-type: patch
@@ -649,17 +658,12 @@
 - commits:
     - subject: Add md5sum fingerprint checking
       hash: 278927b2ceb21244f8453adb50ecca936d163f75
-      body: >
+      body: |
         Filter out a number of files that are likely to change, or cause
-
         problems when acessing.  Reference:
 
-
-        -
-        https://jel.ly.fish/view-all-support-issues/scratchpad-entry-23139ed6-e984-47dc-a133-69feb4b7ffa7
-
-        -
-        https://jel.ly.fish/view-all-support-issues/scratchpad-entry-handful-of-files-fail-fingerprint-checks-aca9e981-a3e3-429c-9542-ecc4f35b185a
+        - https://jel.ly.fish/view-all-support-issues/scratchpad-entry-23139ed6-e984-47dc-a133-69feb4b7ffa7
+        - https://jel.ly.fish/view-all-support-issues/scratchpad-entry-handful-of-files-fail-fingerprint-checks-aca9e981-a3e3-429c-9542-ecc4f35b185a
       footer:
         Change-type: patch
         change-type: patch
@@ -714,9 +718,8 @@
 - commits:
     - subject: "supervisor: grab all supervisor lock dirs in diagnostics"
       hash: 4d07e1f1b04f32e764732afd57e7f853127a3fb8
-      body: >
-        ref.
-        https://www.flowdock.com/app/rulemotion/r-product/threads/gIr9O4P2AW5lBCaxAaJvdPPB187
+      body: |
+        ref. https://www.flowdock.com/app/rulemotion/r-product/threads/gIr9O4P2AW5lBCaxAaJvdPPB187
       footer:
         Change-type: patch
         change-type: patch
@@ -835,9 +838,8 @@
 - commits:
     - subject: "timesync: check if DHCP passed in any local timeservers"
       hash: 6e4daba7654bf723e96e0cff88462a06e000d98b
-      body: >
-        written to during config:
-        https://github.com/balena-os/meta-balena/blob/9ace976ea9d757d3d928ed59ce60c4118bb9d557/meta-balena-common/recipes-connectivity/networkmanager/resin-files/99dhcp_ntp#L3
+      body: |
+        written to during config: https://github.com/balena-os/meta-balena/blob/9ace976ea9d757d3d928ed59ce60c4118bb9d557/meta-balena-common/recipes-connectivity/networkmanager/resin-files/99dhcp_ntp#L3
       footer:
         Change-type: patch
         change-type: patch
@@ -1063,9 +1065,8 @@
 - commits:
     - subject: "check_balenaOS: adjust query to reflect public apps (ESR support)"
       hash: af8abc40ea482389be6295b996eb510af6b7eb45
-      body: >
+      body: |
         This is the same logic used in resinhup to perform delta updates:
-
         https://github.com/balena-os/resinhup/blob/master/upgrade-2.x.sh#L721-L730
       footer:
         Connects-to: https://github.com/balena-io/device-diagnostics/issues/156
@@ -2535,25 +2536,15 @@
   version: 1.1.7
 - commits:
     - author: Gergely Imreh
-      body: >-
+      body: |-
         Being a spoilsport, rewriting the config.json key filtering,
-
         so all hidden values are consistenly marked as `<hidden>`,
-
         and also make it easier expandable, if needed.
-
         It would have been great, if our `jq` version had support for the
-
         `test` keyword, in which case we could have had a simpler version
-
         such as this (recording for reference):
-
-        cat /mnt/boot/config.json | jq '. | with_entries(if .key |
-        test("apiKey|deviceApiKey|pubnubSubscribeKey|pubnubPublishKey|mixpanelToken|wifiKey|files")
-        then .value = "<hidden>" else . end)'
-
+        cat /mnt/boot/config.json | jq '. | with_entries(if .key | test("apiKey|deviceApiKey|pubnubSubscribeKey|pubnubPublishKey|mixpanelToken|wifiKey|files") then .value = "<hidden>" else . end)'
         Unfortunately have to use `contains("key")`, and that's what this PR
-
         does.
       footers:
         change-type: patch
